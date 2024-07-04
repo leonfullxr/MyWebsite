@@ -3,138 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leon Elliott Fuller's Resume</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-            background: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            margin-top: 20px;
-        }
-        .header, .section {
-            margin-bottom: 20px;
-        }
-        .header h1, .header h2, .header h3 {
-            margin: 0;
-            padding-bottom: 10px;
-        }
-        .header p {
-            margin: 5px 0;
-        }
-        .section h2 {
-            border-bottom: 2px solid #e8491d;
-            padding-bottom: 10px;
-        }
-        .section ul {
-            list-style: none;
-            padding: 0;
-        }
-        .section ul li {
-            margin-bottom: 10px;
-        }
-        .language-switcher {
-            text-align: right;
-            margin-bottom: 20px;
-        }
-        .language-switcher a {
-            text-decoration: none;
-            color: #e8491d;
-            margin: 0 5px;
-        }
-    </style>
+    <title>Leon Elliott Fuller</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Leon Elliott Fuller</h1>
-            <p>21 year old bilingual computer engineer</p>
-            <p>Email: <a href="mailto:l.elliottfuller@gmail.com">l.elliottfuller@gmail.com</a></p>
-            <p>Address: Marbella</p>
-            <p>--> Currently finishing my last year in Computer Engineering, studying abroad in Poland</p>
+        <div class="language-selector">
+            <label for="language-select">Choose a language:</label>
+            <select id="language-select">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+            </select>
         </div>
-
-        <div class="section">
-            <h2>Profile</h2>
-            <p>While I am currently pursuing my studies, I am also seeking to gain practical experience in the workforce and establish a solid foundation for my future career. Through this, I aim to strengthen my knowledge and skills. Ultimately, my goal is to receive training to work in an organizational role within a company.</p>
-            <p>I love meeting new people, discovering new places, travelling and sports. I often do several running races, sometimes with friends for fun, I just love discovering and learning new things! </p>
-        </div>
-
-        <div class="section">
-            <h2>Education</h2>
-            <p><strong>Computer Engineering</strong> <em>Sep 2021 - Present</em></p>
-            <p>UGR, Granada</p>
-            <p>Currently finishing my fourth year of Computer Engineering at the University of Granada, doing an Erasmus in Poland (studying abroad)</p>
-        </div>
-
-        <div class="section">
-            <h2>Employment</h2>
-            <p><strong>IT Consultant</strong> <em>Jul 2022 - Sep 2022</em></p>
-            <p>Private Client Consultancy · Full-time, Malaga</p>
-            <p>I worked as an IT Consultant for the summer, helping out with employers IT issues, partly creating a Desktop App for the company, setting up the company's 2FA, adding email spam rules and generally maintaining the company's IT/Security service.</p>
-        </div>
-
-        <div class="section">
-            <h2>Technical Skills</h2>
-            <ul>
-                <li>Parallel Programming - OpenMP</li>
-                <li>3D graphical programming - OpenGL</li>
-                <li>Competitive Programming and Game Jam Participation</li>
-                <li>Technical Experience: Machine Learning, Deep Learning, Cybersecurity, Web development and Game Development</li>
-                <li>Proficiency in C++, Python, and Godot Game Engine</li>
-                <li>Software Development Projects: C++, Python and Java</li>
-                <li>AI enthusiast</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Projects &amp; Events</h2>
-            <p>I have done various projects in C++ and participated in various competitive programming events and Game jams using Godot.</p>
-        </div>
-
-        <div class="section">
-            <h2>Certificates</h2>
-            <p><strong>Video game &amp; Entrepreneurship Program</strong> <em>July 2020</em></p>
-            <p>I took a course from the Incyde Foundation that showed me the fundamentals of designing, creating, and managing video game projects in Unity, to launch them in the market, conducting a prior study of it.</p>
-            <p><strong>Machine Learning and Big Data for BioInformatics</strong> <em>January-June 2024</em></p>
-            <p>A University-Sponsored Machine Learning and Big data program, that covered various topics of ML focused on BioInformatics, developing methods and software tools for understanding biological data. I also, related with this program, created a detailed <a href="https://github.com/leonfullxr/Classifying-Mushrooms.git">Mushroom Classification</a> project.
-            </p>
-        </div>
-
-        <div class="section">
-            <h2>Personal Details</h2>
-            <p>LinkedIn: <a href="https://www.linkedin.com/in/leon-elliott-fuller">Leon Elliott Fuller</a></p>
-            <p>GitHub: <a href="https://github.com/Leonfullxr">Leonfullxr</a></p>
-        </div>
-
-        <div class="section">
-            <h2>Skills</h2>
-            <p>Generally I do not like talking about my skills, because I feel like that should only be proven and not just said. But I will give a brief list of what I think is most important.
-              <ul>
-                  <li>Good communication - I love travelling and meeting new people, having improved my social and communication skills</li>
-                  <li>Puntual - I make sure to be punctual, I know how fustrating it is to waste time</li>
-                  <li>Hardworker - I put a lot of effort into learning new things, generally because I also love learning new things</li>
-              </ul>
-            </p>
-        </div>
-
-        <div class="section">
-            <h2>Languages</h2>
-            <ul>
-                <li>English - Native</li>
-                <li>Spanish - Native</li>
-                <li>French - Basic</li>
-            </ul>
-        </div>
+        <div id="content"></div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
