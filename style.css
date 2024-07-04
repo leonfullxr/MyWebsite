@@ -54,4 +54,28 @@ body {
 
 .language-selector label {
     font-weight: bold;
+    margin-right: 10px;
+}
+
+#language-select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+#language-select:hover {
+    background-color: #f0f0f0;
+    border-color: #888;
+}
+
+#language-select:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#language-select option {
+    padding: 10px;
 }
