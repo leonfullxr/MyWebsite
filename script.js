@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h1>Leon Elliott Fuller</h1>
                 <p>21 year old bilingual computer engineer</p>
                 <p>Email: <a href="mailto:l.elliottfuller@gmail.com">l.elliottfuller@gmail.com</a></p>
-                <p>Address: Marbella</p>
+                <p>Address: Marbella, Spain</p>
                 <p>--> Currently finishing my last year in Computer Engineering, studying abroad in Poland</p>
             </div>
             <div class="section">
@@ -60,14 +60,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>GitHub: <a href="https://github.com/Leonfullxr">Leonfullxr</a></p>
             </div>
             <div class="section">
-            <h2>Skills</h2>
-            <p>Generally I do not like talking about my skills, because I feel like that should only be proven and not just said. But I will give a brief list of what I think is most important.
-              <ul>
-                  <li>Good communication - I love travelling and meeting new people, having improved my social and communication skills</li>
-                  <li>Punctual - I make sure to be punctual, I know how frustrating it is to waste time</li>
-                  <li>Hardworker - I put a lot of effort into learning new things, generally because I also love learning new things</li>
-              </ul>
-            </p>
+            <h2>Idiomas</h2>
+            <ul>
+                <li>English - Native</li>
+                <li>Spanish - Native</li>
+                <li>French - Basic</li>
+            </ul>
         </div>
         `,
         es: `
@@ -75,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <h1>Leon Elliott Fuller</h1>
             <p>Ingeniero informático bilingüe de 21 años</p>
             <p>Email: <a href="mailto:l.elliottfuller@gmail.com">l.elliottfuller@gmail.com</a></p>
-            <p>Dirección: Marbella</p>
+            <p>Dirección: Marbella, Spain</p>
             <p>--> Actualmente finalizando mi último año en Ingeniería Informática, estudiando en el extranjero en Polonia</p>
         </div>
 
