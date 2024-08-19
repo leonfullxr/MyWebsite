@@ -69,14 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
               </ul>
             </p>
         </div>
-            <div class="section">
-                <h2>Languages</h2>
-                <ul>
-                    <li>English - Native</li>
-                    <li>Spanish - Native</li>
-                    <li>French - Basic</li>
-                </ul>
-            </div>
         `,
         es: `
             <div class="header">
@@ -137,17 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <h2>Datos Personales</h2>
             <p>LinkedIn: <a href="https://www.linkedin.com/in/leon-elliott-fuller">Leon Elliott Fuller</a></p>
             <p>GitHub: <a href="https://github.com/Leonfullxr">Leonfullxr</a></p>
-        </div>
-
-        <div class="section">
-            <h2>Habilidades</h2>
-            <p>Generalmente no me gusta hablar de mis habilidades, porque siento que solo deben ser demostradas y no solo dichas. Pero daré una breve lista de lo que creo que es más importante.
-              <ul>
-                  <li>Buena comunicación - Me encanta viajar y conocer gente nueva, he mejorado mis habilidades sociales y de comunicación</li>
-                  <li>Puntual - Me aseguro de ser puntual, sé lo frustrante que es perder el tiempo</li>
-                  <li>Trabajador - Pongo mucho esfuerzo en aprender cosas nuevas, generalmente porque también me encanta aprender cosas nuevas</li>
-              </ul>
-            </p>
         </div>
 
         <div class="section">
