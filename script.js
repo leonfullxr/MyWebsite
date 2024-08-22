@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>GitHub: <a href="https://github.com/Leonfullxr">Leonfullxr</a></p>
             </div>
             <div class="section">
-            <h2>Idiomas</h2>
+            <h2>Languages</h2>
             <ul>
                 <li>English - Native</li>
                 <li>Spanish - Native</li>
