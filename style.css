@@ -1,63 +1,25 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.header h1 {
-    font-size: 2.5em;
-    margin: 0;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.header p {
-    margin: 5px 0;
-    font-size: 1.1em;
-}
-
-.section {
-    margin-bottom: 20px;
-}
-
+/* Center the section headers */
 .section h2 {
     font-size: 1.8em;
     font-weight: bold;
     border-bottom: 2px solid #eaeaea;
     padding-bottom: 5px;
     margin-bottom: 10px;
+    text-align: center; /* Center align */
 }
 
-.job, .project, .education-entry {
-    margin-bottom: 15px;
+/* Style the list bullets */
+ul {
+    list-style-type: disc; /* Standard bullet points */
+    margin-left: 40px; /* More indentation for a professional look */
 }
 
+/* Align job and education details to the right */
 .job-header, .education-entry h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.job-header h3, .education-entry h3 {
-    font-size: 1.3em;
-    font-weight: bold;
-    margin: 0;
+    text-align: left; /* Ensure titles are aligned left */
 }
 
 .job-header p, .education-entry p {
@@ -65,26 +27,22 @@ body {
     font-size: 1.1em;
     color: #555;
     font-weight: bold;
+    text-align: right; /* Align dates/locations to the right */
 }
 
-.job-header span, .education-entry span {
-    font-size: 1.1em;
-    color: #555;
-    font-weight: normal;
+/* Ensure the overall layout and spacing is balanced */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px; /* Increased padding for a cleaner look */
+    box-shadow: 0 0 15px rgba(0,0,0,0.1); /* Slightly stronger shadow for depth */
 }
 
-ul {
-    list-style-type: disc;
-    margin-left: 20px;
-}
-
-ul li {
-    margin-bottom: 5px;
-}
-
-.skills p {
-    font-size: 1.1em;
-    margin: 0;
+/* Style for the top profile area */
+.header {
+    text-align: center; /* Center align the header */
+    margin-bottom: 30px; /* Extra spacing below the header */
 }
 
 .language-selector {

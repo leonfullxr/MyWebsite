@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>Currently finishing my third year of Computer Engineering at the University of Granada</p>
             </div>
             <div class="section">
-                <h2>Employment</h2>
+                <h2>Experience</h2>
                 <p><strong>IT Consultant</strong> <em>Jul 2022 - Sep 2022</em></p>
                 <p>Private Client Consultancy · Full-time, Malaga</p>
                 <p>I worked as an IT Consultant for the summer, helping out the workers with their IT issues, partly creating a Desktop App for the company, setting up the company's 2FA and generally maintaining the company's IT service.</p>
