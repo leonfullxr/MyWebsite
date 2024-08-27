@@ -2,33 +2,62 @@
 .section h2 {
     font-size: 1.8em;
     font-weight: bold;
-    border-bottom: 2px solid #eaeaea;
+    border-bottom: 2px solid #0e0d0d;
     padding-bottom: 5px;
     margin-bottom: 10px;
     text-align: center; /* Center align */
 }
 
-/* Style the list bullets */
-ul {
-    list-style-type: disc; /* Standard bullet points */
-    margin-left: 40px; /* More indentation for a professional look */
+/* General section layout adjustments */
+.experience-entry, .certificate-entry, .project-entry {
+    margin-bottom: 20px;
 }
 
-/* Align job and education details to the right */
-.job-header, .education-entry h3 {
+/* Common header styles for education, experience, and certificate sections */
+.education-header, .experience-header, .certificate-header, .project-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: left; /* Ensure titles are aligned left */
+    flex-direction: column; /* Stack the title and subtitle */
+    margin-bottom: 10px;
 }
 
-.job-header p, .education-entry p {
+.education-header h3, .experience-header h3, .certificate-header h3, .project-header h3 {
+    display: flex;
+    justify-content: space-between; /* Align title and location */
     margin: 0;
-    font-size: 1.1em;
-    color: #555;
-    font-weight: bold;
-    text-align: right; /* Align dates/locations to the right */
+    font-weight: bold; /* Bold for title */
 }
+
+.education-header h3 .location, .experience-header h3 .location, .certificate-header h3 .location, .project-header h3 .location {
+    font-weight: normal; /* Normal font weight for location */
+}
+
+.education-header p, .experience-header p, .certificate-header p, .project-header p {
+    display: flex;
+    justify-content: space-between; /* Align specialization/role and date */
+    font-size: 1em;
+    margin: 0;
+    font-style: italic; /* Italic for specialization/role */
+    color: #000;
+}
+
+.education-header p .date, .experience-header p .date, .certificate-header p .date, .project-header p .date {
+    font-style: normal; /* Normal font style for date */
+    font-weight: normal; /* Normal font weight for date */
+    font-size: 1em; /* Ensure consistent font size */
+}
+
+/* List styling for consistency across sections */
+ul {
+    list-style-type: disc;
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
+
+ul li {
+    margin-bottom: 5px;
+    font-size: 1em;
+}
+
 
 /* Ensure the overall layout and spacing is balanced */
 .container {
