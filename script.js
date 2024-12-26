@@ -52,20 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
 
-            <!-- Skills Section -->
-            <div class="section">
-                <h2>Technical Skills</h2>
-                <ul>
-                    <li>Parallel Programming - OpenMP</li>
-                    <li>3D graphical programming - OpenGL</li>
-                    <li>Competitive Programming and Game Jam Participation</li>
-                    <li>Technical Experience: Machine Learning, Deep Learning, Cybersecurity, Web development and Game Development</li>
-                    <li>Proficiency in C++, Python, and Godot Game Engine</li>
-                    <li>Software Development Projects: C, C++, Python and Java</li>
-                    <li>Criptography - Elliptic curves</li>
-                </ul>
-            </div>
-
             <!-- Projects Section -->
             <div class="section">
                 <h2>Projects & Events</h2>
@@ -183,20 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <p>Trabajé como consultor de TI durante el verano, ayudando a los empleados con sus problemas de TI, desarrollando parcialmente una aplicación de escritorio para la empresa, configurando la autenticación de dos factores de la empresa y, en general, manteniendo el servicio de TI de la empresa.</p>
                 </div>
-            </div>
-
-            <!-- Sección de Habilidades Técnicas -->
-            <div class="section">
-                <h2>Habilidades Técnicas</h2>
-                <ul>
-                    <li>Programación Paralela - OpenMP</li>
-                    <li>Programación gráfica 3D - OpenGL</li>
-                    <li>Programación Competitiva y Participación en Game Jams</li>
-                    <li>Experiencia Técnica: Aprendizaje Automático, Aprendizaje Profundo, Ciberseguridad, Desarrollo Web y Desarrollo de Juegos</li>
-                    <li>Dominio de C++, Python y Godot Game Engine</li>
-                    <li>Proyectos de Desarrollo de Software: C, C++, Python y Java</li>
-                    <li>Criptografía - Curvas elípticas</li>
-                </ul>
             </div>
 
             <!-- Sección de Proyectos -->
