@@ -105,3 +105,31 @@ ul li {
 #language-select option {
     padding: 10px;
 }
+
+
+
+/* Spanish version styling */
+.spanish {
+    margin-top: 30px;
+    font-size: 1em;
+}
+
+.spanish h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid #0e0d0d;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.spanish ul {
+    list-style-type: disc;
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
+
+.spanish ul li {
+    margin-bottom: 5px;
+    font-size: 1em;
+}

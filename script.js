@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="header">
                 <h1>Leon Elliott Fuller</h1>
                 <p>Email: <a href="mailto:l.elliottfuller@gmail.com">l.elliottfuller@gmail.com</a></p>
-                <p>Address: Marbella, Spain</p>
+                <p>Address: Grzegórzecka 20A, 31-532 Kraków, Poland</p>
                 <p>Currently finishing my last year in Computer Engineering, studying abroad in Poland</p>
             </div>
             <div class="section">
@@ -21,12 +21,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h2>Education</h2>
                 <div class="education-entry">
                     <div class="education-header">
+                        <h3>Erasmus+ Student at AGH Univeristy of Krakow <span class="location">Kraków, Poland</span></h3>
+                        <p>Finishing my university studies abroad in Computer Science <span class="date">Sep 2024 - Present</span></p>
+                    </div>
+                    <ul>
+                        <li>Coursework: Computer Vision, Deep Learning in Medical Image Analysis, Cybersecurity, Real Time Operating Systems in C and Cloud Computing.</li>
+                    </ul>
+                </div>
+                <div class="education-entry">
+                    <div class="education-header">
                         <h3>Computer Engineering <span class="location">Granada, Spain</span></h3>
                         <p>Specialized in Computing and Intelligent Systems <span class="date">Sep. 2021 - Present</span></p>
                     </div>
                     <ul>
-                        <li>Coursework: AI, Machine Learning, Networking, and Cybersecurity.</li>
-                        <li>Honors: Calculus, Statistics, and Programming.</li>
+                        <li>Coursework: AI, Machine Learning, Networking, C++, Python, OOP, Graphical Design using OpenGL, and Cybersecurity.</li>
+                        <li>Honors: Calculus, Statistics, Machine Learning, and Programming.</li>
                     </ul>
                 </div>
             </div>
@@ -80,6 +89,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h2>Certificates</h2>
                 <div class="certificate-entry">
                     <div class="certificate-header">
+                        <h3>AWS Academy Cloud Developing <span class="location">Krakow, Poland</span></h3>
+                        <p><a href="https://www.credly.com/badges/88aa1ef1-aa4f-4202-9739-75d974af1a1b/linked_in_profile">Amazon Web Services (AWS) - Certificate</a> <span class="date">November 2024</span></p>
+                    </div>
+                    <ul>
+                        <li>Learned how to design, develop, and deploy cloud-based solutions using AWS.</li>
+                        <li>Developed a <a href="https://docs.google.com/document/d/1Wbxl2npoqENX2HGI253hoDC6QvVw2TH4mAmL73aasCM/edit?usp=sharing">End to end AWS Web Application</a> related to this program.</li>
+                    </ul>
+                </div>
+                <div class="certificate-entry">
+                    <div class="certificate-header">
                         <h3>Machine Learning and Big Data for BioInformatics <span class="location">Granada, Spain</span></h3>
                         <p>University of Granada <span class="date">January - June 2024</span></p>
                     </div>
@@ -103,103 +122,122 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
 
             <div class="section">
+                <h2>Interests</h2>
+            <ul>
+                <li>Proud dog owner</li>
+                <li>Professional mediocre marathon runner</li>
+                <li>Mountain and nature lover</li>
+                <li>Completed over 400 hours of meditation after discovering memory leaks</li>
+                </ul>
+            <div class="section">
                 <h2>Personal Details</h2>
-                <p>LinkedIn: <a href="https://www.linkedin.com/in/leon-elliott-fuller">Leon Elliott Fuller</a></p>
+                <p>LinkedIn: <a href="www.linkedin.com/in/leon-elliott-fuller-b48b7123a">Leon Elliott Fuller</a></p>
                 <p>GitHub: <a href="https://github.com/Leonfullxr">Leonfullxr</a></p>
             </div>
-            <div class="section">
-            <h2>Languages</h2>
-            <ul>
-                <li>English - Native</li>
-                <li>Spanish - Native</li>
-                <li>French - Basic</li>
-            </ul>
         </div>
         `,
         es: `
             <div class="header">
                 <h1>Leon Elliott Fuller</h1>
                 <p>Email: <a href="mailto:l.elliottfuller@gmail.com">l.elliottfuller@gmail.com</a></p>
-                <p>Direccion: Marbella, Espana</p>
-                <p>Actualmente finalizando mi ultimo ano en Ingenieria Informatica, estudiando en Polonia</p>
+                <p>Dirección: Grzegórzecka 20A, 31-532 Cracovia, Polonia</p>
+                <p>Actualmente terminando mi último año de Ingeniería Informática, estudiando en el extranjero en Polonia</p>
             </div>
             <div class="section">
                 <h2>Perfil</h2>
-                <p>Mientras continuo mis estudios, tambien busco adquirir experiencia practica en el ambito laboral y establecer una base solida para mi futura carrera. A traves de esto, pretendo fortalecer mis conocimientos y habilidades. En ultima instancia, mi objetivo es recibir formacion para trabajar en un rol organizativo dentro de una empresa.</p>
-                <p>Me encanta conocer gente nueva, descubrir nuevos lugares, viajar y practicar deportes. A menudo participo en varias carreras, a veces con amigos por diversion. ¡Me encanta descubrir y aprender cosas nuevas!</p>
+                <p>Mientras termino mis estudios, también busco ganar experiencia práctica en el ámbito laboral y establecer una base sólida para mi futura carrera. A través de esto, busco fortalecer mis conocimientos y habilidades. Mi objetivo final es recibir formación para trabajar en un rol organizativo dentro de una empresa.</p>
+                <p>Me encanta conocer gente nueva, descubrir nuevos lugares, viajar y practicar deportes. A menudo participo en varias carreras, a veces con amigos por diversión. ¡Me encanta descubrir y aprender cosas nuevas!</p>
             </div>
 
-            <!-- Education Section -->
+            <!-- Sección de Educación -->
             <div class="section">
-                <h2>Educacion</h2>
+                <h2>Educación</h2>
                 <div class="education-entry">
                     <div class="education-header">
-                        <h3>Ingenieria Informatica <span class="location">Granada, Espana</span></h3>
-                        <p>Especializado en Computacion y Sistemas Inteligentes <span class="date">Sep. 2021 - Presente</span></p>
+                        <h3>Erasmus+ Estudiante en la Universidad AGH de Cracovia <span class="location">Cracovia, Polonia</span></h3>
+                        <p>Terminando mis estudios universitarios en el extranjero en Ciencias de la Computación <span class="date">Sept 2024 - Presente</span></p>
                     </div>
                     <ul>
-                        <li>Asignaturas: IA, Aprendizaje Automatico, Redes y Ciberseguridad.</li>
-                        <li>Honores: Calculo, Estadistica y Programacion.</li>
+                        <li>Cursos: Visión por Computador, Aprendizaje Profundo en Análisis de Imágenes Médicas, Ciberseguridad, Sistemas Operativos en Tiempo Real en C y Computación en la Nube.</li>
+                    </ul>
+                </div>
+                <div class="education-entry">
+                    <div class="education-header">
+                        <h3>Ingeniería Informática <span class="location">Granada, España</span></h3>
+                        <p>Especializado en Computación y Sistemas Inteligentes <span class="date">Septiembre 2021 - Presente</span></p>
+                    </div>
+                    <ul>
+                        <li>Cursos: IA, Aprendizaje Automático, Redes, C++, Python, POO, Diseño Gráfico usando OpenGL, y Ciberseguridad.</li>
+                        <li>Reconocimientos: Cálculo, Estadística, Aprendizaje Automático, y Programación.</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Experience Section -->
+            <!-- Sección de Experiencia -->
             <div class="section">
                 <h2>Experiencia</h2>
                 <div class="experience-entry">
                     <div class="experience-header">
-                        <h3>Consultoria de Clientes Privados <span class="location">Malaga, Espana</span></h3>
-                        <p>Consultor de TI · Tiempo completo <span class="date">Jul. 2022 - Sep. 2023</span></p>
+                        <h3>Consultoría a Clientes Privados <span class="location">Málaga, España</span></h3>
+                        <p>Consultor de TI · Tiempo completo <span class="date">Julio 2022 - Septiembre 2023</span></p>
                     </div>
-                    <p>Trabaje como Consultor de TI durante el verano, ayudando a los empleados con problemas de TI, creando una aplicacion de escritorio para la empresa, configurando la autenticacion de dos factores de la empresa y manteniendo el servicio de TI de la empresa.</p>
+                    <p>Trabajé como consultor de TI durante el verano, ayudando a los empleados con sus problemas de TI, desarrollando parcialmente una aplicación de escritorio para la empresa, configurando la autenticación de dos factores de la empresa y, en general, manteniendo el servicio de TI de la empresa.</p>
                 </div>
             </div>
 
-            <!-- Skills Section -->
+            <!-- Sección de Habilidades Técnicas -->
             <div class="section">
-                <h2>Habilidades Tecnicas</h2>
+                <h2>Habilidades Técnicas</h2>
                 <ul>
-                    <li>Programacion Paralela - OpenMP</li>
-                    <li>Programacion Grafica 3D - OpenGL</li>
-                    <li>Participacion en Programacion Competitiva y Game Jams</li>
-                    <li>Experiencia Tecnica: Aprendizaje Automatico, Aprendizaje Profundo, Ciberseguridad, Desarrollo Web y Desarrollo de Videojuegos</li>
-                    <li>Competencia en C++, Python y Godot Game Engine</li>
+                    <li>Programación Paralela - OpenMP</li>
+                    <li>Programación gráfica 3D - OpenGL</li>
+                    <li>Programación Competitiva y Participación en Game Jams</li>
+                    <li>Experiencia Técnica: Aprendizaje Automático, Aprendizaje Profundo, Ciberseguridad, Desarrollo Web y Desarrollo de Juegos</li>
+                    <li>Dominio de C++, Python y Godot Game Engine</li>
                     <li>Proyectos de Desarrollo de Software: C, C++, Python y Java</li>
-                    <li>Cristografia - Curvas Elipticas</li>
+                    <li>Criptografía - Curvas elípticas</li>
                 </ul>
             </div>
 
-            <!-- Projects Section -->
+            <!-- Sección de Proyectos -->
             <div class="section">
                 <h2>Proyectos y Eventos</h2>
                 <div class="project-entry">
                     <div class="project-header">
-                        <h3><a href="https://github.com/leonfullxr/Pichola">GameJam - Pichola</a> <span class="location">Granada, Espana</span></h3>
-                        <p>Proyecto de Desarrollo de Juegos <span class="date">Ene. 2022</span></p>
+                        <h3><a href="https://github.com/leonfullxr/Pichola">GameJam - Pichola</a> <span class="location">Granada, España</span></h3>
+                        <p>Proyecto de Desarrollo de Videojuegos <span class="date">Enero 2022</span></p>
                     </div>
                     <ul>
-                        <li>Participe en un evento de GameJam con el tema "empezar desde cero".</li>
+                        <li>Participé en un evento de GameJam, el tema fue "comenzar desde cero".</li>
                         <li>Usamos Godot Engine para crear el juego 2D en 48 horas.</li>
-                        <li>1º lugar en la categoria 'Mejor Arte'.</li>
-                        <li>3º lugar en la categoria 'Mejor Potencial Comercial'.</li>
-                        <li>3º lugar en la categoria 'Mas Popular'.</li>
-                        <li>Para mas informacion, visita la <a href="https://itch.io/jam/student-game-jam/rate/1966784">pagina en itch.io</a>.</li>
+                        <li>1º lugar en la categoría 'Mejor Arte'.</li>
+                        <li>3º lugar en la categoría 'Mejor Potencial Comercial'.</li>
+                        <li>3º lugar en la categoría 'Más Popular'.</li>
+                        <li>Para más información, visita la <a href="https://itch.io/jam/student-game-jam/rate/1966784">página de itch.io</a>.</li>
                     </ul>
-                </div>
             </div>
 
-            <!-- Certificates Section -->
+            <!-- Sección de Certificados -->
             <div class="section">
                 <h2>Certificados</h2>
                 <div class="certificate-entry">
                     <div class="certificate-header">
-                        <h3>Aprendizaje Automatico y Big Data para Bioinformatica <span class="location">Granada, Espana</span></h3>
+                        <h3>AWS Academy Cloud Developing <span class="location">Cracovia, Polonia</span></h3>
+                        <p><a href="https://www.credly.com/badges/88aa1ef1-aa4f-4202-9739-75d974af1a1b/linked_in_profile">Amazon Web Services (AWS) - Certificado</a> <span class="date">Noviembre 2024</span></p>
+                    </div>
+                    <ul>
+                        <li>Aprendí a diseñar, desarrollar y desplegar soluciones basadas en la nube usando AWS.</li>
+                        <li>Desarrollé una <a href="https://docs.google.com/document/d/1Wbxl2npoqENX2HGI253hoDC6QvVw2TH4mAmL73aasCM/edit?usp=sharing">Aplicación Web AWS de extremo a extremo</a> relacionada con este programa.</li>
+                    </ul>
+                </div>
+                <div class="certificate-entry">
+                    <div class="certificate-header">
+                        <h3>Aprendizaje Automático y Big Data para Bioinformática <span class="location">Granada, España</span></h3>
                         <p>Universidad de Granada <span class="date">Enero - Junio 2024</span></p>
                     </div>
                     <ul>
-                        <li>Un <a href="https://abierta.ugr.es/course/view.php?id=74">programa patrocinado por la Universidad</a> sobre Aprendizaje Automatico y Big Data enfocado en Bioinformatica, desarrollando metodos y herramientas de software para comprender datos biologicos.</li>
-                        <li>Creé un proyecto detallado de <a href="https://github.com/leonfullxr/Classifying-Mushrooms.git">Clasificacion de Hongos</a> relacionado con este programa.</li>
+                        <li>Un <a href="https://abierta.ugr.es/course/view.php?id=74">programa universitario patrocinado</a>, que cubre varios temas de Aprendizaje Automático enfocados en Bioinformática.</li>
+                        <li>Creé un proyecto detallado de <a href="https://github.com/leonfullxr/Classifying-Mushrooms.git">Clasificación de Hongos</a> relacionado con este programa.</li>
                     </ul>
                 </div>
                 <div class="certificate-entry">
@@ -217,18 +255,19 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
 
             <div class="section">
-                <h2>Datos Personales</h2>
-                <p>LinkedIn: <a href="https://www.linkedin.com/in/leon-elliott-fuller">Leon Elliott Fuller</a></p>
+                <h2>Intereses</h2>
+                <ul>
+                    <li>Dueño orgulloso de un perro</li>
+                    <li>Corredor mediocre profesional de maratones</li>
+                    <li>Amante de la montaña y la naturaleza</li>
+                    <li>He completado más de 400 horas de meditación tras descubrir fallos de memoria</li>
+                </ul>
+            <div class="section">
+                <h2>Detalles Personales</h2>
+                <p>LinkedIn: <a href="www.linkedin.com/in/leon-elliott-fuller-b48b7123a">Leon Elliott Fuller</a></p>
                 <p>GitHub: <a href="https://github.com/Leonfullxr">Leonfullxr</a></p>
             </div>
-            <div class="section">
-                <h2>Idiomas</h2>
-                <ul>
-                    <li>Ingles - Nativo</li>
-                    <li>Español - Nativo</li>
-                    <li>Frances - Basico</li>
-                </ul>
-            </div>
+        </div>
         `
     };
 
