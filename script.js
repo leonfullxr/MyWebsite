@@ -85,12 +85,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="certificate-entry">
                     <div class="certificate-header">
+                        <h3>Machine Learning A-Z <span class="location">Online, Udemy</span></h3>
+                        <p><a href="https://udemy-certificate.s3.amazonaws.com/pdf/UC-555f0359-8d05-4820-9c97-f20af53e4ca9.pdf"> Udemy - Certificate</a> <span class="date">January - July 2024</span></p>
+                    </div>
+                    <ul>
+                        <li>This course goes from the basics of Machine Learning towards a more deeper understanding. Honestly, it was a complement towards my University courses of Machine Learning, because while it does cover the broad understanding of ML, it doesn't really go extremely deep into detail, but it's still a good course if you have no basic understanding of ML.</li>
+                        <li>This course basically helped me solidify my understanding of ML and helped me get better grades in my University courses of ML.</li>
+                    </ul>
+                </div>
+                <div class="certificate-entry">
+                    <div class="certificate-header">
                         <h3>Machine Learning and Big Data for BioInformatics <span class="location">Granada, Spain</span></h3>
                         <p>University of Granada <span class="date">January - June 2024</span></p>
                     </div>
                     <ul>
                         <li>A <a href="https://abierta.ugr.es/course/view.php?id=74">University-Sponsored Machine Learning and Big Data program</a>, covering various topics of ML focused on BioInformatics, developing methods and software tools for understanding biological data.</li>
                         <li>Created a detailed <a href="https://github.com/leonfullxr/Classifying-Mushrooms.git">Mushroom Classification</a> project related to this program.</li>
+                    </ul>
+                </div>
+                <div class="certificate-entry">
+                    <div class="certificate-header">
+                        <h3>Master C++ Programming <span class="location">Online, Udemy</span></h3>
+                        <p><a href="https://udemy-certificate.s3.amazonaws.com/image/UC-a82c810b-3b69-4423-9d1a-f8e9ff2509f8.jpg?v=1735292490000"> Udemy - Certificate</a> <span class="date">December 2022</span></p>
+                    </div>
+                    <ul>
+                        <li>An online C++ mastering course, going from the most basic understanding of variables to the most advanced topics such as multi-threading, polymorphism, etc.</li>
+                        <li>Created a few mini C++ projects related to this program such as a calculator, keylogger and GUI application development using Qt 5 C++.</li>
                     </ul>
                 </div>
                 <div class="certificate-entry">
@@ -204,12 +224,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="certificate-entry">
                     <div class="certificate-header">
+                        <h3>Machine Learning A-Z <span class="location">Online, Udemy</span></h3>
+                        <p><a href="https://udemy-certificate.s3.amazonaws.com/pdf/UC-555f0359-8d05-4820-9c97-f20af53e4ca9.pdf">Udemy - Certificado</a> <span class="date">Enero - Julio 2024</span></p>
+                    </div>
+                    <ul>
+                        <li>Este curso abarca desde los conceptos básicos de Machine Learning hasta una comprensión más profunda. Honestamente, fue un complemento a mis cursos universitarios de Machine Learning, ya que si bien cubre una comprensión amplia del tema, no entra en detalles extremadamente profundos. Aun así, es un buen curso si no tienes conocimientos previos de ML.</li>
+                        <li>Este curso me ayudó a solidificar mi comprensión de Machine Learning y a obtener mejores calificaciones en mis cursos universitarios de ML.</li>
+                    </ul>
+                </div>
+                <div class="certificate-entry">
+                    <div class="certificate-header">
                         <h3>Aprendizaje Automático y Big Data para Bioinformática <span class="location">Granada, España</span></h3>
                         <p>Universidad de Granada <span class="date">Enero - Junio 2024</span></p>
                     </div>
                     <ul>
                         <li>Un <a href="https://abierta.ugr.es/course/view.php?id=74">programa universitario patrocinado</a>, que cubre varios temas de Aprendizaje Automático enfocados en Bioinformática.</li>
                         <li>Creé un proyecto detallado de <a href="https://github.com/leonfullxr/Classifying-Mushrooms.git">Clasificación de Hongos</a> relacionado con este programa.</li>
+                    </ul>
+                </div>
+                <div class="certificate-entry">
+                    <div class="certificate-header">
+                        <h3>Domina la Programación en C++ <span class="location">Online, Udemy</span></h3>
+                        <p><a href="https://udemy-certificate.s3.amazonaws.com/image/UC-a82c810b-3b69-4423-9d1a-f8e9ff2509f8.jpg?v=1735292490000">Udemy - Certificado</a> <span class="date">Diciembre 2022</span></p>
+                    </div>
+                    <ul>
+                        <li>Un curso en línea para dominar C++, comenzando desde los conceptos más básicos de variables hasta temas avanzados como multithreading, polimorfismo, etc.</li>
+                        <li>Creé algunos proyectos pequeños en C++ relacionados con este programa, como una calculadora, un keylogger y desarrollo de aplicaciones GUI utilizando Qt 5 C++.</li>
                     </ul>
                 </div>
                 <div class="certificate-entry">
