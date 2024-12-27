@@ -4,7 +4,11 @@ This is a simple personal website that I created using HTML and CSS. It is a sta
 The general idea is to have this project to showcase my work timeline with Web Development, because throughout my University years I have been working on different projects such as Deep Learning, Machine Learning, Data Science, Game Development, and Cybersecurity. I like this project to start from the basics of html and css and then move on to more advanced topics such as JavaScript, React, Node.js, and MongoDB.
 
 # Future work
-In the future, I plan to add more functionality to the website, such as photos and videos of my projects, a section of my profile picture and for a further improvement, I will add dynamic content using JavaScript.
+In the future, I plan to add more functionality to the website, such as photos and videos of my projects, a section of my profile picture and for a further improvement, I will add dynamic content using JavaScript. Basically:
+- Add a photo gallery of my projects
+- Add a section of my profile picture
+- Add dynamic content using JavaScript
+- Make the website responsive
 
 # Feedback
 If you have any feedback or suggestions for improvement, please feel free to reach out to me. I am always looking for ways to improve my work and would love to hear your thoughts.
