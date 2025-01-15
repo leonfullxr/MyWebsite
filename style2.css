@@ -1,0 +1,135 @@
+/* Center the section headers */
+.section h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+    border-bottom: 2px solid #0e0d0d;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    text-align: center; /* Center align */
+}
+
+/* General section layout adjustments */
+.experience-entry, .certificate-entry, .project-entry {
+    margin-bottom: 20px;
+}
+
+/* Common header styles for education, experience, and certificate sections */
+.education-header, .experience-header, .certificate-header, .project-header {
+    display: flex;
+    flex-direction: column; /* Stack the title and subtitle */
+    margin-bottom: 10px;
+}
+
+.education-header h3, .experience-header h3, .certificate-header h3, .project-header h3 {
+    display: flex;
+    justify-content: space-between; /* Align title and location */
+    margin: 0;
+    font-weight: bold; /* Bold for title */
+}
+
+.education-header h3 .location, .experience-header h3 .location, .certificate-header h3 .location, .project-header h3 .location {
+    font-weight: normal; /* Normal font weight for location */
+}
+
+.education-header p, .experience-header p, .certificate-header p, .project-header p {
+    display: flex;
+    justify-content: space-between; /* Align specialization/role and date */
+    font-size: 1em;
+    margin: 0;
+    font-style: italic; /* Italic for specialization/role */
+    color: #000;
+}
+
+.education-header p .date, .experience-header p .date, .certificate-header p .date, .project-header p .date {
+    font-style: normal; /* Normal font style for date */
+    font-weight: normal; /* Normal font weight for date */
+    font-size: 1em; /* Ensure consistent font size */
+}
+
+/* List styling for consistency across sections */
+ul {
+    list-style-type: disc;
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
+
+ul li {
+    margin-bottom: 5px;
+    font-size: 1em;
+}
+
+
+/* Ensure the overall layout and spacing is balanced */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px; /* Increased padding for a cleaner look */
+    box-shadow: 0 0 15px rgba(0,0,0,0.1); /* Slightly stronger shadow for depth */
+}
+
+/* Style for the top profile area */
+.header {
+    text-align: center; /* Center align the header */
+    margin-bottom: 30px; /* Extra spacing below the header */
+}
+
+.language-selector {
+    margin-bottom: 20px;
+}
+
+.language-selector label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+#language-select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+#language-select:hover {
+    background-color: #f0f0f0;
+    border-color: #888;
+}
+
+#language-select:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#language-select option {
+    padding: 10px;
+}
+
+
+
+/* Spanish version styling */
+.spanish {
+    margin-top: 30px;
+    font-size: 1em;
+}
+
+.spanish h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid #0e0d0d;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.spanish ul {
+    list-style-type: disc;
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
+
+.spanish ul li {
+    margin-bottom: 5px;
+    font-size: 1em;
+}
