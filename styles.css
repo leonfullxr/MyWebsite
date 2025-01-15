@@ -409,8 +409,6 @@ header {
   color: var(--text-light);
 }
 
-/* Add this to your existing styles.css file */
-
 .journey__card h6 {
   font-size: 1rem;
   font-weight: 400;
@@ -455,61 +453,6 @@ header {
 
 .journey__card p {
   color: var(--text-light);
-}
-
-.service__grid {
-  margin-top: 4rem;
-  display: grid;
-  gap: 4rem 1rem;
-}
-
-.service__card {
-  padding-block: 0 1.5rem;
-  padding-inline: 1.5rem;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-top-right-radius: 3rem;
-  transition: 0.3s;
-}
-
-.service__card:hover {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-}
-
-.service__card span {
-  display: inline-block;
-  padding: 6px 14px;
-  font-size: 2rem;
-  color: var(--white);
-  background-color: var(--primary-color);
-  transform: translateY(-50%);
-  border-radius: 5px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  transition: 0.3s;
-}
-
-.service__card:hover span {
-  color: var(--primary-color);
-  background-color: var(--white);
-}
-
-.service__card h4 {
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--secondary-color);
-  transition: 0.3s;
-}
-
-.service__card p {
-  color: var(--text-light);
-  line-height: 1.75rem;
-  transition: 0.3s;
-}
-
-.service__card:hover :is(h4, p) {
-  color: var(--white);
 }
 
 .portfolio {
@@ -606,49 +549,6 @@ header {
 
 .swiper-pagination-bullet-active {
   background-color: var(--primary-color);
-}
-
-.client__header {
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.client__details {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.client__details img {
-  max-width: 80px;
-  border-radius: 100%;
-  border: 2px solid var(--primary-color);
-}
-
-.client__details h4 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--secondary-color);
-}
-
-.client__details h5 {
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--text-light);
-}
-
-.client__ratings span {
-  font-size: 1.2rem;
-  color: goldenrod;
-}
-
-.client__card p {
-  color: var(--text-light);
-  line-height: 1.75rem;
 }
 
 .blog {
