@@ -58,7 +58,6 @@ ul li {
     font-size: 1em;
 }
 
-
 /* Ensure the overall layout and spacing is balanced */
 .container {
     max-width: 800px;
@@ -74,8 +73,10 @@ ul li {
     margin-bottom: 30px; /* Extra spacing below the header */
 }
 
+/* Language selector styles */
 .language-selector {
     margin-bottom: 20px;
+    text-align: center; /* Center align the dropdown */
 }
 
 .language-selector label {
@@ -102,34 +103,16 @@ ul li {
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-#language-select option {
-    padding: 10px;
+/* Styling for dynamically loaded content */
+#content {
+    animation: fadeIn 0.5s ease-in-out;
 }
 
-
-
-/* Spanish version styling */
-.spanish {
-    margin-top: 30px;
-    font-size: 1em;
-}
-
-.spanish h2 {
-    font-size: 1.8em;
-    font-weight: bold;
-    text-align: center;
-    border-bottom: 2px solid #0e0d0d;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-}
-
-.spanish ul {
-    list-style-type: disc;
-    margin-left: 40px;
-    margin-bottom: 10px;
-}
-
-.spanish ul li {
-    margin-bottom: 5px;
-    font-size: 1em;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
