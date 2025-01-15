@@ -17,7 +17,7 @@
 }
 
 #oldPortfolioBtn {
-  margin-left: 20px; /* Adjust the value as needed */
+  margin-left: 20px;
 }
 
 .section__container {
@@ -489,15 +489,12 @@ header {
   gap: 1rem;
 }
 
-/** chatgpt **/
-/* 1) The wrapper around the image + overlay */
 .image-wrapper {
   position: relative;
-  overflow: hidden;       /* ensures the scaled image is clipped */
-  border-radius: 10px;    /* matches the image’s rounding if desired */
+  overflow: hidden;       
+  border-radius: 10px;
 }
 
-/* 2) Style the image */
 .image-wrapper img {
   display: block;
   width: 100%;
@@ -507,17 +504,14 @@ header {
   transition: transform 0.3s ease;
 }
 
-/* 3) Scale the image on hover */
 .image-wrapper:hover img {
   transform: scale(1.07);
 }
 
-/* 4) The overlay inside .image-wrapper */
 .project-overlay {
   position: absolute;
   top: 0;
   left: 0;
-  /* overlay covers the entire .image-wrapper */
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
@@ -526,20 +520,17 @@ header {
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 
-  /* Center the text/icon */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
-/* 5) Show overlay on hover */
 .image-wrapper:hover .project-overlay {
   opacity: 1;
   visibility: visible;
 }
 
-/* 6) Text styling */
 .project-overlay p {
   margin-bottom: 1rem;
   color: var(--white);
@@ -548,7 +539,6 @@ header {
   padding: 0 1rem;
 }
 
-/* 7) GitHub icon styling */
 .project-overlay a {
   color: var(--white);
   font-size: 1.5rem;
