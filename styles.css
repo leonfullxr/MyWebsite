@@ -16,6 +16,10 @@
   box-sizing: border-box;
 }
 
+#oldPortfolioBtn {
+  margin-left: 20px; /* Adjust the value as needed */
+}
+
 .section__container {
   max-width: var(--max-width);
   margin: auto;
