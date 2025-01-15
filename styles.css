@@ -494,6 +494,10 @@ header {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
+.portfolio__card:hover img {
+  transform: scale(1.1);
+}
+
 .banner__container {
   display: grid;
   gap: 2rem;
@@ -630,10 +634,6 @@ header {
   }
 
   .journey__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .service__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
