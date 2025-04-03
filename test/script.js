@@ -7,9 +7,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const bInput = document.getElementById("bParam");
     const equationHeading = document.getElementById("equation");
   
-    // Define world coordinates for drawing (adjustable as needed)
-    const xMin = -2, xMax = 3;
-    const yMin = -4, yMax = 4;
+    // Define world coordinates as variables for dynamic updating
+    let xMin = -2, xMax = 3, yMin = -4, yMax = 4;
   
     // Tick mark settings
     const tickLength = 5;
@@ -68,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
   
-    // Initialize parameters (they will update dynamically)
+    // Initialize parameters (they update dynamically)
     let a = parseFloat(aInput.value);
     let b = parseFloat(bInput.value);
   
@@ -154,6 +153,21 @@ document.addEventListener("DOMContentLoaded", function() {
       canvas.height = window.innerHeight;
       draw();
     }
+  
+    // Zoom on scroll: adjust the world coordinate range while keeping the center fixed
+    canvas.addEventListener("wheel", function(event) {
+      event.preventDefault();
+      const zoomFactor = event.deltaY < 0 ? 0.9 : 1.1;
+      const centerX = (xMin + xMax) / 2;
+      const centerY = (yMin + yMax) / 2;
+      const widthRange = (xMax - xMin) * zoomFactor;
+      const heightRange = (yMax - yMin) * zoomFactor;
+      xMin = centerX - widthRange / 2;
+      xMax = centerX + widthRange / 2;
+      yMin = centerY - heightRange / 2;
+      yMax = centerY + heightRange / 2;
+      draw();
+    });
   
     window.addEventListener("resize", resizeCanvas);
     aInput.addEventListener("input", updateCurve);
