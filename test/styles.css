@@ -6,6 +6,25 @@ body {
     padding: 0;
   }
   
+  #toolbar {
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #eaeaea;
+    display: inline-block;
+    border-radius: 5px;
+  }
+  
+  #toolbar label {
+    margin: 0 10px;
+    font-weight: bold;
+  }
+  
+  #toolbar input {
+    width: 60px;
+    padding: 5px;
+    margin-right: 10px;
+  }
+  
   canvas {
     border: 1px solid #ccc;
     margin: 20px auto;

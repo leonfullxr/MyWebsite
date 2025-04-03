@@ -2,8 +2,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const canvas = document.getElementById("curveCanvas");
     const ctx = canvas.getContext("2d");
   
-    // Define world coordinates for drawing
-    // These ranges can be adjusted as needed.
+    // Get toolbar inputs and equation heading
+    const aInput = document.getElementById("aParam");
+    const bInput = document.getElementById("bParam");
+    const equationHeading = document.getElementById("equation");
+  
+    // Define world coordinates for drawing (adjustable as needed)
     const xMin = -2, xMax = 3;
     const yMin = -4, yMax = 4;
     const width = canvas.width, height = canvas.height;
@@ -42,10 +46,19 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
   
-    // Elliptic curve parameters: y² = x³ + a*x + b
-    const a = -1, b = 1;
+    // Initialize parameters (they will update dynamically)
+    let a = parseFloat(aInput.value);
+    let b = parseFloat(bInput.value);
   
-    // Function f(x) = x³ + a*x + b
+    // Update the heading to reflect the current parameters
+    function updateHeading() {
+      // Format equation string nicely depending on sign of parameters.
+      let aStr = a >= 0 ? " + " + a + "x" : " - " + Math.abs(a) + "x";
+      let bStr = b >= 0 ? " + " + b : " - " + Math.abs(b);
+      equationHeading.textContent = "Elliptic Curve: y² = x³" + aStr + bStr;
+    }
+  
+    // Function f(x) = x³ + a*x + b (right-hand side of the curve)
     function f(x) {
       return x * x * x + a * x + b;
     }
@@ -74,8 +87,6 @@ document.addEventListener("DOMContentLoaded", function() {
             ctx.lineTo(cx, cy);
           }
         } else {
-          // When f(x) < 0, the curve is not defined for real y;
-          // start a new path segment.
           started = false;
         }
       }
@@ -103,13 +114,27 @@ document.addEventListener("DOMContentLoaded", function() {
       ctx.stroke();
     }
   
-    // Clear the canvas and draw the axes and curve
+    // Clear the canvas and draw axes and the curve
     function draw() {
       ctx.clearRect(0, 0, width, height);
       drawAxes();
       drawCurve();
     }
   
+    // Update curve when parameters change
+    function updateCurve() {
+      a = parseFloat(aInput.value);
+      b = parseFloat(bInput.value);
+      updateHeading();
+      draw();
+    }
+  
+    // Listen for changes in the toolbar inputs
+    aInput.addEventListener("input", updateCurve);
+    bInput.addEventListener("input", updateCurve);
+  
+    // Initial drawing
+    updateHeading();
     draw();
   });
   
