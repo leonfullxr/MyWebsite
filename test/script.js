@@ -12,6 +12,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const yMin = -4, yMax = 4;
     const width = canvas.width, height = canvas.height;
   
+    // Length of tick marks in pixels
+    const tickLength = 5;
+    ctx.font = "10px Arial";
+    ctx.fillStyle = "#000";
+  
     // Convert world x coordinate to canvas x coordinate
     function transformX(x) {
       return ((x - xMin) / (xMax - xMin)) * width;
@@ -22,27 +27,57 @@ document.addEventListener("DOMContentLoaded", function() {
       return height - ((y - yMin) / (yMax - yMin)) * height;
     }
   
-    // Draw coordinate axes for reference
+    // Draw coordinate axes and add tick marks and labels
     function drawAxes() {
       ctx.strokeStyle = "#aaa";
       ctx.lineWidth = 1;
   
-      // Draw y-axis (x = 0)
-      if (xMin < 0 && xMax > 0) {
+      // Determine x-axis (y = 0) and y-axis (x = 0) positions if they exist within the range
+      const hasXAxis = (yMin < 0 && yMax > 0);
+      const hasYAxis = (xMin < 0 && xMax > 0);
+  
+      if (hasYAxis) {
         const xZero = transformX(0);
+        // Draw y-axis line
         ctx.beginPath();
         ctx.moveTo(xZero, 0);
         ctx.lineTo(xZero, height);
         ctx.stroke();
+  
+        // Add tick marks on y-axis
+        // We'll mark at every integer value from Math.ceil(yMin) to Math.floor(yMax)
+        for (let y = Math.ceil(yMin); y <= Math.floor(yMax); y++) {
+          const cy = transformY(y);
+          // Draw tick (horizontal line centered at the axis)
+          ctx.beginPath();
+          ctx.moveTo(xZero - tickLength, cy);
+          ctx.lineTo(xZero + tickLength, cy);
+          ctx.stroke();
+          // Label the tick slightly to the left of the axis
+          ctx.fillText(y, xZero - tickLength - 20, cy + 3);
+        }
       }
   
-      // Draw x-axis (y = 0)
-      if (yMin < 0 && yMax > 0) {
+      if (hasXAxis) {
         const yZero = transformY(0);
+        // Draw x-axis line
         ctx.beginPath();
         ctx.moveTo(0, yZero);
         ctx.lineTo(width, yZero);
         ctx.stroke();
+  
+        // Add tick marks on x-axis
+        // Mark at every integer value from Math.ceil(xMin) to Math.floor(xMax)
+        for (let x = Math.ceil(xMin); x <= Math.floor(xMax); x++) {
+          const cx = transformX(x);
+          // Draw tick (vertical line centered at the axis)
+          ctx.beginPath();
+          ctx.moveTo(cx, yZero - tickLength);
+          ctx.lineTo(cx, yZero + tickLength);
+          ctx.stroke();
+          // Label the tick below the axis
+          ctx.fillText(x, cx - 5, yZero + tickLength + 15);
+        }
       }
     }
   
@@ -52,7 +87,6 @@ document.addEventListener("DOMContentLoaded", function() {
   
     // Update the heading to reflect the current parameters
     function updateHeading() {
-      // Format equation string nicely depending on sign of parameters.
       let aStr = a >= 0 ? " + " + a + "x" : " - " + Math.abs(a) + "x";
       let bStr = b >= 0 ? " + " + b : " - " + Math.abs(b);
       equationHeading.textContent = "Elliptic Curve: y² = x³" + aStr + bStr;
@@ -67,8 +101,6 @@ document.addEventListener("DOMContentLoaded", function() {
     function drawCurve() {
       ctx.strokeStyle = "#0077cc";
       ctx.lineWidth = 2;
-  
-      // Use a small step for a smooth curve
       const step = (xMax - xMin) / 1000;
   
       // Draw the upper branch (y = +sqrt(f(x)))
@@ -76,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
       let started = false;
       for (let x = xMin; x <= xMax; x += step) {
         const val = f(x);
-        if (val >= 0) {  // Only real y values where f(x) is non-negative
+        if (val >= 0) {
           const y = Math.sqrt(val);
           const cx = transformX(x);
           const cy = transformY(y);
@@ -114,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function() {
       ctx.stroke();
     }
   
-    // Clear the canvas and draw axes and the curve
+    // Clear the canvas and redraw axes, scale, and the curve
     function draw() {
       ctx.clearRect(0, 0, width, height);
       drawAxes();
