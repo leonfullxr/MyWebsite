@@ -10,72 +10,59 @@ document.addEventListener("DOMContentLoaded", function() {
     // Define world coordinates for drawing (adjustable as needed)
     const xMin = -2, xMax = 3;
     const yMin = -4, yMax = 4;
-    const width = canvas.width, height = canvas.height;
   
-    // Length of tick marks in pixels
+    // Tick mark settings
     const tickLength = 5;
     ctx.font = "10px Arial";
     ctx.fillStyle = "#000";
   
     // Convert world x coordinate to canvas x coordinate
     function transformX(x) {
-      return ((x - xMin) / (xMax - xMin)) * width;
+      return ((x - xMin) / (xMax - xMin)) * canvas.width;
     }
   
     // Convert world y coordinate to canvas y coordinate (inverting the y-axis)
     function transformY(y) {
-      return height - ((y - yMin) / (yMax - yMin)) * height;
+      return canvas.height - ((y - yMin) / (yMax - yMin)) * canvas.height;
     }
   
-    // Draw coordinate axes and add tick marks and labels
+    // Draw coordinate axes with tick marks and labels
     function drawAxes() {
       ctx.strokeStyle = "#aaa";
       ctx.lineWidth = 1;
-  
-      // Determine x-axis (y = 0) and y-axis (x = 0) positions if they exist within the range
       const hasXAxis = (yMin < 0 && yMax > 0);
       const hasYAxis = (xMin < 0 && xMax > 0);
   
       if (hasYAxis) {
         const xZero = transformX(0);
-        // Draw y-axis line
         ctx.beginPath();
         ctx.moveTo(xZero, 0);
-        ctx.lineTo(xZero, height);
+        ctx.lineTo(xZero, canvas.height);
         ctx.stroke();
   
-        // Add tick marks on y-axis
-        // We'll mark at every integer value from Math.ceil(yMin) to Math.floor(yMax)
         for (let y = Math.ceil(yMin); y <= Math.floor(yMax); y++) {
           const cy = transformY(y);
-          // Draw tick (horizontal line centered at the axis)
           ctx.beginPath();
           ctx.moveTo(xZero - tickLength, cy);
           ctx.lineTo(xZero + tickLength, cy);
           ctx.stroke();
-          // Label the tick slightly to the left of the axis
           ctx.fillText(y, xZero - tickLength - 20, cy + 3);
         }
       }
   
       if (hasXAxis) {
         const yZero = transformY(0);
-        // Draw x-axis line
         ctx.beginPath();
         ctx.moveTo(0, yZero);
-        ctx.lineTo(width, yZero);
+        ctx.lineTo(canvas.width, yZero);
         ctx.stroke();
   
-        // Add tick marks on x-axis
-        // Mark at every integer value from Math.ceil(xMin) to Math.floor(xMax)
         for (let x = Math.ceil(xMin); x <= Math.floor(xMax); x++) {
           const cx = transformX(x);
-          // Draw tick (vertical line centered at the axis)
           ctx.beginPath();
           ctx.moveTo(cx, yZero - tickLength);
           ctx.lineTo(cx, yZero + tickLength);
           ctx.stroke();
-          // Label the tick below the axis
           ctx.fillText(x, cx - 5, yZero + tickLength + 15);
         }
       }
@@ -103,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function() {
       ctx.lineWidth = 2;
       const step = (xMax - xMin) / 1000;
   
-      // Draw the upper branch (y = +sqrt(f(x)))
+      // Upper branch (y = +sqrt(f(x)))
       ctx.beginPath();
       let started = false;
       for (let x = xMin; x <= xMax; x += step) {
@@ -124,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
       ctx.stroke();
   
-      // Draw the lower branch (y = -sqrt(f(x)))
+      // Lower branch (y = -sqrt(f(x)))
       ctx.beginPath();
       started = false;
       for (let x = xMin; x <= xMax; x += step) {
@@ -146,9 +133,9 @@ document.addEventListener("DOMContentLoaded", function() {
       ctx.stroke();
     }
   
-    // Clear the canvas and redraw axes, scale, and the curve
+    // Clear the canvas and redraw axes and the curve
     function draw() {
-      ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       drawAxes();
       drawCurve();
     }
@@ -161,12 +148,19 @@ document.addEventListener("DOMContentLoaded", function() {
       draw();
     }
   
-    // Listen for changes in the toolbar inputs
+    // Resize the canvas to fill the window and redraw the graph
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      draw();
+    }
+  
+    window.addEventListener("resize", resizeCanvas);
     aInput.addEventListener("input", updateCurve);
     bInput.addEventListener("input", updateCurve);
   
-    // Initial drawing
+    // Initial setup
+    resizeCanvas();
     updateHeading();
-    draw();
   });
   
