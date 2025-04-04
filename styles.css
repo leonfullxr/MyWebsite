@@ -747,12 +747,17 @@ header {
     color: var(--primary-color);
   }
 
-  .nav__btns {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
+  @media (min-width: 768px) {
+    .nav__btns {
+      display: flex;
+      /* remove flex: 1 if it’s causing too much stretching */
+      /* flex: 1;  <-- optional, remove if undesired */
+      align-items: center;   /* vertically center buttons */
+      justify-content: flex-end; /* keep them on the right side */
+      gap: 0.5rem;             /* space between each button */
+    }
   }
-
+  
   .header__container {
     padding-block: 0;
     grid-template-columns: repeat(2, 1fr);

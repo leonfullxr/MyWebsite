@@ -22,6 +22,9 @@ document.getElementById('downloadCvBtn').addEventListener('click', function () {
 document.getElementById('oldPortfolioBtn').addEventListener('click', function () {
   window.location.href = '/old_project/index2.html';
 });
+document.getElementById('thesisBtn').addEventListener('click', function () {
+  window.location.href = '/ecc/index.html';
+});
 document.getElementById('contactMeBtn').addEventListener('click', function () {
   window.location.href = 'mailto:l.elliottfuller@gmail.com';
 });
