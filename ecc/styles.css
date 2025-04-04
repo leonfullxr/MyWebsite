@@ -1,0 +1,57 @@
+/* Ensure the body and html fill the window and remove default spacing */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  /* Make the canvas fill the entire viewport */
+  #curveCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+  }
+  
+  /* Overlay container for toolbar and equation */
+  #overlay {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+  
+  
+  #toolbar {
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #eaeaea;
+    display: inline-block;
+    border-radius: 5px;
+  }
+  
+  #toolbar label {
+    margin: 0 10px;
+    font-weight: bold;
+  }
+  
+  #toolbar input {
+    width: 60px;
+    padding: 5px;
+    margin-right: 10px;
+  }
+  
+  canvas {
+    border: 1px solid #ccc;
+    margin: 20px auto;
+    display: block;
+    background-color: #fff;
+  }
+  
