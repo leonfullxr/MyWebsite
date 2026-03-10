@@ -1,0 +1,195 @@
+{
+  "meta": {
+    "title": "Leon Elliott Fuller — Computer Engineering Student & Developer",
+    "description": "Personal portfolio of Leon Elliott Fuller. Computer Engineering student passionate about Deep Learning, Cybersecurity, and Web Development."
+  },
+  "nav": {
+    "about": "About",
+    "cv": "Experience",
+    "projects": "Projects",
+    "blog": "Blog",
+    "switchLang": "ES"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Leon Elliott Fuller",
+    "tagline": "Computer Engineering · Deep Learning · Cybersecurity",
+    "description": "Computer Engineering student at the University of Granada, currently on Erasmus+ at AGH University of Krakow. I build things, learn constantly, and embrace new challenges.",
+    "cta": "Get to know me"
+  },
+  "about": {
+    "title": "About me",
+    "paragraphs": [
+      "I'm a Computer Engineering student specializing in Computing and Intelligent Systems at the University of Granada, currently finishing my studies abroad at AGH University of Krakow through the Erasmus+ program.",
+      "As I near the completion of my studies, I am eager to transition into the professional world and apply my knowledge in a practical setting. I am committed to building a strong foundation for my career by continuously developing my skills and embracing new challenges.",
+      "Throughout my university years, I have worked on projects spanning Deep Learning, Machine Learning, Data Science, Game Development, Cybersecurity, and Web Development. I bring a proactive attitude and a passion for learning."
+    ],
+    "location": "Kraków, Poland"
+  },
+  "hobbies": {
+    "title": "Beyond the code",
+    "items": [
+      {
+        "icon": "running",
+        "title": "Running",
+        "description": "I'm a self-proclaimed professional mediocre marathon runner. I love the challenge of long-distance running and often do races, sometimes with friends just for fun."
+      },
+      {
+        "icon": "nature",
+        "title": "Nature & Mountains",
+        "description": "Mountain and nature lover. I enjoy hiking and discovering new landscapes wherever I go. There's nothing like fresh air and a great view to clear your mind."
+      },
+      {
+        "icon": "music",
+        "title": "Music",
+        "description": "Music is a constant companion — whether I'm coding, running, or just relaxing. I enjoy discovering new genres and artists."
+      }
+    ]
+  },
+  "cv": {
+    "title": "Experience",
+    "experience": {
+      "title": "Work Experience",
+      "items": [
+        {
+          "role": "IT Consultant",
+          "company": "Private Client Consultancy",
+          "url": "#",
+          "period": "Jul 2022 — Sep 2023",
+          "current": false,
+          "description": [
+            "Worked as an IT Consultant helping workers with their IT issues, partly creating a Desktop App for the company.",
+            "Set up the company's 2FA, antimalware, spyware, and phishing rules, and generally maintained the company's IT service.",
+            "Provided training sessions for end users on the use of newly implemented technologies or processes."
+          ]
+        }
+      ]
+    },
+    "education": {
+      "title": "Education",
+      "items": [
+        {
+          "degree": "BSc. Computer Engineering (Erasmus+)",
+          "institution": "AGH University of Krakow, Poland",
+          "period": "Sep 2024 — Present",
+          "details": "Finishing studies abroad. Coursework: Computer Vision, Deep Learning in Medical Image Analysis, Cybersecurity, Real Time Operating Systems in C, and Cloud Computing."
+        },
+        {
+          "degree": "BSc. Computer Engineering",
+          "institution": "University of Granada, Spain",
+          "period": "Sep 2021 — Jun 2024",
+          "details": "Specialized in Computing and Intelligent Systems. Coursework: AI, Machine Learning, Networking, C++, Python, OOP, OpenGL, Cybersecurity. Honors in Calculus, Statistics, Machine Learning, and Programming."
+        }
+      ]
+    },
+    "skills": {
+      "title": "Skills",
+      "categories": [
+        {
+          "name": "Programming",
+          "items": ["C++", "Python", "JavaScript", "HTML/CSS", "SQL", "Bash"]
+        },
+        {
+          "name": "Technologies & Tools",
+          "items": ["Docker", "Wireguard", "Nextcloud", "Git", "Linux", "AWS", "Godot Engine", "OpenGL"]
+        },
+        {
+          "name": "Fields",
+          "items": ["Deep Learning", "Machine Learning", "Computer Vision", "Cybersecurity", "Networking", "Game Development"]
+        },
+        {
+          "name": "Languages",
+          "items": ["English (Native)", "Spanish (Fluent)"]
+        }
+      ]
+    },
+    "awards": {
+      "title": "Certifications & Awards",
+      "items": [
+        "AWS Academy Cloud Developing — Amazon Web Services (Nov 2024)",
+        "Machine Learning A-Z — Udemy (Jan–Jul 2024)",
+        "ML & Big Data for BioInformatics — University of Granada (Jan–Jun 2024)",
+        "Master C++ Programming — Udemy (Dec 2022)",
+        "GameJam Pichola — 1st 'Best Art', 3rd 'Best Commercial Potential', 3rd 'Most Popular' (Jan 2022)",
+        "Video Game & Entrepreneurship Program — Incyde Foundation (Jul–Aug 2020)"
+      ]
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "items": [
+      {
+        "name": "Cypher — Encrypted Chat App",
+        "url": "https://github.com/leonfullxr/Cypher",
+        "period": "2024",
+        "description": "State-of-the-art encrypted chat application with end-to-end encryption, real-time messaging, zero metadata storage, and advanced protocols like TLS and Signal. Features AES encryption and complete anonymity.",
+        "tags": ["Cybersecurity", "Web App", "DevOps"]
+      },
+      {
+        "name": "Self-Hosted Nextcloud",
+        "url": "https://nextcloud.leonfuller.space/",
+        "period": "2024",
+        "description": "Private, self-hosted alternative to Google Drive using Docker and Traefik. Part of a broader homelab setup focused on data privacy and complete control over personal files.",
+        "tags": ["DevOps", "Docker", "Web App"]
+      },
+      {
+        "name": "Pichola — Award-Winning Game",
+        "url": "https://github.com/leonfullxr/Pichola",
+        "period": "Jan 2022",
+        "description": "Award-winning game created during a 48-hour Game Jam using Godot Engine. Theme: 'Start from Nothing'. Players begin as an egg, collecting others to unlock abilities. Won 'Best Art'.",
+        "tags": ["Game Dev", "Design"]
+      },
+      {
+        "name": "AI for Ludo Game",
+        "url": "https://github.com/leonfullxr/AI-for-Ludo-game",
+        "period": "2023",
+        "description": "A reimagined Parchís game with a strategic twist, featuring a deliberative AI agent using MINIMAX and ALPHA-BETA PRUNING for intelligent gameplay against human players.",
+        "tags": ["AI", "Game Dev"]
+      },
+      {
+        "name": "Visual Path Finding",
+        "url": "https://github.com/leonfullxr/Visual-Path-Finding",
+        "period": "2023",
+        "description": "Interactive visualization tool demonstrating path-finding algorithms like A*, Dijkstra, and more. An educational resource for understanding algorithmic mechanics.",
+        "tags": ["AI", "Design"]
+      },
+      {
+        "name": "Classifying Mushrooms",
+        "url": "https://github.com/leonfullxr/Classifying-Mushrooms",
+        "period": "2024",
+        "description": "Mushroom edibility classification using supervised ML models. Analyzed the UCI Secondary Mushroom dataset as part of the ML course at the University of Granada.",
+        "tags": ["AI", "Machine Learning"]
+      },
+      {
+        "name": "Solar System Simulation",
+        "url": "https://github.com/leonfullxr/SolarSystem-Simulation",
+        "period": "2023",
+        "description": "Python-based simulation of a solar system with gravitational pull, collision dynamics, and asteroid interactions. Built with pygame.",
+        "tags": ["Game Dev", "Design"]
+      },
+      {
+        "name": "Elliptic Curve Visualization",
+        "url": "https://leonfullxr.github.io/ecc/",
+        "period": "2025",
+        "description": "Interactive visualization of elliptic curves (y² = x³ + ax + b) with adjustable parameters and zoom. Built as part of my thesis work on elliptic curve cryptography.",
+        "tags": ["Cybersecurity", "Web App"]
+      }
+    ]
+  },
+  "blog": {
+    "title": "Blog",
+    "readMore": "Read more",
+    "empty": "Coming soon. I'm preparing my first posts."
+  },
+  "footer": {
+    "copyright": "Leon Elliott Fuller"
+  },
+  "contact": {
+    "title": "Contact",
+    "email": "l.elliottfuller@gmail.com",
+    "phone": "+34 634 328 303",
+    "linkedin": "https://www.linkedin.com/in/leon-elliott-fuller-b48b7123a/",
+    "github": "https://github.com/leonfullxr",
+    "website": "https://leonfullxr.github.io/"
+  }
+}
