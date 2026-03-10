@@ -57,7 +57,7 @@ const server = createServer(async (req, res) => {
     res.end(content);
   } else {
     // 404 - redirect to /es/
-    res.writeHead(302, { Location: '/es/' });
+    res.writeHead(302, { Location: '/en/' });
     res.end();
   }
 });

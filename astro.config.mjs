@@ -7,7 +7,7 @@ export default defineConfig({
   output: 'static',
   site: 'https://leonfullxr.github.io',
   i18n: {
-    defaultLocale: 'es',
+    defaultLocale: 'en',
     locales: ['es', 'en'],
     routing: {
       prefixDefaultLocale: true,
