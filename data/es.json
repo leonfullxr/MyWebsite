@@ -1,0 +1,195 @@
+{
+  "meta": {
+    "title": "Leon Elliott Fuller — Estudiante de Ingeniería Informática & Desarrollador",
+    "description": "Portfolio personal de Leon Elliott Fuller. Estudiante de Ingeniería Informática apasionado por Deep Learning, Ciberseguridad y Desarrollo Web."
+  },
+  "nav": {
+    "about": "Sobre mí",
+    "cv": "Experiencia",
+    "projects": "Proyectos",
+    "blog": "Blog",
+    "switchLang": "EN"
+  },
+  "hero": {
+    "greeting": "Hola, soy",
+    "name": "Leon Elliott Fuller",
+    "tagline": "Ingeniería Informática · Deep Learning · Ciberseguridad",
+    "description": "Estudiante de Ingeniería Informática en la Universidad de Granada, actualmente de Erasmus+ en la Universidad AGH de Cracovia. Construyo cosas, aprendo constantemente y acepto nuevos retos.",
+    "cta": "Conóceme"
+  },
+  "about": {
+    "title": "Sobre mí",
+    "paragraphs": [
+      "Soy estudiante de Ingeniería Informática especializado en Computación y Sistemas Inteligentes en la Universidad de Granada, actualmente terminando mis estudios en el extranjero en la Universidad AGH de Cracovia a través del programa Erasmus+.",
+      "A medida que me acerco a la finalización de mis estudios, estoy deseando dar el salto al mundo profesional y aplicar mis conocimientos en un entorno práctico. Estoy comprometido con construir una base sólida para mi carrera desarrollando continuamente mis habilidades y aceptando nuevos retos.",
+      "A lo largo de mis años universitarios, he trabajado en proyectos de Deep Learning, Machine Learning, Ciencia de Datos, Desarrollo de Videojuegos, Ciberseguridad y Desarrollo Web. Aporto una actitud proactiva y pasión por aprender."
+    ],
+    "location": "Cracovia, Polonia"
+  },
+  "hobbies": {
+    "title": "Más allá del código",
+    "items": [
+      {
+        "icon": "running",
+        "title": "Running",
+        "description": "Soy un autoproclamado corredor mediocre profesional de maratones. Me encanta el desafío de las carreras de larga distancia y a menudo participo en carreras, a veces con amigos por diversión."
+      },
+      {
+        "icon": "nature",
+        "title": "Naturaleza y Montaña",
+        "description": "Amante de la montaña y la naturaleza. Disfruto del senderismo y descubrir nuevos paisajes dondequiera que vaya. No hay nada como el aire fresco y una buena vista para despejar la mente."
+      },
+      {
+        "icon": "music",
+        "title": "Música",
+        "description": "La música es una compañera constante — ya sea programando, corriendo o simplemente descansando. Disfruto descubriendo nuevos géneros y artistas."
+      }
+    ]
+  },
+  "cv": {
+    "title": "Experiencia",
+    "experience": {
+      "title": "Experiencia Laboral",
+      "items": [
+        {
+          "role": "Consultor de TI",
+          "company": "Consultoría a Clientes Privados",
+          "url": "#",
+          "period": "Jul 2022 — Sep 2023",
+          "current": false,
+          "description": [
+            "Trabajé como consultor de TI ayudando a los empleados con sus problemas informáticos, desarrollando parcialmente una aplicación de escritorio para la empresa.",
+            "Configuré la autenticación de dos factores, reglas antimalware, spyware y phishing, y mantuve el servicio de TI de la empresa.",
+            "Impartí sesiones de formación para usuarios finales sobre el uso de tecnologías o procesos recién implementados."
+          ]
+        }
+      ]
+    },
+    "education": {
+      "title": "Educación",
+      "items": [
+        {
+          "degree": "Grado en Ingeniería Informática (Erasmus+)",
+          "institution": "Universidad AGH de Cracovia, Polonia",
+          "period": "Sep 2024 — Presente",
+          "details": "Terminando estudios en el extranjero. Cursos: Visión por Computador, Deep Learning en Análisis de Imágenes Médicas, Ciberseguridad, Sistemas Operativos en Tiempo Real en C y Computación en la Nube."
+        },
+        {
+          "degree": "Grado en Ingeniería Informática",
+          "institution": "Universidad de Granada, España",
+          "period": "Sep 2021 — Jun 2024",
+          "details": "Especializado en Computación y Sistemas Inteligentes. Cursos: IA, Aprendizaje Automático, Redes, C++, Python, POO, OpenGL, Ciberseguridad. Matrículas de Honor en Cálculo, Estadística, Aprendizaje Automático y Programación."
+        }
+      ]
+    },
+    "skills": {
+      "title": "Habilidades",
+      "categories": [
+        {
+          "name": "Programación",
+          "items": ["C++", "Python", "JavaScript", "HTML/CSS", "SQL", "Bash"]
+        },
+        {
+          "name": "Tecnologías y Herramientas",
+          "items": ["Docker", "Wireguard", "Nextcloud", "Git", "Linux", "AWS", "Godot Engine", "OpenGL"]
+        },
+        {
+          "name": "Campos",
+          "items": ["Deep Learning", "Machine Learning", "Visión por Computador", "Ciberseguridad", "Redes", "Desarrollo de Videojuegos"]
+        },
+        {
+          "name": "Idiomas",
+          "items": ["Inglés (Nativo)", "Español (Fluido)"]
+        }
+      ]
+    },
+    "awards": {
+      "title": "Certificaciones y Premios",
+      "items": [
+        "AWS Academy Cloud Developing — Amazon Web Services (Nov 2024)",
+        "Machine Learning A-Z — Udemy (Ene–Jul 2024)",
+        "ML y Big Data para Bioinformática — Universidad de Granada (Ene–Jun 2024)",
+        "Domina C++ — Udemy (Dic 2022)",
+        "GameJam Pichola — 1º 'Mejor Arte', 3º 'Mejor Potencial Comercial', 3º 'Más Popular' (Ene 2022)",
+        "Programa de Videojuegos y Emprendimiento — Fundación Incyde (Jul–Ago 2020)"
+      ]
+    }
+  },
+  "projects": {
+    "title": "Proyectos",
+    "items": [
+      {
+        "name": "Cypher — Chat Encriptado",
+        "url": "https://github.com/leonfullxr/Cypher",
+        "period": "2024",
+        "description": "Aplicación de chat encriptada con cifrado de extremo a extremo, mensajería en tiempo real, sin almacenamiento de metadatos y protocolos avanzados como TLS y Signal. Usa cifrado AES y garantiza anonimato completo.",
+        "tags": ["Ciberseguridad", "Web App", "DevOps"]
+      },
+      {
+        "name": "Nextcloud Autoalojado",
+        "url": "https://nextcloud.leonfuller.space/",
+        "period": "2024",
+        "description": "Alternativa privada y autoalojada a Google Drive usando Docker y Traefik. Parte de un homelab más amplio centrado en privacidad de datos y control total sobre archivos personales.",
+        "tags": ["DevOps", "Docker", "Web App"]
+      },
+      {
+        "name": "Pichola — Juego Premiado",
+        "url": "https://github.com/leonfullxr/Pichola",
+        "period": "Ene 2022",
+        "description": "Juego premiado creado en una Game Jam de 48 horas con Godot Engine. Tema: 'Empezar de cero'. Los jugadores comienzan como un huevo, recolectando otros para desbloquear habilidades. Ganó 'Mejor Arte'.",
+        "tags": ["Videojuegos", "Diseño"]
+      },
+      {
+        "name": "IA para Juego de Parchís",
+        "url": "https://github.com/leonfullxr/AI-for-Ludo-game",
+        "period": "2023",
+        "description": "Parchís reinventado con un giro estratégico, con un agente de IA deliberativo usando MINIMAX y poda ALFA-BETA para juego inteligente contra humanos.",
+        "tags": ["IA", "Videojuegos"]
+      },
+      {
+        "name": "Visual Path Finding",
+        "url": "https://github.com/leonfullxr/Visual-Path-Finding",
+        "period": "2023",
+        "description": "Herramienta interactiva de visualización de algoritmos de búsqueda de caminos como A*, Dijkstra y más. Recurso educativo para entender la mecánica algorítmica.",
+        "tags": ["IA", "Diseño"]
+      },
+      {
+        "name": "Clasificación de Hongos",
+        "url": "https://github.com/leonfullxr/Classifying-Mushrooms",
+        "period": "2024",
+        "description": "Clasificación de comestibilidad de hongos usando modelos de ML supervisado. Análisis del dataset UCI Secondary Mushroom como parte del curso de ML en la UGR.",
+        "tags": ["IA", "Machine Learning"]
+      },
+      {
+        "name": "Simulación del Sistema Solar",
+        "url": "https://github.com/leonfullxr/SolarSystem-Simulation",
+        "period": "2023",
+        "description": "Simulación del sistema solar en Python con atracción gravitacional, dinámica de colisiones e interacciones con asteroides. Construido con pygame.",
+        "tags": ["Videojuegos", "Diseño"]
+      },
+      {
+        "name": "Visualización de Curvas Elípticas",
+        "url": "https://leonfullxr.github.io/ecc/",
+        "period": "2025",
+        "description": "Visualización interactiva de curvas elípticas (y² = x³ + ax + b) con parámetros ajustables y zoom. Parte de mi trabajo de fin de grado sobre criptografía de curvas elípticas.",
+        "tags": ["Ciberseguridad", "Web App"]
+      }
+    ]
+  },
+  "blog": {
+    "title": "Blog",
+    "readMore": "Leer más",
+    "empty": "Próximamente. Estoy preparando mis primeras publicaciones."
+  },
+  "footer": {
+    "copyright": "Leon Elliott Fuller"
+  },
+  "contact": {
+    "title": "Contacto",
+    "email": "l.elliottfuller@gmail.com",
+    "phone": "+34 634 328 303",
+    "linkedin": "https://www.linkedin.com/in/leon-elliott-fuller-b48b7123a/",
+    "github": "https://github.com/leonfullxr",
+    "website": "https://leonfullxr.github.io/"
+  }
+}
