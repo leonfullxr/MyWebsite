@@ -56,9 +56,14 @@ const server = createServer(async (req, res) => {
     res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' });
     res.end(content);
   } else {
-    // 404 - redirect to /es/
-    res.writeHead(302, { Location: '/en/' });
-    res.end();
+    const fallback = await tryFile(join(DIST, 'en', 'index.html'));
+    if (fallback) {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(fallback);
+    } else {
+      res.writeHead(302, { Location: '/en/' });
+      res.end();
+    }
   }
 });
 
