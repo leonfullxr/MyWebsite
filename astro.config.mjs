@@ -6,12 +6,4 @@ export default defineConfig({
   integrations: [tailwind(), react()],
   output: 'static',
   site: 'https://leonfullxr.github.io',
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['es', 'en'],
-    routing: {
-      prefixDefaultLocale: true,
-      redirectToDefaultLocale: false,
-    },
-  },
 });
