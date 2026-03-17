@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Leon Elliott Fuller - Estudiante de Ingeniería Informática & Desarrollador",
+    "title": "Leon Elliott Fuller - Ingeniero Informático",
     "description": "Portfolio personal de Leon Elliott Fuller. Estudiante de Ingeniería Informática apasionado por Deep Learning, Ciberseguridad y Desarrollo Web."
   },
   "nav": {
@@ -14,14 +14,14 @@
     "greeting": "Hola, soy",
     "name": "Leon Elliott Fuller",
     "tagline": "Ingeniería Informática · Deep Learning · Ciberseguridad",
-    "description": "Estudiante de Ingeniería Informática en la Universidad de Granada, actualmente de Erasmus+ en la Universidad AGH de Cracovia. Construyo cosas, aprendo constantemente y acepto nuevos retos.",
+    "description": "Ingeniero de Seguridad Junior en Wazuh. Graduado en Ingeniería Informática por la Universidad de Granada con un año Erasmus+ en AGH Cracovia. Construyo cosas, aprendo constantemente y acepto nuevos retos.",
     "cta": "Conóceme"
   },
   "about": {
     "title": "Sobre mí",
     "paragraphs": [
-      "Soy estudiante de Ingeniería Informática especializado en Computación y Sistemas Inteligentes en la Universidad de Granada, actualmente terminando mis estudios en el extranjero en la Universidad AGH de Cracovia a través del programa Erasmus+.",
-      "A medida que me acerco a la finalización de mis estudios, estoy deseando dar el salto al mundo profesional y aplicar mis conocimientos en un entorno práctico. Estoy comprometido con construir una base sólida para mi carrera desarrollando continuamente mis habilidades y aceptando nuevos retos.",
+      "Soy Ingeniero Informático trabajando como Ingeniero de Seguridad Junior en Wazuh, especializado en SIEM, XDR y sistemas de detección de intrusiones. Me gradué en Ingeniería Informática en la Universidad de Granada con especialización en Computación y Sistemas Inteligentes.",
+      "Estoy comprometido con construir una base sólida para mi carrera desarrollando continuamente mis habilidades y aceptando nuevos retos. Actualmente enfocado en disciplina y aprendizaje, estoy determinado a enfrentar tareas complejas y esforzarme al máximo.",
       "A lo largo de mis años universitarios, he trabajado en proyectos de Deep Learning, Machine Learning, Ciencia de Datos, Desarrollo de Videojuegos, Ciberseguridad y Desarrollo Web. Aporto una actitud proactiva y pasión por aprender."
     ],
     "location": "Marbella, España"
@@ -42,7 +42,7 @@
       {
         "icon": "music",
         "title": "Música",
-        "description": "La música es una compañera constante — ya sea programando, corriendo o simplemente descansando. Disfruto descubriendo nuevos géneros y artistas."
+        "description": "La música es una compañera constante - ya sea programando, corriendo o simplemente descansando. Disfruto descubriendo nuevos géneros y artistas."
       }
     ]
   },
@@ -52,10 +52,22 @@
       "title": "Experiencia Laboral",
       "items": [
         {
+          "role": "Ingeniero de Seguridad Junior",
+          "company": "Wazuh",
+          "url": "https://wazuh.com/",
+          "period": "Feb 2025 - Presente",
+          "current": true,
+          "description": [
+            "Resolución de incidencias de alto impacto en Wazuh para clientes empresariales, mejorando significativamente la visibilidad, la precisión de detección y la estabilidad del sistema.",
+            "Diseño de soluciones de seguridad a medida usando principios de SIEM, XDR, HIDS y NIDS en infraestructuras OnPrem y Cloud.",
+            "Diseño y establecimiento de configuraciones personalizadas de Security Operations Center (SOC) para grandes corporaciones. Asesoramiento en hardening de seguridad, ajuste de detección de anomalías y reducción de falsos positivos."
+          ]
+        },
+        {
           "role": "Consultor de TI",
           "company": "Consultoría a Clientes Privados",
           "url": "#",
-          "period": "Jul 2022 — Sep 2023",
+          "period": "Jul 2022 - Sep 2023",
           "current": false,
           "description": [
             "Trabajé como consultor de TI ayudando a los empleados con sus problemas informáticos, desarrollando parcialmente una aplicación de escritorio para la empresa.",
@@ -69,16 +81,16 @@
       "title": "Educación",
       "items": [
         {
-          "degree": "Grado en Ingeniería Informática (Erasmus+)",
-          "institution": "Universidad AGH de Cracovia, Polonia",
-          "period": "Sep 2024 — Presente",
-          "details": "Terminando estudios en el extranjero. Cursos: Visión por Computador, Deep Learning en Análisis de Imágenes Médicas, Ciberseguridad, Sistemas Operativos en Tiempo Real en C y Computación en la Nube."
-        },
-        {
           "degree": "Grado en Ingeniería Informática",
           "institution": "Universidad de Granada, España",
-          "period": "Sep 2021 — Jun 2024",
+          "period": "Sep 2021 - Jun 2026",
           "details": "Especializado en Computación y Sistemas Inteligentes. Cursos: IA, Aprendizaje Automático, Redes, C++, Python, POO, OpenGL, Ciberseguridad. Matrículas de Honor en Cálculo, Estadística, Aprendizaje Automático y Programación."
+        },
+        {
+          "degree": "Grado en Ingeniería Informática (Erasmus+)",
+          "institution": "Universidad AGH de Cracovia, Polonia",
+          "period": "Sep 2024 - Jun 2025",
+          "details": "Terminando estudios en el extranjero. Cursos: Visión por Computador, Deep Learning en Análisis de Imágenes Médicas, Ciberseguridad, Sistemas Operativos en Tiempo Real en C y Computación en la Nube."
         }
       ]
     },
@@ -87,11 +99,11 @@
       "categories": [
         {
           "name": "Programación",
-          "items": ["C++", "Python", "JavaScript", "HTML/CSS", "SQL", "Bash"]
+          "items": ["C++", "Python", "JavaScript", "HTML/CSS", "Bash"]
         },
         {
           "name": "Tecnologías y Herramientas",
-          "items": ["Docker", "Wireguard", "Nextcloud", "Git", "Linux", "AWS", "Godot Engine", "OpenGL"]
+          "items": ["Elasticsearch", "Docker", "k8s", "Nextcloud", "Git", "Linux", "AWS", "Godot Engine", "OpenGL"]
         },
         {
           "name": "Campos",
@@ -106,12 +118,13 @@
     "awards": {
       "title": "Certificaciones y Premios",
       "items": [
-        "AWS Academy Cloud Developing — Amazon Web Services (Nov 2024)",
-        "Machine Learning A-Z — Udemy (Ene–Jul 2024)",
-        "ML y Big Data para Bioinformática — Universidad de Granada (Ene–Jun 2024)",
-        "Domina C++ — Udemy (Dic 2022)",
-        "GameJam Pichola — 1º 'Mejor Arte', 3º 'Mejor Potencial Comercial', 3º 'Más Popular' (Ene 2022)",
-        "Programa de Videojuegos y Emprendimiento — Fundación Incyde (Jul–Ago 2020)"
+        "Elasticsearch Engineer - Elasticsearch (2025)",
+        "AWS Academy Cloud Developing - Amazon Web Services (Nov 2024)",
+        "Machine Learning A-Z - Udemy (Ene–Jul 2024)",
+        "ML y Big Data para Bioinformática - Universidad de Granada (Ene–Jun 2024)",
+        "Domina C++ - Udemy (Dic 2022)",
+        "GameJam Pichola - 1º 'Mejor Arte', 3º 'Mejor Potencial Comercial', 3º 'Más Popular' (Ene 2022)",
+        "Programa de Videojuegos y Emprendimiento - Fundación Incyde (Jul–Ago 2020)"
       ]
     }
   },
@@ -119,7 +132,7 @@
     "title": "Proyectos",
     "items": [
       {
-        "name": "Cypher — Chat Encriptado",
+        "name": "Cypher - Chat Encriptado",
         "url": "https://github.com/leonfullxr/Cypher",
         "period": "2024",
         "description": "Aplicación de chat encriptada con cifrado de extremo a extremo, mensajería en tiempo real, sin almacenamiento de metadatos y protocolos avanzados como TLS y Signal. Usa cifrado AES y garantiza anonimato completo.",
@@ -133,7 +146,7 @@
         "tags": ["DevOps", "Docker", "Web App"]
       },
       {
-        "name": "Pichola — Juego Premiado",
+        "name": "Pichola - Juego Premiado",
         "url": "https://github.com/leonfullxr/Pichola",
         "period": "Ene 2022",
         "description": "Juego premiado creado en una Game Jam de 48 horas con Godot Engine. Tema: 'Empezar de cero'. Los jugadores comienzan como un huevo, recolectando otros para desbloquear habilidades. Ganó 'Mejor Arte'.",
