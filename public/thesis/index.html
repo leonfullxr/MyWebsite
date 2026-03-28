@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hopf Torus Gallery - Elliptic Curves in 3D</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap');
+
+  :root {
+    --panel-bg: rgba(255,255,255,0.92);
+    --panel-border: rgba(0,0,0,0.07);
+    --accent: #d48a3a;
+    --accent-dim: rgba(212,138,58,0.15);
+    --text: #2a2520;
+    --text-dim: #999;
+    --mono: 'IBM Plex Mono', monospace;
+    --serif: 'Playfair Display', Georgia, serif;
+  }
+  .dark-mode {
+    --panel-bg: rgba(30,28,26,0.94);
+    --panel-border: rgba(255,255,255,0.08);
+    --accent: #e8a04a;
+    --accent-dim: rgba(232,160,74,0.15);
+    --text: #e8e2d8;
+    --text-dim: #777;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--serif);
+    color: var(--text);
+    overflow: hidden;
+    height: 100vh;
+    transition: background 0.4s;
+  }
+
+  canvas { display: block; }
+  #canvas-container { position: fixed; inset: 0; z-index: 0; }
+
+  /* ---- SIDEBAR ---- */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 320px;
+    background: var(--panel-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid var(--panel-border);
+    z-index: 20;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    scrollbar-width: thin;
+  }
+  #sidebar.collapsed { transform: translateX(-320px); }
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+
+  #toggle-sidebar {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 25;
+    width: 36px; height: 36px;
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    background: var(--panel-bg);
+    backdrop-filter: blur(12px);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    color: var(--text);
+    transition: left 0.35s cubic-bezier(0.4,0,0.2,1), background 0.2s;
+  }
+  #toggle-sidebar.open { left: 328px; }
+  #toggle-sidebar:hover { background: var(--accent-dim); }
+
+  .sidebar-section {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--panel-border);
+  }
+  .sidebar-section:last-child { border-bottom: none; }
+
+  .section-title {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+  }
+
+  h1.logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 2px;
+  }
+  .logo-sub {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--text-dim);
+  }
+
+  /* Gallery grid */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .gallery-item {
+    background: var(--accent-dim);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 8px 6px;
+    cursor: pointer;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    line-height: 1.3;
+    transition: border-color 0.2s, background 0.2s;
+    color: var(--text);
+  }
+  .gallery-item:hover { background: var(--accent-dim); border-color: var(--accent); }
+  .gallery-item.active { border-color: var(--accent); background: var(--accent-dim); }
+  .gallery-item .icon { font-size: 1.4rem; margin-bottom: 3px; display: block; }
+
+  /* Controls */
+  label.ctrl {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    margin-top: 8px;
+    color: var(--text);
+  }
+  label.ctrl:first-of-type { margin-top: 0; }
+  .ctrl-val {
+    color: var(--text-dim);
+    min-width: 36px;
+    text-align: right;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    margin-top: 3px;
+    -webkit-appearance: none;
+    height: 3px;
+    border-radius: 2px;
+    background: rgba(128,128,128,0.2);
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+
+  select.ctrl-select {
+    width: 100%;
+    padding: 5px 8px;
+    margin-top: 4px;
+    border: 1px solid var(--panel-border);
+    border-radius: 5px;
+    background: transparent;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  /* Buttons row */
+  .btn-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .btn {
+    flex: 1;
+    min-width: 60px;
+    padding: 6px 10px;
+    border: 1px solid var(--panel-border);
+    border-radius: 6px;
+    background: transparent;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.2s;
+    text-align: center;
+  }
+  .btn:hover { background: var(--accent-dim); }
+  .btn.active { background: var(--accent-dim); border-color: var(--accent); }
+
+  /* Info bar */
+  #info-bar {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    background: var(--panel-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  #info-bar .eq {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--text);
+  }
+
+  /* Loading */
+  #loading {
+    position: fixed; inset: 0;
+    background: #f5f2ed;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 100;
+    transition: opacity 0.5s;
+  }
+  .dark-mode #loading { background: #1e1c1a; }
+  #loading.hidden { opacity: 0; pointer-events: none; }
+  #loading .spinner {
+    width: 32px; height: 32px;
+    border: 2px solid rgba(0,0,0,0.1);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 14px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #loading span {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+
+  /* Screenshot flash */
+  #flash {
+    position: fixed; inset: 0;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 50;
+    transition: opacity 0.15s;
+  }
+  #flash.active { opacity: 0.6; }
+</style>
+</head>
+<body>
+
+<div id="loading">
+  <div class="spinner"></div>
+  <span>Computing Hopf fibration...</span>
+</div>
+<div id="flash"></div>
+<div id="canvas-container"></div>
+
+<button id="toggle-sidebar" class="open" title="Toggle panel">☰</button>
+
+<div id="sidebar">
+  <!-- HEADER -->
+  <div class="sidebar-section" style="padding-top:20px">
+    <h1 class="logo">Hopf Torus Gallery</h1>
+    <div class="logo-sub">Elliptic curves via the Hopf fibration</div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="sidebar-section">
+    <div class="section-title">Shape Gallery</div>
+    <div class="gallery-grid" id="gallery"></div>
+  </div>
+
+  <!-- CUSTOM PARAMETERS -->
+  <div class="sidebar-section" id="custom-section">
+    <div class="section-title">Parameters</div>
+    <label class="ctrl">φ₀ (colatitude) <span class="ctrl-val" id="v-phi0">1.05</span></label>
+    <input type="range" id="r-phi0" min="0.3" max="2.8" value="1.047" step="0.01">
+    <label class="ctrl">Amplitude <span class="ctrl-val" id="v-amp">0.30</span></label>
+    <input type="range" id="r-amp" min="0.0" max="0.8" value="0.3" step="0.01">
+    <label class="ctrl">Frequency <span class="ctrl-val" id="v-freq">3</span></label>
+    <input type="range" id="r-freq" min="0" max="12" value="3" step="1">
+    <label class="ctrl">2nd Amplitude <span class="ctrl-val" id="v-amp2">0.00</span></label>
+    <input type="range" id="r-amp2" min="0.0" max="0.5" value="0.0" step="0.01">
+    <label class="ctrl">2nd Frequency <span class="ctrl-val" id="v-freq2">0</span></label>
+    <input type="range" id="r-freq2" min="0" max="15" value="0" step="1">
+  </div>
+
+  <!-- APPEARANCE -->
+  <div class="sidebar-section">
+    <div class="section-title">Appearance</div>
+    <label class="ctrl">Density <span class="ctrl-val" id="v-density">26</span></label>
+    <input type="range" id="r-density" min="10" max="52" value="26" step="2">
+    <label class="ctrl">Sphere scale <span class="ctrl-val" id="v-scale">0.7</span></label>
+    <input type="range" id="r-scale" min="0.2" max="2.5" value="0.7" step="0.05">
+
+    <div class="section-title" style="margin-top:14px">Color mode</div>
+    <select class="ctrl-select" id="sel-colormode">
+      <option value="solid-orange">Solid - Orange</option>
+      <option value="solid-blue">Solid - Blue</option>
+      <option value="solid-green">Solid - Green</option>
+      <option value="solid-pearl">Solid - Pearl</option>
+      <option value="solid-crimson">Solid - Crimson</option>
+      <option value="solid-gold">Solid - Gold</option>
+      <option value="grad-height">Gradient - Height</option>
+      <option value="grad-angle" selected>Gradient - Angle</option>
+      <option value="grad-distance">Gradient - Distance</option>
+      <option value="rainbow">Rainbow</option>
+      <option value="warm-cool">Warm ↔ Cool</option>
+      <option value="lattice-grid">Lattice Grid</option>
+    </select>
+
+    <div class="section-title" style="margin-top:14px">Material</div>
+    <select class="ctrl-select" id="sel-material">
+      <option value="glossy">Glossy (paper style)</option>
+      <option value="chrome">Chrome</option>
+      <option value="matte">Matte</option>
+      <option value="ceramic">Ceramic</option>
+      <option value="plastic">Plastic</option>
+      <option value="gem" selected>Gemstone</option>
+    </select>
+  </div>
+
+  <!-- SCENE -->
+  <div class="sidebar-section">
+    <div class="section-title">Scene</div>
+    <div class="btn-row">
+      <button class="btn active" data-bg="light" onclick="setBg('light')">Light</button>
+      <button class="btn" data-bg="dark" onclick="setBg('dark')">Dark</button>
+      <button class="btn" data-bg="gradient" onclick="setBg('gradient')">Gradient</button>
+    </div>
+    <label class="ctrl" style="margin-top:10px">Show highlight point
+      <input type="checkbox" id="chk-highlight" checked>
+    </label>
+    <label class="ctrl">Show ground plane
+      <input type="checkbox" id="chk-ground" checked>
+    </label>
+    <label class="ctrl">Auto-rotate
+      <input type="checkbox" id="chk-rotate" checked>
+    </label>
+    <label class="ctrl">Rotate speed <span class="ctrl-val" id="v-rotspeed">1.0</span></label>
+    <input type="range" id="r-rotspeed" min="0.1" max="5.0" value="1.0" step="0.1">
+  </div>
+
+  <!-- ANIMATION -->
+  <div class="sidebar-section">
+    <div class="section-title">Animation</div>
+    <div class="btn-row">
+      <button class="btn" id="btn-breathe" onclick="toggleAnim('breathe')">Breathe</button>
+      <button class="btn" id="btn-wave" onclick="toggleAnim('wave')">Wave</button>
+      <button class="btn" id="btn-morph" onclick="toggleAnim('morph')">Morph</button>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="sidebar-section">
+    <div class="section-title">Export</div>
+    <div class="btn-row">
+      <button class="btn" onclick="screenshot()">Screenshot</button>
+      <button class="btn" onclick="randomize()">Random</button>
+    </div>
+  </div>
+</div>
+
+<div id="info-bar">
+  <span class="eq" id="disp-name">Wavy 3-fold</span>
+  <span id="disp-count">- spheres</span>
+  <span id="disp-math"></span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ================================================================
+//  SHAPE DEFINITIONS
+// ================================================================
+
+const SHAPES = [
+  // --- Circles of latitude (classical lattices) ---
+  { id:'sq-lattice', name:'Square lattice', icon:'', cat:'Lattice',
+    phi0: Math.PI/2, amp:0, freq:0, amp2:0, freq2:0,
+    desc:'τ = i - Corresponds to y² = x³ + x' },
+  { id:'hex-lattice', name:'Hexagonal lattice', icon:'', cat:'Lattice',
+    phi0: Math.PI/3, amp:0, freq:0, amp2:0, freq2:0,
+    desc:'τ = e^{iπ/3} - Corresponds to y² = x³ + 1' },
+  { id:'rect-lattice', name:'Rectangular', icon:'', cat:'Lattice',
+    phi0: Math.PI/2.5, amp:0, freq:0, amp2:0, freq2:0,
+    desc:'τ = 1.25i - Stretched torus' },
+  { id:'thin-lattice', name:'Thin torus', icon:'', cat:'Lattice',
+    phi0: Math.PI/6, amp:0, freq:0, amp2:0, freq2:0,
+    desc:'Small φ₀ - Thin ring-like torus' },
+
+  // --- Wavy tori (single frequency) ---
+  { id:'wavy3', name:'3-fold wave', icon:'', cat:'Wavy',
+    phi0: Math.PI/3, amp:0.3, freq:3, amp2:0, freq2:0,
+    desc:'Trefoil-like wavy torus' },
+  { id:'wavy4', name:'4-fold wave', icon:'', cat:'Wavy',
+    phi0: Math.PI/2, amp:0.35, freq:4, amp2:0, freq2:0,
+    desc:'Four-lobed wavy torus' },
+  { id:'wavy5', name:'5-fold wave', icon:'', cat:'Wavy',
+    phi0: Math.PI/2.8, amp:0.35, freq:5, amp2:0, freq2:0,
+    desc:'Pentagonal symmetry' },
+  { id:'wavy7', name:'7-fold wave', icon:'', cat:'Wavy',
+    phi0: Math.PI/3, amp:0.2, freq:7, amp2:0, freq2:0,
+    desc:'Seven-fold flower pattern' },
+  { id:'wavy11', name:'11-fold wave', icon:'', cat:'Wavy',
+    phi0: 1.05, amp:0.15, freq:11, amp2:0, freq2:0,
+    desc:'Highly corrugated surface' },
+
+  // --- Exotic (multi-frequency, Lissajous-like) ---
+  { id:'lissajous23', name:'Lissajous 2:3', icon:'', cat:'Exotic',
+    phi0: Math.PI/3, amp:0.3, freq:2, amp2:0.2, freq2:3,
+    desc:'Two-frequency interference pattern' },
+  { id:'lissajous35', name:'Lissajous 3:5', icon:'', cat:'Exotic',
+    phi0: Math.PI/2.5, amp:0.25, freq:3, amp2:0.15, freq2:5,
+    desc:'Complex beat pattern' },
+  { id:'lissajous57', name:'Lissajous 5:7', icon:'', cat:'Exotic',
+    phi0: Math.PI/3, amp:0.18, freq:5, amp2:0.12, freq2:7,
+    desc:'Dense multi-frequency pattern' },
+  { id:'gentle-ripple', name:'Gentle ripple', icon:'', cat:'Exotic',
+    phi0: Math.PI/3, amp:0.08, freq:6, amp2:0.05, freq2:10,
+    desc:'Subtle high-frequency texture' },
+  { id:'dramatic-fold', name:'Deep folds', icon:'', cat:'Exotic',
+    phi0: Math.PI/2.2, amp:0.55, freq:3, amp2:0.25, freq2:6,
+    desc:'Extreme deformation' },
+  { id:'alien-egg', name:'Alien egg', icon:'', cat:'Exotic',
+    phi0: Math.PI/4, amp:0.4, freq:2, amp2:0.15, freq2:5,
+    desc:'Asymmetric organic shape' },
+  { id:'coral', name:'Coral', icon:'', cat:'Exotic',
+    phi0: Math.PI/2.5, amp:0.3, freq:4, amp2:0.2, freq2:9,
+    desc:'Organic branching texture' },
+  { id:'stellated', name:'Stellated', icon:'', cat:'Exotic',
+    phi0: Math.PI/2, amp:0.45, freq:6, amp2:0.15, freq2:2,
+    desc:'Star-pointed torus' },
+];
+
+// ================================================================
+//  MATERIALS
+// ================================================================
+
+const MATERIALS = {
+  glossy:  { roughness: 0.15, metalness: 0.05 },
+  chrome:  { roughness: 0.05, metalness: 0.92 },
+  matte:   { roughness: 0.85, metalness: 0.0 },
+  ceramic: { roughness: 0.3,  metalness: 0.0 },
+  plastic: { roughness: 0.4,  metalness: 0.0 },
+  gem:     { roughness: 0.02, metalness: 0.15 },
+};
+
+const SOLID_COLORS = {
+  'solid-orange':  0xf0943a,
+  'solid-blue':    0x4a8fc7,
+  'solid-green':   0x5aad6a,
+  'solid-pearl':   0xe8e2d8,
+  'solid-crimson': 0xc44040,
+  'solid-gold':    0xd4a843,
+};
+
+// ================================================================
+//  THREE.JS SETUP
+// ================================================================
+
+const container = document.getElementById('canvas-container');
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+renderer.outputEncoding = THREE.sRGBEncoding;
+container.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 200);
+camera.position.set(6, 5.5, 9);
+camera.lookAt(0, 0, 0);
+
+// ================================================================
+//  ORBIT CONTROLS
+// ================================================================
+
+let isDragging = false, prevMouse = {x:0,y:0};
+let spherical = {
+  theta: Math.atan2(camera.position.x, camera.position.z),
+  phi: Math.acos(camera.position.y / camera.position.length()),
+  radius: camera.position.length()
+};
+
+function updateCamera() {
+  camera.position.x = spherical.radius * Math.sin(spherical.phi) * Math.sin(spherical.theta);
+  camera.position.y = spherical.radius * Math.cos(spherical.phi);
+  camera.position.z = spherical.radius * Math.sin(spherical.phi) * Math.cos(spherical.theta);
+  camera.lookAt(0, 0, 0);
+}
+
+renderer.domElement.addEventListener('pointerdown', e => {
+  isDragging = true;
+  prevMouse = {x:e.clientX, y:e.clientY};
+  renderer.domElement.setPointerCapture(e.pointerId);
+});
+renderer.domElement.addEventListener('pointermove', e => {
+  if (!isDragging) return;
+  spherical.theta -= (e.clientX - prevMouse.x) * 0.005;
+  spherical.phi = Math.max(0.15, Math.min(Math.PI-0.15, spherical.phi + (e.clientY - prevMouse.y)*0.005));
+  prevMouse = {x:e.clientX, y:e.clientY};
+  updateCamera();
+});
+renderer.domElement.addEventListener('pointerup', e => {
+  isDragging = false;
+  renderer.domElement.releasePointerCapture(e.pointerId);
+});
+renderer.domElement.addEventListener('wheel', e => {
+  spherical.radius = Math.max(3, Math.min(22, spherical.radius + e.deltaY * 0.008));
+  updateCamera();
+}, {passive:true});
+
+// ================================================================
+//  LIGHTING
+// ================================================================
+
+function setupLighting() {
+  // Key
+  const key = new THREE.DirectionalLight(0xfff5e6, 1.3);
+  key.position.set(5, 8, 6);
+  key.castShadow = true;
+  key.shadow.mapSize.set(2048, 2048);
+  key.shadow.camera.near = 0.5; key.shadow.camera.far = 30;
+  key.shadow.camera.left = -8; key.shadow.camera.right = 8;
+  key.shadow.camera.top = 8; key.shadow.camera.bottom = -8;
+  key.shadow.bias = -0.0005; key.shadow.radius = 4;
+  scene.add(key);
+  // Fill
+  const fill = new THREE.DirectionalLight(0xdce4ff, 0.5);
+  fill.position.set(-5, 3, -3);
+  scene.add(fill);
+  // Rim
+  const rim = new THREE.DirectionalLight(0xffeedd, 0.45);
+  rim.position.set(-2, 5, -7);
+  scene.add(rim);
+  // Ambient + Hemi
+  scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+  scene.add(new THREE.HemisphereLight(0xffffff, 0xe8ddd0, 0.25));
+}
+setupLighting();
+
+// Ground
+const groundGeo = new THREE.PlaneGeometry(50, 50);
+const groundMat = new THREE.MeshStandardMaterial({ color:0xf0ece5, roughness:0.85, metalness:0 });
+const ground = new THREE.Mesh(groundGeo, groundMat);
+ground.rotation.x = -Math.PI/2;
+ground.position.y = -2.8;
+ground.receiveShadow = true;
+scene.add(ground);
+
+// ================================================================
+//  HOPF FIBRATION MATH
+// ================================================================
+
+function computeHopfTorus(phi0, amp, freq, amp2, freq2, ns, nt) {
+  const isCircle = (amp === 0 && amp2 === 0);
+
+  if (isCircle) {
+    return hopfCircle(phi0, ns, nt);
+  } else {
+    return hopfWavy(phi0, amp, freq, amp2, freq2, ns, nt);
+  }
+}
+
+function hopfCircle(phi0, ns, nt) {
+  const pts = [];
+  const sp2 = Math.sin(phi0/2), cp2 = Math.cos(phi0/2), sphi = Math.sin(phi0);
+  for (let i = 0; i < nt; i++) {
+    const t = (i/nt)*2*Math.PI;
+    const v = 2*t/sphi, f = v*sp2;
+    for (let j = 0; j < ns; j++) {
+      const s = (j/ns)*2*Math.PI;
+      const a1 = v+s-f, a2 = s-f;
+      const z1r=Math.cos(a1)*sp2, z1i=Math.sin(a1)*sp2;
+      const z2r=Math.cos(a2)*cp2, z2i=Math.sin(a2)*cp2;
+      const d = Math.max(Math.abs(1-z2i),1e-6);
+      const sg = (1-z2i)>=0?1:-1;
+      pts.push({x:z1r/(sg*d), y:z2r/(sg*d), z:z1i/(sg*d), w4:z2i, si:j/ns, ti:i/nt});
+    }
+  }
+  return pts;
+}
+
+function hopfWavy(phi0, amp, freq, amp2, freq2, ns, nt) {
+  const N = 3000;
+  const dv = 2*Math.PI/(N-1);
+  const vR=[], phiV=[], dsA=[], coA=[];
+
+  for (let k=0;k<N;k++){
+    const v=k*dv;
+    vR.push(v);
+    const ph = phi0 + amp*Math.sin(freq*v) + amp2*Math.sin(freq2*v);
+    phiV.push(ph);
+    const dphi = amp*freq*Math.cos(freq*v) + amp2*freq2*Math.cos(freq2*v);
+    const sp = Math.sin(ph);
+    dsA.push(Math.sqrt(sp*sp + dphi*dphi));
+    coA.push(Math.sin(ph/2));
+  }
+
+  const arcL=[0], coC=[0];
+  for(let k=1;k<N;k++){
+    arcL.push(arcL[k-1]+dsA[k]*dv);
+    coC.push(coC[k-1]+coA[k]*dv);
+  }
+  const totL = arcL[N-1];
+
+  function lerp(xs,ys,xq){
+    if(xq<=xs[0])return ys[0];
+    if(xq>=xs[xs.length-1])return ys[ys.length-1];
+    let lo=0,hi=xs.length-1;
+    while(hi-lo>1){const m=(lo+hi)>>1;if(xs[m]<=xq)lo=m;else hi=m;}
+    const f=(xq-xs[lo])/(xs[hi]-xs[lo]);
+    return ys[lo]+f*(ys[hi]-ys[lo]);
+  }
+
+  const pts=[];
+  for(let i=0;i<nt;i++){
+    const t = (i/nt)*(totL/2);
+    const v = lerp(arcL, vR, 2*t);
+    const theta = v;
+    const phi = lerp(vR, phiV, v);
+    const fC = lerp(vR, coC, v);
+    const sp2=Math.sin(phi/2), cp2=Math.cos(phi/2);
+
+    for(let j=0;j<ns;j++){
+      const s=(j/ns)*2*Math.PI;
+      const a1=theta+s-fC, a2=s-fC;
+      const z1r=Math.cos(a1)*sp2, z1i=Math.sin(a1)*sp2;
+      const z2r=Math.cos(a2)*cp2, z2i=Math.sin(a2)*cp2;
+      const d=Math.max(Math.abs(1-z2i),1e-6);
+      const sg=(1-z2i)>=0?1:-1;
+      pts.push({x:z1r/(sg*d), y:z2r/(sg*d), z:z1i/(sg*d), w4:z2i, si:j/ns, ti:i/nt});
+    }
+  }
+  return pts;
+}
+
+// ================================================================
+//  COLOR FUNCTIONS
+// ================================================================
+
+function hsl2rgb(h,s,l){
+  const a=s*Math.min(l,1-l);
+  const f=n=>{const k=(n+h/30)%12;return l-a*Math.max(-1,Math.min(k-3,9-k,1));};
+  return new THREE.Color(f(0),f(8),f(4));
+}
+
+function getColor(p, idx, total, mode) {
+  const solidKey = mode.startsWith('solid-') ? mode : null;
+  if (solidKey && SOLID_COLORS[solidKey] !== undefined) {
+    return new THREE.Color(SOLID_COLORS[solidKey]);
+  }
+  const dist = Math.sqrt(p.x*p.x + p.y*p.y + p.z*p.z);
+
+  switch(mode) {
+    case 'grad-height': {
+      const t = (p.y + 3) / 6;
+      return new THREE.Color().lerpColors(new THREE.Color(0x2244aa), new THREE.Color(0xee6633), Math.max(0,Math.min(1,t)));
+    }
+    case 'grad-angle': {
+      const angle = (Math.atan2(p.z, p.x) + Math.PI) / (2*Math.PI);
+      return hsl2rgb(angle*360, 0.6, 0.55);
+    }
+    case 'grad-distance': {
+      const t = Math.min(dist/5, 1);
+      return new THREE.Color().lerpColors(new THREE.Color(0xffd700), new THREE.Color(0x8b0000), t);
+    }
+    case 'rainbow': {
+      return hsl2rgb((p.ti * 360 + p.si * 120) % 360, 0.75, 0.55);
+    }
+    case 'warm-cool': {
+      const t = p.ti;
+      return new THREE.Color().lerpColors(new THREE.Color(0xdd4422), new THREE.Color(0x2266bb), t);
+    }
+    case 'lattice-grid': {
+      const gridS = Math.sin(p.si * Math.PI * 8) > 0;
+      const gridT = Math.sin(p.ti * Math.PI * 8) > 0;
+      return (gridS ^ gridT) ? new THREE.Color(0xf0943a) : new THREE.Color(0xe8ddd0);
+    }
+    default:
+      return new THREE.Color(0xf0943a);
+  }
+}
+
+// ================================================================
+//  BUILD / REBUILD TORUS
+// ================================================================
+
+let instancedMesh = null;
+let highlightMesh = null;
+const sphereGeo = new THREE.SphereGeometry(1, 24, 24);
+let currentPoints = [];
+
+function buildTorus() {
+  if (instancedMesh) { scene.remove(instancedMesh); instancedMesh.geometry.dispose(); }
+  if (highlightMesh) { scene.remove(highlightMesh); }
+
+  const phi0 = parseFloat(document.getElementById('r-phi0').value);
+  const amp  = parseFloat(document.getElementById('r-amp').value);
+  const freq = parseInt(document.getElementById('r-freq').value);
+  const amp2 = parseFloat(document.getElementById('r-amp2').value);
+  const freq2= parseInt(document.getElementById('r-freq2').value);
+  const density = parseInt(document.getElementById('r-density').value);
+  const scale = parseFloat(document.getElementById('r-scale').value);
+  const colorMode = document.getElementById('sel-colormode').value;
+  const matName = document.getElementById('sel-material').value;
+  const showHL = document.getElementById('chk-highlight').checked;
+
+  // Update value displays
+  document.getElementById('v-phi0').textContent = phi0.toFixed(2);
+  document.getElementById('v-amp').textContent = amp.toFixed(2);
+  document.getElementById('v-freq').textContent = freq;
+  document.getElementById('v-amp2').textContent = amp2.toFixed(2);
+  document.getElementById('v-freq2').textContent = freq2;
+  document.getElementById('v-density').textContent = density;
+  document.getElementById('v-scale').textContent = scale.toFixed(1);
+  document.getElementById('v-rotspeed').textContent =
+    parseFloat(document.getElementById('r-rotspeed').value).toFixed(1);
+
+  const ns = density, nt = density;
+  let points = computeHopfTorus(phi0, amp, freq, amp2, freq2, ns, nt);
+
+  // Filter blowups
+  const maxDist = 9;
+  points = points.filter(p => Math.sqrt(p.x*p.x+p.y*p.y+p.z*p.z) < maxDist);
+  currentPoints = points;
+
+  const baseR = 0.11 * scale * (26 / density);
+  const mat = MATERIALS[matName] || MATERIALS.glossy;
+  const isSolid = colorMode.startsWith('solid-') || colorMode === '';
+  const baseColor = SOLID_COLORS[colorMode] || 0xf0943a;
+
+  // For solid colors, use a single material; for gradients, use per-instance color
+  const material = new THREE.MeshStandardMaterial({
+    color: isSolid ? baseColor : 0xffffff,
+    roughness: mat.roughness,
+    metalness: mat.metalness,
+  });
+
+  const count = points.length;
+  instancedMesh = new THREE.InstancedMesh(sphereGeo, material, count);
+  instancedMesh.castShadow = true;
+  instancedMesh.receiveShadow = true;
+
+  const dummy = new THREE.Object3D();
+  const color = new THREE.Color();
+
+  for (let i = 0; i < count; i++) {
+    const p = points[i];
+    const stereo = 1.0 / Math.max(Math.abs(1 - p.w4), 0.15);
+    const r = baseR * Math.min(stereo, 3.5);
+    dummy.position.set(p.x, p.y, p.z);
+    dummy.scale.setScalar(r);
+    dummy.updateMatrix();
+    instancedMesh.setMatrixAt(i, dummy.matrix);
+
+    if (!isSolid) {
+      instancedMesh.setColorAt(i, getColor(p, i, count, colorMode));
+    }
+  }
+
+  instancedMesh.instanceMatrix.needsUpdate = true;
+  if (instancedMesh.instanceColor) instancedMesh.instanceColor.needsUpdate = true;
+  scene.add(instancedMesh);
+
+  // Highlight sphere
+  if (showHL && count > 0) {
+    const hi = points[Math.floor(count * 0.37)];
+    const stereo = 1.0 / Math.max(Math.abs(1 - hi.w4), 0.15);
+    const r = baseR * Math.min(stereo, 3.5) * 1.15;
+    const hlMat = new THREE.MeshStandardMaterial({
+      color: 0xd45a5a, roughness: 0.12, metalness: 0.1
+    });
+    highlightMesh = new THREE.Mesh(sphereGeo, hlMat);
+    highlightMesh.position.set(hi.x, hi.y, hi.z);
+    highlightMesh.scale.setScalar(r);
+    highlightMesh.castShadow = true;
+    scene.add(highlightMesh);
+  }
+
+  // Info bar
+  document.getElementById('disp-count').textContent = `${count} spheres`;
+}
+
+// ================================================================
+//  GALLERY UI
+// ================================================================
+
+let activeShapeId = 'wavy3';
+
+function buildGallery() {
+  const grid = document.getElementById('gallery');
+  grid.innerHTML = '';
+  SHAPES.forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'gallery-item' + (s.id === activeShapeId ? ' active' : '');
+    el.dataset.id = s.id;
+    el.innerHTML = `<span class="icon">${s.icon}</span>${s.name}`;
+    el.addEventListener('click', () => selectShape(s.id));
+    grid.appendChild(el);
+  });
+}
+
+function selectShape(id) {
+  activeShapeId = id;
+  const shape = SHAPES.find(s => s.id === id);
+  if (!shape) return;
+
+  // Update sliders
+  document.getElementById('r-phi0').value = shape.phi0;
+  document.getElementById('r-amp').value = shape.amp;
+  document.getElementById('r-freq').value = shape.freq;
+  document.getElementById('r-amp2').value = shape.amp2;
+  document.getElementById('r-freq2').value = shape.freq2;
+
+  // Update info
+  document.getElementById('disp-name').textContent = shape.name;
+  document.getElementById('disp-math').textContent = shape.desc;
+
+  // Highlight active
+  document.querySelectorAll('.gallery-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.id === id);
+  });
+
+  buildTorus();
+}
+
+// ================================================================
+//  BACKGROUND
+// ================================================================
+
+let currentBg = 'light';
+
+function setBg(mode) {
+  currentBg = mode;
+  document.querySelectorAll('[data-bg]').forEach(b =>
+    b.classList.toggle('active', b.dataset.bg === mode));
+
+  if (mode === 'dark') {
+    document.body.classList.add('dark-mode');
+    scene.background = new THREE.Color(0x1e1c1a);
+    groundMat.color.set(0x2a2825);
+    renderer.toneMappingExposure = 1.0;
+  } else if (mode === 'gradient') {
+    document.body.classList.remove('dark-mode');
+    // Use a simple color - can't do real gradient on scene.background in r128 easily
+    scene.background = new THREE.Color(0xe0ddd5);
+    groundMat.color.set(0xd5d0c8);
+    renderer.toneMappingExposure = 1.1;
+  } else {
+    document.body.classList.remove('dark-mode');
+    scene.background = new THREE.Color(0xf5f2ed);
+    groundMat.color.set(0xf0ece5);
+    renderer.toneMappingExposure = 1.15;
+  }
+}
+setBg('light');
+
+// ================================================================
+//  ANIMATIONS
+// ================================================================
+
+let activeAnim = null;
+let animTime = 0;
+
+function toggleAnim(name) {
+  if (activeAnim === name) {
+    activeAnim = null;
+    document.getElementById('btn-'+name).classList.remove('active');
+    // Reset scales
+    if (instancedMesh) buildTorus();
+  } else {
+    if (activeAnim) document.getElementById('btn-'+activeAnim).classList.remove('active');
+    activeAnim = name;
+    document.getElementById('btn-'+name).classList.add('active');
+    animTime = 0;
+  }
+}
+
+function applyAnimation(dt) {
+  if (!activeAnim || !instancedMesh || !currentPoints.length) return;
+  animTime += dt;
+  const dummy = new THREE.Object3D();
+  const density = parseInt(document.getElementById('r-density').value);
+  const scale = parseFloat(document.getElementById('r-scale').value);
+  const baseR = 0.11 * scale * (26 / density);
+
+  for (let i = 0; i < currentPoints.length; i++) {
+    const p = currentPoints[i];
+    const stereo = 1.0 / Math.max(Math.abs(1-p.w4), 0.15);
+    let r = baseR * Math.min(stereo, 3.5);
+
+    if (activeAnim === 'breathe') {
+      r *= 1 + 0.15 * Math.sin(animTime * 2);
+    } else if (activeAnim === 'wave') {
+      const phase = p.ti * Math.PI * 4 + animTime * 3;
+      r *= 1 + 0.2 * Math.sin(phase);
+    } else if (activeAnim === 'morph') {
+      const t = Math.sin(animTime * 0.8) * 0.5 + 0.5;
+      r *= 0.6 + 0.8 * t * (0.5 + 0.5*Math.sin(p.si * Math.PI * 6 + animTime * 2));
+    }
+
+    dummy.position.set(p.x, p.y, p.z);
+    dummy.scale.setScalar(r);
+    dummy.updateMatrix();
+    instancedMesh.setMatrixAt(i, dummy.matrix);
+  }
+  instancedMesh.instanceMatrix.needsUpdate = true;
+}
+
+// ================================================================
+//  SCREENSHOT & RANDOM
+// ================================================================
+
+function screenshot() {
+  renderer.render(scene, camera);
+  const link = document.createElement('a');
+  link.download = `hopf_torus_${Date.now()}.png`;
+  link.href = renderer.domElement.toDataURL('image/png');
+  document.getElementById('flash').classList.add('active');
+  setTimeout(() => document.getElementById('flash').classList.remove('active'), 200);
+  link.click();
+}
+
+function randomize() {
+  const idx = Math.floor(Math.random() * SHAPES.length);
+  selectShape(SHAPES[idx].id);
+
+  // Random color
+  const colorOpts = document.getElementById('sel-colormode').options;
+  document.getElementById('sel-colormode').selectedIndex =
+    Math.floor(Math.random() * colorOpts.length);
+
+  // Random material
+  const matOpts = document.getElementById('sel-material').options;
+  document.getElementById('sel-material').selectedIndex =
+    Math.floor(Math.random() * matOpts.length);
+
+  buildTorus();
+}
+
+// ================================================================
+//  SIDEBAR TOGGLE
+// ================================================================
+
+document.getElementById('toggle-sidebar').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('collapsed');
+  document.getElementById('toggle-sidebar').classList.toggle('open');
+});
+
+// ================================================================
+//  WIRING
+// ================================================================
+
+// All sliders and selects trigger rebuild
+['r-phi0','r-amp','r-freq','r-amp2','r-freq2','r-density','r-scale'].forEach(id => {
+  document.getElementById(id).addEventListener('input', buildTorus);
+});
+['sel-colormode','sel-material'].forEach(id => {
+  document.getElementById(id).addEventListener('change', buildTorus);
+});
+document.getElementById('chk-highlight').addEventListener('change', buildTorus);
+document.getElementById('chk-ground').addEventListener('change', () => {
+  ground.visible = document.getElementById('chk-ground').checked;
+});
+document.getElementById('r-rotspeed').addEventListener('input', () => {
+  document.getElementById('v-rotspeed').textContent =
+    parseFloat(document.getElementById('r-rotspeed').value).toFixed(1);
+});
+
+// ================================================================
+//  RENDER LOOP
+// ================================================================
+
+const clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+  const dt = clock.getDelta();
+
+  if (document.getElementById('chk-rotate').checked && !isDragging) {
+    const speed = parseFloat(document.getElementById('r-rotspeed').value);
+    spherical.theta += 0.002 * speed;
+    updateCamera();
+  }
+
+  applyAnimation(dt);
+  renderer.render(scene, camera);
+}
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (e.key === 'h' || e.key === 'H') {
+    document.getElementById('toggle-sidebar').click();
+  } else if (e.key === 'r' || e.key === 'R') {
+    randomize();
+  } else if (e.key === 's' && !e.ctrlKey && !e.metaKey) {
+    screenshot();
+  }
+});
+
+// ================================================================
+//  INIT
+// ================================================================
+
+buildGallery();
+setTimeout(() => {
+  selectShape('wavy11');
+  document.getElementById('loading').classList.add('hidden');
+  animate();
+}, 120);
+
+</script>
+</body>
+</html>

@@ -7,6 +7,7 @@
     "about": "Sobre mí",
     "cv": "Experiencia",
     "projects": "Proyectos",
+    "thesis": "TFG",
     "blog": "Blog",
     "switchLang": "EN"
   },
@@ -25,6 +26,11 @@
       "A lo largo de mis años universitarios, he trabajado en proyectos de Deep Learning, Machine Learning, Ciencia de Datos, Desarrollo de Videojuegos, Ciberseguridad y Desarrollo Web. Aporto una actitud proactiva y pasión por aprender."
     ],
     "location": "Marbella, España"
+  },
+  "thesis": {
+  "title": "Trabajo de Fin de Grado",
+  "description": "Visualización 3D interactiva de curvas elípticas mediante la fibración de Hopf. Explora 18 formas de toro en categorías de lattice, onduladas y exóticas, con 12 modos de color, 6 materiales, 3 animaciones y control total de parámetros. Construido con Three.js como parte de mi TFG sobre criptografía de curvas elípticas.",
+  "cta": "Abrir explorador interactivo →"
   },
   "hobbies": {
     "title": "Más allá del código",
