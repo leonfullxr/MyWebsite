@@ -7,6 +7,7 @@
     "about": "About",
     "cv": "Experience",
     "projects": "Projects",
+    "thesis": "Thesis",
     "blog": "Blog",
     "switchLang": "ES"
   },
@@ -25,6 +26,11 @@
       "Throughout my university years, I have worked on projects spanning Deep Learning, Machine Learning, Data Science, Game Development, Cybersecurity, and Web Development. I bring a proactive attitude and a passion for learning."
     ],
     "location": "Marbella, Spain"
+  },
+  "thesis": {
+  "title": "Thesis",
+  "description": "Interactive 3D visualization of elliptic curves via the Hopf fibration. Explore 18 torus shapes across lattice, wavy, and exotic categories, with 12 color modes, 6 materials, 3 animations, and full custom parameter control. Built with Three.js as part of my thesis on elliptic curve cryptography.",
+  "cta": "Launch interactive explorer"
   },
   "hobbies": {
     "title": "Beyond the code",

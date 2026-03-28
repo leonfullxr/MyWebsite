@@ -4,6 +4,7 @@ interface Props {
     about: string;
     cv: string;
     projects: string;
+    thesis: string;
     blog: string;
     switchLang: string;
   };
@@ -25,6 +26,7 @@ const otherLang = lang === 'es' ? 'en' : 'es';
       <a href={`/${lang}/#about`} class="text-sm font-body hover:text-sand-600 dark:hover:text-sand-400 transition-colors">{nav.about}</a>
       <a href={`/${lang}/#cv`} class="text-sm font-body hover:text-sand-600 dark:hover:text-sand-400 transition-colors">{nav.cv}</a>
       <a href={`/${lang}/#projects`} class="text-sm font-body hover:text-sand-600 dark:hover:text-sand-400 transition-colors">{nav.projects}</a>
+      <a href={`/${lang}/thesis`} class="text-sm font-body hover:text-sand-600 dark:hover:text-sand-400 transition-colors">{nav.thesis}</a>
       <a href={`/${lang}/#blog`} class="text-sm font-body hover:text-sand-600 dark:hover:text-sand-400 transition-colors">{nav.blog}</a>
       <div class="flex items-center gap-3 ml-2">
         <a href={`/${otherLang}/`} class="text-xs font-mono px-2.5 py-1 rounded-full border border-sand-300 dark:border-ink-700 hover:bg-sand-200 dark:hover:bg-ink-800 transition-colors">
@@ -57,6 +59,7 @@ const otherLang = lang === 'es' ? 'en' : 'es';
     <a href={`/${lang}/#about`} onclick="toggleMenu()" class="block text-sm">{nav.about}</a>
     <a href={`/${lang}/#cv`} onclick="toggleMenu()" class="block text-sm">{nav.cv}</a>
     <a href={`/${lang}/#projects`} onclick="toggleMenu()" class="block text-sm">{nav.projects}</a>
+    <a href={`/${lang}/thesis`} onclick="toggleMenu()" class="block text-sm">{nav.thesis}</a>
     <a href={`/${lang}/#blog`} onclick="toggleMenu()" class="block text-sm">{nav.blog}</a>
   </div>
 </nav>
