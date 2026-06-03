@@ -1,0 +1,33 @@
+version: 2
+updates:
+  # Application & tooling dependencies
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+    groups:
+      astro:
+        patterns:
+          - astro
+          - '@astrojs/*'
+      react:
+        patterns:
+          - react
+          - react-dom
+          - '@types/react*'
+      dev-dependencies:
+        dependency-type: development
+
+  # GitHub Actions used by the workflows above
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    labels:
+      - dependencies
+      - github-actions
