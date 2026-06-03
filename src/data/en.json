@@ -28,9 +28,9 @@
     "location": "Granada, Spain"
   },
   "thesis": {
-  "title": "Thesis",
-  "description": "Interactive 3D visualization of elliptic curves via the Hopf fibration. Explore 18 torus shapes across lattice, wavy, and exotic categories, with 12 color modes, 6 materials, 3 animations, and full custom parameter control. Built with Three.js as part of my thesis on elliptic curve cryptography.",
-  "cta": "Launch interactive explorer"
+    "title": "Thesis",
+    "description": "Interactive 3D visualization of elliptic curves via the Hopf fibration. Explore 18 torus shapes across lattice, wavy, and exotic categories, with 12 color modes, 6 materials, 3 animations, and full custom parameter control. Built with Three.js as part of my thesis on elliptic curve cryptography.",
+    "cta": "Launch interactive explorer"
   },
   "hobbies": {
     "title": "Beyond the code",
@@ -111,11 +111,29 @@
         },
         {
           "name": "Technologies & Tools",
-          "items": ["Wazuh", "Elasticsearch", "Docker", "k8s", "Nextcloud", "Git", "Linux", "AWS", "Godot Engine", "OpenGL"]
+          "items": [
+            "Wazuh",
+            "Elasticsearch",
+            "Docker",
+            "k8s",
+            "Nextcloud",
+            "Git",
+            "Linux",
+            "AWS",
+            "Godot Engine",
+            "OpenGL"
+          ]
         },
         {
           "name": "Fields",
-          "items": ["Deep Learning", "Machine Learning", "Computer Vision", "Cybersecurity", "Networking", "Game Development"]
+          "items": [
+            "Deep Learning",
+            "Machine Learning",
+            "Computer Vision",
+            "Cybersecurity",
+            "Networking",
+            "Game Development"
+          ]
         },
         {
           "name": "Languages",

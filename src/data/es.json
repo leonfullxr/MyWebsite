@@ -28,9 +28,9 @@
     "location": "Granada, España"
   },
   "thesis": {
-  "title": "Trabajo de Fin de Grado",
-  "description": "Visualización 3D interactiva de curvas elípticas mediante la fibración de Hopf. Explora 18 formas de toro en categorías de lattice, onduladas y exóticas, con 12 modos de color, 6 materiales, 3 animaciones y control total de parámetros. Construido con Three.js como parte de mi TFG sobre criptografía de curvas elípticas.",
-  "cta": "Abrir explorador interactivo →"
+    "title": "Trabajo de Fin de Grado",
+    "description": "Visualización 3D interactiva de curvas elípticas mediante la fibración de Hopf. Explora 18 formas de toro en categorías de lattice, onduladas y exóticas, con 12 modos de color, 6 materiales, 3 animaciones y control total de parámetros. Construido con Three.js como parte de mi TFG sobre criptografía de curvas elípticas.",
+    "cta": "Abrir explorador interactivo →"
   },
   "hobbies": {
     "title": "Más allá del código",
@@ -111,11 +111,28 @@
         },
         {
           "name": "Tecnologías y Herramientas",
-          "items": ["Elasticsearch", "Docker", "k8s", "Nextcloud", "Git", "Linux", "AWS", "Godot Engine", "OpenGL"]
+          "items": [
+            "Elasticsearch",
+            "Docker",
+            "k8s",
+            "Nextcloud",
+            "Git",
+            "Linux",
+            "AWS",
+            "Godot Engine",
+            "OpenGL"
+          ]
         },
         {
           "name": "Campos",
-          "items": ["Deep Learning", "Machine Learning", "Visión por Computador", "Ciberseguridad", "Redes", "Desarrollo de Videojuegos"]
+          "items": [
+            "Deep Learning",
+            "Machine Learning",
+            "Visión por Computador",
+            "Ciberseguridad",
+            "Redes",
+            "Desarrollo de Videojuegos"
+          ]
         },
         {
           "name": "Idiomas",
