@@ -1,13 +1,11 @@
 name: CI
 
-# Validates every pull request and every push to a non-main branch.
-# `main` is validated and shipped by deploy.yml, so it is excluded here to
-# avoid running the same build twice.
+# Validates every pull request targeting main. `main` itself is validated and
+# shipped by deploy.yml. Running on pull_request only (not push) avoids the
+# duplicate checks that appear when a branch with an open PR is pushed.
 on:
   pull_request:
     branches: [main]
-  push:
-    branches-ignore: [main]
   workflow_dispatch:
 
 permissions:
