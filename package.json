@@ -13,9 +13,9 @@
     "audit:prod": "npm audit --omit=dev --audit-level=high"
   },
   "dependencies": {
-    "@astrojs/react": "^4.4.2",
+    "@astrojs/react": "^5.0.7",
     "@astrojs/tailwind": "^6.0.2",
-    "astro": "^5.5.4",
+    "astro": "^6.4.3",
     "marked": "^17.0.3",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
