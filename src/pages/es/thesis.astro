@@ -6,24 +6,44 @@ import data from '../../data/es.json';
 const lang = 'es';
 ---
 
-<Layout title="Galería Hopf Torus - Leon Elliott Fuller" description="Visualización 3D interactiva de curvas elípticas mediante la fibración de Hopf" lang={lang}>
+<Layout
+  title="Galería Hopf Torus - Leon Elliott Fuller"
+  description="Visualización 3D interactiva de curvas elípticas mediante la fibración de Hopf"
+  lang={lang}
+>
   <Nav nav={data.nav} lang={lang} />
   <main class="pt-16 h-screen flex flex-col">
     <div class="max-w-5xl mx-auto px-6 py-6 shrink-0">
-      <a href={`/${lang}/#thesis`} class="inline-flex items-center gap-2 text-sm font-mono text-sand-500 hover:text-sand-700 dark:hover:text-sand-300 mb-4 transition-colors">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"/></svg>
+      <a
+        href={`/${lang}/#thesis`}
+        class="inline-flex items-center gap-2 text-sm font-mono text-sand-500 hover:text-sand-700 dark:hover:text-sand-300 mb-4 transition-colors"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M15 19l-7-7 7-7"></path></svg
+        >
         Volver
       </a>
-      <h1 class="font-display text-3xl md:text-4xl italic tracking-tight mb-2">Galería Hopf Torus</h1>
-      <p class="text-ink-500 dark:text-sand-400 text-sm leading-relaxed">Visualización 3D interactiva de curvas elípticas mediante la fibración de Hopf. Explora 18 formas, 12 modos de color, 6 materiales y parámetros personalizados. Usa los controles del panel lateral o pulsa <kbd class="px-1.5 py-0.5 rounded bg-sand-200 dark:bg-ink-800 font-mono text-xs">H</kbd> para mostrar/ocultar el panel.</p>
+      <h1 class="font-display text-3xl md:text-4xl italic tracking-tight mb-2">
+        Galería Hopf Torus
+      </h1>
+      <p class="text-ink-500 dark:text-sand-400 text-sm leading-relaxed">
+        Visualización 3D interactiva de curvas elípticas mediante la fibración de Hopf. Explora 18
+        formas, 12 modos de color, 6 materiales y parámetros personalizados. Usa los controles del
+        panel lateral o pulsa <kbd
+          class="px-1.5 py-0.5 rounded bg-sand-200 dark:bg-ink-800 font-mono text-xs">H</kbd
+        > para mostrar/ocultar el panel.
+      </p>
     </div>
     <div class="flex-1 min-h-0 border-t border-sand-200 dark:border-ink-800">
       <iframe
         src="/thesis/index.html"
         class="w-full h-full border-0"
         allow="fullscreen"
-        title="Galería interactiva Hopf Torus"
-      ></iframe>
+        title="Galería interactiva Hopf Torus"></iframe>
     </div>
   </main>
 </Layout>

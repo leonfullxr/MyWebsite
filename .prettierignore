@@ -1,0 +1,18 @@
+# Build output & dependencies
+dist/
+.astro/
+node_modules/
+
+# Lockfiles
+package-lock.json
+
+# Static assets
+public/
+assets/
+
+# Authored content (preserve Markdown formatting as written)
+src/content/
+
+# Generated / data
+*.min.js
+*.min.css
