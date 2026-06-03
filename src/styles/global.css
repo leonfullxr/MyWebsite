@@ -91,7 +91,9 @@
   }
 
   .hero-text {
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 0, 0, 0.35);
+    text-shadow:
+      0 2px 12px rgba(0, 0, 0, 0.7),
+      0 0 40px rgba(0, 0, 0, 0.35);
   }
 
   .hero-text a {
@@ -103,8 +105,12 @@
   }
 
   @keyframes subtleZoom {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.05); }
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.05);
+    }
   }
 
   /* Timeline */
@@ -210,10 +216,18 @@
     animation: fadeInUp 0.6s ease-out forwards;
   }
 
-  .fade-in-delay-1 { animation-delay: 0.1s; }
-  .fade-in-delay-2 { animation-delay: 0.2s; }
-  .fade-in-delay-3 { animation-delay: 0.3s; }
-  .fade-in-delay-4 { animation-delay: 0.4s; }
+  .fade-in-delay-1 {
+    animation-delay: 0.1s;
+  }
+  .fade-in-delay-2 {
+    animation-delay: 0.2s;
+  }
+  .fade-in-delay-3 {
+    animation-delay: 0.3s;
+  }
+  .fade-in-delay-4 {
+    animation-delay: 0.4s;
+  }
 
   @keyframes fadeInUp {
     to {
