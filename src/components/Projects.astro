@@ -8,6 +8,7 @@ interface Props {
       period: string;
       description: string;
       tags: string[];
+      image?: string;
     }[];
   };
 }
@@ -49,6 +50,15 @@ const totalPages = Math.ceil(projects.items.length / PAGE_SIZE);
           data-tags={project.tags.join(',')}
           data-index={i}
         >
+          {project.image && (
+            <div class="-mx-6 -mt-6 md:-mx-8 md:-mt-8 mb-4 rounded-t-2xl overflow-hidden border-b border-sand-200 dark:border-ink-700">
+              <img
+                src={project.image}
+                alt={project.name}
+                class="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          )}
           <div class="flex items-start justify-between mb-3">
             <h3 class="text-lg font-medium group-hover:text-sand-600 dark:group-hover:text-sand-400 transition-colors">{project.name}</h3>
             <svg class="w-4 h-4 text-ink-300 dark:text-sand-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 17L17 7M17 7H7M17 7v10"/></svg>

@@ -14,7 +14,7 @@
   "hero": {
     "greeting": "Hola, soy",
     "name": "Leon Elliott Fuller",
-    "tagline": "Ingeniería Informática · Deep Learning · Ciberseguridad",
+    "tagline": "Ingeniería Informática · Deep Learning · Ciberseguridad · Ingeniero Software",
     "description": "Ingeniero de Seguridad Junior en Wazuh. Graduado en Ingeniería Informática por la Universidad de Granada con un año Erasmus+ en AGH Cracovia. Construyo cosas, aprendo constantemente y acepto nuevos retos.",
     "cta": "Conóceme"
   },
@@ -25,7 +25,7 @@
       "Estoy comprometido con construir una base sólida para mi carrera desarrollando continuamente mis habilidades y aceptando nuevos retos. Actualmente enfocado en disciplina y aprendizaje, estoy determinado a enfrentar tareas complejas y esforzarme al máximo.",
       "A lo largo de mis años universitarios, he trabajado en proyectos de Deep Learning, Machine Learning, Ciencia de Datos, Desarrollo de Videojuegos, Ciberseguridad y Desarrollo Web. Aporto una actitud proactiva y pasión por aprender."
     ],
-    "location": "Marbella, España"
+    "location": "Granada, España"
   },
   "thesis": {
   "title": "Trabajo de Fin de Grado",
@@ -38,7 +38,7 @@
       {
         "icon": "running",
         "title": "Running",
-        "description": "Soy un autoproclamado corredor mediocre profesional de maratones. Me encanta el desafío de las carreras de larga distancia y a menudo participo en carreras, a veces con amigos por diversión."
+        "description": "Soy un corredor mediocre profesional de ultramaratones. Me encanta el desafío de las carreras de larga distancia y a menudo participo en carreras, a veces con amigos por diversión."
       },
       {
         "icon": "nature",
@@ -58,15 +58,17 @@
       "title": "Experiencia Laboral",
       "items": [
         {
-          "role": "Ingeniero de Seguridad Junior",
+          "role": "Ingeniero de Seguridad",
           "company": "Wazuh",
           "url": "https://wazuh.com/",
           "period": "Feb 2025 - Presente",
           "current": true,
           "description": [
-            "Resolución de incidencias de alto impacto en Wazuh para clientes empresariales, mejorando significativamente la visibilidad, la precisión de detección y la estabilidad del sistema.",
-            "Diseño de soluciones de seguridad a medida usando principios de SIEM, XDR, HIDS y NIDS en infraestructuras OnPrem y Cloud.",
-            "Diseño y establecimiento de configuraciones personalizadas de Security Operations Center (SOC) para grandes corporaciones. Asesoramiento en hardening de seguridad, ajuste de detección de anomalías y reducción de falsos positivos."
+            "Diseñé e implementé ecosistemas SIEM/XDR de alta disponibilidad en entornos Cloud y OnPrem, transformando requisitos complejos de seguridad y cumplimiento normativo en arquitecturas escalables.",
+            "Administré infraestructuras tolerantes a fallos utilizando Kubernetes y Docker, optimizando la capacidad y los costos para la ingesta masiva de logs en clústeres de Elasticsearch y OpenSearch.",
+            "Lideré el diseño de entornos SOC y estrategias de detección avanzada. Desarrollé modelos de amenazas personalizados, integraciones API y automatización de respuestas (playbooks) que redujeron significativamente el tiempo medio de respuesta (MTTR).",
+            "Resolví problemas críticos de arquitectura liderando equipos técnicos de respuesta ante incidentes, asegurando la estabilidad de la plataforma y la monitorización continua de amenazas para clientes corporativos.",
+            "Actué como referente técnico en iniciativas de seguridad (hardening) de infraestructura. Optimicé los sistemas HIDS/NIDS para eliminar falsos positivos y capacité al equipo en mejores prácticas de seguridad en contenedores y optimización de plataformas."
           ]
         },
         {
@@ -76,9 +78,9 @@
           "period": "Jul 2022 - Sep 2023",
           "current": false,
           "description": [
-            "Trabajé como consultor de TI ayudando a los empleados con sus problemas informáticos, desarrollando parcialmente una aplicación de escritorio para la empresa.",
-            "Configuré la autenticación de dos factores, reglas antimalware, spyware y phishing, y mantuve el servicio de TI de la empresa.",
-            "Impartí sesiones de formación para usuarios finales sobre el uso de tecnologías o procesos recién implementados."
+            "Brindé consultoría de TI y soporte técnico a nivel corporativo, y desarrollé una aplicación de escritorio interna para optimizar los flujos de trabajo diarios.",
+            "Implementé controles de seguridad fundamentales, incluyendo autenticación multifactor (MFA), protección de endpoints y políticas anti-phishing, y administré la operativa general de la infraestructura de TI.",
+            "Impulsé la adopción tecnológica diseñando e impartiendo sesiones de capacitación estructuradas, facilitando la adaptación de los usuarios a nuevos sistemas y protocolos de seguridad."
           ]
         }
       ]
@@ -117,7 +119,7 @@
         },
         {
           "name": "Idiomas",
-          "items": ["Inglés (Nativo)", "Español (Fluido)"]
+          "items": ["Inglés (Nativo)", "Español (Nativo)"]
         }
       ]
     },
@@ -126,11 +128,11 @@
       "items": [
         "Elasticsearch Engineer - Elasticsearch (2025)",
         "AWS Academy Cloud Developing - Amazon Web Services (Nov 2024)",
-        "Machine Learning A-Z - Udemy (Ene–Jul 2024)",
-        "ML y Big Data para Bioinformática - Universidad de Granada (Ene–Jun 2024)",
+        "Machine Learning A-Z - Udemy (Ene-Jul 2024)",
+        "ML y Big Data para Bioinformática - Universidad de Granada (Ene-Jun 2024)",
         "Domina C++ - Udemy (Dic 2022)",
         "GameJam Pichola - 1º 'Mejor Arte', 3º 'Mejor Potencial Comercial', 3º 'Más Popular' (Ene 2022)",
-        "Programa de Videojuegos y Emprendimiento - Fundación Incyde (Jul–Ago 2020)"
+        "Programa de Videojuegos y Emprendimiento - Fundación Incyde (Jul-Ago 2020)"
       ]
     }
   },
@@ -142,42 +144,48 @@
         "url": "https://github.com/leonfullxr/Cypher",
         "period": "2024",
         "description": "Aplicación de chat encriptada con cifrado de extremo a extremo, mensajería en tiempo real, sin almacenamiento de metadatos y protocolos avanzados como TLS y Signal. Usa cifrado AES y garantiza anonimato completo.",
-        "tags": ["Ciberseguridad", "Web App", "DevOps"]
+        "tags": ["Ciberseguridad", "Web App", "DevOps"],
+        "image": "/images/cypher_logo.png"
       },
       {
         "name": "Nextcloud Autoalojado",
         "url": "https://nextcloud.leonfuller.space/",
         "period": "2024",
         "description": "Alternativa privada y autoalojada a Google Drive usando Docker y Traefik. Parte de un homelab más amplio centrado en privacidad de datos y control total sobre archivos personales.",
-        "tags": ["DevOps", "Docker", "Web App"]
+        "tags": ["DevOps", "Docker", "Web App"],
+        "image": "/images/nextcloud_login.png"
       },
       {
         "name": "Pichola - Juego Premiado",
         "url": "https://github.com/leonfullxr/Pichola",
         "period": "Ene 2022",
         "description": "Juego premiado creado en una Game Jam de 48 horas con Godot Engine. Tema: 'Empezar de cero'. Los jugadores comienzan como un huevo, recolectando otros para desbloquear habilidades. Ganó 'Mejor Arte'.",
-        "tags": ["Videojuegos", "Diseño"]
+        "tags": ["Videojuegos", "Diseño"],
+        "image": "/images/pichola.png"
       },
       {
         "name": "IA para Juego de Parchís",
         "url": "https://github.com/leonfullxr/AI-for-Ludo-game",
         "period": "2023",
         "description": "Parchís reinventado con un giro estratégico, con un agente de IA deliberativo usando MINIMAX y poda ALFA-BETA para juego inteligente contra humanos.",
-        "tags": ["IA", "Videojuegos"]
+        "tags": ["IA", "Videojuegos"],
+        "image": "/images/ludo_game.png"
       },
       {
         "name": "Visual Path Finding",
         "url": "https://github.com/leonfullxr/Visual-Path-Finding",
         "period": "2023",
         "description": "Herramienta interactiva de visualización de algoritmos de búsqueda de caminos como A*, Dijkstra y más. Recurso educativo para entender la mecánica algorítmica.",
-        "tags": ["IA", "Diseño"]
+        "tags": ["IA", "Diseño"],
+        "image": "/images/visual_pathfinding.png"
       },
       {
         "name": "Clasificación de Hongos",
         "url": "https://github.com/leonfullxr/Classifying-Mushrooms",
         "period": "2024",
         "description": "Clasificación de comestibilidad de hongos usando modelos de ML supervisado. Análisis del dataset UCI Secondary Mushroom como parte del curso de ML en la UGR.",
-        "tags": ["IA", "Machine Learning"]
+        "tags": ["IA", "Machine Learning"],
+        "image": "/images/mushroom_classification.png"
       },
       {
         "name": "Simulación del Sistema Solar",

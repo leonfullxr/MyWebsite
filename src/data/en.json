@@ -14,7 +14,7 @@
   "hero": {
     "greeting": "Hi, I'm",
     "name": "Leon Elliott Fuller",
-    "tagline": "Computer Engineering · Security Engineer · Cybersecurity",
+    "tagline": "Computer Engineering · Security Engineer · Cybersecurity · Software Engineer",
     "description": "Junior Security Engineer at Wazuh. Computer Science graduate from the University of Granada with an Erasmus+ year at AGH Krakow. I build things, learn constantly, and embrace new challenges.",
     "cta": "Get to know me"
   },
@@ -25,7 +25,7 @@
       "I am committed to building a strong foundation for my career by continuously developing my skills and embracing new challenges. Currently focused on discipline and learning, I am determined to face complex tasks and put in the hard work.",
       "Throughout my university years, I have worked on projects spanning Deep Learning, Machine Learning, Data Science, Game Development, Cybersecurity, and Web Development. I bring a proactive attitude and a passion for learning."
     ],
-    "location": "Marbella, Spain"
+    "location": "Granada, Spain"
   },
   "thesis": {
   "title": "Thesis",
@@ -38,7 +38,7 @@
       {
         "icon": "running",
         "title": "Running",
-        "description": "I'm a self-proclaimed professional mediocre marathon runner. I love the challenge of long-distance running and often do races, sometimes with friends just for fun."
+        "description": "I'm a professional mediocre ultramarathon runner. I love the challenge of long distance running and often do races, sometimes with friends just for fun."
       },
       {
         "icon": "nature",
@@ -58,15 +58,17 @@
       "title": "Work Experience",
       "items": [
         {
-          "role": "Junior Security Engineer",
+          "role": "Security Engineer",
           "company": "Wazuh",
           "url": "https://wazuh.com/",
           "period": "Feb 2025 - Present",
           "current": true,
           "description": [
-            "Resolved high-impact Wazuh issues for enterprise customers, significantly improving visibility, detection accuracy, and system stability.",
-            "Engineered tailored security solutions using SIEM, XDR, HIDS, and NIDS principles across OnPrem and Cloud infrastructures.",
-            "Designed and established custom Security Operations Center (SOC) setups for major corporations. Advised on security hardening, anomaly detection tuning, and reduction of false positives."
+            "Architected and deployed high-availability SIEM/XDR ecosystems across distributed Cloud and OnPrem environments, translating complex enterprise compliance and security requirements into scalable architectural roadmaps.",
+            "Engineered fault-tolerant containerized infrastructures using Kubernetes and Docker, conducting capacity planning and cost-optimization for massive scale Elasticsearch and OpenSearch log ingestion pipelines.",
+            "Spearheaded custom SOC design and advanced detection engineering, implementing tailored threat modeling frameworks, API integrations, and automated response playbooks that drastically reduced Mean Time to Respond (MTTR).",
+            "Resolved critical, high-impact architectural bottlenecks by directing cross-functional technical war rooms during major escalations, ensuring uninterrupted threat visibility and platform stability for enterprise clients.",
+            "Served as the advisory lead, driving infrastructure hardening initiatives, fine tuning and optimizing HIDS/NIDS anomaly detection to eliminate false positives, and mentoring engineering members on platform optimization and container security best practices."
           ]
         },
         {
@@ -76,9 +78,9 @@
           "period": "Jul 2022 - Sep 2023",
           "current": false,
           "description": [
-            "Worked as an IT Consultant helping workers with their IT issues, partly creating a Desktop App for the company.",
-            "Set up the company's 2FA, antimalware, spyware, and phishing rules, and generally maintained the company's IT service.",
-            "Provided training sessions for end users on the use of newly implemented technologies or processes."
+            "Provided comprehensive IT consulting and technical support across the organization, and developed a custom internal desktop application to streamline daily workflows.",
+            "Implemented foundational security controls—including Multi-Factor Authentication (MFA), endpoint protection, and anti-phishing policies while managing overall IT infrastructure operations.",
+            "Drove technology adoption by designing and delivering structured training sessions, ensuring smooth end-user onboarding for new IT systems and security protocols."
           ]
         }
       ]
@@ -117,7 +119,7 @@
         },
         {
           "name": "Languages",
-          "items": ["English (Native)", "Spanish (Fluent)"]
+          "items": ["English (Native)", "Spanish (Native)"]
         }
       ]
     },
@@ -126,11 +128,11 @@
       "items": [
         "Elasticsearch Engineer - Elasticsearch (2025)",
         "AWS Academy Cloud Developing - Amazon Web Services (Nov 2024)",
-        "Machine Learning A-Z - Udemy (Jan–Jul 2024)",
-        "ML & Big Data for BioInformatics - University of Granada (Jan–Jun 2024)",
+        "Machine Learning A-Z - Udemy (Jan-Jul 2024)",
+        "ML & Big Data for BioInformatics - University of Granada (Jan-Jun 2024)",
         "Master C++ Programming - Udemy (Dec 2022)",
         "GameJam Pichola - 1st 'Best Art', 3rd 'Best Commercial Potential', 3rd 'Most Popular' (Jan 2022)",
-        "Video Game & Entrepreneurship Program - Incyde Foundation (Jul–Aug 2020)"
+        "Video Game & Entrepreneurship Program - Incyde Foundation (Jul-Aug 2020)"
       ]
     }
   },
@@ -142,42 +144,48 @@
         "url": "https://github.com/leonfullxr/Cypher",
         "period": "2024",
         "description": "State-of-the-art encrypted chat application with end-to-end encryption, real-time messaging, zero metadata storage, and advanced protocols like TLS and Signal. Features AES encryption and complete anonymity.",
-        "tags": ["Cybersecurity", "Web App", "DevOps"]
+        "tags": ["Cybersecurity", "Web App", "DevOps"],
+        "image": "/images/cypher_logo.png"
       },
       {
         "name": "Self-Hosted Nextcloud",
         "url": "https://nextcloud.leonfuller.space/",
         "period": "2024",
         "description": "Private, self-hosted alternative to Google Drive using Docker and Traefik. Part of a broader homelab setup focused on data privacy and complete control over personal files.",
-        "tags": ["DevOps", "Docker", "Web App"]
+        "tags": ["DevOps", "Docker", "Web App"],
+        "image": "/images/nextcloud_login.png"
       },
       {
         "name": "Pichola - Award-Winning Game",
         "url": "https://github.com/leonfullxr/Pichola",
         "period": "Jan 2022",
         "description": "Award-winning game created during a 48-hour Game Jam using Godot Engine. Theme: 'Start from Nothing'. Players begin as an egg, collecting others to unlock abilities. Won 'Best Art'.",
-        "tags": ["Game Dev", "Design"]
+        "tags": ["Game Dev", "Design"],
+        "image": "/images/pichola.png"
       },
       {
         "name": "AI for Ludo Game",
         "url": "https://github.com/leonfullxr/AI-for-Ludo-game",
         "period": "2023",
         "description": "A reimagined Parchís game with a strategic twist, featuring a deliberative AI agent using MINIMAX and ALPHA-BETA PRUNING for intelligent gameplay against human players.",
-        "tags": ["AI", "Game Dev"]
+        "tags": ["AI", "Game Dev"],
+        "image": "/images/ludo_game.png"
       },
       {
         "name": "Visual Path Finding",
         "url": "https://github.com/leonfullxr/Visual-Path-Finding",
         "period": "2023",
         "description": "Interactive visualization tool demonstrating path-finding algorithms like A*, Dijkstra, and more. An educational resource for understanding algorithmic mechanics.",
-        "tags": ["AI", "Design"]
+        "tags": ["AI", "Design"],
+        "image": "/images/visual_pathfinding.png"
       },
       {
         "name": "Classifying Mushrooms",
         "url": "https://github.com/leonfullxr/Classifying-Mushrooms",
         "period": "2024",
         "description": "Mushroom edibility classification using supervised ML models. Analyzed the UCI Secondary Mushroom dataset as part of the ML course at the University of Granada.",
-        "tags": ["AI", "Machine Learning"]
+        "tags": ["AI", "Machine Learning"],
+        "image": "/images/mushroom_classification.png"
       },
       {
         "name": "Solar System Simulation",
