@@ -122,7 +122,7 @@ The operational edges got the same treatment. Answers stream token by token, cap
 
 ## Run it yourself
 
-The whole harness is reproducible on any Linux machine with Docker and about 8 GB of free RAM (more if you want local inference):
+The complete harness is published in [`integrations/ai-assistant`](https://github.com/leonfullxr/Wazuh/tree/main/integrations/ai-assistant) of my Wazuh repository, next to the other integrations and PoCs I have built around the platform. It is reproducible on any Linux machine with Docker and about 8 GB of free RAM (more if you want local inference):
 
 ```bash
 cp .env.example .env      # pick an inference backend inside
@@ -136,7 +136,7 @@ make evals                # the bilingual golden set, end to end
 make test                 # 26 unit tests for the deterministic core
 ```
 
-I am preparing the full harness, meaning the compose overlay, the auth shim, the tool service, the seeder and the eval runner, for a public repository. Everything load-bearing is described above, and if you want to compare notes before it lands, [reach out](/en/#contact).
+Everything is there: the compose overlay, the auth shim, the tool service, the alert seeder, the golden set and its runner, and a README that walks every section of this post in runnable detail, from the Bedrock setup to the air-gapped variant. If you try it and want to compare notes, [reach out](/en/#contact).
 
 ## What I took away
 

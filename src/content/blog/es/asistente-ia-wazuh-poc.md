@@ -122,7 +122,7 @@ Los bordes operativos recibieron el mismo trato. Las respuestas fluyen token a t
 
 ## Pruébalo tú mismo
 
-Todo el laboratorio es reproducible en cualquier máquina Linux con Docker y unos 8 GB de RAM libre (más si quieres inferencia local):
+El laboratorio completo está publicado en [`integrations/ai-assistant`](https://github.com/leonfullxr/Wazuh/tree/main/integrations/ai-assistant) de mi repositorio de Wazuh, junto al resto de integraciones y PoCs que he construido alrededor de la plataforma. Es reproducible en cualquier máquina Linux con Docker y unos 8 GB de RAM libre (más si quieres inferencia local):
 
 ```bash
 cp .env.example .env      # elige dentro un backend de inferencia
@@ -136,7 +136,7 @@ make evals                # el conjunto dorado bilingüe, de extremo a extremo
 make test                 # 26 tests unitarios del núcleo determinista
 ```
 
-Estoy preparando el laboratorio completo, es decir, el overlay de compose, el auth shim, el tool service, el generador de alertas y el ejecutor de evaluaciones, para un repositorio público. Todo lo estructural está descrito arriba, y si quieres comparar notas antes de que llegue, [escríbeme](/es/#contact).
+Está todo allí: el overlay de compose, el auth shim, el tool service, el generador de alertas, el conjunto dorado con su ejecutor, y un README que recorre cada sección de este artículo con detalle ejecutable, desde la configuración de Bedrock hasta la variante aislada de la red. Si lo pruebas y quieres comparar notas, [escríbeme](/es/#contact).
 
 ## Lo que me llevo
 
