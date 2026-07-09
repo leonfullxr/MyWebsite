@@ -25,14 +25,34 @@ const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
 const frontmatter = frontmatterMatch?.[1] || '';
 const title = frontmatter.match(/title:\s*"(.+)"/)?.[1] || '';
 const date = frontmatter.match(/date:\s*"(.+)"/)?.[1] || '';
+const description = frontmatter.match(/description:\s*"(.+)"/)?.[1] || title;
+const image = frontmatter.match(/image:\s*"(.+)"/)?.[1];
 
 const markdownBody = content.replace(/^---\n[\s\S]*?\n---\n/, '');
-const htmlContent = await marked(markdownBody);
+
+const slugify = (s: string) =>
+  s
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-');
+
+const headings = [...markdownBody.matchAll(/^## (.+)$/gm)].map((m) => m[1]);
+let htmlContent = await marked(markdownBody);
+for (const h of headings) {
+  const rendered = marked.parseInline(h);
+  htmlContent = htmlContent.replace(
+    `<h2>${rendered}</h2>`,
+    `<h2 id="${slugify(h)}">${rendered}</h2>`
+  );
+}
 
 const lang = 'en';
 ---
 
-<Layout title={`${title} - Leon Elliott Fuller`} description={title} lang={lang}>
+<Layout title={`${title} - Leon Elliott Fuller`} description={description} lang={lang} image={image}>
   <Nav nav={data.nav} lang={lang} />
   <main class="pt-28 pb-20">
     <article class="max-w-3xl mx-auto px-6">
@@ -53,10 +73,58 @@ const lang = 'en';
         <p class="font-mono text-sm text-sand-500 mb-3">{date}</p>
         <h1 class="font-display text-4xl md:text-5xl italic tracking-tight">{title}</h1>
       </header>
+      {
+        headings.length >= 3 && (
+          <nav class="mb-10 rounded-xl border border-sand-200 dark:border-ink-700 bg-sand-100/50 dark:bg-ink-900/30 px-6 py-5">
+            <p class="font-mono text-xs uppercase tracking-widest text-sand-500 mb-3">Contents</p>
+            <ol class="space-y-1.5 text-sm list-none">
+              {headings.map((h) => (
+                <li>
+                  <a
+                    class="text-ink-500 dark:text-sand-400 hover:text-ink-800 dark:hover:text-sand-200 transition-colors"
+                    href={`#${slugify(h)}`}
+                  >
+                    {h}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )
+      }
       <div class="prose-blog">
         <Fragment set:html={htmlContent} />
       </div>
     </article>
   </main>
   <Footer footer={data.footer} contact={data.contact} />
+  <script is:inline>
+    // Lightbox for linked images inside the post body
+    document.querySelectorAll('.prose-blog a').forEach((a) => {
+      const img = a.querySelector('img');
+      if (!img) return;
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const overlay = document.createElement('div');
+        overlay.style.cssText =
+          'position:fixed;inset:0;z-index:100;background:rgba(10,12,16,.88);display:flex;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out;';
+        const big = document.createElement('img');
+        big.src = a.href;
+        big.alt = img.alt || '';
+        big.style.cssText =
+          'max-width:100%;max-height:100%;border-radius:12px;background:#fff;padding:12px;object-fit:contain;';
+        overlay.appendChild(big);
+        const close = () => {
+          overlay.remove();
+          document.removeEventListener('keydown', onKey);
+        };
+        const onKey = (ev) => {
+          if (ev.key === 'Escape') close();
+        };
+        overlay.addEventListener('click', close);
+        document.addEventListener('keydown', onKey);
+        document.body.appendChild(overlay);
+      });
+    });
+  </script>
 </Layout>

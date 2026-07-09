@@ -4,6 +4,7 @@ date: "2026-07-09"
 description: "Cómo diseñé y autoalojé un asistente de seguridad con IA para Wazuh cuyas respuestas son verificables por construcción, con una cadena de identidad real e inferencia intercambiable desde Amazon Bedrock hasta modelos completamente locales."
 tags: ["Ciberseguridad", "IA", "SIEM", "AWS"]
 lang: "es"
+image: "/blog/wazuh/8-production-topology.png"
 ---
 
 Todos los equipos SOC que conozco están experimentando con la misma idea: dejar que los analistas pregunten a su SIEM en lenguaje natural. "¿Cuántos fallos de autenticación hubo en las últimas 24 horas y qué usuarios fueron objetivo?" es una interfaz mejor que un DSL de consultas, y los modelos de lenguaje claramente son capaces de soportarla. La parte incómoda es lo que ocurre después. Un modelo de lenguaje responderá a esa pregunta con total fluidez sea o no cierta la respuesta, y en un contexto de operaciones de seguridad un número equivocado dicho con confianza es peor que ningún número.
@@ -154,8 +155,12 @@ Un PoC se gana que lo tomen en serio conociendo sus propios huecos, así que est
 
 Nada de esto cambia la arquitectura. Ese es el sentido de acertar primero con la estructura: todo lo de la lista es una pasada de endurecimiento dentro de una costura que ya existe.
 
+Tres adiciones van más allá del endurecimiento, y son los siguientes hitos. Un **carril de conocimiento**: los analistas también preguntan "qué significa la regla 5710" y "cómo enrolo un agente", así que un carril de recuperación sobre la documentación oficial de Wazuh, con citas verificadas contra los pasajes recuperados exactamente igual que `[alert:id]`, daría a las preguntas sobre la plataforma el mismo tratamiento de veracidad que a las preguntas sobre telemetría. **Casos dorados multi-turno y canarios del carril 0**: conversaciones con preguntas de seguimiento que referencian evidencia anterior, más preguntas deliberadamente ambiguas de casi-acierto que comprueban que el enrutador escala en lugar de adivinar, poniendo a prueba la honestidad del enrutado y no solo las respuestas. Y **el coste dentro de la etiqueta de verificabilidad**: la etiqueta ya declara el carril y las comprobaciones, así que revelar los tokens que gastó cada respuesta hace visible la economía de reconocer-antes-de-razonar para el analista, no solo para Prometheus.
+
 ## Lo que me llevo
 
 Tres lecciones sobrevivieron al contacto con la implementación. Primera, la veracidad es estructural o no es nada: las listas blancas, la compilación en servidor, los recuentos calculados por el almacén y las citas verificadas hacen más por la confianza que cualquier cantidad de prompt engineering, porque se sostienen incluso cuando el modelo se equivoca. Segunda, la identidad es la funcionalidad que nadie enseña en demos y todo el mundo necesita. Consultar como el usuario a través de un dominio de autenticación JWT significa que la IA hereda exactamente los permisos de la persona que pregunta, y esa única propiedad responde la mayoría de las preguntas difíciles de multi-tenancy antes de que se formulen. Y tercera, la ingeniería honesta gana a la ingeniería impresionante. El carril de profundidad con layer streaming es técnicamente la parte más vistosa del stack, y lo más valioso que hice con él fue medirlo, decir que 0.2 tokens por segundo no es una experiencia de chat, y confinarlo al carril donde ayuda de verdad.
 
 Un asistente para un SIEM no se gana la confianza sonando convincente. Se la gana siendo comprobable, y eso es una decisión de arquitectura.
+
+*Esta es la mitad de diseño de la historia. La mitad operativa - capacidad sin balanceador, acciones aprobadas por humanos, el mapa de auditoría y el playbook de respuesta a incidentes - está en [Operar un asistente de IA en un SOC](/es/blog/operar-ia-wazuh-soc/).*
