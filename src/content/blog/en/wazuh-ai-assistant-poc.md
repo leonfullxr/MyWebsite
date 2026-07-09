@@ -50,33 +50,19 @@ question ──▶ admission ──▶ lane 0 match? ──hit──▶ typed te
 
 The PoC is a Docker Compose overlay on top of the official `wazuh-docker` single-node stack, which provides a real Wazuh 4.14 indexer, manager and dashboard. Around it sit four containers:
 
-```
-             ┌────────────────────── one Linux machine ──────────────────────┐
-             │                                                               │
- analyst ───▶│  n8n (edge: chat UI, workflow glue)                           │
-             │    │                                                          │
-             │    ▼                                                          │
-             │  Keycloak (stand-in for the customer IdP, OIDC)               │
-             │    │                                                          │
-             │    ▼                                                          │
-             │  auth-shim ── mints short-lived turn JWTs (holds the only key)│
-             │    │                                                          │
-             │    ▼                                                          │
-             │  tool service ── agent loop, Query IR, veracity checks, audit │
-             │    │                       │                                  │
-             │    ▼                       ▼                                  │
-             │  Wazuh indexer      inference port                            │
-             │  (queries run       ├─ Amazon Bedrock (default)               │
-             │   as the analyst)   ├─ Ollama, fully local                    │
-             │                     └─ any OpenAI-compatible endpoint         │
-             └───────────────────────────────────────────────────────────────┘
-```
+[![What runs where: the self-hosted stack on one machine and the pluggable inference port](/blog/wazuh/1-local-poc-harness.png)](/blog/wazuh/1-local-poc-harness.png)
+
+*Everything except inference runs on one machine, and even inference can. Click any diagram for full resolution.*
 
 The division of labor matters. n8n is the front door and nothing more, a chat channel and workflow glue. The brain is a headless **tool service** that owns the entire agent loop and exposes three surfaces: an SSE chat API with token streaming, a synchronous JSON endpoint, and a per-tool HTTP surface that executes exactly one validated tool with no model involved. The same hardened internals answer through every door.
 
 ## The identity chain: the AI queries as you
 
 The property I wanted to demonstrate is that the reasoning core can never forge an identity and holds no standing credential that reads telemetry. The chain has four hops and each hop verifies the previous one.
+
+[![One question end to end: the identity chain, then the veracity pipeline on every tool call](/blog/wazuh/2-turn-data-flow.png)](/blog/wazuh/2-turn-data-flow.png)
+
+*One question end to end: the identity chain first, then the veracity pipeline on every tool call, with the lane 0 fast path branching off early.*
 
 The analyst authenticates against the identity provider and gets an OIDC token. A dedicated **auth-shim** sidecar verifies that token against the IdP JWKS, checks that the user carries the analyst role, and mints a turn credential: an RS256 JWT with a dual audience, a lifetime of at most ten minutes, and a tenant claim that comes from deployment configuration rather than from anything in the request. The shim is the only container holding the signing key. The tool service verifies with the public key only, so a compromised reasoning core still cannot mint identities.
 
@@ -98,6 +84,10 @@ The assistant can never show a user more than that token can query, because the 
 
 Everything above sits on top of a single provider port. The loop speaks the Bedrock Converse shape internally, and one adapter translates to and from the OpenAI chat-completions dialect, tool calls included. Switching backends is an `.env` change plus a container recreate, and nothing above the port moves: same loop, same IR, same veracity checks, same identity chain, same audit.
 
+[![One provider port, three postures: what actually leaves your machine per backend](/blog/wazuh/3-inference-backends.png)](/blog/wazuh/3-inference-backends.png)
+
+*One provider port, three postures. What crosses the machine boundary depends entirely on which backend you bind.*
+
 That one seam yields three very different sovereignty postures:
 
 | Backend | What crosses the machine boundary | When to use it |
@@ -111,6 +101,10 @@ The two model tiers (a small router model for cheap decisions, a larger analysis
 ## Recognition before reasoning
 
 The optimization I like most needed no GPU at all. Analysts ask the same operational questions constantly, and those questions do not need a reasoning model. Lane 0 embeds each incoming question with a small local embedding model (`bge-m3`, which handles English and Spanish in one space), matches it against curated exemplars by cosine similarity, extracts slots like time windows and agent names with deterministic bilingual rules, and executes the matched template through the exact same veracity pipeline as every other lane. A hit answers in tens of milliseconds with zero model tokens, and on Bedrock that literally means the most frequent questions cost nothing. A miss escalates silently, so lane 0 can never break the assistant, only relieve it.
+
+[![Query cascade: lane 0, the router and analysis tiers, the depth lane, and the shared veracity pipeline](/blog/wazuh/4-query-cascade.png)](/blog/wazuh/4-query-cascade.png)
+
+*Recognition before reasoning: each stage only sees what the previous one could not answer, and every stage passes through the same veracity pipeline.*
 
 Next to it sits an evidence cache keyed on a hash of the canonical query plan, with time bounds floored to a TTL grid so that "last 24 hours" asked twice in the same minute is one query, not two. Cached answers disclose `served_from_cache`, because an assistant built on verifiability does not get to hide its shortcuts.
 

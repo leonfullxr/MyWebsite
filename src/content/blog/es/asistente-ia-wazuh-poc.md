@@ -50,33 +50,19 @@ pregunta ──▶ admisión ──▶ ¿carril 0? ──acierto──▶ planti
 
 El PoC es un overlay de Docker Compose sobre el stack oficial `wazuh-docker` de nodo único, que aporta un indexer, un manager y un dashboard reales de Wazuh 4.14. Alrededor hay cuatro contenedores:
 
-```
-             ┌──────────────────── una máquina Linux ────────────────────────┐
-             │                                                               │
- analista ──▶│  n8n (borde: chat, orquestación)                              │
-             │    │                                                          │
-             │    ▼                                                          │
-             │  Keycloak (sustituto del IdP del cliente, OIDC)               │
-             │    │                                                          │
-             │    ▼                                                          │
-             │  auth-shim ── acuña turn JWTs de vida corta (única clave)     │
-             │    │                                                          │
-             │    ▼                                                          │
-             │  tool service ── bucle de agente, Query IR, veracidad, audit  │
-             │    │                       │                                  │
-             │    ▼                       ▼                                  │
-             │  Wazuh indexer      puerto de inferencia                      │
-             │  (las consultas     ├─ Amazon Bedrock (por defecto)           │
-             │   corren como       ├─ Ollama, completamente local            │
-             │   el analista)      └─ cualquier endpoint OpenAI-compatible   │
-             └───────────────────────────────────────────────────────────────┘
-```
+[![Qué corre dónde: el stack autoalojado en una sola máquina y el puerto de inferencia enchufable](/blog/wazuh/1-local-poc-harness.png)](/blog/wazuh/1-local-poc-harness.png)
+
+*Todo excepto la inferencia corre en una sola máquina, y hasta la inferencia puede. Haz clic en cualquier diagrama para verlo a resolución completa.*
 
 El reparto de responsabilidades importa. n8n es la puerta de entrada y nada más, un canal de chat y pegamento de flujos. El cerebro es un **tool service** sin interfaz propia que posee el bucle de agente completo y expone tres superficies: una API de chat por SSE con streaming de tokens, un endpoint JSON síncrono, y una superficie HTTP por herramienta que ejecuta exactamente una herramienta validada sin ningún modelo de por medio. Los mismos internos endurecidos responden por todas las puertas.
 
 ## La cadena de identidad: la IA consulta como tú
 
 La propiedad que quería demostrar es que el núcleo de razonamiento no puede falsificar una identidad y no posee ninguna credencial permanente que lea telemetría. La cadena tiene cuatro saltos y cada salto verifica el anterior.
+
+[![Una pregunta de principio a fin: la cadena de identidad y luego la tubería de veracidad en cada llamada a herramienta](/blog/wazuh/2-turn-data-flow.png)](/blog/wazuh/2-turn-data-flow.png)
+
+*Una pregunta de principio a fin: primero la cadena de identidad, luego la tubería de veracidad en cada llamada a herramienta, con el carril 0 desviándose pronto.*
 
 El analista se autentica contra el proveedor de identidad y obtiene un token OIDC. Un sidecar dedicado, el **auth-shim**, verifica ese token contra el JWKS del IdP, comprueba que el usuario tiene el rol de analista y acuña la credencial del turno: un JWT RS256 con doble audiencia, una vida máxima de diez minutos y un claim de tenant que proviene de la configuración del despliegue y nunca de la petición. El shim es el único contenedor que guarda la clave de firma. El tool service verifica solo con la clave pública, de modo que ni siquiera un núcleo de razonamiento comprometido puede acuñar identidades.
 
@@ -98,6 +84,10 @@ El asistente nunca puede mostrar a un usuario más de lo que ese token puede con
 
 Todo lo anterior descansa sobre un único puerto de proveedor. El bucle habla internamente el formato Converse de Bedrock, y un adaptador traduce hacia y desde el dialecto chat-completions de OpenAI, llamadas a herramientas incluidas. Cambiar de backend es un cambio en el `.env` más recrear un contenedor, y nada por encima del puerto se mueve: mismo bucle, misma IR, mismas comprobaciones de veracidad, misma cadena de identidad, misma auditoría.
 
+[![Un puerto de proveedor, tres posturas: qué sale realmente de tu máquina según el backend](/blog/wazuh/3-inference-backends.png)](/blog/wazuh/3-inference-backends.png)
+
+*Un puerto de proveedor, tres posturas. Lo que cruza el límite de la máquina depende por completo del backend que vincules.*
+
 Esa única costura produce tres posturas de soberanía muy distintas:
 
 | Backend | Qué cruza el límite de la máquina | Cuándo usarlo |
@@ -111,6 +101,10 @@ Los dos niveles de modelo (un modelo pequeño de enrutado para las decisiones ba
 ## Reconocer antes de razonar
 
 La optimización que más me gusta no necesitó ninguna GPU. Los analistas hacen las mismas preguntas operativas constantemente, y esas preguntas no necesitan un modelo de razonamiento. El carril 0 convierte cada pregunta entrante en un embedding con un modelo local pequeño (`bge-m3`, que maneja inglés y español en un mismo espacio), la compara con los ejemplos curados por similitud coseno, extrae slots como ventanas temporales y nombres de agente con reglas bilingües deterministas, y ejecuta la plantilla acertada a través de la misma tubería de veracidad que cualquier otro carril. Un acierto responde en decenas de milisegundos con cero tokens de modelo, y en Bedrock eso significa literalmente que las preguntas más frecuentes no cuestan nada. Un fallo escala en silencio, así que el carril 0 nunca puede romper el asistente, solo aliviarlo.
+
+[![Cascada de consultas: carril 0, los niveles de enrutado y análisis, el carril de profundidad y la tubería de veracidad compartida](/blog/wazuh/4-query-cascade.png)](/blog/wazuh/4-query-cascade.png)
+
+*Reconocer antes de razonar: cada etapa solo ve lo que la anterior no pudo responder, y todas pasan por la misma tubería de veracidad.*
 
 A su lado hay una caché de evidencia cuya clave es un hash del plan de consulta canónico, con los límites temporales redondeados a una rejilla de TTL, de modo que "las últimas 24 horas" preguntado dos veces en el mismo minuto es una consulta y no dos. Las respuestas cacheadas declaran `served_from_cache`, porque un asistente construido sobre la verificabilidad no tiene derecho a esconder sus atajos.
 
