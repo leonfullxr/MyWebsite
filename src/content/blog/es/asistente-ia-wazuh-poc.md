@@ -28,23 +28,9 @@ Toda consulta que supera la validación pasa además por cuatro comprobaciones d
 
 Por último, cada afirmación de una respuesta sintetizada debe citar un identificador `[alert:id]` o `[agg:name]`, y el servicio verifica cada cita contra lo que realmente se recuperó. Una cita inventada aflora como un evento de corrección en lugar de una mentira dicha con confianza, y cada respuesta lleva una etiqueta de verificabilidad que indica qué carril la produjo y qué comprobaciones se ejecutaron.
 
-```
-pregunta ──▶ admisión ──▶ ¿carril 0? ──acierto──▶ plantilla tipada ──▶ respuesta
-                              │ fallo                            (sin modelo)
-                              ▼
-                 bucle de agente (llamadas acotadas)
-          el modelo elige herramienta tipada o emite Query IR
-                              │
-             validar ▸ compilar ▸ mapping ▸ dry-run
-                              │
-               ejecutar como el analista (turn JWT)
-                              │
-        totales exactos + agregaciones + muestra truncada
-                              │
-       síntesis con citas [alert:id], verificadas después
-                              ▼
-                respuesta + etiqueta de verificabilidad
-```
+[![Los cuatro carriles de consulta ordenados por verificabilidad, del emparejamiento de plantillas a la generación con compuerta](/blog/wazuh/5-veracity-lanes.png)](/blog/wazuh/5-veracity-lanes.png)
+
+*El enrutador siempre prefiere el carril más bajo capaz de expresar la pregunta. La escalada se registra y se mide, así que cualquier deriva hacia carriles menos verificables aparece en las métricas y no en un incidente.*
 
 ## La arquitectura en una sola máquina
 
@@ -98,6 +84,16 @@ Esa única costura produce tres posturas de soberanía muy distintas:
 
 Los dos niveles de modelo (un modelo pequeño de enrutado para las decisiones baratas y un modelo mayor de análisis para el bucle de investigación) pueden vincularse cada uno a un proveedor distinto, así que un enrutador local con análisis en Bedrock son dos líneas de configuración. Para servir en local, los modelos sparse mixture-of-experts resultaron ser el desbloqueo práctico: `gpt-oss:20b` da calidad de modelo grande con unos 3.6B de parámetros activos y corre en una máquina de 16 GB, y `qwen3:30b-a3b` cabe entero en 24 GB de VRAM. En el extremo monté un carril de profundidad experimental alrededor del layer streaming al estilo AirLLM, que de verdad ejecuta modelos de clase 70B en una GPU de 4 GB, a entre 0.07 y 0.7 tokens por segundo. Eso no es un asistente interactivo y ninguna configuración lo convierte en uno, así que está posicionado honestamente como un carril por lotes para una pregunta difícil durante la noche, nunca como la ruta del chat.
 
+## Cuando los logs contraatacan
+
+Un asistente para un SIEM tiene un modelo de amenazas peculiar: su entrada más peligrosa no es la pregunta del usuario, es la evidencia. Los cuerpos de las alertas contienen lo que un atacante haya conseguido escribir en una línea de log, lo que significa que cada pieza de evidencia que el modelo lee es, potencialmente, una instrucción adversaria. La tubería la trata como tal. La pregunta del analista pasa un filtro de ataques de prompt, la evidencia recuperada pasa su propio guardrail antes de que el modelo la vea, la salida del modelo pasa una tercera comprobación de secretos, PII y grounding, y la verificación de citas elimina y marca cualquier afirmación que cite evidencia que nunca se recuperó. Lo que llega al navegador es Markdown saneado: sin HTML, sin enlaces externos, sin imágenes de carga automática.
+
+[![Defensa contra inyección de prompts: guardrails sobre la pregunta, la evidencia y la salida, verificación de citas y la pista de auditoría vigilándolo todo](/blog/wazuh/6-injection-defense.png)](/blog/wazuh/6-injection-defense.png)
+
+*La evidencia se trata como entrada no confiable desde el momento en que sale del indexer, y cada intervención de un guardrail acaba en el índice de auditoría.*
+
+La defensa honesta, en cualquier caso, es estructural: todas las herramientas que el modelo puede invocar son de solo lectura y están acotadas al tenant, así que incluso una inyección perfectamente ejecutada no tiene nada peligroso que secuestrar. Y como las intervenciones de los guardrails y los fallos de cita son eventos de auditoría en el indexer del propio tenant, el *intento* de inyección se convierte en una detección del SOC sobre el atacante. El asistente transforma el ataque en telemetría.
+
 ## Reconocer antes de razonar
 
 La optimización que más me gusta no necesitó ninguna GPU. Los analistas hacen las mismas preguntas operativas constantemente, y esas preguntas no necesitan un modelo de razonamiento. El carril 0 convierte cada pregunta entrante en un embedding con un modelo local pequeño (`bge-m3`, que maneja inglés y español en un mismo espacio), la compara con los ejemplos curados por similitud coseno, extrae slots como ventanas temporales y nombres de agente con reglas bilingües deterministas, y ejecuta la plantilla acertada a través de la misma tubería de veracidad que cualquier otro carril. Un acierto responde en decenas de milisegundos con cero tokens de modelo, y en Bedrock eso significa literalmente que las preguntas más frecuentes no cuestan nada. Un fallo escala en silencio, así que el carril 0 nunca puede romper el asistente, solo aliviarlo.
@@ -111,6 +107,10 @@ A su lado hay una caché de evidencia cuya clave es un hash del plan de consulta
 ## Demostrarlo en lugar de enseñarlo
 
 Las demos no convencen a nadie, así que el laboratorio convierte sus afirmaciones en aserciones. Un generador escribe unas dos mil alertas sintéticas con semilla determinista y registra las verdades exactas en un fichero. Un conjunto dorado bilingüe de casos de evaluación se ejecuta después contra el stack vivo a través de la cadena completa, desde el login OIDC hasta la respuesta final, comprobando la selección de herramientas, los recuentos contra la verdad conocida, la honestidad ante cero resultados, la resistencia a inyección de prompts y la ausencia de citas sin verificar. Sale con código distinto de cero ante cualquier fallo, lo que lo convierte en una puerta de CI: los cambios de prompt pasan a ser físicamente incapaces de fusionarse sin evaluar. Una suite unitaria aparte de 26 tests cubre el núcleo determinista, es decir, la validación de la IR, la compilación a DSL, la extracción de slots del carril 0 y las claves de caché.
+
+[![El laboratorio de evaluación: sembrado determinista, un conjunto dorado bilingüe que recorre la cadena completa y aserciones que bloquean la CI](/blog/wazuh/7-eval-harness.png)](/blog/wazuh/7-eval-harness.png)
+
+*El conjunto dorado no simula nada: inicia sesión por OIDC, pregunta por la API de chat y comprueba contra verdades registradas en el momento del sembrado.*
 
 Los bordes operativos recibieron el mismo trato. Las respuestas fluyen token a token, la capacidad es una cola acotada que rechaza honestamente en lugar de degradar en silencio, un kill switch convierte todas las superficies en un 503 cuando hace falta, y un endpoint de Prometheus expone turnos por carril, resultados de herramientas e histogramas de latencia.
 
@@ -131,6 +131,28 @@ make test                 # 26 tests unitarios del núcleo determinista
 ```
 
 Está todo allí: el overlay de compose, el auth shim, el tool service, el generador de alertas, el conjunto dorado con su ejecutor, y un README que recorre cada sección de este artículo con detalle ejecutable, desde la configuración de Bedrock hasta la variante aislada de la red. Si lo pruebas y quieres comparar notas, [escríbeme](/es/#contact).
+
+## De una máquina a una flota
+
+El PoC replica el diseño de producción a propósito: el dominio de autenticación JWT, el rol de analista de solo lectura y las adiciones de securityconfig son el mismo YAML que templetizaría una pipeline de flota. En producción el laboratorio se despliega en EKS con un namespace por tenant tras una NetworkPolicy de denegación por defecto, y cada tenant recibe su propio rol IAM (IRSA), su propio perfil de inferencia y guardrail de Bedrock y su propia clave KMS. La ruta de la IA nunca toca internet, porque Bedrock, STS, Secrets Manager y los logs se alcanzan a través de endpoints de interfaz de la VPC, y la auditoría aterriza tanto en el indexer del propio tenant como en un bucket de S3 con Object Lock. El único salto compartido de la ruta de datos es la flota de modelos sin estado de Bedrock, y ese es exactamente el salto sin retención.
+
+[![La topología de producción multi-tenant: namespaces, roles IAM, perfiles de inferencia y guardrails por tenant, con PrivateLink como única ruta hacia Bedrock](/blog/wazuh/8-production-topology.png)](/blog/wazuh/8-production-topology.png)
+
+*Dos tenants lado a lado: formas idénticas, credenciales disjuntas. Cualquiera de las cuatro puertas de aislamiento - red, credenciales, IAM, identidad - bloquea por sí sola una ruta entre tenants.*
+
+## Lo que endurecería después
+
+Un PoC se gana que lo tomen en serio conociendo sus propios huecos, así que esta es mi lista, en orden:
+
+- **La caché de evidencia debe incluir la identidad en su clave, no solo el plan de consulta.** Dos analistas con permisos de índice distintos no deben compartir jamás una entrada de caché, así que el conjunto efectivo de roles pertenece a la clave. Es el tipo de bug que solo existe porque la caché funciona.
+- **El carril 0 necesita un margen, no solo un umbral.** Un corte único de coseno en 0.80 acabará disparando la plantilla equivocada ante una paráfrasis con una negación dentro. El arreglo es exigir distancia entre el mejor y el segundo mejor emparejamiento, comprobar que todos los slots de la plantilla se extrajeron de verdad, y registrar los casi-aciertos en modo sombra para hacer crecer el corpus con seguridad.
+- **Los JWT de turno necesitan una vía de revocación.** Diez minutos es poco, pero un kill switch no debería tener que esperar a la expiración; una pequeña lista de denegación de valores `jti` en memoria cierra esa ventana.
+- **El diagnóstico de cero resultados debe pagar su coste bajo el control de admisión.** Las sondas diferenciales multiplican las consultas al indexer en cada turno sin resultados; deben ejecutarse bajo el mismo semáforo que todo lo demás, etiquetadas en el registro de auditoría.
+- **Los modelos locales merecen decodificación restringida.** Forzar la gramática de la Query IR convierte los bucles de parsear-y-reintentar en validez al primer intento, lo que en un modelo local de 20B es latencia real recuperada.
+- **La reproducción de conversaciones necesita compactación.** El contexto multi-turno crece sin límite; los turnos antiguos deberían compactarse en un resumen que conserve los identificadores de las citas, para que las preguntas de seguimiento sigan siendo verificables.
+- **La deriva de escalada debería avisar a alguien.** Las métricas por carril ya existen; una alerta sobre una tasa creciente del carril 2 caza una regresión de prompt antes de que nadie note que las respuestas se volvieron más lentas y caras.
+
+Nada de esto cambia la arquitectura. Ese es el sentido de acertar primero con la estructura: todo lo de la lista es una pasada de endurecimiento dentro de una costura que ya existe.
 
 ## Lo que me llevo
 

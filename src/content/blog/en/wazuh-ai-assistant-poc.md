@@ -28,23 +28,9 @@ Every query that survives validation then passes through four veracity checks be
 
 Finally, every claim in a synthesized answer must cite an `[alert:id]` or `[agg:name]` identifier, and the service verifies each citation against what was actually retrieved. An invented citation surfaces as a correction event instead of a confident lie, and every answer carries a verifiability label stating which lane produced it and which checks ran.
 
-```
-question ──▶ admission ──▶ lane 0 match? ──hit──▶ typed template ──▶ answer
-                               │ miss                            (no model involved)
-                               ▼
-                  agent loop (bounded tool calls)
-             model picks a typed tool or emits a Query IR
-                               │
-              validate ▸ compile ▸ mapping check ▸ dry-run
-                               │
-                execute as the analyst (turn JWT)
-                               │
-           exact totals + aggregations + truncated sample
-                               │
-        synthesis with [alert:id] citations, verified after
-                               ▼
-                  answer + verifiability label
-```
+[![The four query lanes ranked by verifiability, from template matching to gated generation](/blog/wazuh/5-veracity-lanes.png)](/blog/wazuh/5-veracity-lanes.png)
+
+*The router always prefers the lowest lane that can express the question. Escalation is logged and metered, so drift toward less-verifiable lanes shows up in the metrics instead of in an incident.*
 
 ## The architecture on one machine
 
@@ -98,6 +84,16 @@ That one seam yields three very different sovereignty postures:
 
 The two model tiers (a small router model for cheap decisions, a larger analysis model for the investigation loop) can each bind to a different provider, so a local router with Bedrock analysis is a two-line configuration. For local serving, sparse mixture-of-experts models turned out to be the practical unlock: `gpt-oss:20b` gives big-model quality with about 3.6B active parameters and runs on a 16 GB machine, and `qwen3:30b-a3b` fits entirely in 24 GB of VRAM. At the extreme end I wired an experimental depth lane around AirLLM-style layer streaming, which really does run 70B-class models on a 4 GB GPU, at 0.07 to 0.7 tokens per second. That is not an interactive assistant and no configuration makes it one, so it is honestly positioned as a batch lane for one hard question overnight, never the chat path.
 
+## When the logs attack back
+
+A SIEM assistant has an unusual threat model: its most dangerous input is not the user's question, it is the evidence. Alert bodies contain whatever an attacker managed to write into a log line, which means every piece of evidence the model reads is potentially an adversarial instruction. The pipeline treats it that way. The analyst's question passes a prompt-attack filter, retrieved evidence passes its own guardrail before the model sees it, the model's output passes a third check for secrets, PII and grounding, and citation verification then strips and flags any claim that references evidence that was never retrieved. What reaches the browser is sanitized Markdown: no HTML, no external links, no auto-loading images.
+
+[![Prompt-injection defense: guardrails on the question, the evidence and the output, citation verification, and the audit trail watching all of it](/blog/wazuh/6-injection-defense.png)](/blog/wazuh/6-injection-defense.png)
+
+*Evidence is treated as untrusted input from the moment it leaves the indexer, and every guardrail intervention lands in the audit index.*
+
+The honest defense, though, is structural: every tool the model can call is read-only and tenant-scoped, so even a perfectly successful injection has nothing dangerous to hijack. And because guardrail interventions and citation failures are audit events in the tenant's own indexer, an injection *attempt* becomes a SOC detection about the attacker. The assistant turns the attack into telemetry.
+
 ## Recognition before reasoning
 
 The optimization I like most needed no GPU at all. Analysts ask the same operational questions constantly, and those questions do not need a reasoning model. Lane 0 embeds each incoming question with a small local embedding model (`bge-m3`, which handles English and Spanish in one space), matches it against curated exemplars by cosine similarity, extracts slots like time windows and agent names with deterministic bilingual rules, and executes the matched template through the exact same veracity pipeline as every other lane. A hit answers in tens of milliseconds with zero model tokens, and on Bedrock that literally means the most frequent questions cost nothing. A miss escalates silently, so lane 0 can never break the assistant, only relieve it.
@@ -111,6 +107,10 @@ Next to it sits an evidence cache keyed on a hash of the canonical query plan, w
 ## Proving it works instead of demoing it
 
 Demos convince nobody, so the harness turns its claims into assertions. A seeder writes about two thousand synthetic alerts with a deterministic seed and records the exact ground truths into a file. A bilingual golden set of evaluation cases then runs against the live stack through the full chain, from the OIDC login to the final answer, asserting tool selection, ground-truth counts, zero-hit honesty, prompt-injection resistance, and the absence of unverified citations. It exits nonzero on any failure, which makes it a CI gate: prompt changes become physically unable to merge unevaluated. A separate unit suite of 26 tests covers the deterministic core, meaning IR validation, DSL compilation, lane 0 slot extraction and cache keying.
+
+[![The eval harness: deterministic seeding, a bilingual golden set driving the full chain, and assertions that gate CI](/blog/wazuh/7-eval-harness.png)](/blog/wazuh/7-eval-harness.png)
+
+*The golden set mocks nothing: it logs in through OIDC, asks through the chat API, and asserts against ground truths recorded at seed time.*
 
 The operational edges got the same treatment. Answers stream token by token, capacity is a bounded queue that rejects honestly instead of degrading silently, a kill switch turns every surface into a 503 when needed, and a Prometheus endpoint exposes turns by lane, tool outcomes and latency histograms.
 
@@ -131,6 +131,28 @@ make test                 # 26 unit tests for the deterministic core
 ```
 
 Everything is there: the compose overlay, the auth shim, the tool service, the alert seeder, the golden set and its runner, and a README that walks every section of this post in runnable detail, from the Bedrock setup to the air-gapped variant. If you try it and want to compare notes, [reach out](/en/#contact).
+
+## From one machine to a fleet
+
+The PoC mirrors the production design on purpose: the JWT auth domain, the read-only analyst role and the securityconfig additions are the same YAML a fleet pipeline would template. In production the harness unfolds into EKS with one namespace per tenant behind a default-deny NetworkPolicy, and every tenant gets its own IAM role (IRSA), its own Bedrock inference profile and guardrail, and its own KMS key. The AI path never touches the internet, since Bedrock, STS, Secrets Manager and logging are all reached through VPC interface endpoints, and audit lands both in the tenant's own indexer and in an Object Lock S3 bucket. The only shared hop on the data path is Bedrock's stateless model fleet, and that is exactly the hop with no retention.
+
+[![The multi-tenant production topology: per-tenant namespaces, IAM roles, inference profiles and guardrails, with PrivateLink as the only path to Bedrock](/blog/wazuh/8-production-topology.png)](/blog/wazuh/8-production-topology.png)
+
+*Two tenants side by side: identical shapes, disjoint credentials. Any one of the four isolation gates - network, credentials, IAM, identity - blocks a cross-tenant path on its own.*
+
+## What I'd harden next
+
+A PoC earns the right to be taken seriously by knowing its own gaps, so here is my list, in order:
+
+- **The evidence cache must key on identity, not just on the query plan.** Two analysts with different index permissions must never share a cache entry, so the effective role set belongs in the cache key. It is the kind of bug that only exists because the cache works.
+- **Lane 0 needs a margin, not just a threshold.** A single 0.80 cosine cutoff will eventually fire the wrong template on a paraphrase with a negation in it. The fix is requiring a gap between the best and second-best match, checking that every template slot was actually extracted, and logging near-misses in shadow mode to grow the corpus safely.
+- **Turn JWTs need a revocation path.** Ten minutes is short, but a kill switch should not have to wait for expiry; a small in-memory denylist of `jti` values closes that window.
+- **Zero-hit diagnosis should pay for itself under admission control.** The differential probes multiply indexer queries on every zero-hit turn; they should run under the same semaphore as everything else, tagged in the audit record.
+- **Local models deserve constrained decoding.** Grammar-constrained output for the Query IR turns parse-and-retry loops into first-try validity, which on a 20B local model is real latency back.
+- **Conversation replay needs compaction.** Multi-turn context grows without bound; old turns should compact into a summary that preserves citation IDs, so follow-ups stay verifiable.
+- **Escalation drift should page someone.** The per-lane metrics already exist; an alert on a rising lane-2 rate catches a prompt regression before anyone notices the answers got slower and more expensive.
+
+None of these change the architecture. That is the point of getting the structure right first: everything on the list is a hardening pass inside a seam that already exists.
 
 ## What I took away
 
