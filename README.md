@@ -1,9 +1,7 @@
-# Leon Elliott Fuller — Portfolio & Blog
+# Portfolio & Blog
 
 [![Deploy](https://github.com/leonfullxr/mywebsite/actions/workflows/deploy.yml/badge.svg)](https://github.com/leonfullxr/mywebsite/actions/workflows/deploy.yml)
 [![CI](https://github.com/leonfullxr/mywebsite/actions/workflows/ci.yml/badge.svg)](https://github.com/leonfullxr/mywebsite/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/leonfullxr/mywebsite/actions/workflows/codeql.yml/badge.svg)](https://github.com/leonfullxr/mywebsite/actions/workflows/codeql.yml)
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/leonfullxr/mywebsite/badge)](https://scorecard.dev/viewer/?uri=github.com/leonfullxr/mywebsite)
 
 Personal portfolio built with [Astro](https://astro.build/), Tailwind CSS, and Markdown blog support. Features bilingual content (English/Spanish), dark mode, and responsive design.
 
