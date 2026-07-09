@@ -344,9 +344,6 @@
     <label class="ctrl" style="margin-top:10px">Show highlight point
       <input type="checkbox" id="chk-highlight" checked>
     </label>
-    <label class="ctrl">Show ground plane
-      <input type="checkbox" id="chk-ground" checked>
-    </label>
     <label class="ctrl">Auto-rotate
       <input type="checkbox" id="chk-rotate" checked>
     </label>
@@ -554,15 +551,6 @@ function setupLighting() {
   scene.add(new THREE.HemisphereLight(0xffffff, 0xe8ddd0, 0.25));
 }
 setupLighting();
-
-// Ground
-const groundGeo = new THREE.PlaneGeometry(50, 50);
-const groundMat = new THREE.MeshStandardMaterial({ color:0xf0ece5, roughness:0.85, metalness:0 });
-const ground = new THREE.Mesh(groundGeo, groundMat);
-ground.rotation.x = -Math.PI/2;
-ground.position.y = -2.8;
-ground.receiveShadow = true;
-scene.add(ground);
 
 // ================================================================
 //  HOPF FIBRATION MATH
@@ -855,18 +843,15 @@ function setBg(mode) {
   if (mode === 'dark') {
     document.body.classList.add('dark-mode');
     scene.background = new THREE.Color(0x1e1c1a);
-    groundMat.color.set(0x2a2825);
     renderer.toneMappingExposure = 1.0;
   } else if (mode === 'gradient') {
     document.body.classList.remove('dark-mode');
     // Use a simple color - can't do real gradient on scene.background in r128 easily
     scene.background = new THREE.Color(0xe0ddd5);
-    groundMat.color.set(0xd5d0c8);
     renderer.toneMappingExposure = 1.1;
   } else {
     document.body.classList.remove('dark-mode');
     scene.background = new THREE.Color(0xf5f2ed);
-    groundMat.color.set(0xf0ece5);
     renderer.toneMappingExposure = 1.15;
   }
 }
@@ -976,9 +961,6 @@ document.getElementById('toggle-sidebar').addEventListener('click', () => {
   document.getElementById(id).addEventListener('change', buildTorus);
 });
 document.getElementById('chk-highlight').addEventListener('change', buildTorus);
-document.getElementById('chk-ground').addEventListener('change', () => {
-  ground.visible = document.getElementById('chk-ground').checked;
-});
 document.getElementById('r-rotspeed').addEventListener('input', () => {
   document.getElementById('v-rotspeed').textContent =
     parseFloat(document.getElementById('r-rotspeed').value).toFixed(1);
