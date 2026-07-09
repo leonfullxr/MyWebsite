@@ -15,8 +15,6 @@ interface Props {
 
 const { projects } = Astro.props;
 const allTags = [...new Set(projects.items.flatMap((p) => p.tags))].sort();
-const PAGE_SIZE = 6;
-const totalPages = Math.ceil(projects.items.length / PAGE_SIZE);
 ---
 
 <section id="projects" class="py-20 md:py-28">
@@ -45,14 +43,18 @@ const totalPages = Math.ceil(projects.items.length / PAGE_SIZE);
       )
     }
 
-    <div class="grid md:grid-cols-2 gap-6" id="proj-list">
+    {/* Horizontal scroll strip - no page jumps when browsing projects */}
+    <div
+      class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6 px-6 scroll-smooth"
+      id="proj-list"
+    >
       {
         projects.items.map((project, i) => (
           <a
             href={project.url}
             target="_blank"
             rel="noopener"
-            class="card group observe-fade block proj-item"
+            class="card group observe-fade block proj-item snap-start shrink-0 w-[82%] sm:w-[46%] lg:w-[31%]"
             data-tags={project.tags.join(',')}
             data-index={i}
           >
@@ -97,73 +99,58 @@ const totalPages = Math.ceil(projects.items.length / PAGE_SIZE);
       }
     </div>
 
-    {/* Pagination */}
-    {
-      totalPages > 1 && (
-        <div class="flex items-center justify-center gap-4 mt-10" id="proj-pagination">
-          <button
-            id="proj-prev"
-            class="text-sm font-mono px-4 py-2 rounded-full border border-sand-300 dark:border-ink-700 hover:bg-sand-200 dark:hover:bg-ink-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            ←
-          </button>
-          <span id="proj-page-info" class="text-sm font-mono text-ink-400 dark:text-sand-500" />
-          <button
-            id="proj-next"
-            class="text-sm font-mono px-4 py-2 rounded-full border border-sand-300 dark:border-ink-700 hover:bg-sand-200 dark:hover:bg-ink-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            →
-          </button>
-        </div>
-      )
-    }
+    {/* Scroll arrows */}
+    <div class="flex items-center justify-center gap-4 mt-8" id="proj-nav">
+      <button
+        id="proj-prev"
+        aria-label="Scroll projects left"
+        class="text-sm font-mono px-4 py-2 rounded-full border border-sand-300 dark:border-ink-700 hover:bg-sand-200 dark:hover:bg-ink-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+      >
+        ←
+      </button>
+      <button
+        id="proj-next"
+        aria-label="Scroll projects right"
+        class="text-sm font-mono px-4 py-2 rounded-full border border-sand-300 dark:border-ink-700 hover:bg-sand-200 dark:hover:bg-ink-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+      >
+        →
+      </button>
+    </div>
   </div>
 </section>
 
-<script is:inline define:vars={{ PAGE_SIZE }}>
+<script is:inline>
   (function () {
+    const list = document.getElementById('proj-list');
     const items = document.querySelectorAll('.proj-item');
     const filters = document.querySelectorAll('#proj-filters .ptag-filter');
-    const pagination = document.getElementById('proj-pagination');
+    const nav = document.getElementById('proj-nav');
     const prevBtn = document.getElementById('proj-prev');
     const nextBtn = document.getElementById('proj-next');
-    const pageInfo = document.getElementById('proj-page-info');
 
-    if (!items.length) return;
+    if (!list || !items.length) return;
 
     let activeTag = 'all';
-    let currentPage = 0;
 
-    function getVisible() {
-      return [...items].filter((item) => {
-        if (activeTag === 'all') return true;
-        return item.dataset.tags.split(',').includes(activeTag);
-      });
+    function updateNav() {
+      const max = list.scrollWidth - list.clientWidth;
+      if (nav) nav.style.display = max > 4 ? 'flex' : 'none';
+      if (prevBtn) prevBtn.disabled = list.scrollLeft <= 4;
+      if (nextBtn) nextBtn.disabled = list.scrollLeft >= max - 4;
     }
 
-    function render() {
-      const visible = getVisible();
-      const pages = Math.ceil(visible.length / PAGE_SIZE);
-      if (currentPage >= pages) currentPage = Math.max(0, pages - 1);
-
-      items.forEach((item) => (item.style.display = 'none'));
-      visible.forEach((item, i) => {
-        item.style.display =
-          i >= currentPage * PAGE_SIZE && i < (currentPage + 1) * PAGE_SIZE ? '' : 'none';
+    function applyFilter() {
+      items.forEach((item) => {
+        const show = activeTag === 'all' || item.dataset.tags.split(',').includes(activeTag);
+        item.style.display = show ? '' : 'none';
       });
-
-      if (pagination) {
-        pagination.style.display = pages > 1 ? 'flex' : 'none';
-        if (pageInfo) pageInfo.textContent = currentPage + 1 + ' / ' + pages;
-        if (prevBtn) prevBtn.disabled = currentPage === 0;
-        if (nextBtn) nextBtn.disabled = currentPage >= pages - 1;
-      }
+      list.scrollLeft = 0;
+      updateNav();
     }
 
     filters.forEach((btn) => {
       btn.addEventListener('click', () => {
         activeTag = btn.dataset.filter;
-        currentPage = 0;
         filters.forEach((b) => {
           b.classList.remove(
             '!bg-ink-900',
@@ -178,21 +165,18 @@ const totalPages = Math.ceil(projects.items.length / PAGE_SIZE);
           'dark:!bg-sand-200',
           'dark:!text-ink-900'
         );
-        render();
+        applyFilter();
       });
     });
 
-    if (prevBtn)
-      prevBtn.addEventListener('click', () => {
-        currentPage--;
-        render();
-      });
-    if (nextBtn)
-      nextBtn.addEventListener('click', () => {
-        currentPage++;
-        render();
-      });
+    function page(dir) {
+      list.scrollBy({ left: dir * list.clientWidth * 0.9, behavior: 'smooth' });
+    }
+    if (prevBtn) prevBtn.addEventListener('click', () => page(-1));
+    if (nextBtn) nextBtn.addEventListener('click', () => page(1));
 
-    render();
+    list.addEventListener('scroll', updateNav, { passive: true });
+    window.addEventListener('resize', updateNav);
+    updateNav();
   })();
 </script>
