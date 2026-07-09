@@ -2,8 +2,6 @@
 
 [![Deploy](https://github.com/leonfullxr/mywebsite/actions/workflows/deploy.yml/badge.svg)](https://github.com/leonfullxr/mywebsite/actions/workflows/deploy.yml)
 [![CI](https://github.com/leonfullxr/mywebsite/actions/workflows/ci.yml/badge.svg)](https://github.com/leonfullxr/mywebsite/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/leonfullxr/mywebsite/actions/workflows/codeql.yml/badge.svg)](https://github.com/leonfullxr/mywebsite/actions/workflows/codeql.yml)
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/leonfullxr/mywebsite/badge)](https://scorecard.dev/viewer/?uri=github.com/leonfullxr/mywebsite)
 
 Personal portfolio built with [Astro](https://astro.build/), Tailwind CSS, and Markdown blog support. Features bilingual content (English/Spanish), dark mode, and responsive design.
 
@@ -30,26 +28,15 @@ npm run dev
 
 The site is configured for GitHub Pages deployment via the `.github/workflows/deploy.yml` workflow. Push to `main` to trigger automatic deployment.
 
-## CI/CD & Security
+## CI/CD
 
-Every pull request and push is validated by a set of automated pipelines:
+Every pull request and push is validated by automated pipelines:
 
-| Workflow              | Trigger              | Purpose                                                   |
-| --------------------- | -------------------- | --------------------------------------------------------- |
-| **CI**                | PRs, non-main pushes | Prettier check, `astro check`, build, prod `npm audit`    |
-| **Deploy**            | Push to `main`       | Type-check, build and publish to GitHub Pages             |
-| **CodeQL**            | PRs, `main`, weekly  | Static application security testing (SAST)                |
-| **Dependency Review** | PRs                  | Blocks vulnerable / disallowed-license dependency changes |
-| **Gitleaks**          | PRs, pushes          | Secret scanning                                           |
-| **OpenSSF Scorecard** | `main`, weekly       | Supply-chain security posture                             |
-| **Lighthouse**        | PRs                  | Performance, accessibility, best-practices & SEO audits   |
-| **Link Check**        | Weekly               | Detects broken links and opens a tracking issue           |
-| **Dependabot**        | Weekly               | Automated npm & GitHub Actions updates                    |
-
-> **Note:** CodeQL, Dependency Review and Scorecard require the repository to be
-> public (or to have GitHub Advanced Security enabled). Scorecard's
-> `publish_results` and code-scanning SARIF uploads also need code scanning to be
-> enabled under **Settings → Code security**.
+| Workflow       | Trigger              | Purpose                                                |
+| -------------- | -------------------- | ------------------------------------------------------ |
+| **CI**         | PRs, non-main pushes | Prettier check, `astro check`, build, prod `npm audit` |
+| **Deploy**     | Push to `main`       | Type-check, build and publish to GitHub Pages          |
+| **Dependabot** | Weekly               | Automated npm & GitHub Actions updates                 |
 
 ## Structure
 
