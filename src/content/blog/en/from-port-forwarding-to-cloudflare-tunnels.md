@@ -75,7 +75,7 @@ Step 5 is not a joke - the real script literally ended with a `sleep 90` and an 
 ### What else hurt
 
 - **Two ports permanently open to the internet.** Ports 80 and 443 were a standing invitation on my router - a 24/7 attack surface pointed at my living room.
-- **My home IP was public knowledge.** Anyone resolving `nextcloud.leonfuller.com` got my house's IP address - and DNS history services archive those records *forever*.
+- **My home IP was public knowledge.** Anyone resolving `nextcloud.example.com` got my house's IP address - and DNS history services archive those records *forever*.
 - **ACME quirks.** Traefik's `acme.json` must pre-exist as a `chmod 600` *file*, or Docker helpfully creates it as a directory and certificate issuance fails in confusing ways. Renewals could race after IP changes.
 - **The footgun I'm most glad I discovered myself:** published Docker ports **bypass UFW**. Docker inserts its iptables chains ahead of UFW's, so `ufw deny 8080` does nothing for a container that publishes `8080:80`. My firewall rules were giving me a false sense of security - the router's port forwards were the only real gate.
 
@@ -117,11 +117,11 @@ Traffic rules live in the Cloudflare Zero Trust dashboard as *ingress rules* - h
 
 | Hostname | Path | Origin |
 |---|---|---|
-| nextcloud.leonfuller.com | `/push/*` | `notify_push:7867` |
-| nextcloud.leonfuller.com | `*` | `nextcloud-app:80` |
-| music.leonfuller.com | `*` | `navidrome:4533` |
-| photos.leonfuller.com | `*` | `immich_server:2283` |
-| ssh.leonfuller.com | - | `host.docker.internal:22` (SSH) |
+| nextcloud.example.com | `/push/*` | `notify_push:7070` |
+| nextcloud.example.com | `*` | `nextcloud-app:8080` |
+| music.example.com | `*` | `navidrome:4000` |
+| photos.example.com | `*` | `immich_server:3000` |
+| ssh.example.com | - | `host.docker.internal:2222` (SSH) |
 
 Ordering matters: the `/push/*` rule must sit *above* the catch-all for the same hostname, or Nextcloud's push daemon silently breaks. The origins are plain Docker DNS names on the `proxy` network - cloudflared resolves them like any other container would.
 
@@ -129,13 +129,13 @@ Adding a new service is now a two-step operation: join the `proxy` network, add 
 
 ### SSH from anywhere, gated by Zero Trust
 
-The `ssh.leonfuller.com` route is special: it's protected by Cloudflare Access, which demands an email one-time-passcode *before a single byte reaches my network*. On the client side it's transparent after the first login:
+The `ssh.example.com` route is special: it's protected by Cloudflare Access, which demands an email one-time-passcode *before a single byte reaches my network*. On the client side it's transparent after the first login:
 
 ```
 # ~/.ssh/config
 Host pi
-  HostName ssh.leonfuller.com
-  User leon
+  HostName ssh.example.com
+  User pi
   ProxyCommand cloudflared access ssh --hostname %h
 ```
 

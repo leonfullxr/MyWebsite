@@ -62,7 +62,7 @@ services:
       - ./postgres:/var/lib/postgresql/data   # DB: SSD
 ```
 
-No ports are published anywhere - the only way in is through the tunnel's ingress rule for `photos.leonfuller.com`, and the machine-learning sidecar (smart search, face recognition - all local) never leaves the internal network at all.
+No ports are published anywhere - the only way in is through the tunnel's ingress rule for `photos.example.com`, and the machine-learning sidecar (smart search, face recognition - all local) never leaves the internal network at all.
 
 ## The principle, restated
 

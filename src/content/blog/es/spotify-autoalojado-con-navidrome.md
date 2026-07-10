@@ -23,10 +23,10 @@ La parte de Navidrome es maravillosamente aburrida: vigila una carpeta. Los fich
 services:
   navidrome:
     image: deluan/navidrome:latest
-    user: "1000:1003"
+    user: "1000:1000"
     environment:
       ND_SCANNER_SCHEDULE: 1h
-      ND_BASEURL: https://music.leonfuller.com
+      ND_BASEURL: https://music.example.com
       ND_PLAYLISTSPATH: Playlists   # importa ./Playlists/*.m3u8
     volumes:
       - ./data:/data

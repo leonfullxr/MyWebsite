@@ -75,7 +75,7 @@ El paso 5 no es broma: el script real terminaba literalmente con un `sleep 90` y
 ### Qué más dolía
 
 - **Dos puertos permanentemente abiertos a internet.** Los puertos 80 y 443 eran una invitación permanente en mi router - una superficie de ataque 24/7 apuntando a mi salón.
-- **Mi IP doméstica era de dominio público.** Cualquiera que resolviera `nextcloud.leonfuller.com` obtenía la IP de mi casa - y los servicios de histórico DNS archivan esos registros *para siempre*.
+- **Mi IP doméstica era de dominio público.** Cualquiera que resolviera `nextcloud.example.com` obtenía la IP de mi casa - y los servicios de histórico DNS archivan esos registros *para siempre*.
 - **Las rarezas de ACME.** El `acme.json` de Traefik debe existir previamente como *fichero* con `chmod 600`, o Docker lo crea amablemente como directorio y la emisión de certificados falla de formas confusas. Las renovaciones podían entrar en carrera tras un cambio de IP.
 - **El error de diseño que más agradezco haber descubierto yo mismo:** los puertos publicados de Docker **se saltan UFW**. Docker inserta sus cadenas de iptables por delante de las de UFW, así que `ufw deny 8080` no hace nada frente a un contenedor que publica `8080:80`. Mis reglas de firewall me daban una falsa sensación de seguridad - la única puerta real eran las redirecciones del router.
 
@@ -117,11 +117,11 @@ Las reglas de tráfico viven en el panel de Cloudflare Zero Trust como *reglas d
 
 | Hostname | Ruta | Origen |
 |---|---|---|
-| nextcloud.leonfuller.com | `/push/*` | `notify_push:7867` |
-| nextcloud.leonfuller.com | `*` | `nextcloud-app:80` |
-| music.leonfuller.com | `*` | `navidrome:4533` |
-| photos.leonfuller.com | `*` | `immich_server:2283` |
-| ssh.leonfuller.com | - | `host.docker.internal:22` (SSH) |
+| nextcloud.example.com | `/push/*` | `notify_push:7070` |
+| nextcloud.example.com | `*` | `nextcloud-app:8080` |
+| music.example.com | `*` | `navidrome:4000` |
+| photos.example.com | `*` | `immich_server:3000` |
+| ssh.example.com | - | `host.docker.internal:2222` (SSH) |
 
 El orden importa: la regla `/push/*` debe estar *encima* del comodín del mismo hostname, o el demonio de push de Nextcloud deja de funcionar en silencio. Los orígenes son nombres DNS normales de Docker en la red `proxy` - cloudflared los resuelve como lo haría cualquier otro contenedor.
 
@@ -129,13 +129,13 @@ Añadir un servicio nuevo son ahora dos pasos: unirse a la red `proxy` y añadir
 
 ### SSH desde cualquier parte, protegido por Zero Trust
 
-La ruta `ssh.leonfuller.com` es especial: la protege Cloudflare Access, que exige un código de un solo uso por email *antes de que un solo byte llegue a mi red*. En el cliente es transparente tras el primer login:
+La ruta `ssh.example.com` es especial: la protege Cloudflare Access, que exige un código de un solo uso por email *antes de que un solo byte llegue a mi red*. En el cliente es transparente tras el primer login:
 
 ```
 # ~/.ssh/config
 Host pi
-  HostName ssh.leonfuller.com
-  User leon
+  HostName ssh.example.com
+  User pi
   ProxyCommand cloudflared access ssh --hostname %h
 ```
 

@@ -62,7 +62,7 @@ services:
       - ./postgres:/var/lib/postgresql/data   # BD: SSD
 ```
 
-No hay puertos publicados en ninguna parte - la única entrada es la regla de ingress del túnel para `photos.leonfuller.com`, y el sidecar de machine learning (búsqueda inteligente, reconocimiento facial - todo local) nunca sale de la red interna.
+No hay puertos publicados en ninguna parte - la única entrada es la regla de ingress del túnel para `photos.example.com`, y el sidecar de machine learning (búsqueda inteligente, reconocimiento facial - todo local) nunca sale de la red interna.
 
 ## El principio, reformulado
 

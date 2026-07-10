@@ -23,10 +23,10 @@ Navidrome's side of the bargain is beautifully boring: it watches a folder. File
 services:
   navidrome:
     image: deluan/navidrome:latest
-    user: "1000:1003"
+    user: "1000:1000"
     environment:
       ND_SCANNER_SCHEDULE: 1h
-      ND_BASEURL: https://music.leonfuller.com
+      ND_BASEURL: https://music.example.com
       ND_PLAYLISTSPATH: Playlists   # import ./Playlists/*.m3u8
     volumes:
       - ./data:/data
