@@ -9,6 +9,8 @@ translation: "creating-homeserver"
 
 # Creando tu propio Servidor Doméstico
 
+> **Actualización (julio 2026):** esta idea acabó convirtiéndose en una plataforma autoalojada completa sobre una Raspberry Pi 5 - Nextcloud, Immich y Navidrome detrás de un túnel de Cloudflare con cero puertos abiertos. Lee cómo evolucionó la arquitectura en [De abrir puertos a túneles de Cloudflare](/es/blog/de-puertos-abiertos-a-tuneles-cloudflare/).
+
 ## ¿Qué es un Servidor Doméstico?
 
 Un servidor doméstico es un servidor personal ubicado en tu red doméstica que puedes usar para almacenar, compartir y gestionar tus archivos y datos. Actúa como un centro para tu contenido digital, proporcionando una solución autoalojada para acceder a tus medios, copias de seguridad y servicios desde cualquier lugar.
