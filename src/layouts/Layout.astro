@@ -5,9 +5,15 @@ interface Props {
   title: string;
   description: string;
   lang: string;
+  image?: string;
+  alternate?: string;
 }
 
-const { title, description, lang } = Astro.props;
+const { title, description, lang, image, alternate } = Astro.props;
+const ogImage = image ? new URL(image, Astro.site).href : undefined;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const alternateUrl = alternate ? new URL(alternate, Astro.site).href : undefined;
+const alternateLang = lang === 'en' ? 'es' : 'en';
 ---
 
 <!doctype html>
@@ -16,6 +22,17 @@ const { title, description, lang } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {ogImage && <meta name="twitter:card" content="summary_large_image" />}
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    <link rel="canonical" href={canonical} />
+    {alternateUrl && <link rel="alternate" hreflang={alternateLang} href={alternateUrl} />}
+    {alternateUrl && <link rel="alternate" hreflang={lang} href={canonical} />}
+    <link rel="alternate" type="application/rss+xml" title="Blog (EN)" href="/en/blog/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Blog (ES)" href="/es/blog/rss.xml" />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />

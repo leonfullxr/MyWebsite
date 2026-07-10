@@ -4,6 +4,7 @@ date: "2024-07-20"
 description: "Discover the benefits of setting up a home server, from enhancing privacy to saving money on cloud services."
 tags: ["DevOps", "Self-Hosting", "Linux"]
 lang: "en"
+translation: "creando-servidor-domestico"
 ---
 
 # Creating Your Home Server

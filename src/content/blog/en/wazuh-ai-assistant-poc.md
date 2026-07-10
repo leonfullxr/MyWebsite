@@ -4,6 +4,8 @@ date: "2026-07-09"
 description: "How I designed and self-hosted an AI security assistant for Wazuh whose answers are verifiable by construction, with a real identity chain and pluggable inference from Amazon Bedrock to fully local models."
 tags: ["Cybersecurity", "AI", "SIEM", "AWS"]
 lang: "en"
+translation: "asistente-ia-wazuh-poc"
+image: "/blog/wazuh/8-production-topology.png"
 ---
 
 Every SOC team I know is experimenting with the same idea: let analysts ask their SIEM questions in plain language. "How many authentication failures in the last 24 hours, and which users are targeted?" is a better interface than a query DSL, and large language models are clearly good enough to power it. The uncomfortable part is what happens next. A language model will answer that question fluently whether or not the answer is true, and in a security operations context a confident wrong number is worse than no number at all.
@@ -154,8 +156,12 @@ A PoC earns the right to be taken seriously by knowing its own gaps, so here is 
 
 None of these change the architecture. That is the point of getting the structure right first: everything on the list is a hardening pass inside a seam that already exists.
 
+Three additions go further than hardening, and they are the next milestones. A **knowledge lane**: analysts also ask "what does rule 5710 mean" and "how do I enroll an agent", so a retrieval lane over the official Wazuh documentation, with citations verified against retrieved passages exactly like `[alert:id]`, would give questions about the platform the same veracity treatment as questions about telemetry. **Multi-turn golden cases and lane 0 canaries**: conversations with follow-ups that reference earlier evidence, plus deliberately ambiguous near-miss questions that assert the router escalates instead of guessing, testing the honesty of the routing rather than only the answers. And **cost inside the verifiability label**: the label already states the lane and the checks, so disclosing the tokens each answer spent makes the economics of recognition-before-reasoning visible to the analyst, not just to Prometheus.
+
 ## What I took away
 
 Three lessons survived contact with the implementation. First, veracity is structural or it is nothing: allowlists, server-side compilation, datastore-computed counts and verified citations do more for trust than any amount of prompt engineering, because they hold even when the model is wrong. Second, identity is the feature nobody demos and everybody needs. Queries-as-user through a JWT auth domain means the AI inherits exactly the permissions of the person asking, and that single property answers most of the hard multi-tenancy questions before they are asked. And third, honest engineering beats impressive engineering. The layer-streaming depth lane is technically the flashiest part of the stack, and the most valuable thing I did with it was measure it, state that 0.2 tokens per second is not a chat experience, and confine it to the lane where it genuinely helps.
 
 A SIEM assistant does not earn trust by sounding right. It earns trust by being checkable, and that is an architecture decision.
+
+*This is the design half of the story. The operations half - capacity without a load balancer, human-approved actions, the audit map and the incident-response playbook - is in [Operating an AI Assistant in a SOC](/en/blog/operating-wazuh-ai-soc/).*

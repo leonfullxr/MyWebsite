@@ -4,6 +4,7 @@ date: "2024-02-08"
 description: "Entiende qué es una dirección MAC, por qué podrías querer cambiarla, e instrucciones paso a paso para Linux."
 tags: ["Networking", "Ciberseguridad", "Linux"]
 lang: "es"
+translation: "changing-mac"
 ---
 
 # Cambiando tu Dirección MAC
