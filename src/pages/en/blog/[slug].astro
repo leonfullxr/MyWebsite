@@ -169,11 +169,20 @@ const lang = 'en';
       btn.className = 'code-copy';
       btn.setAttribute('aria-label', 'Copy code');
       btn.innerHTML = copyIcon;
-      btn.addEventListener('click', () => {
-        navigator.clipboard.writeText(pre.innerText).then(() => {
-          btn.innerHTML = checkIcon;
-          setTimeout(() => (btn.innerHTML = copyIcon), 1500);
-        });
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(pre.textContent);
+        } catch {
+          // Clipboard unavailable/blocked: select the code so the user can copy manually
+          const range = document.createRange();
+          range.selectNodeContents(pre);
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          return;
+        }
+        btn.innerHTML = checkIcon;
+        setTimeout(() => (btn.innerHTML = copyIcon), 1500);
       });
       wrap.appendChild(btn);
     });
