@@ -220,7 +220,8 @@
   }
 
   .back-to-top.visible {
-    @apply visible opacity-100 translate-y-0 pointer-events-auto;
+    @apply opacity-100 translate-y-0 pointer-events-auto;
+    visibility: visible;
   }
 
   /* highlight.js tokens — github-dark-ish, used in both themes */
