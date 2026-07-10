@@ -4,6 +4,7 @@ date: "2024-02-08"
 description: "Understand what a MAC address is, why you might want to change it, and step-by-step instructions for Linux."
 tags: ["Networking", "Cybersecurity", "Linux"]
 lang: "en"
+translation: "cambiando-mac"
 ---
 
 # Changing Your MAC Address

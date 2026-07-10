@@ -4,6 +4,7 @@ date: "2026-07-10"
 description: "The operations half of the Wazuh AI assistant: capacity without a load balancer, human-approved actions with zero standing credentials, an audit trail the SIEM itself watches, and the playbook for the worst question a multi-tenant platform can face."
 tags: ["Cybersecurity", "AI", "SIEM", "AWS"]
 lang: "en"
+translation: "operar-ia-wazuh-soc"
 image: "/blog/wazuh/9-request-path.png"
 ---
 

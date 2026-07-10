@@ -191,6 +191,83 @@
     @apply bg-transparent p-0;
   }
 
+  /* highlight.js tokens — github-ish light, github-dark-ish dark */
+  .prose-blog .hljs-comment,
+  .prose-blog .hljs-quote {
+    color: #6a737d;
+    font-style: italic;
+  }
+  .prose-blog .hljs-keyword,
+  .prose-blog .hljs-selector-tag,
+  .prose-blog .hljs-type {
+    color: #d73a49;
+  }
+  .prose-blog .hljs-string,
+  .prose-blog .hljs-regexp,
+  .prose-blog .hljs-addition {
+    color: #032f62;
+  }
+  .prose-blog .hljs-number,
+  .prose-blog .hljs-literal,
+  .prose-blog .hljs-symbol,
+  .prose-blog .hljs-bullet {
+    color: #005cc5;
+  }
+  .prose-blog .hljs-title,
+  .prose-blog .hljs-section,
+  .prose-blog .hljs-name,
+  .prose-blog .hljs-function .hljs-title {
+    color: #6f42c1;
+  }
+  .prose-blog .hljs-attr,
+  .prose-blog .hljs-attribute,
+  .prose-blog .hljs-variable,
+  .prose-blog .hljs-template-variable,
+  .prose-blog .hljs-built_in {
+    color: #e36209;
+  }
+  .prose-blog .hljs-meta,
+  .prose-blog .hljs-deletion {
+    color: #b31d28;
+  }
+  .dark .prose-blog .hljs-comment,
+  .dark .prose-blog .hljs-quote {
+    color: #8b949e;
+  }
+  .dark .prose-blog .hljs-keyword,
+  .dark .prose-blog .hljs-selector-tag,
+  .dark .prose-blog .hljs-type {
+    color: #ff7b72;
+  }
+  .dark .prose-blog .hljs-string,
+  .dark .prose-blog .hljs-regexp,
+  .dark .prose-blog .hljs-addition {
+    color: #a5d6ff;
+  }
+  .dark .prose-blog .hljs-number,
+  .dark .prose-blog .hljs-literal,
+  .dark .prose-blog .hljs-symbol,
+  .dark .prose-blog .hljs-bullet {
+    color: #79c0ff;
+  }
+  .dark .prose-blog .hljs-title,
+  .dark .prose-blog .hljs-section,
+  .dark .prose-blog .hljs-name,
+  .dark .prose-blog .hljs-function .hljs-title {
+    color: #d2a8ff;
+  }
+  .dark .prose-blog .hljs-attr,
+  .dark .prose-blog .hljs-attribute,
+  .dark .prose-blog .hljs-variable,
+  .dark .prose-blog .hljs-template-variable,
+  .dark .prose-blog .hljs-built_in {
+    color: #ffa657;
+  }
+  .dark .prose-blog .hljs-meta,
+  .dark .prose-blog .hljs-deletion {
+    color: #ff7b72;
+  }
+
   /* Blog images — card style for technical diagrams */
   .prose-blog img {
     @apply rounded-xl my-6 max-w-full mx-auto block px-6 py-4 bg-white border border-sand-200;

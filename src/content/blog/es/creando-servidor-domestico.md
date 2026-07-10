@@ -4,6 +4,7 @@ date: "2024-07-20"
 description: "Descubre los beneficios de montar un servidor doméstico, desde mejorar tu privacidad hasta ahorrar en servicios en la nube."
 tags: ["DevOps", "Self-Hosting", "Linux"]
 lang: "es"
+translation: "creating-homeserver"
 ---
 
 # Creando tu propio Servidor Doméstico

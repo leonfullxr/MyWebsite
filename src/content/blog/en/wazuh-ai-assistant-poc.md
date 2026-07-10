@@ -4,6 +4,7 @@ date: "2026-07-09"
 description: "How I designed and self-hosted an AI security assistant for Wazuh whose answers are verifiable by construction, with a real identity chain and pluggable inference from Amazon Bedrock to fully local models."
 tags: ["Cybersecurity", "AI", "SIEM", "AWS"]
 lang: "en"
+translation: "asistente-ia-wazuh-poc"
 image: "/blog/wazuh/8-production-topology.png"
 ---
 

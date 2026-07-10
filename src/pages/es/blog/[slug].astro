@@ -4,9 +4,21 @@ import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
 import fs from 'node:fs';
 import path from 'node:path';
-import { marked } from 'marked';
+import { Marked } from 'marked';
+import { markedHighlight } from 'marked-highlight';
+import hljs from 'highlight.js';
 
 import data from '../../../data/es.json';
+
+const marked = new Marked(
+  markedHighlight({
+    langPrefix: 'hljs language-',
+    highlight(code, lang) {
+      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      return hljs.highlight(code, { language }).value;
+    },
+  })
+);
 
 export function getStaticPaths() {
   const blogDir = path.join(process.cwd(), 'src', 'content', 'blog', 'es');
@@ -27,6 +39,8 @@ const title = frontmatter.match(/title:\s*"(.+)"/)?.[1] || '';
 const date = frontmatter.match(/date:\s*"(.+)"/)?.[1] || '';
 const description = frontmatter.match(/description:\s*"(.+)"/)?.[1] || title;
 const image = frontmatter.match(/image:\s*"(.+)"/)?.[1];
+const translation = frontmatter.match(/translation:\s*"(.+)"/)?.[1];
+const alternate = translation ? `/en/blog/${translation}/` : undefined;
 
 const markdownBody = content.replace(/^---\n[\s\S]*?\n---\n/, '');
 
@@ -40,7 +54,8 @@ const slugify = (s: string) =>
     .replace(/\s+/g, '-');
 
 const headings = [...markdownBody.matchAll(/^## (.+)$/gm)].map((m) => m[1]);
-let htmlContent = await marked(markdownBody);
+let htmlContent = await marked.parse(markdownBody);
+htmlContent = htmlContent.replace(/<img /g, '<img loading="lazy" decoding="async" ');
 for (const h of headings) {
   const rendered = marked.parseInline(h);
   htmlContent = htmlContent.replace(
@@ -52,7 +67,13 @@ for (const h of headings) {
 const lang = 'es';
 ---
 
-<Layout title={`${title} - Leon Elliott Fuller`} description={description} lang={lang} image={image}>
+<Layout
+  title={`${title} - Leon Elliott Fuller`}
+  description={description}
+  lang={lang}
+  image={image}
+  alternate={alternate}
+>
   <Nav nav={data.nav} lang={lang} />
   <main class="pt-28 pb-20">
     <article class="max-w-3xl mx-auto px-6">

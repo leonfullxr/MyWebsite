@@ -4,6 +4,7 @@ date: "2026-07-09"
 description: "Cómo diseñé y autoalojé un asistente de seguridad con IA para Wazuh cuyas respuestas son verificables por construcción, con una cadena de identidad real e inferencia intercambiable desde Amazon Bedrock hasta modelos completamente locales."
 tags: ["Ciberseguridad", "IA", "SIEM", "AWS"]
 lang: "es"
+translation: "wazuh-ai-assistant-poc"
 image: "/blog/wazuh/8-production-topology.png"
 ---
 

@@ -4,6 +4,7 @@ date: "2025-01-21"
 description: "Learn how to set up and manage Wireguard, a powerful VPN solution, with easy-to-follow admin scripts."
 tags: ["Networking", "Cybersecurity", "Linux"]
 lang: "en"
+translation: "configurando-wireguard"
 ---
 
 # Wireguard Admin Scripts

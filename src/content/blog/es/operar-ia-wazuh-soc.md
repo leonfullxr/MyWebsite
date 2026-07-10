@@ -4,6 +4,7 @@ date: "2026-07-10"
 description: "La mitad operativa del asistente de IA para Wazuh: capacidad sin balanceador de carga, acciones aprobadas por humanos sin credenciales permanentes, una pista de auditoría que el propio SIEM vigila, y el playbook para la peor pregunta que puede afrontar una plataforma multi-tenant."
 tags: ["Ciberseguridad", "IA", "SIEM", "AWS"]
 lang: "es"
+translation: "operating-wazuh-ai-soc"
 image: "/blog/wazuh/9-request-path.png"
 ---
 
