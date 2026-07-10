@@ -119,6 +119,12 @@ const lang = 'es';
     </article>
   </main>
   <Footer footer={data.footer} contact={data.contact} />
+  <button id="back-to-top" class="back-to-top" aria-label="Volver arriba">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+      ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 15l7-7 7 7"
+      ></path></svg
+    >
+  </button>
   <script is:inline>
     // Lightbox for linked images inside the post body
     document.querySelectorAll('.prose-blog a').forEach((a) => {
@@ -147,5 +153,38 @@ const lang = 'es';
         document.body.appendChild(overlay);
       });
     });
+
+    // Copy button on code blocks
+    const copyIcon =
+      '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3"/></svg>';
+    const checkIcon =
+      '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>';
+    document.querySelectorAll('.prose-blog pre').forEach((pre) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'code-block';
+      pre.parentNode.insertBefore(wrap, pre);
+      wrap.appendChild(pre);
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'code-copy';
+      btn.setAttribute('aria-label', 'Copiar codigo');
+      btn.innerHTML = copyIcon;
+      btn.addEventListener('click', () => {
+        navigator.clipboard.writeText(pre.innerText).then(() => {
+          btn.innerHTML = checkIcon;
+          setTimeout(() => (btn.innerHTML = copyIcon), 1500);
+        });
+      });
+      wrap.appendChild(btn);
+    });
+
+    // Back to top
+    const toTop = document.getElementById('back-to-top');
+    window.addEventListener(
+      'scroll',
+      () => toTop.classList.toggle('visible', window.scrollY > 600),
+      { passive: true }
+    );
+    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   </script>
 </Layout>

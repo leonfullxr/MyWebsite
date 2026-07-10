@@ -183,88 +183,82 @@
     @apply bg-ink-800;
   }
 
+  /* Code blocks — dark terminal style in both themes */
+  .code-block {
+    @apply relative my-6;
+  }
+
   .prose-blog pre {
-    @apply bg-sand-100 dark:bg-ink-900 rounded-xl p-4 my-4 overflow-x-auto text-sm font-mono;
+    @apply bg-ink-950 dark:bg-ink-900 border border-ink-800 dark:border-ink-700 rounded-xl p-4 my-6 overflow-x-auto text-sm font-mono text-sand-100;
+  }
+
+  .code-block pre {
+    @apply my-0;
   }
 
   .prose-blog pre code {
-    @apply bg-transparent p-0;
+    @apply bg-transparent p-0 text-sand-100;
   }
 
-  /* highlight.js tokens — github-ish light, github-dark-ish dark */
+  .code-copy {
+    @apply absolute top-2.5 right-2.5 p-1.5 rounded-lg text-sand-400 bg-ink-950/80 dark:bg-ink-900/80 hover:text-sand-100 hover:bg-ink-800 transition-colors opacity-0 focus:opacity-100 cursor-pointer;
+  }
+
+  .code-block:hover .code-copy {
+    @apply opacity-100;
+  }
+
+  @media (hover: none) {
+    .code-copy {
+      @apply opacity-100;
+    }
+  }
+
+  /* Back to top */
+  .back-to-top {
+    @apply fixed bottom-6 right-6 z-50 p-3 rounded-full border border-sand-300 dark:border-ink-700 bg-sand-50/90 dark:bg-ink-900/90 text-ink-600 dark:text-sand-300 shadow-lg backdrop-blur-sm transition-all duration-300 opacity-0 translate-y-4 pointer-events-none hover:bg-sand-200 dark:hover:bg-ink-800 cursor-pointer;
+  }
+
+  .back-to-top.visible {
+    @apply opacity-100 translate-y-0 pointer-events-auto;
+  }
+
+  /* highlight.js tokens — github-dark-ish, used in both themes */
   .prose-blog .hljs-comment,
   .prose-blog .hljs-quote {
-    color: #6a737d;
-    font-style: italic;
+    color: #8b949e;
   }
   .prose-blog .hljs-keyword,
   .prose-blog .hljs-selector-tag,
   .prose-blog .hljs-type {
-    color: #d73a49;
+    color: #ff7b72;
   }
   .prose-blog .hljs-string,
   .prose-blog .hljs-regexp,
   .prose-blog .hljs-addition {
-    color: #032f62;
+    color: #a5d6ff;
   }
   .prose-blog .hljs-number,
   .prose-blog .hljs-literal,
   .prose-blog .hljs-symbol,
   .prose-blog .hljs-bullet {
-    color: #005cc5;
+    color: #79c0ff;
   }
   .prose-blog .hljs-title,
   .prose-blog .hljs-section,
   .prose-blog .hljs-name,
   .prose-blog .hljs-function .hljs-title {
-    color: #6f42c1;
+    color: #d2a8ff;
   }
   .prose-blog .hljs-attr,
   .prose-blog .hljs-attribute,
   .prose-blog .hljs-variable,
   .prose-blog .hljs-template-variable,
   .prose-blog .hljs-built_in {
-    color: #e36209;
+    color: #ffa657;
   }
   .prose-blog .hljs-meta,
   .prose-blog .hljs-deletion {
-    color: #b31d28;
-  }
-  .dark .prose-blog .hljs-comment,
-  .dark .prose-blog .hljs-quote {
-    color: #8b949e;
-  }
-  .dark .prose-blog .hljs-keyword,
-  .dark .prose-blog .hljs-selector-tag,
-  .dark .prose-blog .hljs-type {
-    color: #ff7b72;
-  }
-  .dark .prose-blog .hljs-string,
-  .dark .prose-blog .hljs-regexp,
-  .dark .prose-blog .hljs-addition {
-    color: #a5d6ff;
-  }
-  .dark .prose-blog .hljs-number,
-  .dark .prose-blog .hljs-literal,
-  .dark .prose-blog .hljs-symbol,
-  .dark .prose-blog .hljs-bullet {
-    color: #79c0ff;
-  }
-  .dark .prose-blog .hljs-title,
-  .dark .prose-blog .hljs-section,
-  .dark .prose-blog .hljs-name,
-  .dark .prose-blog .hljs-function .hljs-title {
-    color: #d2a8ff;
-  }
-  .dark .prose-blog .hljs-attr,
-  .dark .prose-blog .hljs-attribute,
-  .dark .prose-blog .hljs-variable,
-  .dark .prose-blog .hljs-template-variable,
-  .dark .prose-blog .hljs-built_in {
-    color: #ffa657;
-  }
-  .dark .prose-blog .hljs-meta,
-  .dark .prose-blog .hljs-deletion {
     color: #ff7b72;
   }
 
