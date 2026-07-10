@@ -37,7 +37,7 @@ Every container that needs to be reachable joins one shared external Docker netw
 
 ## Architecture v1 - Traefik, Let's Encrypt, and a script vs. my ISP
 
-The first version was the pattern you'll find in every self-hosting tutorial: forward ports 80/443 on the router, run a reverse proxy that terminates TLS with Let's Encrypt certificates, point an `A` record at your public IP.
+The first version was the pattern you'll find in every self-hosting tutorial: forward ports 80/443 on the router, run a reverse proxy that terminates TLS with Let's Encrypt certificates, point an `A` record at your public IP. I documented that first build in detail at the time - the full Compose stack, Traefik config and all - in [Setting up Nextcloud on a Raspberry Pi](/en/blog/nextcloud-raspberry-pi-docker-setup/).
 
 [![Architecture v1 - Traefik + Let's Encrypt + port forwarding](/images/blog/v1-architecture.svg)](/images/blog/v1-architecture.svg)
 
