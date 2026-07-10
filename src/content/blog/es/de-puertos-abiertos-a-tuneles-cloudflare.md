@@ -37,7 +37,7 @@ Todo contenedor que deba ser accesible se une a una red externa compartida de Do
 
 ## Arquitectura v1 - Traefik, Let's Encrypt y un script contra mi operadora
 
-La primera versión era el patrón de cualquier tutorial de self-hosting: redirigir los puertos 80/443 en el router, un proxy inverso que termina TLS con certificados de Let's Encrypt, y un registro `A` apuntando a tu IP pública.
+La primera versión era el patrón de cualquier tutorial de self-hosting: redirigir los puertos 80/443 en el router, un proxy inverso que termina TLS con certificados de Let's Encrypt, y un registro `A` apuntando a tu IP pública. Documenté aquella primera construcción en detalle en su momento - el stack de Compose completo, la configuración de Traefik y todo lo demás - en [Montando Nextcloud en una Raspberry Pi](/es/blog/montando-nextcloud-en-raspberry-pi-docker/).
 
 [![Arquitectura v1 - Traefik + Let's Encrypt + port forwarding](/images/blog/v1-architecture.svg)](/images/blog/v1-architecture.svg)
 
