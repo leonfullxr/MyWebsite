@@ -23,8 +23,8 @@
     "highlight.js": "^11.11.1",
     "marked": "^17.0.3",
     "marked-highlight": "^2.2.4",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
