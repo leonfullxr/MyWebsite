@@ -116,7 +116,7 @@
       "categories": [
         {
           "name": "Programación",
-          "items": ["C++", "Python", "JavaScript", "HTML/CSS", "Bash"]
+          "items": ["C", "C++", "Python", "Go", "TypeScript", "JavaScript", "Svelte", "HTML/CSS", "Bash"]
         },
         {
           "name": "Tecnologías y Herramientas",
@@ -184,10 +184,11 @@
       },
       {
         "name": "Visualización de Curvas Elípticas",
-        "url": "https://leonfullxr.github.io/ecc/",
+        "url": "https://github.com/leonfullxr/ECC-Thesis",
         "period": "2025",
         "description": "Visualización interactiva de curvas elípticas (y² = x³ + ax + b) con parámetros ajustables y zoom. Parte de mi trabajo de fin de grado sobre criptografía de curvas elípticas.",
-        "tags": ["Ciberseguridad", "Web App"]
+        "tags": ["Ciberseguridad", "Web App"],
+        "image": "/images/hopf_torus.png"
       },
       {
         "name": "Cypher - Chat Encriptado",
@@ -199,7 +200,7 @@
       },
       {
         "name": "Nextcloud Autoalojado",
-        "url": "https://nextcloud.leonfuller.space/",
+        "url": "https://nextcloud.leonfuller.com/",
         "period": "2024",
         "description": "Alternativa privada y autoalojada a Google Drive usando Docker y Traefik. Parte de un homelab más amplio centrado en privacidad de datos y control total sobre archivos personales.",
         "tags": ["DevOps", "Docker", "Web App"],

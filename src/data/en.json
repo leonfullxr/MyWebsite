@@ -116,7 +116,7 @@
       "categories": [
         {
           "name": "Programming",
-          "items": ["C++", "Python", "JavaScript", "HTML/CSS", "Bash"]
+          "items": ["C", "C++", "Python", "Go", "TypeScript", "JavaScript", "Svelte", "HTML/CSS", "Bash"]
         },
         {
           "name": "Technologies & Tools",
@@ -184,10 +184,11 @@
       },
       {
         "name": "Elliptic Curve Visualization",
-        "url": "https://leonfullxr.github.io/ecc/",
+        "url": "https://github.com/leonfullxr/ECC-Thesis",
         "period": "2025",
         "description": "Interactive plot of elliptic curves (y² = x³ + ax + b) with adjustable parameters and zoom. Part of my thesis on elliptic curve cryptography.",
-        "tags": ["Cybersecurity", "Web App"]
+        "tags": ["Cybersecurity", "Web App"],
+        "image": "/images/hopf_torus.png"
       },
       {
         "name": "Cypher - Encrypted Chat App",
@@ -199,7 +200,7 @@
       },
       {
         "name": "Self-Hosted Nextcloud",
-        "url": "https://nextcloud.leonfuller.space/",
+        "url": "https://nextcloud.leonfuller.com/",
         "period": "2024",
         "description": "Private file sync and storage on Docker and Traefik. Part of a homelab where I control my own data instead of using cloud drives.",
         "tags": ["DevOps", "Docker", "Web App"],
