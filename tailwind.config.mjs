@@ -5,9 +5,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        sans: ['Lato', 'system-ui', 'sans-serif'],
         display: ['Lato', 'system-ui', 'sans-serif'],
         body: ['Lato', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'monospace'],
+        mono: ['Lato', 'system-ui', 'sans-serif'],
       },
       colors: {
         sand: {

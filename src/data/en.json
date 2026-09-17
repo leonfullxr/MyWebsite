@@ -152,8 +152,10 @@
             "SOC Engineering",
             "HIDS / NIDS",
             "Cloud Security",
-            "Identity (SSO / RBAC)",
-            "Compliance (PCI-DSS, ISO 27001)",
+            "ISO 27001",
+            "HIPAA",
+            "GDPR",
+            "PCI-DSS",
             "Cybersecurity",
             "Networking"
           ]
