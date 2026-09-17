@@ -31,7 +31,7 @@ interface Props {
     };
     awards: {
       title: string;
-      items: string[];
+      items: (string | { text: string; url?: string })[];
     };
   };
 }
@@ -142,12 +142,27 @@ const { cv } = Astro.props;
       </h3>
       <div class="space-y-3">
         {
-          cv.awards.items.map((award: string) => (
-            <p class="text-ink-600 dark:text-sand-300 text-sm flex gap-2">
-              <span class="text-sand-400">✦</span>
-              {award}
-            </p>
-          ))
+          cv.awards.items.map((award) => {
+            const text = typeof award === 'string' ? award : award.text;
+            const url = typeof award === 'string' ? undefined : award.url;
+            return (
+              <p class="text-ink-600 dark:text-sand-300 text-sm flex gap-2">
+                <span class="text-sand-400">✦</span>
+                {url ? (
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener"
+                    class="hover:text-sand-600 dark:hover:text-sand-200 hover:underline"
+                  >
+                    {text}
+                  </a>
+                ) : (
+                  text
+                )}
+              </p>
+            );
+          })
         }
       </div>
     </div>

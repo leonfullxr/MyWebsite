@@ -14,22 +14,22 @@
   "hero": {
     "greeting": "Hola, soy",
     "name": "Leon Elliott Fuller",
-    "tagline": "Ingeniería Informática · Deep Learning · Ciberseguridad · Ingeniero Software",
-    "description": "Ingeniero de Seguridad Junior en Wazuh. Graduado en Ingeniería Informática por la Universidad de Granada con un año Erasmus+ en AGH Cracovia. Construyo cosas, aprendo constantemente y acepto nuevos retos.",
+    "tagline": "Ingeniería Informática · Ingeniero de Seguridad · Ciberseguridad · Ingeniero Software",
+    "description": "Ingeniero de seguridad en Wazuh. Me gradué en Ingeniería Informática en la Universidad de Granada y cursé un año Erasmus+ en AGH Cracovia. Construyo sistemas, aprendo herramientas nuevas y asumo retos difíciles.",
     "cta": "Conóceme"
   },
   "about": {
     "title": "Sobre mí",
     "paragraphs": [
-      "Soy Ingeniero Informático trabajando como Ingeniero de Seguridad Junior en Wazuh, especializado en SIEM, XDR y sistemas de detección de intrusiones. Me gradué en Ingeniería Informática en la Universidad de Granada con especialización en Computación y Sistemas Inteligentes.",
-      "Estoy comprometido con construir una base sólida para mi carrera desarrollando continuamente mis habilidades y aceptando nuevos retos. Actualmente enfocado en disciplina y aprendizaje, estoy determinado a enfrentar tareas complejas y esforzarme al máximo.",
-      "A lo largo de mis años universitarios, he trabajado en proyectos de Deep Learning, Machine Learning, Ciencia de Datos, Desarrollo de Videojuegos, Ciberseguridad y Desarrollo Web. Aporto una actitud proactiva y pasión por aprender."
+      "Soy ingeniero informático en Wazuh. Trabajo con SIEM, XDR y sistemas de detección de intrusiones. Me gradué en Ingeniería Informática en la Universidad de Granada, con enfoque en computación y sistemas inteligentes.",
+      "Practico para ganar habilidades y asumo tareas que me sacan de la zona cómoda. Mantengo disciplina en el aprendizaje y trabajo duro en problemas complejos.",
+      "En la universidad hice proyectos de deep learning, machine learning, ciencia de datos, videojuegos, ciberseguridad y desarrollo web. Trabajo con iniciativa y me gusta aprender."
     ],
     "location": "Granada, España"
   },
   "thesis": {
     "title": "Trabajo de Fin de Grado",
-    "description": "Visualización 3D interactiva de curvas elípticas mediante la fibración de Hopf. Explora 18 formas de toro en categorías de lattice, onduladas y exóticas, con 12 modos de color, 6 materiales, 3 animaciones y control total de parámetros. Construido con Three.js como parte de mi TFG sobre criptografía de curvas elípticas.",
+    "description": "Vista 3D interactiva de curvas elípticas con la fibración de Hopf. Puedes explorar 18 formas de toro en grupos lattice, ondulados y exóticos. La app tiene 12 modos de color, 6 materiales, 3 animaciones y control completo de parámetros. La hice con Three.js para mi TFG sobre criptografía de curvas elípticas.",
     "cta": "Abrir explorador interactivo →"
   },
   "hobbies": {
@@ -38,17 +38,17 @@
       {
         "icon": "running",
         "title": "Running",
-        "description": "Soy un corredor mediocre profesional de ultramaratones. Me encanta el desafío de las carreras de larga distancia y a menudo participo en carreras, a veces con amigos por diversión."
+        "description": "Corro ultramaratones por gusto, no por podios. Me gustan las carreras largas y a menudo corro con amigos."
       },
       {
         "icon": "nature",
         "title": "Naturaleza y Montaña",
-        "description": "Amante de la montaña y la naturaleza. Disfruto del senderismo y descubrir nuevos paisajes dondequiera que vaya. No hay nada como el aire fresco y una buena vista para despejar la mente."
+        "description": "Hago senderismo en la montaña cuando puedo. El aire fresco y una buena vista me ayudan a desconectar."
       },
       {
         "icon": "music",
         "title": "Música",
-        "description": "La música es una compañera constante - ya sea programando, corriendo o simplemente descansando. Disfruto descubriendo nuevos géneros y artistas."
+        "description": "Escucho música mientras programo, corro o descanso. Me gusta descubrir artistas y géneros nuevos."
       }
     ]
   },
@@ -64,11 +64,18 @@
           "period": "Feb 2025 - Presente",
           "current": true,
           "description": [
-            "Diseñé e implementé ecosistemas SIEM/XDR de alta disponibilidad en entornos Cloud y OnPrem, transformando requisitos complejos de seguridad y cumplimiento normativo en arquitecturas escalables.",
-            "Administré infraestructuras tolerantes a fallos utilizando Kubernetes y Docker, optimizando la capacidad y los costos para la ingesta masiva de logs en clústeres de Elasticsearch y OpenSearch.",
-            "Lideré el diseño de entornos SOC y estrategias de detección avanzada. Desarrollé modelos de amenazas personalizados, integraciones API y automatización de respuestas (playbooks) que redujeron significativamente el tiempo medio de respuesta (MTTR).",
-            "Resolví problemas críticos de arquitectura liderando equipos técnicos de respuesta ante incidentes, asegurando la estabilidad de la plataforma y la monitorización continua de amenazas para clientes corporativos.",
-            "Actué como referente técnico en iniciativas de seguridad (hardening) de infraestructura. Optimicé los sistemas HIDS/NIDS para eliminar falsos positivos y capacité al equipo en mejores prácticas de seguridad en contenedores y optimización de plataformas."
+            "Diseño e implemento plataformas SOC personalizadas para grandes empresas, con soluciones SIEM, XDR, HIDS y NIDS en infraestructuras on-prem y cloud.",
+            "Mantenedor principal del repositorio público de integraciones de Wazuh (https://github.com/wazuh/integrations) y referente de producto para clientes empresariales y la comunidad open source.",
+            "Diseñé pipelines de ingesta de logs que procesan más de 250B de eventos manteniendo precisión de detección y estabilidad del sistema a escala.",
+            "Reduje costes de infraestructura cloud de clientes hasta un 20% migrando pods de AWS EKS de ARM a AMD en entornos Wazuh multi-pod equivalentes, con right-sizing y ajuste de cargas.",
+            "Resolví incidencias de alto impacto en Wazuh para clientes empresariales, mejorando visibilidad, precisión de detección y estabilidad del sistema.",
+            "Asesoré en hardening de seguridad y ajuste de detección de anomalías, reduciendo ruido de alertas con umbrales, agrupación y refinamiento de reglas.",
+            "Despliegue y gestión de Wazuh, OpenSearch (Open Distro) y Elastic Stack en entornos de cliente diversos, optimizando cada uno para máxima eficiencia.",
+            "Integré plataformas cloud en pipelines de monitorización: Azure vía Microsoft Graph API y AWS vía SQS, CloudTrail y VPC Flow Logs.",
+            "Configuré SSO y RBAC para proveedores de identidad empresariales (Okta, Entra ID, Google Workspace, LDAP).",
+            "Desarrollé políticas SCA personalizadas alineadas con marcos de cumplimiento (PCI-DSS, CJIS, ISO 27001).",
+            "Configuré pipelines de Filebeat y reenvío syslog desde dispositivos sin agente (Sophos, FortiGate, Cisco) con rsyslog y configuración localfile.",
+            "Rediseñé la estructura de carpetas por defecto, gestioné montajes de volúmenes, redimensioné sistemas de archivos y optimicé el uso de disco."
           ]
         },
         {
@@ -78,9 +85,11 @@
           "period": "Jul 2022 - Sep 2023",
           "current": false,
           "description": [
-            "Brindé consultoría de TI y soporte técnico a nivel corporativo, y desarrollé una aplicación de escritorio interna para optimizar los flujos de trabajo diarios.",
-            "Implementé controles de seguridad fundamentales, incluyendo autenticación multifactor (MFA), protección de endpoints y políticas anti-phishing, y administré la operativa general de la infraestructura de TI.",
-            "Impulsé la adopción tecnológica diseñando e impartiendo sesiones de capacitación estructuradas, facilitando la adaptación de los usuarios a nuevos sistemas y protocolos de seguridad."
+            "Ofrecí consultoría de TI y soporte técnico en la organización.",
+            "Desarrollé una aplicación de escritorio interna para agilizar el trabajo diario.",
+            "Desplegué MFA, protección de endpoints y controles anti-phishing.",
+            "Gestioné la operación diaria de la infraestructura de TI.",
+            "Impartí formación para que los usuarios adoptaran sistemas y reglas de seguridad nuevas."
           ]
         }
       ]
@@ -112,26 +121,31 @@
         {
           "name": "Tecnologías y Herramientas",
           "items": [
+            "Wazuh",
+            "OpenSearch",
             "Elasticsearch",
+            "Elastic Stack",
             "Docker",
-            "k8s",
-            "Nextcloud",
-            "Git",
-            "Linux",
+            "Kubernetes",
             "AWS",
-            "Godot Engine",
-            "OpenGL"
+            "Azure",
+            "Filebeat",
+            "rsyslog",
+            "Git",
+            "Linux"
           ]
         },
         {
           "name": "Campos",
           "items": [
-            "Deep Learning",
-            "Machine Learning",
-            "Visión por Computador",
+            "SIEM / XDR",
+            "Ingeniería SOC",
+            "HIDS / NIDS",
+            "Seguridad Cloud",
+            "Identidad (SSO / RBAC)",
+            "Cumplimiento (PCI-DSS, ISO 27001)",
             "Ciberseguridad",
-            "Redes",
-            "Desarrollo de Videojuegos"
+            "Redes"
           ]
         },
         {
@@ -143,6 +157,10 @@
     "awards": {
       "title": "Certificaciones y Premios",
       "items": [
+        {
+          "text": "CompTIA Security+ ce - CompTIA (Sep 2026)",
+          "url": "https://www.credly.com/badges/86db1620-ae07-420a-a9ab-ef2675916fa4"
+        },
         "Elasticsearch Engineer - Elasticsearch (2025)",
         "AWS Academy Cloud Developing - Amazon Web Services (Nov 2024)",
         "Machine Learning A-Z - Udemy (Ene-Jul 2024)",
