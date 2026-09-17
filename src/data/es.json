@@ -116,7 +116,17 @@
       "categories": [
         {
           "name": "Programación",
-          "items": ["C", "C++", "Python", "Go", "TypeScript", "JavaScript", "Svelte", "HTML/CSS", "Bash"]
+          "items": [
+            "C",
+            "C++",
+            "Python",
+            "Go",
+            "TypeScript",
+            "JavaScript",
+            "Svelte",
+            "HTML/CSS",
+            "Bash"
+          ]
         },
         {
           "name": "Tecnologías y Herramientas",
