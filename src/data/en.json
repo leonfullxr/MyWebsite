@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Leon Elliott Fuller - Computer Science Engineer",
-    "description": "Personal portfolio of Leon Elliott Fuller. Computer Engineering student passionate about Deep Learning, Cybersecurity, and Web Development."
+    "description": "Personal portfolio of Leon Elliott Fuller. Computer engineering graduate focused on cybersecurity, deep learning, and web development."
   },
   "nav": {
     "about": "About",
@@ -15,21 +15,21 @@
     "greeting": "Hi, I'm",
     "name": "Leon Elliott Fuller",
     "tagline": "Computer Engineering · Security Engineer · Cybersecurity · Software Engineer",
-    "description": "Junior Security Engineer at Wazuh. Computer Science graduate from the University of Granada with an Erasmus+ year at AGH Krakow. I build things, learn constantly, and embrace new challenges.",
+    "description": "Security engineer at Wazuh. I graduated in computer engineering from the University of Granada and studied one year at AGH Krakow through Erasmus+. I build systems, learn new tools, and take on hard problems.",
     "cta": "Get to know me"
   },
   "about": {
     "title": "About me",
     "paragraphs": [
-      "I'm a Computer Science Engineer working as a Junior Security Engineer at Wazuh, specializing in SIEM, XDR, and intrusion detection systems. I graduated in Computer Engineering from the University of Granada with a specialization in Computing and Intelligent Systems.",
-      "I am committed to building a strong foundation for my career by continuously developing my skills and embracing new challenges. Currently focused on discipline and learning, I am determined to face complex tasks and put in the hard work.",
-      "Throughout my university years, I have worked on projects spanning Deep Learning, Machine Learning, Data Science, Game Development, Cybersecurity, and Web Development. I bring a proactive attitude and a passion for learning."
+      "I am a computer science engineer at Wazuh. I work on SIEM, XDR, and intrusion detection systems. I graduated in computer engineering from the University of Granada with a focus on computing and intelligent systems.",
+      "I build skills through practice and take on tasks that stretch what I know. I stay disciplined about learning and put in the work on hard problems.",
+      "At university I built projects in deep learning, machine learning, data science, game development, cybersecurity, and web development. I work proactively and like to learn."
     ],
     "location": "Granada, Spain"
   },
   "thesis": {
     "title": "Thesis",
-    "description": "Interactive 3D visualization of elliptic curves via the Hopf fibration. Explore 18 torus shapes across lattice, wavy, and exotic categories, with 12 color modes, 6 materials, 3 animations, and full custom parameter control. Built with Three.js as part of my thesis on elliptic curve cryptography.",
+    "description": "Interactive 3D view of elliptic curves through the Hopf fibration. You can explore 18 torus shapes in lattice, wavy, and exotic groups. The app has 12 color modes, 6 materials, 3 animations, and full control of parameters. I built it with Three.js for my thesis on elliptic curve cryptography.",
     "cta": "Launch interactive explorer"
   },
   "hobbies": {
@@ -38,17 +38,17 @@
       {
         "icon": "running",
         "title": "Running",
-        "description": "I'm a professional mediocre ultramarathon runner. I love the challenge of long distance running and often do races, sometimes with friends just for fun."
+        "description": "I run ultramarathons for fun, not for podiums. I like long races and often run with friends."
       },
       {
         "icon": "nature",
         "title": "Nature & Mountains",
-        "description": "Mountain and nature lover. I enjoy hiking and discovering new landscapes wherever I go. There's nothing like fresh air and a great view to clear your mind."
+        "description": "I hike in the mountains when I can. Fresh air and a clear view help me reset."
       },
       {
         "icon": "music",
         "title": "Music",
-        "description": "Music is a constant companion - whether I'm coding, running, or just relaxing. I enjoy discovering new genres and artists."
+        "description": "I listen to music while I code, run, or relax. I like finding new artists and genres."
       }
     ]
   },
@@ -64,11 +64,18 @@
           "period": "Feb 2025 - Present",
           "current": true,
           "description": [
-            "Architected and deployed high-availability SIEM/XDR ecosystems across distributed Cloud and OnPrem environments, translating complex enterprise compliance and security requirements into scalable architectural roadmaps.",
-            "Engineered fault-tolerant containerized infrastructures using Kubernetes and Docker, conducting capacity planning and cost-optimization for massive scale Elasticsearch and OpenSearch log ingestion pipelines.",
-            "Spearheaded custom SOC design and advanced detection engineering, implementing tailored threat modeling frameworks, API integrations, and automated response playbooks that drastically reduced Mean Time to Respond (MTTR).",
-            "Resolved critical, high-impact architectural bottlenecks by directing cross-functional technical war rooms during major escalations, ensuring uninterrupted threat visibility and platform stability for enterprise clients.",
-            "Served as the advisory lead, driving infrastructure hardening initiatives, fine tuning and optimizing HIDS/NIDS anomaly detection to eliminate false positives, and mentoring engineering members on platform optimization and container security best practices."
+            "Architect and establish custom Security Operations Center (SOC) platforms for major enterprises, engineering SIEM, XDR, HIDS and NIDS solutions across on-prem and cloud infrastructures.",
+            "Core maintainer of Wazuh's public integrations repository (https://github.com/wazuh/integrations) and a recognized product expert supporting enterprise customers and the wider open-source community.",
+            "Engineered log ingestion pipelines processing over 250B events while maintaining detection accuracy and system stability at scale.",
+            "Cut client cloud infrastructure costs by up to 20% by migrating AWS EKS pods from ARM to AMD for equivalent multi-pod Wazuh environments at lower cost, plus right-sizing and workload tuning.",
+            "Resolved high-impact Wazuh issues for enterprise customers, significantly improving visibility, detection accuracy and system stability.",
+            "Advised on security hardening and anomaly detection tuning, reducing alert noise through thresholding, grouping and rule refinement.",
+            "Rollout and management of Wazuh, OpenSearch (Open Distro) and Elastic Stack across diverse client environments, optimizing each for peak efficiency.",
+            "Integrated cloud platforms into monitoring pipelines: Azure via Microsoft Graph API and AWS via SQS, CloudTrail and VPC Flow Logs.",
+            "Configured SSO and RBAC for enterprise identity providers (Okta, Entra ID, Google Workspace, LDAP).",
+            "Developed custom SCA policies aligned with compliance frameworks (PCI-DSS, CJIS, ISO 27001).",
+            "Configured Filebeat pipelines and syslog forwarding from agentless devices (Sophos, FortiGate, Cisco) using rsyslog and localfile configuration.",
+            "Redesigned default folder structure, managed volume mounts, resized filesystems and optimized disk usage."
           ]
         },
         {
@@ -78,9 +85,11 @@
           "period": "Jul 2022 - Sep 2023",
           "current": false,
           "description": [
-            "Provided comprehensive IT consulting and technical support across the organization, and developed a custom internal desktop application to streamline daily workflows.",
-            "Implemented foundational security controls—including Multi-Factor Authentication (MFA), endpoint protection, and anti-phishing policies while managing overall IT infrastructure operations.",
-            "Drove technology adoption by designing and delivering structured training sessions, ensuring smooth end-user onboarding for new IT systems and security protocols."
+            "Provided IT consulting and technical support across the organization.",
+            "Built a custom desktop app to streamline daily workflows.",
+            "Deployed MFA, endpoint protection, and anti-phishing controls.",
+            "Managed day-to-day IT infrastructure operations.",
+            "Ran training sessions so users could adopt new systems and security rules."
           ]
         }
       ]
@@ -92,13 +101,13 @@
           "degree": "BSc. Computer Engineering",
           "institution": "University of Granada, Spain",
           "period": "Sep 2021 - Jun 2026",
-          "details": "Specialized in Computing and Intelligent Systems. Coursework: AI, Machine Learning, Networking, C++, Python, OOP, OpenGL, Cybersecurity. Honors in Calculus, Statistics, Machine Learning, and Programming."
+          "details": "Focus on computing and intelligent systems. Coursework includes AI, machine learning, networking, C++, Python, OOP, OpenGL, and cybersecurity. Honors in calculus, statistics, machine learning, and programming."
         },
         {
           "degree": "BSc. Computer Engineering (Erasmus+)",
           "institution": "AGH University of Krakow, Poland",
           "period": "Sep 2024 - Jun 2025",
-          "details": "Finishing studies abroad. Coursework: Computer Vision, Deep Learning in Medical Image Analysis, Cybersecurity, Real Time Operating Systems in C, and Cloud Computing."
+          "details": "Final year abroad. Coursework includes computer vision, deep learning for medical imaging, cybersecurity, real-time operating systems in C, and cloud computing."
         }
       ]
     },
@@ -107,32 +116,46 @@
       "categories": [
         {
           "name": "Programming",
-          "items": ["C++", "Python", "JavaScript", "HTML/CSS", "Bash"]
+          "items": [
+            "C",
+            "C++",
+            "Python",
+            "Go",
+            "TypeScript",
+            "JavaScript",
+            "Svelte",
+            "HTML/CSS",
+            "Bash"
+          ]
         },
         {
           "name": "Technologies & Tools",
           "items": [
             "Wazuh",
+            "OpenSearch",
             "Elasticsearch",
+            "Elastic Stack",
             "Docker",
-            "k8s",
-            "Nextcloud",
-            "Git",
-            "Linux",
+            "Kubernetes",
             "AWS",
-            "Godot Engine",
-            "OpenGL"
+            "Azure",
+            "Filebeat",
+            "rsyslog",
+            "Git",
+            "Linux"
           ]
         },
         {
           "name": "Fields",
           "items": [
-            "Deep Learning",
-            "Machine Learning",
-            "Computer Vision",
+            "SIEM / XDR",
+            "SOC Engineering",
+            "HIDS / NIDS",
+            "Cloud Security",
+            "Identity (SSO / RBAC)",
+            "Compliance (PCI-DSS, ISO 27001)",
             "Cybersecurity",
-            "Networking",
-            "Game Development"
+            "Networking"
           ]
         },
         {
@@ -144,6 +167,10 @@
     "awards": {
       "title": "Certifications & Awards",
       "items": [
+        {
+          "text": "CompTIA Security+ ce - CompTIA (Sep 2026)",
+          "url": "https://www.credly.com/badges/86db1620-ae07-420a-a9ab-ef2675916fa4"
+        },
         "Elasticsearch Engineer - Elasticsearch (2025)",
         "AWS Academy Cloud Developing - Amazon Web Services (Nov 2024)",
         "Machine Learning A-Z - Udemy (Jan-Jul 2024)",
@@ -158,34 +185,50 @@
     "title": "Projects",
     "items": [
       {
+        "name": "Potocolom Studio",
+        "url": "https://potocolom.leonfuller.com/",
+        "period": "2026",
+        "description": "Open source, real time generative image platform. You can generate images, enhance them, upscale them and can sketch on a canvas and a diffusion model paints over your strokes live, then one click hands the result to a heavier model for the final image. One AGPL codebase runs it both ways - self-hosted on your own GPU for free, or as a managed cloud with subscriptions.",
+        "tags": ["AI", "Web App", "Open Source"],
+        "image": "/images/potocolom.png"
+      },
+      {
+        "name": "Elliptic Curve Visualization",
+        "url": "https://github.com/leonfullxr/ECC-Thesis",
+        "period": "2025",
+        "description": "Interactive plot of elliptic curves (y² = x³ + ax + b) with adjustable parameters and zoom. Part of my thesis on elliptic curve cryptography.",
+        "tags": ["Cybersecurity", "Web App"],
+        "image": "/images/hopf_torus.png"
+      },
+      {
         "name": "Cypher - Encrypted Chat App",
         "url": "https://github.com/leonfullxr/Cypher",
         "period": "2024",
-        "description": "State-of-the-art encrypted chat application with end-to-end encryption, real-time messaging, zero metadata storage, and advanced protocols like TLS and Signal. Features AES encryption and complete anonymity.",
+        "description": "Encrypted chat app with end-to-end encryption, real-time messaging, and no metadata storage. It uses TLS, Signal-style protocols, and AES. Users stay anonymous by design.",
         "tags": ["Cybersecurity", "Web App", "DevOps"],
         "image": "/images/cypher_logo.png"
       },
       {
         "name": "Self-Hosted Nextcloud",
-        "url": "https://nextcloud.leonfuller.space/",
+        "url": "https://nextcloud.leonfuller.com/",
         "period": "2024",
-        "description": "Private, self-hosted alternative to Google Drive using Docker and Traefik. Part of a broader homelab setup focused on data privacy and complete control over personal files.",
+        "description": "Private file sync and storage on Docker and Traefik. Part of a homelab where I control my own data instead of using cloud drives.",
         "tags": ["DevOps", "Docker", "Web App"],
         "image": "/images/nextcloud_login.png"
       },
       {
-        "name": "Pichola - Award-Winning Game",
-        "url": "https://github.com/leonfullxr/Pichola",
-        "period": "Jan 2022",
-        "description": "Award-winning game created during a 48-hour Game Jam using Godot Engine. Theme: 'Start from Nothing'. Players begin as an egg, collecting others to unlock abilities. Won 'Best Art'.",
-        "tags": ["Game Dev", "Design"],
-        "image": "/images/pichola.png"
+        "name": "Classifying Mushrooms",
+        "url": "https://github.com/leonfullxr/Classifying-Mushrooms",
+        "period": "2024",
+        "description": "Supervised models that classify mushroom edibility from the UCI Secondary Mushroom dataset. Course project at the University of Granada.",
+        "tags": ["AI", "Machine Learning"],
+        "image": "/images/mushroom_classification.png"
       },
       {
         "name": "AI for Ludo Game",
         "url": "https://github.com/leonfullxr/AI-for-Ludo-game",
         "period": "2023",
-        "description": "A reimagined Parchís game with a strategic twist, featuring a deliberative AI agent using MINIMAX and ALPHA-BETA PRUNING for intelligent gameplay against human players.",
+        "description": "Parchís variant with a deliberative AI agent. It uses MINIMAX and alpha-beta pruning to play against humans.",
         "tags": ["AI", "Game Dev"],
         "image": "/images/ludo_game.png"
       },
@@ -193,38 +236,31 @@
         "name": "Visual Path Finding",
         "url": "https://github.com/leonfullxr/Visual-Path-Finding",
         "period": "2023",
-        "description": "Interactive visualization tool demonstrating path-finding algorithms like A*, Dijkstra, and more. An educational resource for understanding algorithmic mechanics.",
+        "description": "Interactive demo of path-finding algorithms such as A* and Dijkstra. Built as a teaching aid for algorithm behavior.",
         "tags": ["AI", "Design"],
         "image": "/images/visual_pathfinding.png"
-      },
-      {
-        "name": "Classifying Mushrooms",
-        "url": "https://github.com/leonfullxr/Classifying-Mushrooms",
-        "period": "2024",
-        "description": "Mushroom edibility classification using supervised ML models. Analyzed the UCI Secondary Mushroom dataset as part of the ML course at the University of Granada.",
-        "tags": ["AI", "Machine Learning"],
-        "image": "/images/mushroom_classification.png"
       },
       {
         "name": "Solar System Simulation",
         "url": "https://github.com/leonfullxr/SolarSystem-Simulation",
         "period": "2023",
-        "description": "Python-based simulation of a solar system with gravitational pull, collision dynamics, and asteroid interactions. Built with pygame.",
+        "description": "Python simulation of orbits, gravity, collisions, and asteroids. Built with pygame.",
         "tags": ["Game Dev", "Design"]
       },
       {
-        "name": "Elliptic Curve Visualization",
-        "url": "https://leonfullxr.github.io/ecc/",
-        "period": "2025",
-        "description": "Interactive visualization of elliptic curves (y² = x³ + ax + b) with adjustable parameters and zoom. Built as part of my thesis work on elliptic curve cryptography.",
-        "tags": ["Cybersecurity", "Web App"]
+        "name": "Pichola - Award-Winning Game",
+        "url": "https://github.com/leonfullxr/Pichola",
+        "period": "Jan 2022",
+        "description": "Game built in a 48-hour jam with Godot. Theme: start from nothing. You begin as an egg and collect others to unlock skills. Won Best Art.",
+        "tags": ["Game Dev", "Design"],
+        "image": "/images/pichola.png"
       }
     ]
   },
   "blog": {
     "title": "Blog",
     "readMore": "Read more",
-    "empty": "Coming soon. I'm preparing my first posts."
+    "empty": "Posts are on the way. I am writing the first ones now."
   },
   "footer": {
     "copyright": "Leon Elliott Fuller"

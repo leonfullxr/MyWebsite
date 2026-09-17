@@ -3,7 +3,7 @@
 [![Deploy](https://github.com/leonfullxr/mywebsite/actions/workflows/deploy.yml/badge.svg)](https://github.com/leonfullxr/mywebsite/actions/workflows/deploy.yml)
 [![CI](https://github.com/leonfullxr/mywebsite/actions/workflows/ci.yml/badge.svg)](https://github.com/leonfullxr/mywebsite/actions/workflows/ci.yml)
 
-Personal portfolio built with [Astro](https://astro.build/), Tailwind CSS, and Markdown blog support. Features bilingual content (English/Spanish), dark mode, and responsive design.
+Personal portfolio built with [Astro](https://astro.build/), Tailwind CSS, and Markdown blog posts. The site has English and Spanish content, dark mode, and a responsive layout.
 
 ## Getting Started
 
@@ -26,11 +26,11 @@ npm run dev
 
 ## Deployment
 
-The site is configured for GitHub Pages deployment via the `.github/workflows/deploy.yml` workflow. Push to `main` to trigger automatic deployment.
+GitHub Pages deploys the site through `.github/workflows/deploy.yml`. Push to `main` to start a deploy.
 
 ## CI/CD & Security
 
-Every pull request and push is validated by a set of automated pipelines:
+Each pull request and push runs these pipelines:
 
 | Workflow              | Trigger              | Purpose                                                   |
 | --------------------- | -------------------- | --------------------------------------------------------- |
@@ -44,10 +44,7 @@ Every pull request and push is validated by a set of automated pipelines:
 | **Link Check**        | Weekly               | Detects broken links and opens a tracking issue           |
 | **Dependabot**        | Weekly               | Automated npm & GitHub Actions updates                    |
 
-> **Note:** CodeQL, Dependency Review and Scorecard require the repository to be
-> public (or to have GitHub Advanced Security enabled). Scorecard's
-> `publish_results` and code-scanning SARIF uploads also need code scanning to be
-> enabled under **Settings → Code security**.
+> **Note:** CodeQL, Dependency Review and Scorecard need a public repository or GitHub Advanced Security. Scorecard `publish_results` and SARIF uploads also need code scanning under **Settings → Code security**.
 
 ## Structure
 
@@ -65,4 +62,4 @@ public/
 
 ## Customization
 
-All personal information is centralized in `src/data/en.json` and `src/data/es.json`. Blog posts are Markdown files in `src/content/blog/`.
+Personal data lives in `src/data/en.json` and `src/data/es.json`. Blog posts are Markdown files in `src/content/blog/`.

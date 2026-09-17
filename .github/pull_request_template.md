@@ -16,9 +16,9 @@
 - [ ] `npm run format:check` passes
 - [ ] `npm run check` (type check) passes
 - [ ] `npm run build` succeeds locally
-- [ ] I have reviewed the rendered output (light & dark mode, EN & ES where relevant)
-- [ ] No secrets, tokens, or personal data are committed
+- [ ] I reviewed the rendered output (light and dark mode, EN and ES where relevant)
+- [ ] I did not commit secrets, tokens, or personal data
 
 ## Screenshots / notes
 
-<!-- Optional: before/after screenshots or any additional context. -->
+<!-- Optional: before/after screenshots or other context. -->
