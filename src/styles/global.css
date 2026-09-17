@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,10 +8,18 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
+    @apply font-body;
   }
 
   body {
     @apply font-body text-ink-900 bg-sand-50 antialiased transition-colors duration-300;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    @apply font-body;
   }
 
   .dark body {
