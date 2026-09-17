@@ -175,6 +175,21 @@
     "title": "Proyectos",
     "items": [
       {
+        "name": "Potocolom Studio",
+        "url": "https://potocolom.leonfuller.com/",
+        "period": "2026",
+        "description": "Plataforma open source de generación de imágenes en tiempo real. Puedes generar imágenes, mejorarlas, hacer upscale y dibujar en un lienzo mientras un modelo de difusión pinta sobre tus trazos en vivo; un clic envía el resultado a un modelo más pesado para la imagen final. Un único código AGPL lo ejecuta de dos formas: autoalojado en tu propia GPU gratis, o como nube gestionada con suscripciones.",
+        "tags": ["IA", "Web App", "Open Source"],
+        "image": "/images/potocolom.png"
+      },
+      {
+        "name": "Visualización de Curvas Elípticas",
+        "url": "https://leonfullxr.github.io/ecc/",
+        "period": "2025",
+        "description": "Visualización interactiva de curvas elípticas (y² = x³ + ax + b) con parámetros ajustables y zoom. Parte de mi trabajo de fin de grado sobre criptografía de curvas elípticas.",
+        "tags": ["Ciberseguridad", "Web App"]
+      },
+      {
         "name": "Cypher - Chat Encriptado",
         "url": "https://github.com/leonfullxr/Cypher",
         "period": "2024",
@@ -191,12 +206,12 @@
         "image": "/images/nextcloud_login.png"
       },
       {
-        "name": "Pichola - Juego Premiado",
-        "url": "https://github.com/leonfullxr/Pichola",
-        "period": "Ene 2022",
-        "description": "Juego premiado creado en una Game Jam de 48 horas con Godot Engine. Tema: 'Empezar de cero'. Los jugadores comienzan como un huevo, recolectando otros para desbloquear habilidades. Ganó 'Mejor Arte'.",
-        "tags": ["Videojuegos", "Diseño"],
-        "image": "/images/pichola.png"
+        "name": "Clasificación de Hongos",
+        "url": "https://github.com/leonfullxr/Classifying-Mushrooms",
+        "period": "2024",
+        "description": "Clasificación de comestibilidad de hongos usando modelos de ML supervisado. Análisis del dataset UCI Secondary Mushroom como parte del curso de ML en la UGR.",
+        "tags": ["IA", "Machine Learning"],
+        "image": "/images/mushroom_classification.png"
       },
       {
         "name": "IA para Juego de Parchís",
@@ -215,14 +230,6 @@
         "image": "/images/visual_pathfinding.png"
       },
       {
-        "name": "Clasificación de Hongos",
-        "url": "https://github.com/leonfullxr/Classifying-Mushrooms",
-        "period": "2024",
-        "description": "Clasificación de comestibilidad de hongos usando modelos de ML supervisado. Análisis del dataset UCI Secondary Mushroom como parte del curso de ML en la UGR.",
-        "tags": ["IA", "Machine Learning"],
-        "image": "/images/mushroom_classification.png"
-      },
-      {
         "name": "Simulación del Sistema Solar",
         "url": "https://github.com/leonfullxr/SolarSystem-Simulation",
         "period": "2023",
@@ -230,11 +237,12 @@
         "tags": ["Videojuegos", "Diseño"]
       },
       {
-        "name": "Visualización de Curvas Elípticas",
-        "url": "https://leonfullxr.github.io/ecc/",
-        "period": "2025",
-        "description": "Visualización interactiva de curvas elípticas (y² = x³ + ax + b) con parámetros ajustables y zoom. Parte de mi trabajo de fin de grado sobre criptografía de curvas elípticas.",
-        "tags": ["Ciberseguridad", "Web App"]
+        "name": "Pichola - Juego Premiado",
+        "url": "https://github.com/leonfullxr/Pichola",
+        "period": "Ene 2022",
+        "description": "Juego premiado creado en una Game Jam de 48 horas con Godot Engine. Tema: 'Empezar de cero'. Los jugadores comienzan como un huevo, recolectando otros para desbloquear habilidades. Ganó 'Mejor Arte'.",
+        "tags": ["Videojuegos", "Diseño"],
+        "image": "/images/pichola.png"
       }
     ]
   },

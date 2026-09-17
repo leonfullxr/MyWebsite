@@ -175,6 +175,21 @@
     "title": "Projects",
     "items": [
       {
+        "name": "Potocolom Studio",
+        "url": "https://potocolom.leonfuller.com/",
+        "period": "2026",
+        "description": "Open source, real time generative image platform. You can generate images, enhance them, upscale them and can sketch on a canvas and a diffusion model paints over your strokes live, then one click hands the result to a heavier model for the final image. One AGPL codebase runs it both ways - self-hosted on your own GPU for free, or as a managed cloud with subscriptions.",
+        "tags": ["AI", "Web App", "Open Source"],
+        "image": "/images/potocolom.png"
+      },
+      {
+        "name": "Elliptic Curve Visualization",
+        "url": "https://leonfullxr.github.io/ecc/",
+        "period": "2025",
+        "description": "Interactive plot of elliptic curves (y² = x³ + ax + b) with adjustable parameters and zoom. Part of my thesis on elliptic curve cryptography.",
+        "tags": ["Cybersecurity", "Web App"]
+      },
+      {
         "name": "Cypher - Encrypted Chat App",
         "url": "https://github.com/leonfullxr/Cypher",
         "period": "2024",
@@ -191,12 +206,12 @@
         "image": "/images/nextcloud_login.png"
       },
       {
-        "name": "Pichola - Award-Winning Game",
-        "url": "https://github.com/leonfullxr/Pichola",
-        "period": "Jan 2022",
-        "description": "Game built in a 48-hour jam with Godot. Theme: start from nothing. You begin as an egg and collect others to unlock skills. Won Best Art.",
-        "tags": ["Game Dev", "Design"],
-        "image": "/images/pichola.png"
+        "name": "Classifying Mushrooms",
+        "url": "https://github.com/leonfullxr/Classifying-Mushrooms",
+        "period": "2024",
+        "description": "Supervised models that classify mushroom edibility from the UCI Secondary Mushroom dataset. Course project at the University of Granada.",
+        "tags": ["AI", "Machine Learning"],
+        "image": "/images/mushroom_classification.png"
       },
       {
         "name": "AI for Ludo Game",
@@ -215,14 +230,6 @@
         "image": "/images/visual_pathfinding.png"
       },
       {
-        "name": "Classifying Mushrooms",
-        "url": "https://github.com/leonfullxr/Classifying-Mushrooms",
-        "period": "2024",
-        "description": "Supervised models that classify mushroom edibility from the UCI Secondary Mushroom dataset. Course project at the University of Granada.",
-        "tags": ["AI", "Machine Learning"],
-        "image": "/images/mushroom_classification.png"
-      },
-      {
         "name": "Solar System Simulation",
         "url": "https://github.com/leonfullxr/SolarSystem-Simulation",
         "period": "2023",
@@ -230,11 +237,12 @@
         "tags": ["Game Dev", "Design"]
       },
       {
-        "name": "Elliptic Curve Visualization",
-        "url": "https://leonfullxr.github.io/ecc/",
-        "period": "2025",
-        "description": "Interactive plot of elliptic curves (y² = x³ + ax + b) with adjustable parameters and zoom. Part of my thesis on elliptic curve cryptography.",
-        "tags": ["Cybersecurity", "Web App"]
+        "name": "Pichola - Award-Winning Game",
+        "url": "https://github.com/leonfullxr/Pichola",
+        "period": "Jan 2022",
+        "description": "Game built in a 48-hour jam with Godot. Theme: start from nothing. You begin as an egg and collect others to unlock skills. Won Best Art.",
+        "tags": ["Game Dev", "Design"],
+        "image": "/images/pichola.png"
       }
     ]
   },
