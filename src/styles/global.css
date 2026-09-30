@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -183,21 +183,23 @@
     @apply my-8 border-sand-200 dark:border-ink-800;
   }
 
-  .prose-blog code {
-    @apply font-mono text-sm bg-sand-200 px-1.5 py-0.5 rounded;
+  .prose-blog :not(pre) > code {
+    @apply text-[0.875em] bg-sand-200 text-ink-800 px-1.5 py-0.5 rounded;
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-variant-ligatures: none;
   }
 
-  .dark .prose-blog code {
-    @apply bg-ink-800;
+  .dark .prose-blog :not(pre) > code {
+    @apply bg-ink-800 text-sand-100;
   }
 
-  /* Code blocks */
+  /* Code blocks. Page background is sand-50 / ink-950, so the block needs its own surface. */
   .code-block {
-    @apply my-6 rounded-xl border border-sand-200 dark:border-ink-700 overflow-hidden bg-sand-50 dark:bg-ink-950;
+    @apply my-6 rounded-xl border border-sand-300 dark:border-ink-700 overflow-hidden bg-white dark:bg-[#222] shadow-sm shadow-sand-300/40 dark:shadow-none;
   }
 
   .code-block-header {
-    @apply flex items-center justify-between gap-3 px-4 py-2 border-b border-sand-200 dark:border-ink-700 bg-sand-100/80 dark:bg-ink-900/80;
+    @apply flex items-center justify-between gap-3 px-4 py-2 border-b border-sand-200 dark:border-ink-700 bg-sand-100 dark:bg-ink-800;
   }
 
   .code-block-lang {
@@ -205,11 +207,23 @@
   }
 
   .prose-blog pre {
-    @apply bg-transparent border-0 rounded-none p-4 m-0 overflow-x-auto text-[0.8125rem] leading-6 font-mono text-ink-800 dark:text-sand-100;
+    @apply bg-transparent border-0 rounded-none px-4 py-3.5 m-0 overflow-x-auto text-[0.8125rem] leading-6 text-ink-800 dark:text-sand-100;
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-variant-ligatures: none;
+    tab-size: 2;
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.sand.300') transparent;
   }
 
-  .prose-blog pre code {
-    @apply bg-transparent p-0 text-inherit;
+  .dark .prose-blog pre {
+    scrollbar-color: theme('colors.ink.600') transparent;
+  }
+
+  .prose-blog pre code,
+  .dark .prose-blog pre code {
+    @apply block bg-transparent p-0 rounded-none text-[1em] text-inherit leading-6;
+    font-family: inherit;
+    white-space: pre;
   }
 
   .code-copy {
