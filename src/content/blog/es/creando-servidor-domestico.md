@@ -9,7 +9,7 @@ translation: "creating-homeserver"
 
 # Creando tu propio Servidor Doméstico
 
-> **Actualización (julio 2026):** esta idea acabó convirtiéndose en una plataforma autoalojada completa sobre una Raspberry Pi 5 - Nextcloud, Immich y Navidrome detrás de un túnel de Cloudflare con cero puertos abiertos. Lee cómo evolucionó la arquitectura en [De abrir puertos a túneles de Cloudflare](/es/blog/de-puertos-abiertos-a-tuneles-cloudflare/).
+> **Actualización (julio 2026):** esta idea acabó convirtiéndose en una plataforma autoalojada completa sobre una Raspberry Pi 5: Nextcloud, Immich y Navidrome detrás de un túnel de Cloudflare con cero puertos abiertos. Lee cómo evolucionó la arquitectura en [De abrir puertos a túneles de Cloudflare](/es/blog/de-puertos-abiertos-a-tuneles-cloudflare/).
 
 ## ¿Qué es un Servidor Doméstico?
 

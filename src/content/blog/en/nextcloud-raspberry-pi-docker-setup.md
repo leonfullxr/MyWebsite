@@ -9,9 +9,9 @@ translation: "montando-nextcloud-en-raspberry-pi-docker"
 
 # Setting Up Nextcloud on a Raspberry Pi: Docker Compose, PostgreSQL, Traefik and Push Notifications
 
-> **Update (July 2026):** two years later this stack looks quite different. The Traefik + port-forwarding edge described here was eventually replaced by a Cloudflare Tunnel with zero open ports. This post stays up as the record of the original build. The follow-up is [From Port Forwarding to Cloudflare Tunnels](/en/blog/from-port-forwarding-to-cloudflare-tunnels/).
+> **Update (July 2026):** two years later this stack looks quite different. The Traefik and port-forwarding edge described here was eventually replaced by a Cloudflare Tunnel with zero open ports. This post stays up as the record of the original build. The follow-up is [From Port Forwarding to Cloudflare Tunnels](/en/blog/from-port-forwarding-to-cloudflare-tunnels/).
 
-A few days ago I wrote about [why you might want a home server](/en/blog/creating-homeserver/). This is the first concrete build on mine: **Nextcloud on a Raspberry Pi, fully containerized**. It has a proper database, caching, TLS certificates that renew themselves, and the one thing most Docker setups skip - working push notifications for the clients.
+A few days ago I wrote about [why you might want a home server](/en/blog/creating-homeserver/). This is the first concrete build on mine: **Nextcloud on a Raspberry Pi, fully containerized**. It has a proper database, caching, TLS certificates that renew themselves, and working push notifications, which most Docker setups skip.
 
 Credit where it is due: two community guides shaped this setup. One is [this Raspberry Pi guide](https://help.nextcloud.com/t/guide-setting-up-nextcloud-on-raspberry-pi-ssl-advanced-app-support-high-performance-postgresql-and-cloudflare-zero-trust-integration/185757) on the Nextcloud forum. The other is wwe's excellent [docker compose with notify_push](https://help.nextcloud.com/t/how-to-docker-compose-with-notify-push-2024/186721) walkthrough. What follows is my adaptation of both for an ARM64 Pi, plus the details that cost me evenings to figure out.
 
@@ -23,10 +23,10 @@ One Compose project, six containers, one job each:
 
 | Container | Role |
 |---|---|
-| `app` | Nextcloud itself (Apache image) - PHP, WebDAV, the works |
-| `cron` | Same image, different entrypoint - background jobs every 5 minutes |
-| `notify_push` | The Client Push daemon - real-time sync without polling |
-| `db` | PostgreSQL 15 - faster than MariaDB in my testing, and cleaner upgrades |
+| `app` | Nextcloud itself (Apache image): PHP, WebDAV, the works |
+| `cron` | Same image, different entrypoint: background jobs every 5 minutes |
+| `notify_push` | The Client Push daemon for real-time sync without polling |
+| `db` | PostgreSQL 15, faster than MariaDB in my testing and cleaner to upgrade |
 | `redis` | File locking, caching, and PHP sessions |
 | `imaginary` | Preview/thumbnail generation, so PHP does not choke on photos |
 
@@ -34,7 +34,7 @@ In front of all of it sits **Traefik v3**, terminating TLS with Let's Encrypt ce
 
 ## The interesting parts of the Compose file
 
-The full file is long, so here are the pieces that carry the design. Postgres and the admin account get their credentials from **Docker secrets** - `chmod 600` files on disk, never environment variables:
+The full file is long, so here are the pieces that carry the design. Postgres and the admin account get their credentials from **Docker secrets**: `chmod 600` files on disk, never environment variables.
 
 ```yaml
   db:

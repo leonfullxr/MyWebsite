@@ -1,7 +1,7 @@
 ---
 title: "Migrar Immich llevando un disco duro en la mano, y lo que Nextcloud me enseñó sobre almacenamiento"
 date: "2026-07-10"
-description: "Trasladar una biblioteca de fotos entre CPUs sin convertir Postgres, por qué pinchar la versión salvó la migración, y el desastre de VirtualBox que me enseñó dónde van - y dónde no - los binarios grandes."
+description: "Trasladar una biblioteca de fotos entre CPUs sin convertir Postgres, por qué pinchar la versión salvó la migración, y el desastre de VirtualBox que me enseñó dónde van (y dónde no) los binarios grandes."
 tags: ["Self-Hosting", "DevOps", "Linux"]
 lang: "es"
 translation: "immich-migration-and-nextcloud-storage-lessons"
@@ -9,9 +9,9 @@ translation: "immich-migration-and-nextcloud-storage-lessons"
 
 # Migrar Immich llevando un disco duro en la mano, y lo que Nextcloud me enseñó sobre almacenamiento
 
-Forma parte de mi [serie sobre el servidor doméstico](/es/blog/de-puertos-abiertos-a-tuneles-cloudflare/). Son dos relatos distintos que acaban en la misma conclusión: **los binarios voluminosos no encajan en almacenamiento sincronizado y versionado** - una biblioteca de medios quiere un directorio plano atendido por una app hecha para eso. Nextcloud me enseñó la lección a golpe de factura de disco; Immich demostró lo contrario cuando moví la biblioteca de un lado a otro de la habitación.
+Forma parte de mi [serie sobre el servidor doméstico](/es/blog/de-puertos-abiertos-a-tuneles-cloudflare/). Son dos relatos distintos que acaban en la misma conclusión: **los binarios voluminosos no encajan en almacenamiento sincronizado y versionado**. Una biblioteca de medios quiere un directorio plano atendido por una app hecha para eso. Nextcloud me enseñó la lección a golpe de factura de disco. Immich demostró lo contrario cuando moví la biblioteca de un lado a otro de la habitación.
 
-## Parte 1 - El incidente de VirtualBox
+## Parte 1: El incidente de VirtualBox
 
 Antes de la Pi, Nextcloud empezó a devorar espacio sin explicación aparente. El origen: ficheros `.vdi` de VirtualBox de varios gigabytes dentro del árbol `files/` que sincronizaba.
 
@@ -21,30 +21,30 @@ Para salir del pozo tuve que entender cómo guarda Nextcloud de verdad:
 
 - **No existen exclusiones de versionado por carpeta o extensión.** Solo mandos globales en `config.php`: `versions_retention_obligation` y `trashbin_retention_obligation`.
 - El `sync-exclude.lst` del cliente es **local** y solo frena subidas *nuevas*. No toca lo que ya vive en el servidor.
-- Liberar espacio implica `occ trashbin:cleanup` y `occ versions:cleanup`; si manipulas algo bajo `data/` a mano, hace falta `occ files:scan` para alinear `oc_filecache` con el disco, o la UI y la realidad divergen.
+- Liberar espacio implica `occ trashbin:cleanup` y `occ versions:cleanup`. Si manipulas algo bajo `data/` a mano, hace falta `occ files:scan` para alinear `oc_filecache` con el disco. Si no, la UI y la realidad divergen.
 - **Los cron jobs importan más de lo que parecen.** Un contenedor de cron reiniciándose en bucle deja las políticas de retención sin efecto: la configuración luce bien, el disco sigue creciendo.
 
-La solución no fue comprar más TB. Fue una regla de diseño: Nextcloud para documentos; música, fotos e imágenes de VM en directorios normales, gestionados por herramientas adecuadas. Eso preparó el terreno para lo que vino después.
+La solución no fue comprar más TB. Fue una regla de diseño: Nextcloud para documentos, y música, fotos e imágenes de VM en directorios normales gestionados por herramientas adecuadas. Eso preparó el terreno para lo que vino después.
 
-## Parte 2 - Immich se muda de casa
+## Parte 2: Immich se muda de casa
 
 La biblioteca corría en [Immich](https://immich.app/) sobre un portátil viejo, con los medios en un HDD externo de 4,5 TB. Llevarla a la Pi fue, en lo físico, caminar con el disco al otro lado de la habitación. Lo interesante es que el software casi no protestó.
 
 ### Fija la versión que nombra la copia de seguridad
 
-Immich genera backups automáticos de la base de datos, y el nombre del fichero incluye la release exacta - por ejemplo `immich-db-backup-...-v2.7.5-pg14.18.sql.gz`. Ese nombre es el contrato: en la máquina nueva, `IMMICH_VERSION` debe coincidir con esa release. No migres con `:release` - si upstream publicó algo más nuevo entre el backup y la restauración, la app intentará migrar una base que no le corresponde.
+Immich genera backups automáticos de la base de datos, y el nombre del fichero incluye la release exacta, por ejemplo `immich-db-backup-...-v2.7.5-pg14.18.sql.gz`. Ese nombre es el contrato: en la máquina nueva, `IMMICH_VERSION` debe coincidir con esa release. No migres con `:release`. Si upstream publicó algo más nuevo entre el backup y la restauración, la app intentará migrar una base que no le corresponde.
 
 ### La base de datos cruzó arquitecturas de CPU sin conversión
 
-El matiz: portátil x86-64, Pi ARM64, y el **directorio de datos de Postgres se copió tal cual** - sin dump/restore. Funciona por compatibilidad, no por casualidad: little-endian LP64 en ambos lados, imagen Postgres de Immich fijada y multi-arch con Postgres + glibc idénticos. Mismo formato en disco en origen y destino: los ficheros arrancan.
+El matiz: portátil x86-64, Pi ARM64, y el **directorio de datos de Postgres se copió tal cual** sin dump/restore. Funciona por compatibilidad, no por casualidad: little-endian LP64 en ambos lados, imagen Postgres de Immich fijada y multi-arch con Postgres + glibc idénticos. Mismo formato en disco en origen y destino: los ficheros arrancan.
 
-Aun así lo traté como el paso peligroso: el directorio original quedó intacto en el HDD como rollback inmediato; la instancia viva corre desde el SSD - Postgres y discos mecánicos no son amigos.
+Aun así lo traté como el paso peligroso. El directorio original quedó intacto en el HDD como rollback inmediato. La instancia viva corre desde el SSD. Postgres y discos mecánicos no son amigos.
 
 ### Detalles que se ganaron el sueldo
 
-- **Medios en HDD, base de datos en SSD** - bytes fríos en almacenamiento barato, E/S aleatoria caliente en disco rápido.
+- **Medios en HDD, base de datos en SSD.** Bytes fríos en almacenamiento barato, E/S aleatoria caliente en disco rápido.
 - Immich deja **marcadores** `.immich` en sus carpetas de medios y no arranca si faltan. Parece capricho, pero evita que, con el HDD desmontado, las subidas se dispersen en un punto de montaje vacío del SSD.
-- Herencia de la [arquitectura del túnel](/es/blog/de-puertos-abiertos-a-tuneles-cloudflare/): el plan gratuito de Cloudflare limita cuerpos de petición a ~100 MB; vídeos largos del móvil no pasan por el túnel - van por LAN o VPN.
+- Herencia de la [arquitectura del túnel](/es/blog/de-puertos-abiertos-a-tuneles-cloudflare/): el plan gratuito de Cloudflare limita cuerpos de petición a ~100 MB. Los vídeos largos del móvil no pasan por el túnel. Van por LAN o VPN.
 
 ### El compose, sin ceremonia
 
@@ -62,7 +62,7 @@ services:
       - ./postgres:/var/lib/postgresql/data   # BD: SSD
 ```
 
-Sin puertos publicados: la entrada es la regla de ingress del túnel para `photos.example.com`. El sidecar de ML (búsqueda inteligente, reconocimiento facial - todo local) no sale de la red interna.
+Sin puertos publicados: la entrada es la regla de ingress del túnel para `photos.example.com`. El sidecar de ML (búsqueda inteligente, reconocimiento facial, todo local) no sale de la red interna.
 
 ## El principio, reformulado
 
