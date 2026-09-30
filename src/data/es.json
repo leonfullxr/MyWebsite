@@ -173,8 +173,15 @@
           "text": "CompTIA Security+ ce - CompTIA (Sep 2026)",
           "url": "https://www.credly.com/badges/86db1620-ae07-420a-a9ab-ef2675916fa4"
         },
+        {
+          "text": "AWS Certified AI Practitioner - Amazon Web Services",
+          "url": "https://www.credly.com/badges/2c0af649-dd04-400a-826d-e56bd4830fce/linked_in_profile"
+        },
         "Elasticsearch Engineer - Elasticsearch (2025)",
-        "AWS Academy Cloud Developing - Amazon Web Services (Nov 2024)",
+        {
+          "text": "AWS Academy Cloud Developing - Amazon Web Services (Nov 2024)",
+          "url": "https://www.credly.com/badges/88aa1ef1-aa4f-4202-9739-75d974af1a1b/"
+        },
         "Machine Learning A-Z - Udemy (Ene-Jul 2024)",
         "ML y Big Data para Bioinformática - Universidad de Granada (Ene-Jun 2024)",
         "Domina C++ - Udemy (Dic 2022)",
