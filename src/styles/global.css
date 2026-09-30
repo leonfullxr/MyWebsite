@@ -37,7 +37,15 @@
 
 @layer components {
   .section-heading {
-    @apply font-display text-4xl md:text-5xl italic tracking-tight mb-8;
+    @apply font-display text-2xl md:text-3xl font-semibold tracking-tight text-ink-900 dark:text-sand-100 border-b border-sand-300 dark:border-ink-700 pb-3 mb-8;
+  }
+
+  .subsection-heading {
+    @apply font-display text-base font-semibold text-ink-900 dark:text-sand-100 border-b border-sand-300 dark:border-ink-700 pb-3 mb-8;
+  }
+
+  .card-subsection-heading {
+    @apply font-display text-sm font-semibold text-ink-800 dark:text-sand-200 border-b border-sand-200 dark:border-ink-700 pb-2 mb-3;
   }
 
   .card {
