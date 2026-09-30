@@ -9,7 +9,7 @@ translation: "creando-servidor-domestico"
 
 # Creating Your Home Server
 
-> **Update (July 2026):** this idea grew into a full self-hosted platform on a Raspberry Pi 5 - Nextcloud, Immich and Navidrome behind a Cloudflare Tunnel with zero open ports. Read how the architecture evolved in [From Port Forwarding to Cloudflare Tunnels](/en/blog/from-port-forwarding-to-cloudflare-tunnels/).
+> **Update (July 2026):** this idea grew into a full self-hosted platform on a Raspberry Pi 5: Nextcloud, Immich, and Navidrome behind a Cloudflare Tunnel with zero open ports. Read how the architecture evolved in [From Port Forwarding to Cloudflare Tunnels](/en/blog/from-port-forwarding-to-cloudflare-tunnels/).
 
 ## What is a Home Server?
 

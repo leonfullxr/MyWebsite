@@ -18,8 +18,8 @@ Everything runs on a Raspberry Pi 5 in my house. By the end of this post you wil
 | Component | Detail |
 |---|---|
 | Host | Raspberry Pi 5, 16 GB RAM, Ubuntu Server (aarch64) |
-| Primary storage | 2 TB SSD, LUKS-encrypted - apps, databases, music |
-| Bulk storage | 4.5 TB HDD, LUKS + LVM - photo/video library |
+| Primary storage | 2 TB SSD, LUKS-encrypted: apps, databases, music |
+| Bulk storage | 4.5 TB HDD, LUKS + LVM: photo/video library |
 | Runtime | Docker Compose, one directory per stack |
 | DNS + edge | Cloudflare: DNS, Tunnel, Zero Trust Access, DNSSEC |
 
@@ -35,9 +35,9 @@ Both drives unlock with a passphrase at boot (`/etc/crypttab`, with `nofail` so 
 
 Every container that needs to be reachable joins one shared external Docker network called `proxy`. Who gets to talk to the outside world is the whole story of this post.
 
-## Architecture v1 - Traefik, Let's Encrypt, and a script vs. my ISP
+## Architecture v1: Traefik, Let's Encrypt, and a script vs. my ISP
 
-The first version followed the pattern in every self-hosting tutorial. Forward ports 80/443 on the router. Run a reverse proxy that terminates TLS with Let's Encrypt certificates. Point an `A` record at your public IP. I documented that first build in detail at the time - the full Compose stack, Traefik config and all - in [Setting up Nextcloud on a Raspberry Pi](/en/blog/nextcloud-raspberry-pi-docker-setup/).
+The first version followed the pattern in every self-hosting tutorial. Forward ports 80/443 on the router. Run a reverse proxy that terminates TLS with Let's Encrypt certificates. Point an `A` record at your public IP. I documented that first build in detail at the time, including the full Compose stack and Traefik config, in [Setting up Nextcloud on a Raspberry Pi](/en/blog/nextcloud-raspberry-pi-docker-setup/).
 
 [![Architecture v1 - Traefik + Let's Encrypt + port forwarding](/images/blog/v1-architecture.svg)](/images/blog/v1-architecture.svg)
 
@@ -54,7 +54,7 @@ CURRENT_IP=$(curl -sf https://api.ipify.org)
 # 2. Same as last time? Then stop.
 [[ "$CURRENT_IP" == "$(cat /var/cache/public-ip)" ]] && exit 0
 
-# 3. It changed - update the Cloudflare A record via API.
+# 3. It changed. Update the Cloudflare A record via API.
 curl -sf -X PATCH \
   -H "Authorization: Bearer $CF_API_TOKEN" \
   --data "{\"content\": \"$CURRENT_IP\"}" \
@@ -81,7 +81,7 @@ Step 5 is not a joke. The real script literally ended with a `sleep 90` and an H
 
 None of these problems is exotic. They are the *default* experience of self-hosting the classic way. That is why the fix felt so clean.
 
-## Architecture v2 - inverting the connection
+## Architecture v2: inverting the connection
 
 A Cloudflare Tunnel flips the whole model on its head. Instead of the internet connecting *in* to my house, a single lightweight container (`cloudflared`) dials *out* to Cloudflare's edge. It keeps a handful of redundant QUIC connections alive. Inbound traffic rides those already-established connections back. Nothing listens on the WAN. The router forwards nothing. My home IP appears in no DNS record. The public hostnames resolve to Cloudflare's anycast network.
 
@@ -149,7 +149,7 @@ This is my favorite part of the redesign. Walk the chain from the outside:
 - Port-scan my home IP (if you somehow find it) → nothing is listening.
 - Want a shell? You must get past Cloudflare Access (an OTP sent to a hardware-2FA-protected mailbox), *then* past key-only sshd.
 
-The crown jewels stopped being ports and IP addresses. They became **two accounts** - Cloudflare and email - both hardware-2FA'd. DNSSEC signs the zone on top. The old dynamic-DNS script, with its embedded API token? Deleted, token revoked. There is nothing left for it to do.
+The crown jewels stopped being ports and IP addresses. They became **two accounts**, Cloudflare and email, both protected with hardware 2FA. DNSSEC signs the zone on top. The old dynamic-DNS script, with its embedded API token? Deleted, token revoked. There is nothing left for it to do.
 
 ### The honest trade-offs
 

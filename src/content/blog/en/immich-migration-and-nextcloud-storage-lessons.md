@@ -11,7 +11,7 @@ translation: "migracion-immich-y-lecciones-de-almacenamiento-nextcloud"
 
 This is part of my [home server series](/en/blog/from-port-forwarding-to-cloudflare-tunnels/). It is really two stories that converge on one principle: **bulk binary data does not belong in synced storage**. Media libraries want plain folders served by purpose-built apps. Here is how I learned that the expensive way with Nextcloud, and how it made the Immich migration almost boringly smooth.
 
-## Part 1 - The VirtualBox incident
+## Part 1: The VirtualBox incident
 
 Long before the Pi, my Nextcloud instance developed a mysterious appetite for disk space. The culprit: multi-gigabyte VirtualBox `.vdi` disk images living inside Nextcloud's synced `files/`.
 
@@ -21,28 +21,28 @@ Digging out taught me Nextcloud's actual storage model:
 
 - There are **no per-path or per-extension version exclusions**. The only knobs are global: `versions_retention_obligation` and `trashbin_retention_obligation` in `config.php`.
 - The client-side ignore list (`sync-exclude.lst`) is **local to each client**. It only prevents *future* uploads. It does nothing about data already on the server.
-- Reclaiming space server-side means `occ trashbin:cleanup` and `occ versions:cleanup`. After manually touching anything under `data/`, run `occ files:scan` to reconcile the `oc_filecache` table. Otherwise Nextcloud's view of reality drifts from the disk's.
+- Reclaiming space server-side means `occ trashbin:cleanup` and `occ versions:cleanup`. After manually touching anything under `data/`, run `occ files:scan` to reconcile the `oc_filecache` table. Otherwise Nextcloud's view of reality drifts from the disk.
 - **Background jobs matter more than they seem.** A silently crash-looping cron container means retention policies never prune anything. The setting looks right. The disk keeps filling.
 
 The durable fix was not a bigger disk. It was an architectural rule: Nextcloud handles documents. Music, photos, and VM images live in plain folders owned by tools built for them. That set up everything that followed.
 
-## Part 2 - Immich moves house
+## Part 2: Immich moves house
 
 My photo library ran on [Immich](https://immich.app/) on an old laptop. Media sat on an external 4.5 TB HDD. The migration to the Pi was, physically, one step: carry the drive across the room. The interesting part is why the software side did not fight back.
 
 ### Pin the version the backup names
 
-Immich writes automatic database backups. The filename encodes the exact version that produced them - something like `immich-db-backup-...-v2.7.5-pg14.18.sql.gz`. That filename is the migration contract. Set `IMMICH_VERSION` to exactly that release on the new machine. Never migrate onto `:release`. If upstream published a newer version between your backup and your restore, the app will try to run migrations against a database it does not match.
+Immich writes automatic database backups. The filename encodes the exact version that produced them, something like `immich-db-backup-...-v2.7.5-pg14.18.sql.gz`. That filename is the migration contract. Set `IMMICH_VERSION` to exactly that release on the new machine. Never migrate onto `:release`. If upstream published a newer version between your backup and your restore, the app will try to run migrations against a database it does not match.
 
 ### The database crossed CPU architectures without conversion
 
-The spicy detail: the laptop was x86-64, the Pi is ARM64, and the **Postgres data directory moved between them as-is** - no dump-and-restore. That works because of alignment, not luck. Both platforms are little-endian LP64. The pinned Immich Postgres image is multi-arch. It ships the identical Postgres + glibc versions on both. Same on-disk format on both ends means the files just work.
+The spicy detail: the laptop was x86-64, the Pi is ARM64, and the **Postgres data directory moved between them as-is** with no dump-and-restore. That works because of alignment, not luck. Both platforms are little-endian LP64. The pinned Immich Postgres image is multi-arch. It ships the identical Postgres + glibc versions on both. Same on-disk format on both ends means the files just work.
 
 I still treated it as the risky step. The original data directory stayed untouched on the HDD as an instant rollback. The live copy runs from the SSD. Databases hate spinning disks.
 
 ### Details that earned their keep
 
-- **Media stays on the HDD, database on the SSD** - bulk bytes on cheap storage, hot random I/O on fast storage.
+- **Media stays on the HDD, database on the SSD.** Bulk bytes on cheap storage, hot random I/O on fast storage.
 - Immich plants `.immich` **marker files** in its media folders and refuses to start if it cannot see them. What looks like pedantry is a guard. If the HDD ever fails to mount, Immich stops cold instead of quietly scattering uploads into an empty mountpoint on the SSD.
 - One caveat inherited from the [tunnel architecture](/en/blog/from-port-forwarding-to-cloudflare-tunnels/): Cloudflare's free plan caps request bodies at ~100 MB. Long phone videos will not back up through the tunnel. They take a LAN or VPN path instead.
 
@@ -62,7 +62,7 @@ services:
       - ./postgres:/var/lib/postgresql/data   # DB: SSD
 ```
 
-No ports are published anywhere. The only way in is through the tunnel's ingress rule for `photos.example.com`. The machine-learning sidecar (smart search, face recognition - all local) never leaves the internal network at all.
+No ports are published anywhere. The only way in is through the tunnel's ingress rule for `photos.example.com`. The machine-learning sidecar (smart search, face recognition, all local) never leaves the internal network at all.
 
 ## The principle, restated
 

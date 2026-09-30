@@ -154,37 +154,62 @@ const lang = 'es';
       });
     });
 
-    // Copy button on code blocks
+    // Code blocks: language label + copy
     const copyIcon =
-      '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3"/></svg>';
+      '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3"/></svg>';
     const checkIcon =
-      '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>';
+      '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>';
     document.querySelectorAll('.prose-blog pre').forEach((pre) => {
       const wrap = document.createElement('div');
       wrap.className = 'code-block';
       pre.parentNode.insertBefore(wrap, pre);
-      wrap.appendChild(pre);
+
+      const header = document.createElement('div');
+      header.className = 'code-block-header';
+
+      const codeEl = pre.querySelector('code');
+      const langMatch = codeEl?.className.match(/language-([\w-]+)/);
+      const lang = langMatch ? langMatch[1] : 'text';
+
+      const langLabel = document.createElement('span');
+      langLabel.className = 'code-block-lang';
+      langLabel.textContent = lang;
+
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'code-copy';
       btn.setAttribute('aria-label', 'Copiar código');
-      btn.innerHTML = copyIcon;
+      btn.innerHTML = `${copyIcon}<span>Copiar</span>`;
+
+      const getCodeText = () => {
+        const source = codeEl || pre;
+        return source.textContent.replace(/\n$/, '');
+      };
+
       btn.addEventListener('click', async () => {
+        const text = getCodeText();
         try {
-          await navigator.clipboard.writeText(pre.textContent);
+          await navigator.clipboard.writeText(text);
         } catch {
-          // Clipboard unavailable/blocked: select the code so the user can copy manually
           const range = document.createRange();
-          range.selectNodeContents(pre);
+          range.selectNodeContents(codeEl || pre);
           const selection = window.getSelection();
           selection.removeAllRanges();
           selection.addRange(range);
           return;
         }
-        btn.innerHTML = checkIcon;
-        setTimeout(() => (btn.innerHTML = copyIcon), 1500);
+        btn.classList.add('copied');
+        btn.innerHTML = `${checkIcon}<span>Copiado</span>`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `${copyIcon}<span>Copiar</span>`;
+        }, 1500);
       });
-      wrap.appendChild(btn);
+
+      header.appendChild(langLabel);
+      header.appendChild(btn);
+      wrap.appendChild(header);
+      wrap.appendChild(pre);
     });
 
     // Back to top

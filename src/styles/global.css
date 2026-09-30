@@ -191,35 +191,33 @@
     @apply bg-ink-800;
   }
 
-  /* Code blocks — dark terminal style in both themes */
+  /* Code blocks */
   .code-block {
-    @apply relative my-6;
+    @apply my-6 rounded-xl border border-sand-200 dark:border-ink-700 overflow-hidden bg-sand-50 dark:bg-ink-950;
+  }
+
+  .code-block-header {
+    @apply flex items-center justify-between gap-3 px-4 py-2 border-b border-sand-200 dark:border-ink-700 bg-sand-100/80 dark:bg-ink-900/80;
+  }
+
+  .code-block-lang {
+    @apply text-xs font-mono uppercase tracking-wider text-ink-400 dark:text-sand-500;
   }
 
   .prose-blog pre {
-    @apply bg-ink-950 dark:bg-ink-900 border border-ink-800 dark:border-ink-700 rounded-xl p-4 my-6 overflow-x-auto text-sm font-mono text-sand-100;
-  }
-
-  .code-block pre {
-    @apply my-0;
+    @apply bg-transparent border-0 rounded-none p-4 m-0 overflow-x-auto text-[0.8125rem] leading-6 font-mono text-ink-800 dark:text-sand-100;
   }
 
   .prose-blog pre code {
-    @apply bg-transparent p-0 text-sand-100;
+    @apply bg-transparent p-0 text-inherit;
   }
 
   .code-copy {
-    @apply absolute top-2.5 right-2.5 p-1.5 rounded-lg text-sand-400 bg-ink-950/80 dark:bg-ink-900/80 hover:text-sand-100 hover:bg-ink-800 transition-colors opacity-0 focus:opacity-100 cursor-pointer;
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono text-ink-500 dark:text-sand-400 hover:text-ink-800 dark:hover:text-sand-100 hover:bg-sand-200/80 dark:hover:bg-ink-800 transition-colors cursor-pointer;
   }
 
-  .code-block:hover .code-copy {
-    @apply opacity-100;
-  }
-
-  @media (hover: none) {
-    .code-copy {
-      @apply opacity-100;
-    }
+  .code-copy.copied {
+    @apply text-emerald-700 dark:text-emerald-400;
   }
 
   /* Back to top */
@@ -232,42 +230,80 @@
     visibility: visible;
   }
 
-  /* highlight.js tokens — github-dark-ish, used in both themes */
+  /* highlight.js tokens */
   .prose-blog .hljs-comment,
   .prose-blog .hljs-quote {
-    color: #8b949e;
+    color: #6b7280;
   }
   .prose-blog .hljs-keyword,
   .prose-blog .hljs-selector-tag,
   .prose-blog .hljs-type {
-    color: #ff7b72;
+    color: #b45309;
   }
   .prose-blog .hljs-string,
   .prose-blog .hljs-regexp,
   .prose-blog .hljs-addition {
-    color: #a5d6ff;
+    color: #0369a1;
   }
   .prose-blog .hljs-number,
   .prose-blog .hljs-literal,
   .prose-blog .hljs-symbol,
   .prose-blog .hljs-bullet {
-    color: #79c0ff;
+    color: #0f766e;
   }
   .prose-blog .hljs-title,
   .prose-blog .hljs-section,
   .prose-blog .hljs-name,
   .prose-blog .hljs-function .hljs-title {
-    color: #d2a8ff;
+    color: #7c3aed;
   }
   .prose-blog .hljs-attr,
   .prose-blog .hljs-attribute,
   .prose-blog .hljs-variable,
   .prose-blog .hljs-template-variable,
   .prose-blog .hljs-built_in {
-    color: #ffa657;
+    color: #c2410c;
   }
   .prose-blog .hljs-meta,
   .prose-blog .hljs-deletion {
+    color: #b91c1c;
+  }
+
+  .dark .prose-blog .hljs-comment,
+  .dark .prose-blog .hljs-quote {
+    color: #8b949e;
+  }
+  .dark .prose-blog .hljs-keyword,
+  .dark .prose-blog .hljs-selector-tag,
+  .dark .prose-blog .hljs-type {
+    color: #ff7b72;
+  }
+  .dark .prose-blog .hljs-string,
+  .dark .prose-blog .hljs-regexp,
+  .dark .prose-blog .hljs-addition {
+    color: #a5d6ff;
+  }
+  .dark .prose-blog .hljs-number,
+  .dark .prose-blog .hljs-literal,
+  .dark .prose-blog .hljs-symbol,
+  .dark .prose-blog .hljs-bullet {
+    color: #79c0ff;
+  }
+  .dark .prose-blog .hljs-title,
+  .dark .prose-blog .hljs-section,
+  .dark .prose-blog .hljs-name,
+  .dark .prose-blog .hljs-function .hljs-title {
+    color: #d2a8ff;
+  }
+  .dark .prose-blog .hljs-attr,
+  .dark .prose-blog .hljs-attribute,
+  .dark .prose-blog .hljs-variable,
+  .dark .prose-blog .hljs-template-variable,
+  .dark .prose-blog .hljs-built_in {
+    color: #ffa657;
+  }
+  .dark .prose-blog .hljs-meta,
+  .dark .prose-blog .hljs-deletion {
     color: #ff7b72;
   }
 

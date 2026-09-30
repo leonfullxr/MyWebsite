@@ -9,7 +9,7 @@ translation: "spotify-autoalojado-con-navidrome"
 
 # A Self-Hosted Spotify: Navidrome, spotdl, and a War with Rate Limits
 
-This is part of my [home server series](/en/blog/from-port-forwarding-to-cloudflare-tunnels/). The goal was simple to state and surprisingly deep to execute: **make my entire Spotify library - liked songs and all playlists - exist as plain audio files on my Raspberry Pi**. [Navidrome](https://www.navidrome.org/) serves them so any Subsonic-compatible phone app can stream from anywhere.
+This is part of my [home server series](/en/blog/from-port-forwarding-to-cloudflare-tunnels/). The goal was simple to state and surprisingly deep to execute: **make my entire Spotify library, liked songs and all playlists included, exist as plain audio files on my Raspberry Pi**. [Navidrome](https://www.navidrome.org/) serves them so any Subsonic-compatible phone app can stream from anywhere.
 
 [![The music pipeline - a self-hosted Spotify](/images/blog/music-pipeline.svg)](/images/blog/music-pipeline.svg)
 
@@ -37,23 +37,23 @@ services:
 
 ## What the rate limiter taught me
 
-The naive approach - feed spotdl a list of track URLs - died fast. Every raw URL forces a per-track metadata lookup. ~2,900 of those in bulk is exactly what Spotify's anti-abuse systems exist to stop. Lessons, in the order they cost me time:
+The naive approach, feeding spotdl a list of track URLs, died fast. Every raw URL forces a per-track metadata lookup. ~2,900 of those in bulk is exactly what Spotify's anti-abuse systems exist to stop. Lessons, in the order they cost me time:
 
 1. **Do not use spotdl's shared client ID.** It is throttled into uselessness by everyone else using it. A personal (free) Spotify developer app gets its own quota.
-2. **Even your own app has a daily cap** while in "development mode". Exceed it and Spotify answers `429 Retry-After: 86400` - come back in *a full day*.
+2. **Even your own app has a daily cap** while in "development mode". Exceed it and Spotify answers `429 Retry-After: 86400`. Come back in *a full day*.
 3. **Concurrency trips a different tripwire.** Four parallel threads hammering the session endpoint got the IP soft-banned (`Could not get session`). That error means *throttled*, not *broken*. The fix is patience, not upgrading packages.
 
 The design that survived is a **two-step pipeline** that touches Spotify as little as possible:
 
-**Step 1 - enumerate and bank.** A small Python script paginates my liked songs and playlists through the official Web API. Those endpoints return *full track objects*. The same pass that lists the library also banks every track's metadata into a `library.spotdl` file on disk. A few dozen gentle, spaced-out calls - that is Spotify's entire involvement.
+**Step 1: enumerate and bank.** A small Python script paginates my liked songs and playlists through the official Web API. Those endpoints return *full track objects*. The same pass that lists the library also banks every track's metadata into a `library.spotdl` file on disk. A few dozen gentle, spaced-out calls. That is Spotify's entire involvement.
 
-**Step 2 - download from the bank.** `spotdl download library.spotdl` reads metadata from disk and only talks to YouTube. With `--archive`, every completed track is recorded. Re-runs skip everything already done and fetch only what is new.
+**Step 2: download from the bank.** `spotdl download library.spotdl` reads metadata from disk and only talks to YouTube. With `--archive`, every completed track is recorded. Re-runs skip everything already done and fetch only what is new.
 
 ```bash
 # Step 1: paginated enumeration, metadata banked to disk (the ONLY Spotify contact)
 build-manifest.py  →  backfill/library.spotdl
 
-# Step 2: downloads read the bank; YouTube only; fully resumable
+# Step 2: downloads read the bank (YouTube only, fully resumable)
 spotdl download library.spotdl --archive archive \
   --output "{artist}/{album}/{track-number} - {title}.{output-ext}"
 ```
@@ -71,11 +71,11 @@ The initial bulk download deserved paranoia. The failing request was not per-tra
 
 The full run took about 13 hours on the Pi and finished with ~95% of the library downloaded. Retrying the stragglers recovered most of the rest. The final ~89 tracks simply have no YouTube source. That is the honest cost of this approach.
 
-My favorite bug from that week had nothing to do with Spotify. The run stalled because `run.log` had been pre-created by root. The unprivileged `>> run.log` redirect failed. Bash reported the *command* as failed. The loop dutifully interpreted that as rate-limiting and backed off for 25 minutes at a time - downloading nothing. If you script long-running jobs: **exit codes lie when redirects fail.**
+My favorite bug from that week had nothing to do with Spotify. The run stalled because `run.log` had been pre-created by root. The unprivileged `>> run.log` redirect failed. Bash reported the *command* as failed. The loop dutifully interpreted that as rate-limiting and backed off for 25 minutes at a time, downloading nothing. If you script long-running jobs: **exit codes lie when redirects fail.**
 
 ## Rebuilding the playlists
 
-Downloading files loses the thing that makes a library feel like *yours*: playlist membership. Rebuilding it needed a reliable mapping from "track in Spotify playlist" to "file on disk". The trick: while downloading, spotdl embeds the source Spotify URL in each file's ID3 `WOAS` frame (with the ISRC as a fallback key). A script re-reads playlist membership from the API. It maps each track to its file via that tag and writes one `.m3u8` per playlist - plus a synthetic "Liked Songs" playlist - into the folder Navidrome imports from (`ND_PLAYLISTSPATH`).
+Downloading files loses the thing that makes a library feel like *yours*: playlist membership. Rebuilding it needed a reliable mapping from "track in Spotify playlist" to "file on disk". The trick: while downloading, spotdl embeds the source Spotify URL in each file's ID3 `WOAS` frame (with the ISRC as a fallback key). A script re-reads playlist membership from the API. It maps each track to its file via that tag and writes one `.m3u8` per playlist, plus a synthetic "Liked Songs" playlist, into the folder Navidrome imports from (`ND_PLAYLISTSPATH`).
 
 Assorted findings from the trenches:
 
