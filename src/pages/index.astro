@@ -1,14 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import CV from '../components/CV.astro';
-import Projects from '../components/Projects.astro';
-import Hobbies from '../components/Hobbies.astro';
-import Blog from '../components/Blog.astro';
-import Footer from '../components/Footer.astro';
-import Thesis from '../components/Thesis.astro';
+import Home from '../components/Home.astro';
+import { getPosts } from '../data/home';
 
 import data from '../data/en.json';
 
@@ -16,13 +9,5 @@ const lang = 'en';
 ---
 
 <Layout title={data.meta.title} description={data.meta.description} lang={lang}>
-  <Nav nav={data.nav} lang={lang} />
-  <Hero hero={data.hero} lang={lang} />
-  <About about={data.about} contact={data.contact} />
-  <CV cv={data.cv} />
-  <Thesis thesis={data.thesis} lang={lang} />
-  <Projects projects={data.projects} />
-  <Hobbies hobbies={data.hobbies} />
-  <Blog blog={data.blog} lang={lang} />
-  <Footer footer={data.footer} contact={data.contact} />
+  <Home data={data} posts={getPosts(lang)} lang={lang} />
 </Layout>

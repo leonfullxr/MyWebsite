@@ -1,7 +1,7 @@
-// PROTOTYPE: landing-page redesign sketches. Delete this folder once a variant is picked.
+// Assets and helpers for the homepage (src/components/Home.astro).
 import fs from 'node:fs';
 import path from 'node:path';
-import en from '../../data/en.json';
+import en from './en.json';
 
 export type Post = {
   title: string;
@@ -50,52 +50,52 @@ export const icons = {
 export type Icon = { name: string; src: string };
 
 // Skills shown as logos only; the full text list belongs in the downloadable resume.
-export const skillGroups: { name: string; icons: Icon[] }[] = [
-  {
-    name: 'Languages',
-    icons: [
-      { name: 'C', src: '/images/icons/c.svg' },
-      { name: 'C++', src: '/images/icons/cplusplus.svg' },
-      { name: 'Python', src: '/images/icons/python.svg' },
-      { name: 'Go', src: '/images/icons/go.svg' },
-      { name: 'TypeScript', src: '/images/icons/typescript.svg' },
-      { name: 'JavaScript', src: '/images/icons/javascript.svg' },
-      { name: 'Svelte', src: '/images/icons/svelte.svg' },
-      { name: 'HTML', src: '/images/icons/html5.svg' },
-      { name: 'CSS', src: '/images/icons/css3.svg' },
-      { name: 'Bash', src: '/images/icons/bash.svg' },
-    ],
-  },
-  {
-    name: 'Security & search',
-    icons: [
-      { name: 'Wazuh', src: '/images/icons/wazuh.png' },
-      { name: 'Elasticsearch', src: '/images/icons/elasticsearch.svg' },
-      { name: 'OpenSearch', src: '/images/icons/opensearch.svg' },
-    ],
-  },
-  {
-    name: 'Cloud & infrastructure',
-    icons: [
-      { name: 'Docker', src: '/images/icons/docker.svg' },
-      { name: 'Kubernetes', src: '/images/icons/kubernetes.svg' },
-      { name: 'AWS', src: '/images/icons/aws.svg' },
-      { name: 'Azure', src: '/images/icons/azure.svg' },
-      { name: 'Linux', src: '/images/icons/linux.svg' },
-      { name: 'Git', src: '/images/icons/git.svg' },
-      { name: 'PostgreSQL', src: '/images/icons/postgresql.svg' },
-    ],
-  },
-  {
-    name: 'Graphics & games',
-    icons: [
-      { name: 'Godot', src: '/images/icons/godot.svg' },
-      { name: 'Three.js', src: '/images/icons/threejs.svg' },
-    ],
-  },
-];
-
-export const allSkillIcons: Icon[] = skillGroups.flatMap((g) => g.icons);
+// `id` is looked up in home.skillGroups of en.json / es.json for the visible label.
+export const skillGroups: { id: 'languages' | 'security' | 'cloud' | 'graphics'; icons: Icon[] }[] =
+  [
+    {
+      id: 'languages',
+      icons: [
+        { name: 'C', src: '/images/icons/c.svg' },
+        { name: 'C++', src: '/images/icons/cplusplus.svg' },
+        { name: 'Python', src: '/images/icons/python.svg' },
+        { name: 'Go', src: '/images/icons/go.svg' },
+        { name: 'TypeScript', src: '/images/icons/typescript.svg' },
+        { name: 'JavaScript', src: '/images/icons/javascript.svg' },
+        { name: 'Svelte', src: '/images/icons/svelte.svg' },
+        { name: 'HTML', src: '/images/icons/html5.svg' },
+        { name: 'CSS', src: '/images/icons/css3.svg' },
+        { name: 'Bash', src: '/images/icons/bash.svg' },
+      ],
+    },
+    {
+      id: 'security',
+      icons: [
+        { name: 'Wazuh', src: '/images/icons/wazuh.png' },
+        { name: 'Elasticsearch', src: '/images/icons/elasticsearch.svg' },
+        { name: 'OpenSearch', src: '/images/icons/opensearch.svg' },
+      ],
+    },
+    {
+      id: 'cloud',
+      icons: [
+        { name: 'Docker', src: '/images/icons/docker.svg' },
+        { name: 'Kubernetes', src: '/images/icons/kubernetes.svg' },
+        { name: 'AWS', src: '/images/icons/aws.svg' },
+        { name: 'Azure', src: '/images/icons/azure.svg' },
+        { name: 'Linux', src: '/images/icons/linux.svg' },
+        { name: 'Git', src: '/images/icons/git.svg' },
+        { name: 'PostgreSQL', src: '/images/icons/postgresql.svg' },
+      ],
+    },
+    {
+      id: 'graphics',
+      icons: [
+        { name: 'Godot', src: '/images/icons/godot.svg' },
+        { name: 'Three.js', src: '/images/icons/threejs.svg' },
+      ],
+    },
+  ];
 
 // One entry per cv.awards item, same order. kind "badge" is an official issued badge image
 // (show it large, uncropped); "logo" is an issuer logo to place inside a badge-shaped frame;
@@ -117,7 +117,7 @@ export const awardBadges: Badge[] = [
   { kind: 'monogram', letters: 'IF' },
 ];
 
-// Natural size of each project image, so layouts can size tiles to the picture's shape.
+// Natural size of each project image, so the homepage can size it to the picture's shape.
 export const imageSize: Record<string, { w: number; h: number }> = {
   '/images/potocolom.png': { w: 1024, h: 513 },
   '/images/hopf_torus.png': { w: 1920, h: 721 },
