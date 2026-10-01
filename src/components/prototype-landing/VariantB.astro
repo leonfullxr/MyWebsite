@@ -1,6 +1,509 @@
 ---
-// PROTOTYPE stub, replaced by delegate
+// PROTOTYPE variant B: "Swiss type". Static international-typographic layout: giant Lato 900 headlines on a strict 12-column grid with thin rules, one sand accent, and hover states only.
 import type { Data, Post } from "./data";
-interface Props { data: Data; posts: Post[]; lang: string }
+import { awardText } from "./data";
+
+interface Props {
+  data: Data;
+  posts: Post[];
+  lang: string;
+}
+
+const { data, posts, lang } = Astro.props;
+
+// Shared class strings. They are literals here so Tailwind picks them up.
+const rule = "border-ink-950 dark:border-sand-50";
+const hairline = "border-ink-950/20 dark:border-sand-50/20";
+const accent = "text-sand-600 dark:text-sand-400";
+const accentHover = "transition-colors hover:text-sand-600 dark:hover:text-sand-400";
+const micro = "text-xs uppercase tracking-[0.2em] font-bold";
+
+const nameWords = data.hero.name.split(" ");
+const taglineItems = data.hero.tagline
+  .split(/\u00b7/)
+  .map((t) => t.trim())
+  .filter(Boolean);
+const currentJob =
+  data.cv.experience.items.find((job) => job.current) ?? data.cv.experience.items[0];
+
+const projects = data.projects.items.map((item) => ({
+  name: item.name,
+  url: item.url,
+  period: item.period,
+  description: item.description,
+  tags: item.tags,
+  image: "image" in item && item.image ? item.image : null,
+}));
+
+const allTags: string[] = [];
+for (const project of projects) {
+  for (const tag of project.tags) {
+    if (!allTags.includes(tag)) allTags.push(tag);
+  }
+}
+
+const awards = data.cv.awards.items.map((item) => awardText(item));
+const pad2 = (n: number) => String(n).padStart(2, "0");
 ---
-<p class="p-10">Variant B pending</p>
+
+<div class="overflow-x-clip bg-sand-50 text-ink-950 dark:bg-ink-950 dark:text-sand-50">
+  <!-- Header -->
+  <header id="b-top" class="mx-auto max-w-7xl px-5 md:px-10">
+    <div class:list={["flex h-12 items-center justify-between gap-4 border-b text-xs uppercase tracking-[0.2em]", rule]}>
+      <a href="#b-top" class:list={["shrink-0 font-bold normal-case", accentHover]}>
+        <span class="text-sand-400">return</span> leon<span class="text-sand-400">;</span>
+      </a>
+      <nav class="hidden items-center gap-6 md:flex lg:gap-8">
+        <a href="#b-about" class={accentHover}>{data.nav.about}</a>
+        <a href="#b-exp" class={accentHover}>{data.nav.cv}</a>
+        <a href="#b-projects" class={accentHover}>{data.nav.projects}</a>
+        <a href="#b-thesis" class={accentHover}>{data.nav.thesis}</a>
+        <a href="#b-blog" class={accentHover}>{data.nav.blog}</a>
+      </nav>
+      <div class="flex items-center gap-4 md:gap-6">
+        <a href="/es/" class:list={["font-bold", accentHover]}>{data.nav.switchLang}</a>
+        <button
+          type="button"
+          onclick="toggleTheme()"
+          aria-label="Toggle color theme"
+          class:list={["-mr-1 p-1", accentHover]}
+        >
+          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"></circle>
+            <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="mx-auto max-w-7xl px-5 md:px-10">
+    <p class="pt-10 text-xs uppercase tracking-[0.2em] md:pt-16">{data.hero.greeting}</p>
+    <h1 class="mt-3 font-black uppercase leading-[0.82] tracking-tighter text-[13.5vw] xl:text-[190px]">
+      {
+        nameWords.map((word, i) => (
+          <Fragment>
+            <span class="block md:inline">
+              {word}
+              {i === nameWords.length - 1 && <span class={accent}>.</span>}
+            </span>
+            {i < nameWords.length - 1 && " "}
+          </Fragment>
+        ))
+      }
+    </h1>
+    <div class:list={["mt-8 border-t md:mt-10", rule]}></div>
+    <div class="grid grid-cols-1 gap-8 pt-8 pb-16 md:grid-cols-12 md:gap-10 md:pb-24">
+      <div class="md:col-span-4">
+        <ul class="space-y-2 text-sm uppercase tracking-[0.15em]">
+          {taglineItems.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+      <div class="md:col-span-4">
+        <p class="text-base font-light leading-relaxed md:text-lg">{data.hero.description}</p>
+      </div>
+      <div class="space-y-5 md:col-span-4">
+        <p class="text-base">
+          <span class="block font-bold">{currentJob.role}</span>
+          <span class:list={["block font-bold", accent]}>{currentJob.company}</span>
+        </p>
+        <p class="text-sm uppercase tracking-[0.15em]">{data.about.location}</p>
+        <div class="flex flex-col items-start gap-2 text-sm">
+          <a
+            href={`mailto:${data.contact.email}`}
+            class:list={["underline underline-offset-4", accentHover]}
+          >
+            {data.contact.email} <span aria-hidden="true">&rarr;</span>
+          </a>
+          <a
+            href={data.contact.github}
+            class:list={["underline underline-offset-4", accentHover]}
+          >
+            GitHub <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 About -->
+  <section id="b-about" class="mx-auto max-w-7xl px-5 md:px-10">
+    <div class:list={["border-t", rule]}></div>
+    <div class="grid grid-cols-1 gap-10 py-16 md:grid-cols-12 md:py-24">
+      <div class="md:col-span-4">
+        <p class="text-sm font-bold">01</p>
+        <h2 class="mt-4 font-black text-5xl leading-none tracking-tight md:text-6xl">
+          {data.about.title}
+        </h2>
+      </div>
+      <div class="md:col-span-8">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-5">
+          <div class="sm:col-span-2">
+            <img
+              src="/images/profile.jpg"
+              alt="Leon Elliott Fuller running"
+              loading="lazy"
+              class="aspect-[4/5] w-full object-cover object-top grayscale transition hover:grayscale-0"
+            />
+          </div>
+          <div class="space-y-5 sm:col-span-3">
+            {data.about.paragraphs.map((paragraph) => <p class="text-lg font-light">{paragraph}</p>)}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 Experience -->
+  <section id="b-exp" class="mx-auto max-w-7xl px-5 md:px-10">
+    <div class:list={["border-t", rule]}></div>
+    <div class="grid grid-cols-1 gap-10 py-16 md:grid-cols-12 md:py-24">
+      <div class="md:col-span-4">
+        <p class="text-sm font-bold">02</p>
+        <h2 class="mt-4 font-black text-5xl leading-none tracking-tight md:text-6xl">
+          {data.cv.title}
+        </h2>
+      </div>
+      <div class="space-y-10 md:col-span-8">
+        <div>
+          <p class:list={["border-b pb-3", micro, hairline]}>{data.cv.experience.title}</p>
+          {
+            data.cv.experience.items.map((job, i) => (
+              <article class:list={[i > 0 ? `border-t py-8 ${hairline}` : "py-8"]}>
+                <div class="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-10">
+                  <p class="text-sm">{job.period}</p>
+                  <div class="md:col-span-2">
+                    <h3 class="text-2xl font-bold leading-tight">{job.role}</h3>
+                    <p class:list={["font-bold", accent]}>{job.company}</p>
+                  </div>
+                </div>
+                <ul class="mt-5 md:columns-2 md:gap-10">
+                  {job.description.map((bullet) => (
+                    <li class="mb-3 flex gap-2 break-inside-avoid text-sm leading-relaxed">
+                      <span aria-hidden="true" class={accent}>
+                        -
+                      </span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+        <div>
+          <p class:list={["border-b pb-3", micro, hairline]}>{data.cv.education.title}</p>
+          {
+            data.cv.education.items.map((item, i) => (
+              <article class:list={[i > 0 ? `border-t py-8 ${hairline}` : "py-8"]}>
+                <div class="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-10">
+                  <p class="text-sm">{item.period}</p>
+                  <div class="md:col-span-2">
+                    <h3 class="text-2xl font-bold leading-tight">{item.degree}</h3>
+                    <p class:list={["font-bold", accent]}>{item.institution}</p>
+                  </div>
+                </div>
+                <p class="mt-5 text-sm font-light leading-relaxed">{item.details}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Skills -->
+  <section id="b-skills" class="mx-auto max-w-7xl px-5 md:px-10">
+    <div class:list={["border-t", rule]}></div>
+    <div class="grid grid-cols-1 gap-10 py-16 md:grid-cols-12 md:py-24">
+      <div class="md:col-span-4">
+        <p class="text-sm font-bold">03</p>
+        <h2 class="mt-4 font-black text-5xl leading-none tracking-tight md:text-6xl">
+          {data.cv.skills.title}
+        </h2>
+      </div>
+      <div class="grid grid-cols-2 gap-x-8 gap-y-10 md:col-span-8 md:grid-cols-4 md:gap-x-10">
+        {
+          data.cv.skills.categories.map((category) => (
+            <div>
+              <h3 class:list={["border-b pb-3", micro, rule]}>{category.name}</h3>
+              <ul class="mt-4">
+                {category.items.map((item) => (
+                  <li class="break-words text-xl font-light leading-relaxed">{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 Projects -->
+  <section id="b-projects" class="mx-auto max-w-7xl px-5 md:px-10">
+    <div class:list={["border-t", rule]}></div>
+    <div class="grid grid-cols-1 gap-10 py-16 md:grid-cols-12 md:py-24">
+      <div class="md:col-span-4">
+        <p class="text-sm font-bold">04</p>
+        <h2 class="mt-4 font-black text-5xl leading-none tracking-tight md:text-6xl">
+          {data.projects.title}
+        </h2>
+      </div>
+      <div class="md:col-span-8">
+        <div class="mb-10 flex flex-wrap items-baseline gap-y-2 text-sm uppercase tracking-[0.15em]">
+          <span class="whitespace-nowrap">
+            <button
+              type="button"
+              data-filter="all"
+              aria-pressed="true"
+              class="underline decoration-2 underline-offset-8 font-bold"
+            >
+              All
+            </button>
+            <span class="px-1.5 text-ink-400 dark:text-sand-500" aria-hidden="true">/</span>
+          </span>
+          {
+            allTags.map((tag, i) => (
+              <span class="whitespace-nowrap">
+                <button
+                  type="button"
+                  data-filter={tag.toLowerCase()}
+                  aria-pressed="false"
+                  class:list={[accentHover]}
+                >
+                  {tag}
+                </button>
+                {i < allTags.length - 1 && (
+                  <span class="px-1.5 text-ink-400 dark:text-sand-500" aria-hidden="true">
+                    /
+                  </span>
+                )}
+              </span>
+            ))
+          }
+        </div>
+        <div class="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+          {
+            projects.map((project, i) => (
+              <a
+                href={project.url}
+                data-tags={project.tags.join("|").toLowerCase()}
+                class="group block"
+              >
+                {project.image ? (
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    loading="lazy"
+                    class="aspect-[4/3] w-full object-cover grayscale transition group-hover:grayscale-0"
+                  />
+                ) : (
+                  <div class="flex aspect-[4/3] w-full items-center justify-center bg-ink-950">
+                    <span class="text-7xl font-black text-white">{project.name.charAt(0)}</span>
+                  </div>
+                )}
+                <div class="mt-4 flex items-baseline justify-between text-xs uppercase tracking-[0.15em]">
+                  <span>{pad2(i + 1)}</span>
+                  <span>{project.period}</span>
+                </div>
+                <h3 class="mt-2 font-black text-2xl leading-tight">
+                  <span class:list={[accentHover]}>{project.name}</span>
+                </h3>
+                <p class="mt-2 line-clamp-3 text-sm font-light leading-relaxed">
+                  {project.description}
+                </p>
+                <p class="mt-3 text-xs uppercase tracking-wider">{project.tags.join(" / ")}</p>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 Thesis: full-bleed band that breaks the frame -->
+  <section id="b-thesis" class="bg-ink-950 text-sand-50 dark:bg-sand-50 dark:text-ink-950">
+    <div class="mx-auto max-w-7xl px-5 py-16 md:px-10 md:py-24">
+      <div class="grid grid-cols-1 gap-10 md:grid-cols-12">
+        <div class="md:col-span-7">
+          <p class="flex items-baseline gap-4 text-xs uppercase tracking-[0.2em]">
+            <span class="text-sm font-bold">05</span>
+            <span class="font-bold">{data.thesis.title}</span>
+          </p>
+          <h2 class="mt-4 font-black text-6xl leading-none tracking-tight">Hopf Torus Gallery</h2>
+          <p class="mt-6 max-w-2xl font-light leading-relaxed">{data.thesis.description}</p>
+          <a
+            href={`/${lang}/thesis`}
+            class="mt-8 inline-block border border-current px-6 py-3 text-xs uppercase tracking-[0.2em] transition-colors hover:bg-sand-50 hover:text-ink-950 dark:hover:bg-ink-950 dark:hover:text-sand-50"
+          >
+            {data.thesis.cta} <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+        <div class="md:col-span-5 md:col-start-8">
+          <img
+            src="/images/hopf_torus.png"
+            alt="Hopf Torus Gallery"
+            loading="lazy"
+            class="aspect-square w-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 Certifications -->
+  <section id="b-certs" class="mx-auto max-w-7xl px-5 md:px-10">
+    <div class:list={["border-t", rule]}></div>
+    <div class="grid grid-cols-1 gap-10 py-16 md:grid-cols-12 md:py-24">
+      <div class="md:col-span-4">
+        <p class="text-sm font-bold">06</p>
+        <h2 class="mt-4 font-black text-5xl leading-none tracking-tight md:text-6xl">
+          {data.cv.awards.title}
+        </h2>
+      </div>
+      <div class="md:columns-2 md:gap-10 md:col-span-8">
+        {
+          awards.map((award, i) => (
+            <div
+              class:list={["mb-4 flex items-baseline gap-4 border-b pb-4 break-inside-avoid", hairline]}
+            >
+              <span class="text-xs font-bold">{pad2(i + 1)}</span>
+              {award.url ? (
+                <a
+                  href={award.url}
+                  class:list={["flex-1 font-light", accentHover]}
+                >
+                  {award.text} <span aria-hidden="true">&rarr;</span>
+                </a>
+              ) : (
+                <span class="flex-1 font-light">{award.text}</span>
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 Blog -->
+  <section id="b-blog" class="mx-auto max-w-7xl px-5 md:px-10">
+    <div class:list={["border-t", rule]}></div>
+    <div class="grid grid-cols-1 gap-10 py-16 md:grid-cols-12 md:py-24">
+      <div class="md:col-span-4">
+        <p class="text-sm font-bold">07</p>
+        <h2 class="mt-4 font-black text-5xl leading-none tracking-tight md:text-6xl">
+          {data.blog.title}
+        </h2>
+      </div>
+      <div class="md:col-span-8">
+        {
+          posts.length === 0 ? (
+            <p class="font-light">{data.blog.empty}</p>
+          ) : (
+            <div>
+              {posts.map((post, i) => (
+                <a
+                  href={`/${lang}/blog/${post.slug}/`}
+                  class:list={[
+                    "group grid grid-cols-1 gap-2 py-6 md:grid-cols-12 md:gap-4",
+                    i > 0 ? `border-t ${hairline}` : "",
+                  ]}
+                >
+                  <span class="text-xs uppercase tracking-[0.15em] md:col-span-2">{post.date}</span>
+                  <span class="md:col-span-8">
+                    <span class="block text-2xl font-bold leading-tight">{post.title}</span>
+                    <span class="mt-1 block text-sm text-ink-500 dark:text-sand-400">
+                      {post.description}
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class:list={[
+                      "text-sand-600 dark:text-sand-400 transition-transform group-hover:translate-x-2 md:col-span-2 md:justify-self-end",
+                    ]}
+                  >
+                    &rarr;
+                  </span>
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 Beyond the code -->
+  <section id="b-hobbies" class="mx-auto max-w-7xl px-5 md:px-10">
+    <div class:list={["border-t", rule]}></div>
+    <div class="grid grid-cols-1 gap-10 py-16 md:grid-cols-12 md:py-24">
+      <div class="md:col-span-4">
+        <p class="text-sm font-bold">08</p>
+        <h2 class="mt-4 font-black text-5xl leading-none tracking-tight md:text-6xl">
+          {data.hobbies.title}
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 gap-10 md:col-span-8 md:grid-cols-3">
+        {
+          data.hobbies.items.map((hobby) => (
+            <div>
+              <h3 class="font-black text-3xl leading-tight">{hobby.title}</h3>
+              <p class="mt-3 font-light leading-relaxed">{hobby.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mx-auto max-w-7xl px-5 pb-20 md:px-10">
+    <div class:list={["border-t", rule]}></div>
+    <a
+      href={`mailto:${data.contact.email}`}
+      class:list={["block break-all py-6 font-black leading-none tracking-tight text-[5.6vw] xl:text-[80px]", accentHover]}
+    >
+      {data.contact.email}
+    </a>
+    <div
+      class:list={[
+        "flex flex-wrap items-center justify-between gap-4 border-t py-5 text-xs uppercase tracking-[0.2em]",
+        rule,
+      ]}
+    >
+      <span>&copy; {data.footer.copyright}</span>
+      <div class="flex items-center gap-6">
+        <a href={data.contact.github} class={accentHover}>GitHub</a>
+        <a href={data.contact.linkedin} class={accentHover}>LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script is:inline>
+  (function () {
+    const root = document.querySelector('[data-variant="B"]');
+    if (!root) return;
+    const buttons = root.querySelectorAll('[data-filter]');
+    const items = root.querySelectorAll('[data-tags]');
+    if (buttons.length === 0 || items.length === 0) return;
+    buttons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        const value = button.getAttribute('data-filter') || 'all';
+        buttons.forEach(function (other) {
+          const on = other === button;
+          other.classList.toggle('underline', on);
+          other.classList.toggle('underline-offset-8', on);
+          other.classList.toggle('decoration-2', on);
+          other.classList.toggle('font-bold', on);
+          other.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        items.forEach(function (item) {
+          const tags = (item.getAttribute('data-tags') || '').split('|');
+          item.classList.toggle('hidden', value !== 'all' && tags.indexOf(value) === -1);
+        });
+      });
+    });
+  })();
+</script>

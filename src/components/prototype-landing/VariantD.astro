@@ -1,6 +1,777 @@
 ---
-// PROTOTYPE stub, replaced by delegate
+// PROTOTYPE variant D: "Security console". An always-dark dashboard of bordered status panels with a sticky console header, a key/value profile readout, accordions, a tag filter and a log feed.
 import type { Data, Post } from "./data";
-interface Props { data: Data; posts: Post[]; lang: string }
+import { icons, awardText } from "./data";
+
+interface Props {
+  data: Data;
+  posts: Post[];
+  lang: string;
+}
+
+const { data, posts, lang } = Astro.props;
+
+const jobs = data.cv.experience.items;
+const education = data.cv.education.items;
+const skillGroups = data.cv.skills.categories;
+const projects = data.projects.items;
+const job = jobs[0];
+const fields = skillGroups.find((c) => c.name === "Fields") ?? skillGroups[0];
+const focus = fields.items.slice(0, 3).join(", ");
+const certs = data.cv.awards.items.map((a) => awardText(a));
+const projectTags = Array.from(new Set(projects.flatMap((p) => p.tags)));
+
+const profileRows = [
+  { k: "Role", v: job.role },
+  { k: "Company", v: job.company },
+  { k: "Location", v: data.about.location },
+  { k: "Focus", v: focus },
+  { k: "Events ingested", v: "250B+" },
+  { k: "Cloud cost", v: "-20%" },
+  { k: "Certifications", v: String(certs.length) },
+];
+
+const chevron = "M6 9l6 6 6-6";
+const check = "M20 6L9 17l-5-5";
+const external = "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3";
 ---
-<p class="p-10">Variant D pending</p>
+
+<div class="relative min-h-screen bg-[#0f1113] font-sans text-sand-100">
+  <div class="d-grid" aria-hidden="true"></div>
+
+  <div class="relative z-10">
+    <header
+      id="d-top"
+      class="sticky top-0 z-40 h-14 border-b border-white/10 bg-[#0f1113]/80 backdrop-blur"
+    >
+      <div class="mx-auto flex h-14 max-w-7xl items-center gap-3 px-4 md:gap-5 md:px-8">
+        <a
+          href="#d-top"
+          class="shrink-0 whitespace-nowrap text-sm font-bold tracking-tight text-sand-50 transition-colors hover:text-emerald-400"
+        >
+          <span class="text-sand-400">return</span> leon<span class="text-sand-400">;</span>
+        </a>
+
+        <nav class="mx-auto hidden items-center gap-5 md:flex" aria-label="Section navigation">
+          <a
+            href="#d-about"
+            class="whitespace-nowrap text-xs font-bold uppercase tracking-[0.12em] text-ink-300 transition-colors hover:text-emerald-400"
+            >{data.nav.about}</a
+          >
+          <a
+            href="#d-exp"
+            class="whitespace-nowrap text-xs font-bold uppercase tracking-[0.12em] text-ink-300 transition-colors hover:text-emerald-400"
+            >{data.nav.cv}</a
+          >
+          <a
+            href="#d-projects"
+            class="whitespace-nowrap text-xs font-bold uppercase tracking-[0.12em] text-ink-300 transition-colors hover:text-emerald-400"
+            >{data.nav.projects}</a
+          >
+          <a
+            href="#d-thesis"
+            class="whitespace-nowrap text-xs font-bold uppercase tracking-[0.12em] text-ink-300 transition-colors hover:text-emerald-400"
+            >{data.nav.thesis}</a
+          >
+          <a
+            href="#d-blog"
+            class="whitespace-nowrap text-xs font-bold uppercase tracking-[0.12em] text-ink-300 transition-colors hover:text-emerald-400"
+            >{data.nav.blog}</a
+          >
+        </nav>
+
+        <div class="ml-auto flex shrink-0 items-center gap-2 md:ml-0 md:gap-3">
+          <span
+            class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-emerald-400/40 bg-emerald-400/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-400"
+          >
+            <span class="d-pulse h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true"></span>
+            Available
+          </span>
+          <a
+            href="/es/"
+            class="rounded border border-white/10 px-2 py-1 text-xs font-bold text-ink-300 transition-colors hover:border-emerald-400/40 hover:text-emerald-400"
+            >{data.nav.switchLang}</a
+          >
+          <button
+            type="button"
+            onclick="toggleTheme()"
+            aria-label="Toggle theme"
+            class="rounded border border-white/10 p-1.5 text-ink-300 transition-colors hover:border-emerald-400/40 hover:text-emerald-400"
+          >
+            <svg
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <section
+      class="mx-auto grid max-w-7xl items-start gap-8 px-4 py-16 md:px-8 md:py-24 lg:grid-cols-[1.4fr_1fr]"
+    >
+      <div class="min-w-0">
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-emerald-400">
+          Security Engineer - Wazuh
+        </p>
+        <h1 class="mt-4 text-5xl font-black tracking-tight text-sand-50 md:text-7xl">
+          {data.hero.name}
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-300">{data.hero.description}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href={`mailto:${data.contact.email}`}
+            class="inline-flex items-center gap-2 rounded-lg bg-emerald-400 px-5 py-3 text-sm font-bold text-ink-950 transition-colors hover:bg-emerald-300"
+            >Contact</a
+          >
+          <a
+            href="#d-projects"
+            class="inline-flex items-center gap-2 rounded-lg border border-emerald-400/40 px-5 py-3 text-sm font-bold text-emerald-400 transition-colors hover:bg-emerald-400/10"
+            >View projects</a
+          >
+        </div>
+      </div>
+
+      <div class="min-w-0 rounded-xl border border-white/10 bg-white/[0.03] p-4 md:p-5">
+        <div class="mb-1 flex flex-wrap items-center gap-x-2 gap-y-1 border-b border-white/10 pb-3">
+          <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" aria-hidden="true"></span>
+          <h2 class="text-sm font-bold uppercase tracking-[0.15em] text-sand-100">profile</h2>
+          <span
+            class="ml-auto whitespace-nowrap rounded-full border border-white/10 px-2 py-0.5 text-xs text-ink-300"
+            >{certs.length} certs</span
+          >
+        </div>
+        <dl class="divide-y divide-white/5">
+          {
+            profileRows.map((row) => (
+              <div class="flex items-baseline justify-between gap-3 py-2">
+                <dt class="shrink-0 text-sm text-ink-400">{row.k}</dt>
+                <dd class="min-w-0 break-words text-right text-sm font-bold text-sand-50">{row.v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <div class="mt-4 flex items-center gap-3 border-t border-white/10 pt-4">
+          <img
+            src="/images/profile.jpg"
+            alt={data.hero.name}
+            width="64"
+            height="64"
+            class="h-16 w-16 shrink-0 rounded-lg object-cover object-top"
+          />
+          <div class="flex gap-2">
+            <a
+              href={data.contact.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              class="rounded-lg border border-white/10 p-2.5 text-ink-300 transition-colors hover:border-emerald-400/50 hover:text-emerald-400"
+            >
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                ><path d={icons.github}></path></svg
+              >
+            </a>
+            <a
+              href={data.contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              class="rounded-lg border border-white/10 p-2.5 text-ink-300 transition-colors hover:border-emerald-400/50 hover:text-emerald-400"
+            >
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                ><path d={icons.linkedin}></path></svg
+              >
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="mx-auto grid max-w-7xl gap-4 px-4 pb-4 md:px-8 lg:grid-cols-12">
+      <section
+        id="d-about"
+        class="min-w-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] lg:col-span-5"
+      >
+        <div class="flex flex-wrap items-center gap-x-2 gap-y-1 border-b border-white/10 px-4 py-3 md:px-5">
+          <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" aria-hidden="true"></span>
+          <h2 class="text-sm font-bold uppercase tracking-[0.15em] text-sand-100"
+            >{data.about.title}</h2
+          >
+          <span
+            class="ml-auto whitespace-nowrap rounded-full border border-white/10 px-2 py-0.5 text-xs text-ink-300"
+            >{data.about.paragraphs.length} paragraphs</span
+          >
+        </div>
+        <div class="space-y-3 p-4 text-sm leading-relaxed text-ink-300 md:p-5">
+          {data.about.paragraphs.map((p) => <p>{p}</p>)}
+          <p class="flex items-center gap-2 pt-1 text-xs text-ink-400">
+            <span class="h-1 w-1 shrink-0 rounded-full bg-emerald-400" aria-hidden="true"></span>
+            {data.about.location}
+          </p>
+        </div>
+      </section>
+
+      <section
+        class="min-w-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] lg:col-span-7"
+      >
+        <div class="flex flex-wrap items-center gap-x-2 gap-y-1 border-b border-white/10 px-4 py-3 md:px-5">
+          <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" aria-hidden="true"></span>
+          <h2 class="text-sm font-bold uppercase tracking-[0.15em] text-sand-100"
+            >{data.cv.skills.title}</h2
+          >
+          <span
+            class="ml-auto whitespace-nowrap rounded-full border border-white/10 px-2 py-0.5 text-xs text-ink-300"
+            >{skillGroups.length} groups</span
+          >
+        </div>
+        <div class="space-y-4 p-4 md:p-5">
+          {
+            skillGroups.map((group) => (
+              <div>
+                <div class="mb-2 flex items-baseline justify-between gap-2">
+                  <h3 class="text-xs font-bold uppercase tracking-[0.12em] text-sand-200">
+                    {group.name}
+                  </h3>
+                  <span class="shrink-0 text-[10px] text-ink-400">{group.items.length} items</span>
+                </div>
+                <div class="flex flex-wrap gap-1.5">
+                  {group.items.map((item) => (
+                    <span class="cursor-default rounded border border-white/10 px-2 py-1 text-xs text-ink-300 transition-colors hover:border-emerald-400/50 hover:text-emerald-300">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section
+        id="d-exp"
+        class="min-w-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] lg:col-span-12"
+      >
+        <div class="flex flex-wrap items-center gap-x-2 gap-y-1 border-b border-white/10 px-4 py-3 md:px-5">
+          <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" aria-hidden="true"></span>
+          <h2 class="text-sm font-bold uppercase tracking-[0.15em] text-sand-100"
+            >{data.cv.title}</h2
+          >
+          <span
+            class="ml-auto whitespace-nowrap rounded-full border border-white/10 px-2 py-0.5 text-xs text-ink-300"
+            >{jobs.length} roles</span
+          >
+        </div>
+        <div class="px-4 md:px-5">
+          <p class="pt-4 text-[10px] font-bold uppercase tracking-[0.2em] text-ink-400">
+            {data.cv.experience.title}
+          </p>
+          {
+            jobs.map((item) => (
+              <details class="group border-b border-white/10" open={item.current}>
+                <summary class="flex cursor-pointer list-none flex-wrap items-center gap-x-3 gap-y-1 py-4 pr-2 transition-colors hover:bg-white/[0.02] [&::-webkit-details-marker]:hidden">
+                  <span
+                    class:list={[
+                      "h-2 w-2 shrink-0 rounded-full",
+                      item.current ? "bg-emerald-400" : "bg-emerald-400/30",
+                    ]}
+                    aria-hidden="true"
+                  />
+                  <span class="text-sm font-bold text-sand-50 md:text-base">{item.role}</span>
+                  {item.url && item.url !== "#" ? (
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-d-in-summary
+                      class="text-sm text-emerald-400 transition-colors hover:text-emerald-300"
+                    >
+                      {item.company}
+                    </a>
+                  ) : (
+                    <span class="text-sm text-emerald-400">{item.company}</span>
+                  )}
+                  <span class="ml-auto shrink-0 text-xs text-ink-400">{item.period}</span>
+                  <svg
+                    class="h-4 w-4 shrink-0 text-ink-400 transition-transform group-open:rotate-180"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d={chevron} />
+                  </svg>
+                </summary>
+                <ul class="grid gap-2 pb-5 md:grid-cols-2 md:pl-6">
+                  {item.description.map((line) => (
+                    <li class="flex gap-2 text-sm leading-relaxed text-ink-300">
+                      <svg
+                        class="mt-1 h-3.5 w-3.5 shrink-0 text-emerald-400"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M3 8.5l3.5 3.5L13 4.5" />
+                      </svg>
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            ))
+          }
+
+          <p class="pt-5 text-[10px] font-bold uppercase tracking-[0.2em] text-ink-400">
+            {data.cv.education.title}
+          </p>
+          {
+            education.map((ed) => (
+              <details class="group border-b border-white/10 last:border-b-0">
+                <summary class="flex cursor-pointer list-none flex-wrap items-center gap-x-3 gap-y-1 py-4 pr-2 transition-colors hover:bg-white/[0.02] [&::-webkit-details-marker]:hidden">
+                  <span class="h-2 w-2 shrink-0 rounded-full bg-ink-600" aria-hidden="true" />
+                  <span class="text-sm font-bold text-sand-50">{ed.degree}</span>
+                  <span class="text-sm text-emerald-400">{ed.institution}</span>
+                  <span class="ml-auto shrink-0 text-xs text-ink-400">{ed.period}</span>
+                  <svg
+                    class="h-4 w-4 shrink-0 text-ink-400 transition-transform group-open:rotate-180"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d={chevron} />
+                  </svg>
+                </summary>
+                <p class="pb-4 text-sm leading-relaxed text-ink-300 md:pl-6">{ed.details}</p>
+              </details>
+            ))
+          }
+        </div>
+      </section>
+
+      <section
+        id="d-projects"
+        class="min-w-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] lg:col-span-12"
+      >
+        <div class="flex flex-wrap items-center gap-x-2 gap-y-1 border-b border-white/10 px-4 py-3 md:px-5">
+          <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" aria-hidden="true"></span>
+          <h2 class="text-sm font-bold uppercase tracking-[0.15em] text-sand-100"
+            >{data.projects.title}</h2
+          >
+          <span
+            class="ml-auto whitespace-nowrap rounded-full border border-white/10 px-2 py-0.5 text-xs text-ink-300"
+            >{projects.length} projects</span
+          >
+        </div>
+        <div class="p-4 md:p-5">
+          <div
+            class="mb-4 flex flex-wrap gap-1 rounded-lg border border-white/10 p-1"
+            role="group"
+            aria-label="Filter projects by tag"
+          >
+            <button
+              type="button"
+              data-d-filter="All"
+              data-active="true"
+              class="d-seg rounded-md px-3 py-1.5 text-xs font-bold text-ink-300 transition-colors hover:bg-white/5 hover:text-sand-50"
+              >All</button
+            >
+            {
+              projectTags.map((tag) => (
+                <button
+                  type="button"
+                  data-d-filter={tag}
+                  data-active="false"
+                  class="d-seg rounded-md px-3 py-1.5 text-xs font-bold text-ink-300 transition-colors hover:bg-white/5 hover:text-sand-50"
+                >
+                  {tag}
+                </button>
+              ))
+            }
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {
+              projects.map((p) => (
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-d-tags={p.tags.join("|")}
+                  class="group flex min-w-0 flex-col overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] transition-all duration-300 hover:border-emerald-400/50 hover:shadow-[0_0_0_1px_rgba(52,211,153,0.25),0_10px_40px_-10px_rgba(52,211,153,0.35)]"
+                >
+                  <div class="relative h-40 w-full overflow-hidden bg-ink-950">
+                    {p.image ? (
+                      <img
+                        src={p.image}
+                        alt={p.name}
+                        loading="lazy"
+                        class="h-40 w-full object-cover"
+                      />
+                    ) : (
+                      <div class="flex h-40 w-full items-center justify-center bg-gradient-to-br from-emerald-900 to-[#0f1113]">
+                        <span class="text-5xl font-black text-emerald-400/70">
+                          {p.name.charAt(0)}
+                        </span>
+                      </div>
+                    )}
+                    <div
+                      class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0f1113] to-transparent"
+                      aria-hidden="true"
+                    />
+                    <span class="absolute right-2 top-2 rounded border border-white/10 bg-[#0f1113]/85 px-1.5 py-0.5 text-[10px] font-bold text-ink-300">
+                      {p.period}
+                    </span>
+                  </div>
+                  <div class="flex flex-1 flex-col gap-2 p-4">
+                    <h3 class="text-sm font-bold text-sand-50 transition-colors group-hover:text-emerald-300">
+                      {p.name}
+                    </h3>
+                    <p class="line-clamp-3 text-sm text-ink-300">{p.description}</p>
+                    <div class="mt-auto flex flex-wrap gap-1.5 pt-1">
+                      {p.tags.map((tag) => (
+                        <span class="rounded-full border border-white/10 px-2 py-0.5 text-[10px] text-ink-400">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="d-thesis"
+        class="min-w-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] lg:col-span-7"
+      >
+        <div class="flex flex-wrap items-center gap-x-2 gap-y-1 border-b border-white/10 px-4 py-3 md:px-5">
+          <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" aria-hidden="true"></span>
+          <h2 class="text-sm font-bold uppercase tracking-[0.15em] text-sand-100"
+            >{data.thesis.title}</h2
+          >
+        </div>
+        <div class="flex flex-col gap-5 p-4 md:p-5">
+          <div
+            class="h-56 w-full overflow-hidden rounded-lg border border-emerald-400/30 bg-white shadow-[0_0_50px_-12px_rgba(52,211,153,0.45)]"
+          >
+            <img
+              src="/images/hopf_torus.png"
+              alt="Hopf Torus"
+              loading="lazy"
+              class="h-full w-full scale-125 object-cover"
+            />
+          </div>
+          <div class="min-w-0">
+            <h3 class="text-lg font-black tracking-tight text-sand-50">Hopf Torus Gallery</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-300">{data.thesis.description}</p>
+            <a
+              href={`/${lang}/thesis`}
+              class="mt-4 inline-flex items-center gap-2 rounded-lg bg-emerald-400 px-4 py-2.5 text-sm font-bold text-ink-950 transition-colors hover:bg-emerald-300"
+            >
+              {data.thesis.cta}
+              <svg
+                class="h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="min-w-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] lg:col-span-5"
+      >
+        <div class="flex flex-wrap items-center gap-x-2 gap-y-1 border-b border-white/10 px-4 py-3 md:px-5">
+          <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" aria-hidden="true"></span>
+          <h2 class="text-sm font-bold uppercase tracking-[0.15em] text-sand-100"
+            >{data.cv.awards.title}</h2
+          >
+          <span
+            class="ml-auto whitespace-nowrap rounded-full border border-white/10 px-2 py-0.5 text-xs text-ink-300"
+            >{certs.length} awards</span
+          >
+        </div>
+        <ul class="space-y-3 p-4 md:p-5">
+          {
+            certs.map((item) => (
+              <li class="flex gap-2 text-sm leading-snug">
+                <svg
+                  class="mt-0.5 h-4 w-4 shrink-0 text-emerald-400"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d={check} />
+                </svg>
+                {item.url ? (
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-start gap-1 text-sand-200 underline-offset-2 transition-colors hover:text-emerald-300 hover:underline"
+                  >
+                    {item.text}
+                    <svg
+                      class="mt-0.5 h-3.5 w-3.5 shrink-0"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d={external} />
+                    </svg>
+                  </a>
+                ) : (
+                  <span class="text-ink-300">{item.text}</span>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section
+        id="d-blog"
+        class="min-w-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] lg:col-span-8"
+      >
+        <div class="flex flex-wrap items-center gap-x-2 gap-y-1 border-b border-white/10 px-4 py-3 md:px-5">
+          <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" aria-hidden="true"></span>
+          <h2 class="text-sm font-bold uppercase tracking-[0.15em] text-sand-100"
+            >{data.blog.title}</h2
+          >
+          <span
+            class="ml-auto whitespace-nowrap rounded-full border border-white/10 px-2 py-0.5 text-xs text-ink-300"
+            >{posts.length} posts</span
+          >
+        </div>
+        {
+          posts.length === 0 ? (
+            <p class="p-4 text-sm text-ink-400 md:p-5">{data.blog.empty}</p>
+          ) : (
+            <div>
+              {posts.map((post) => (
+                <a
+                  href={`/${lang}/blog/${post.slug}/`}
+                  class="block border-b border-white/5 px-4 py-3 transition-colors last:border-b-0 hover:bg-white/[0.03] md:px-5"
+                >
+                  <div class="flex flex-col gap-1 sm:flex-row sm:gap-4">
+                    <time
+                      datetime={post.date}
+                      class="shrink-0 text-xs font-bold text-emerald-400 sm:w-24"
+                    >
+                      {post.date}
+                    </time>
+                    <div class="min-w-0">
+                      <span class="block font-bold text-sand-50 transition-colors hover:text-emerald-300">
+                        {post.title}
+                      </span>
+                      <span class="mt-0.5 block line-clamp-1 text-sm text-ink-400">
+                        {post.description}
+                      </span>
+                      {post.tags.length > 0 && (
+                        <span class="mt-1.5 flex flex-wrap gap-1.5">
+                          {post.tags.map((tag) => (
+                            <span class="rounded-full border border-white/10 px-2 py-0.5 text-[10px] text-ink-400">
+                              {tag}
+                            </span>
+                          ))}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </section>
+
+      <section
+        class="min-w-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] lg:col-span-4"
+      >
+        <div class="flex flex-wrap items-center gap-x-2 gap-y-1 border-b border-white/10 px-4 py-3 md:px-5">
+          <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" aria-hidden="true"></span>
+          <h2 class="text-sm font-bold uppercase tracking-[0.15em] text-sand-100"
+            >{data.hobbies.title}</h2
+          >
+          <span
+            class="ml-auto whitespace-nowrap rounded-full border border-white/10 px-2 py-0.5 text-xs text-ink-300"
+            >{data.hobbies.items.length} hobbies</span
+          >
+        </div>
+        <ul class="space-y-4 p-4 md:p-5">
+          {
+            data.hobbies.items.map((hobby) => (
+              <li class="flex gap-3">
+                <span
+                  class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400"
+                  aria-hidden="true"
+                />
+                <div class="min-w-0">
+                  <h3 class="text-sm font-bold text-sand-50">{hobby.title}</h3>
+                  <p class="mt-1 text-sm leading-relaxed text-ink-300">{hobby.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+
+    <footer class="mt-8 border-t border-white/10">
+      <div
+        class="mx-auto flex max-w-7xl flex-col gap-4 px-4 pb-24 pt-8 md:flex-row md:items-center md:justify-between md:px-8"
+      >
+        <p class="text-sm text-ink-400">&copy; {data.footer.copyright}</p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a
+            href={data.contact.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            class="text-ink-300 transition-colors hover:text-emerald-400"
+          >
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+              ><path d={icons.github}></path></svg
+            >
+          </a>
+          <a
+            href={data.contact.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            class="text-ink-300 transition-colors hover:text-emerald-400"
+          >
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+              ><path d={icons.linkedin}></path></svg
+            >
+          </a>
+          <a
+            href={`mailto:${data.contact.email}`}
+            class="break-all text-sm text-ink-300 transition-colors hover:text-emerald-400"
+            >{data.contact.email}</a
+          >
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<style>
+  .d-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.5) 55%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.5) 55%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+
+  .d-pulse {
+    animation: d-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes d-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55);
+    }
+    50% {
+      box-shadow: 0 0 0 4px rgba(52, 211, 153, 0);
+    }
+  }
+
+  .d-seg[data-active="true"] {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #faf8f5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .d-pulse {
+      animation: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const root = document.querySelector('[data-variant="D"]');
+    if (!root) return;
+    const buttons = root.querySelectorAll("[data-d-filter]");
+    const cards = root.querySelectorAll("[data-d-tags]");
+    if (!buttons.length || !cards.length) return;
+
+    // Keep links inside <summary> rows from toggling their own accordion.
+    root.querySelectorAll("summary [data-d-in-summary]").forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    });
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const filter = btn.getAttribute("data-d-filter") || "All";
+        buttons.forEach(function (other) {
+          other.setAttribute("data-active", other === btn ? "true" : "false");
+        });
+        cards.forEach(function (card) {
+          const tags = (card.getAttribute("data-d-tags") || "").split("|");
+          const show = filter === "All" || tags.indexOf(filter) !== -1;
+          card.classList.toggle("hidden", !show);
+        });
+      });
+    });
+  })();
+</script>

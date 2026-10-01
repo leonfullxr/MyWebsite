@@ -1,18 +1,23 @@
 # PROTOTYPE: landing-page redesign
 
-Question: how should the landing page be laid out so sections stop leaving dead space
-(skills grid with an orphaned card, tall section padding) and projects stop relying on a
-horizontal scroll strip?
+Question: what should a full redesign of the landing page look like, so sections stop leaving
+dead space and projects stop relying on a horizontal scroll strip?
 
-Run `npm run dev` and open `/en/prototype-landing?variant=A` (or `B`, `C`). Use the
-pink bar or the arrow keys to switch. The route is dev-only; production builds skip it.
+Run `npm run dev` and open `/en/prototype-landing?variant=A` (or `B`, `C`, `D`). Use the pink
+bar or the arrow keys to switch. The route is dev-only; production builds skip it.
 
-- A: Bento grid. One tile grid for the whole page. Projects use an auto-fill grid with a
-  featured 2x2 tile and a "Show all" button.
-- B: Sidebar rail. Sticky left rail with identity, scrollspy nav and skills. The right
-  column holds content; projects are dense rows with thumbnails.
-- C: Editorial. Alhambra hero kept, sections on a 12-column grid with a sticky label column.
-  Skills are a 4-column matrix. Projects are one featured item plus a masonry grid.
+Round 1 (bento grid, sidebar rail, editorial) was rejected. Round 2, all Lato:
+
+- A: Scroll story (interactive). The hero photo shrinks into a frame while the name converges,
+  the statement lights up word by word, an experience progress track fills, and project cards
+  stack on top of each other. The thesis torus spins with scroll. Respects reduced motion.
+- B: Swiss type (static). Giant Lato 900 name, strict 12-column grid, thin rules, numbered
+  sections, grayscale images that turn colour on hover, a 3x3 project grid.
+- C: Resume sheet (static). Profile card with an Alhambra banner, then a main column
+  (about, experience, projects with "show all") and a sticky side column (skills,
+  education, certifications, hobbies).
+- D: Security console (static, always dark). Dashboard panels with status headers and counts,
+  profile key/value panel, accordion experience, segmented project filter.
 
 Verdict: _pending_
 
