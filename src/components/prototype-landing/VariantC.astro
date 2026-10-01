@@ -47,7 +47,7 @@ const bulletList = 'list-disc pl-5 space-y-1 text-sm leading-relaxed text-ink-70
 
 <header class="sticky top-0 z-40 h-14 backdrop-blur bg-sand-50/85 dark:bg-ink-950/85 border-b border-sand-200 dark:border-ink-800">
   <div class="max-w-6xl mx-auto px-4 md:px-6 h-full flex items-center gap-3 md:gap-6">
-    <span class="font-mono text-lg font-bold tracking-tight whitespace-nowrap text-ink-900 dark:text-sand-50">
+    <span class=" text-lg font-bold tracking-tight whitespace-nowrap text-ink-900 dark:text-sand-50">
       <span class="text-sand-400">return</span> leon<span class="text-sand-400">;</span>
     </span>
     <nav class="hidden md:flex items-center gap-5 text-sm font-bold text-ink-600 dark:text-sand-300">
@@ -89,7 +89,7 @@ const bulletList = 'list-disc pl-5 space-y-1 text-sm leading-relaxed text-ink-70
           class="w-28 h-28 md:w-36 md:h-36 rounded-2xl ring-4 ring-white dark:ring-ink-900 object-cover object-top -mt-14 md:-mt-20 shrink-0"
         />
         <div class="flex-1 min-w-0">
-          <p class="text-xs uppercase tracking-wider font-bold text-sand-600 dark:text-sand-400">{hero.greeting}</p>
+          <p class="text-sm font-bold text-sand-600 dark:text-sand-400">{hero.greeting}</p>
           <h1 class="font-black text-3xl md:text-5xl tracking-tight text-ink-900 dark:text-sand-50 break-words">{hero.name}</h1>
           <p class="mt-1 text-xs md:text-sm leading-relaxed text-ink-500 dark:text-sand-400">{hero.tagline}</p>
           <p class="mt-2 flex items-center gap-1.5 text-xs font-bold text-ink-600 dark:text-sand-300">
@@ -133,7 +133,7 @@ const bulletList = 'list-disc pl-5 space-y-1 text-sm leading-relaxed text-ink-70
     <div class="flex flex-col gap-6 min-w-0">
       <section id="c-about" class={blockCard}>
         <div class="flex items-center gap-3 mb-4">
-          <h2 class="text-xs font-black uppercase tracking-wider text-sand-600 dark:text-sand-400 whitespace-nowrap">{about.title}</h2>
+          <h2 class="text-xs font-black text-sand-600 dark:text-sand-400 whitespace-nowrap">{about.title}</h2>
           <span class="h-px flex-1 bg-sand-200 dark:bg-ink-800" aria-hidden="true"></span>
         </div>
         <div class="space-y-3 text-sm leading-relaxed text-ink-700 dark:text-sand-200">
@@ -143,7 +143,7 @@ const bulletList = 'list-disc pl-5 space-y-1 text-sm leading-relaxed text-ink-70
 
       <section id="c-exp" class={blockCard}>
         <div class="flex items-center gap-3 mb-4">
-          <h2 class="text-xs font-black uppercase tracking-wider text-sand-600 dark:text-sand-400 whitespace-nowrap">{cv.title}</h2>
+          <h2 class="text-xs font-black text-sand-600 dark:text-sand-400 whitespace-nowrap">{cv.title}</h2>
           <span class="h-px flex-1 bg-sand-200 dark:bg-ink-800" aria-hidden="true"></span>
         </div>
         <ol class="relative border-l-2 border-sand-200 dark:border-ink-800 space-y-6">
@@ -159,7 +159,7 @@ const bulletList = 'list-disc pl-5 space-y-1 text-sm leading-relaxed text-ink-70
                 <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <h3 class="font-bold text-lg text-ink-900 dark:text-sand-50">{job.role}</h3>
                   {job.current && (
-                    <span class="text-[10px] uppercase font-black px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400">
+                    <span class="text-xs font-black px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400">
                       Current
                     </span>
                   )}
@@ -176,7 +176,7 @@ const bulletList = 'list-disc pl-5 space-y-1 text-sm leading-relaxed text-ink-70
                 </ul>
                 {job.description.length > 4 && (
                   <details class="mt-2">
-                    <summary class="inline-block cursor-pointer list-none select-none text-xs font-black uppercase tracking-wider text-sand-600 dark:text-sand-400 hover:text-sand-800 dark:hover:text-sand-200 [&::-webkit-details-marker]:hidden">
+                    <summary class="inline-block cursor-pointer list-none select-none text-xs font-black text-sand-600 dark:text-sand-400 hover:text-sand-800 dark:hover:text-sand-200 [&::-webkit-details-marker]:hidden">
                       Show {job.description.length - 4} more
                     </summary>
                     <ul class:list={['mt-2', bulletList]}>
@@ -192,7 +192,7 @@ const bulletList = 'list-disc pl-5 space-y-1 text-sm leading-relaxed text-ink-70
 
       <section id="c-projects" class={blockCard}>
         <div class="flex items-center gap-3 mb-4">
-          <h2 class="text-xs font-black uppercase tracking-wider text-sand-600 dark:text-sand-400 whitespace-nowrap">{projects.title}</h2>
+          <h2 class="text-xs font-black text-sand-600 dark:text-sand-400 whitespace-nowrap">{projects.title}</h2>
           <span class="h-px flex-1 bg-sand-200 dark:bg-ink-800" aria-hidden="true"></span>
         </div>
 
@@ -258,7 +258,7 @@ const bulletList = 'list-disc pl-5 space-y-1 text-sm leading-relaxed text-ink-70
 
       <section class={blockCard}>
         <div class="flex items-center gap-3 mb-4">
-          <h2 class="text-xs font-black uppercase tracking-wider text-sand-600 dark:text-sand-400 whitespace-nowrap">{data.nav.thesis}</h2>
+          <h2 class="text-xs font-black text-sand-600 dark:text-sand-400 whitespace-nowrap">{data.nav.thesis}</h2>
           <span class="h-px flex-1 bg-sand-200 dark:bg-ink-800" aria-hidden="true"></span>
         </div>
         <div class="flex flex-col sm:flex-row gap-4 md:gap-6 items-start">
@@ -286,14 +286,14 @@ const bulletList = 'list-disc pl-5 space-y-1 text-sm leading-relaxed text-ink-70
     <aside class="flex flex-col gap-6 lg:sticky lg:top-20">
       <section class="rounded-2xl border border-sand-200 dark:border-ink-800 bg-white dark:bg-ink-900 px-4 py-5">
         <div class="flex items-center gap-3 mb-3">
-          <h2 class="text-[11px] font-black uppercase tracking-wider text-sand-600 dark:text-sand-400 whitespace-nowrap">{cv.skills.title}</h2>
+          <h2 class="text-xs font-black text-sand-600 dark:text-sand-400 whitespace-nowrap">{cv.skills.title}</h2>
           <span class="h-px flex-1 bg-sand-200 dark:bg-ink-800" aria-hidden="true"></span>
         </div>
         <div class="space-y-3">
           {
             cv.skills.categories.map((cat) => (
               <div>
-                <p class="text-xs uppercase tracking-wider font-bold text-ink-500 dark:text-sand-400">{cat.name}</p>
+                <p class="text-sm font-bold text-ink-500 dark:text-sand-400">{cat.name}</p>
                 <div class="mt-1.5 flex flex-wrap gap-1.5">
                   {cat.items.map((s) => (
                     <span class="text-xs px-2 py-0.5 rounded-md bg-sand-100 dark:bg-ink-800 text-ink-700 dark:text-sand-200">{s}</span>
@@ -307,7 +307,7 @@ const bulletList = 'list-disc pl-5 space-y-1 text-sm leading-relaxed text-ink-70
 
       <section class="rounded-2xl border border-sand-200 dark:border-ink-800 bg-white dark:bg-ink-900 px-4 py-5">
         <div class="flex items-center gap-3 mb-3">
-          <h2 class="text-[11px] font-black uppercase tracking-wider text-sand-600 dark:text-sand-400 whitespace-nowrap">{cv.education.title}</h2>
+          <h2 class="text-xs font-black text-sand-600 dark:text-sand-400 whitespace-nowrap">{cv.education.title}</h2>
           <span class="h-px flex-1 bg-sand-200 dark:bg-ink-800" aria-hidden="true"></span>
         </div>
         <div class="space-y-3">
@@ -325,7 +325,7 @@ const bulletList = 'list-disc pl-5 space-y-1 text-sm leading-relaxed text-ink-70
 
       <section class="rounded-2xl border border-sand-200 dark:border-ink-800 bg-white dark:bg-ink-900 px-4 py-5">
         <div class="flex items-center gap-3 mb-3">
-          <h2 class="text-[11px] font-black uppercase tracking-wider text-sand-600 dark:text-sand-400 whitespace-nowrap">{cv.awards.title}</h2>
+          <h2 class="text-xs font-black text-sand-600 dark:text-sand-400 whitespace-nowrap">{cv.awards.title}</h2>
           <span class="h-px flex-1 bg-sand-200 dark:bg-ink-800" aria-hidden="true"></span>
         </div>
         <ul class="space-y-2">
@@ -359,7 +359,7 @@ const bulletList = 'list-disc pl-5 space-y-1 text-sm leading-relaxed text-ink-70
 
       <section class="rounded-2xl border border-sand-200 dark:border-ink-800 bg-white dark:bg-ink-900 px-4 py-5">
         <div class="flex items-center gap-3 mb-3">
-          <h2 class="text-[11px] font-black uppercase tracking-wider text-sand-600 dark:text-sand-400 whitespace-nowrap">{hobbies.title}</h2>
+          <h2 class="text-xs font-black text-sand-600 dark:text-sand-400 whitespace-nowrap">{hobbies.title}</h2>
           <span class="h-px flex-1 bg-sand-200 dark:bg-ink-800" aria-hidden="true"></span>
         </div>
         <div class="space-y-2">
@@ -378,7 +378,7 @@ const bulletList = 'list-disc pl-5 space-y-1 text-sm leading-relaxed text-ink-70
   <!-- Blog -->
   <section id="c-blog" class:list={[blockCard, 'mt-6']}>
     <div class="flex items-center gap-3 mb-4">
-      <h2 class="text-xs font-black uppercase tracking-wider text-sand-600 dark:text-sand-400 whitespace-nowrap">{blog.title}</h2>
+      <h2 class="text-xs font-black text-sand-600 dark:text-sand-400 whitespace-nowrap">{blog.title}</h2>
       <span class="h-px flex-1 bg-sand-200 dark:bg-ink-800" aria-hidden="true"></span>
     </div>
     {
