@@ -159,8 +159,11 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
           >
             Get to know me
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"
-              ></path></svg
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"></path></svg
             >
           </a>
           <a
@@ -193,7 +196,11 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
             <span
               class="absolute left-3 bottom-3 inline-flex items-center gap-1.5 text-sm font-bold px-3 py-1.5 rounded-full bg-white/90 text-ink-800 dark:bg-ink-950/85 dark:text-sand-100 backdrop-blur-sm"
             >
-              <svg class="w-4 h-4 text-sand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              <svg
+                class="w-4 h-4 text-sand-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
                 ><path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -215,7 +222,9 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
               class="a-social"
               aria-label="GitHub"
             >
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d={icons.github}></path></svg>
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"
+                ><path d={icons.github}></path></svg
+              >
               GitHub
             </a>
             <a
@@ -225,13 +234,18 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
               class="a-social"
               aria-label="LinkedIn"
             >
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d={icons.linkedin}></path></svg>
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"
+                ><path d={icons.linkedin}></path></svg
+              >
               LinkedIn
             </a>
             <a href={`mailto:${contact.email}`} class="a-social" aria-label="Email">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={mailPath}
-                ></path></svg
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d={mailPath}></path></svg
               >
               Email
             </a>
@@ -250,39 +264,39 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
         </div>
       </div>
 
-          <div class="mt-8 rounded-2xl border border-sand-200 dark:border-ink-800 bg-white/60 dark:bg-ink-900/60 p-4 md:p-6">
-            <h3 class="font-bold text-lg mb-4">Tech I work with</h3>
-            <div class="flex flex-wrap gap-x-10 gap-y-5">
-              {
-                skillGroups.map((g) => (
-                  <div class="min-w-0">
-                    <p class="text-sm font-bold text-sand-600 dark:text-sand-400 mb-2">
-                      {g.name}
-                    </p>
-                    <ul class="flex flex-wrap gap-2">
-                      {g.icons.map((ic) => (
-                        <li
-                          class="group relative h-14 w-14 rounded-xl bg-white dark:bg-sand-50 border border-sand-200 dark:border-ink-700 flex items-center justify-center px-1.5 transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-sand-400 focus:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-sand-400"
-                          title={ic.name}
-                          tabindex="0"
-                        >
-                          <img
-                            src={ic.src}
-                            alt={ic.name}
-                            loading="lazy"
-                            class="h-8 w-auto max-w-full object-contain"
-                          />
-                          <span class="a-tip" aria-hidden="true">
-                            {ic.name}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
+      <div
+        class="mt-8 rounded-2xl border border-sand-200 dark:border-ink-800 bg-white/60 dark:bg-ink-900/60 p-4 md:p-6"
+      >
+        <h3 class="font-bold text-lg mb-4">Tech I work with</h3>
+        <div class="flex flex-wrap gap-x-10 gap-y-5">
+          {
+            skillGroups.map((g) => (
+              <div class="min-w-0">
+                <p class="text-sm font-bold text-sand-600 dark:text-sand-400 mb-2">{g.name}</p>
+                <ul class="flex flex-wrap gap-2">
+                  {g.icons.map((ic) => (
+                    <li
+                      class="group relative h-14 w-14 rounded-xl bg-white dark:bg-sand-50 border border-sand-200 dark:border-ink-700 flex items-center justify-center px-1.5 transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-sand-400 focus:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-sand-400"
+                      title={ic.name}
+                      tabindex="0"
+                    >
+                      <img
+                        src={ic.src}
+                        alt={ic.name}
+                        loading="lazy"
+                        class="h-8 w-auto max-w-full object-contain"
+                      />
+                      <span class="a-tip" aria-hidden="true">
+                        {ic.name}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
     </div>
   </section>
 
@@ -327,14 +341,26 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
                         </span>
                       )}
                     </h3>
-                    <span class="text-sm text-ink-400 dark:text-sand-500 shrink-0">{job.period}</span>
+                    <span class="text-sm text-ink-400 dark:text-sand-500 shrink-0">
+                      {job.period}
+                    </span>
                   </div>
                   <ul class="space-y-2">{shown.map(bullet)}</ul>
                   {rest.length > 0 && (
                     <details class="a-more mt-2">
                       <summary class="cursor-pointer list-none inline-flex items-center gap-1.5 text-sm font-bold text-sand-600 dark:text-sand-400 hover:text-sand-800 dark:hover:text-sand-200">
-                        <svg class="a-chev w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        <svg
+                          class="a-chev w-3.5 h-3.5 transition-transform"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 5l7 7-7 7"
+                          />
                         </svg>
                         <span class="a-more-label">Show {rest.length} more</span>
                         <span class="a-less-label">Show less</span>
@@ -357,9 +383,19 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
               </div>
             ))
           }
-          <div class="col-span-2 rounded-2xl overflow-hidden border border-sand-200 dark:border-ink-800 relative h-36">
-            <img src="/images/alhambra.jpg" alt="" loading="lazy" class="w-full h-full object-cover object-[50%_60%]" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div
+            class="col-span-2 rounded-2xl overflow-hidden border border-sand-200 dark:border-ink-800 relative h-36"
+          >
+            <img
+              src="/images/alhambra.jpg"
+              alt=""
+              loading="lazy"
+              class="w-full h-full object-cover object-[50%_60%]"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+            >
+            </div>
             <p class="absolute left-4 bottom-3 right-4 text-white leading-snug">
               <span class="block text-sm text-sand-200">Home base</span>
               <span class="font-bold text-lg">{about.location}</span>
@@ -374,8 +410,18 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
           cv.education.items.map((edu) => (
             <div class="card !p-5 md:!p-6 flex gap-4">
               <div class="w-11 h-11 shrink-0 rounded-xl bg-sand-100 dark:bg-ink-800 text-sand-600 dark:text-sand-400 flex items-center justify-center">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4l9 5-9 5-9-5 9-5zm-6 7.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5M21 9v5" />
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 4l9 5-9 5-9-5 9-5zm-6 7.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5M21 9v5"
+                  />
                 </svg>
               </div>
               <div class="min-w-0">
@@ -425,14 +471,21 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
                 </div>
                 <p class="font-bold text-sm leading-snug line-clamp-2">{a.title}</p>
                 {a.issuer && (
-                  <p class="text-xs text-ink-500 dark:text-sand-400 mt-1 line-clamp-2">{a.issuer}</p>
+                  <p class="text-xs text-ink-500 dark:text-sand-400 mt-1 line-clamp-2">
+                    {a.issuer}
+                  </p>
                 )}
                 {a.date && <p class="text-xs text-ink-400 dark:text-sand-500 mt-0.5">{a.date}</p>}
                 {a.url && (
                   <span class="mt-auto pt-2 inline-flex items-center gap-1 text-xs font-bold text-sand-600 dark:text-sand-400">
                     Verify on Credly
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={arrowPath} />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d={arrowPath}
+                      />
                     </svg>
                   </span>
                 )}
@@ -460,7 +513,9 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
         href={`/${lang}/thesis`}
         class="group flex flex-col md:flex-row rounded-2xl overflow-hidden border border-sand-200 dark:border-ink-800 bg-white/70 dark:bg-ink-900/60 hover:border-sand-400 dark:hover:border-ink-600 hover:shadow-lg transition-all duration-300"
       >
-        <div class="md:w-2/5 bg-white aspect-[1920/721] md:aspect-auto md:min-h-[240px] shrink-0 overflow-hidden">
+        <div
+          class="md:w-2/5 bg-white aspect-[1920/721] md:aspect-auto md:min-h-[240px] shrink-0 overflow-hidden"
+        >
           <img
             src="/images/hopf_torus.png"
             alt="Hopf torus rendered in the gallery"
@@ -472,10 +527,13 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
           <p class="text-sm font-bold text-sand-600 dark:text-sand-400 mb-1">{thesis.title}</p>
           <h2 class="text-2xl md:text-3xl font-black italic mb-3">Hopf Torus Gallery</h2>
           <p class="text-ink-600 dark:text-sand-300 leading-relaxed mb-5">{thesis.description}</p>
-          <span class="self-start inline-flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-full bg-ink-900 text-sand-50 dark:bg-sand-100 dark:text-ink-900 group-hover:bg-sand-700 dark:group-hover:bg-white transition-colors">
+          <span
+            class="self-start inline-flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-full bg-ink-900 text-sand-50 dark:bg-sand-100 dark:text-ink-900 group-hover:bg-sand-700 dark:group-hover:bg-white transition-colors"
+          >
             {thesis.cta}
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={arrowPath} />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={arrowPath}
+              ></path>
             </svg>
           </span>
         </div>
@@ -491,7 +549,10 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
         <button data-filter="all" class="a-chip tag cursor-pointer a-chip-on">All</button>
         {
           allTags.map((tag) => (
-            <button data-filter={tag} class="a-chip tag cursor-pointer hover:bg-sand-300 dark:hover:bg-ink-700">
+            <button
+              data-filter={tag}
+              class="a-chip tag cursor-pointer hover:bg-sand-300 dark:hover:bg-ink-700"
+            >
               {tag}
             </button>
           ))
@@ -501,10 +562,7 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
       <div class="a-masonry" data-proj-grid>
         {
           projectCards.map((p) => (
-            <div
-              class:list={['a-proj', p.wide && 'sm:col-span-2']}
-              data-tags={p.tags.join(',')}
-            >
+            <div class:list={['a-proj', p.wide && 'sm:col-span-2']} data-tags={p.tags.join(',')}>
               <a
                 href={p.url}
                 target="_blank"
@@ -525,7 +583,13 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
                   </div>
                 ) : (
                   <div class="relative aspect-[4/3] overflow-hidden border-b border-sand-200 dark:border-ink-800 bg-gradient-to-br from-ink-950 via-ink-900 to-sand-900 flex items-center justify-center">
-                    <svg class="absolute inset-0 w-full h-full text-sand-400/30" viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor">
+                    <svg
+                      class="absolute inset-0 w-full h-full text-sand-400/30"
+                      viewBox="0 0 160 100"
+                      preserveAspectRatio="xMidYMid slice"
+                      fill="none"
+                      stroke="currentColor"
+                    >
                       <ellipse cx="80" cy="50" rx="30" ry="12" />
                       <ellipse cx="80" cy="50" rx="52" ry="22" />
                       <ellipse cx="80" cy="50" rx="74" ry="33" />
@@ -540,17 +604,37 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
                 )}
                 <div class:list={['p-5', p.featured && 'md:p-6']}>
                   <div class="flex items-start justify-between gap-3">
-                    <h3 class:list={['font-bold leading-snug group-hover:text-sand-600 dark:group-hover:text-sand-400 transition-colors', p.featured ? 'text-xl md:text-2xl' : 'text-lg']}>
+                    <h3
+                      class:list={[
+                        'font-bold leading-snug group-hover:text-sand-600 dark:group-hover:text-sand-400 transition-colors',
+                        p.featured ? 'text-xl md:text-2xl' : 'text-lg',
+                      ]}
+                    >
                       {p.name}
                     </h3>
-                    <svg class="w-4 h-4 mt-1.5 shrink-0 text-ink-300 dark:text-sand-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={arrowPath} />
+                    <svg
+                      class="w-4 h-4 mt-1.5 shrink-0 text-ink-300 dark:text-sand-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d={arrowPath}
+                      />
                     </svg>
                   </div>
                   <p class="text-sm text-ink-400 dark:text-sand-500 mb-2">
                     {p.featured ? `Featured, ${p.period}` : p.period}
                   </p>
-                  <p class:list={['text-sm text-ink-600 dark:text-sand-300 leading-relaxed mb-3', !p.featured && 'line-clamp-3']}>
+                  <p
+                    class:list={[
+                      'text-sm text-ink-600 dark:text-sand-300 leading-relaxed mb-3',
+                      !p.featured && 'line-clamp-3',
+                    ]}
+                  >
                     {p.description}
                   </p>
                   <div class="flex flex-wrap gap-1.5">
@@ -580,7 +664,9 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
               </div>
               <div>
                 <h3 class="font-bold mb-1">{h.title}</h3>
-                <p class="text-sm text-ink-500 dark:text-sand-400 leading-relaxed">{h.description}</p>
+                <p class="text-sm text-ink-500 dark:text-sand-400 leading-relaxed">
+                  {h.description}
+                </p>
               </div>
             </div>
           ))
@@ -624,7 +710,11 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
                         <div class="relative h-full flex items-center justify-center gap-3">
                           {logos.map((t) => (
                             <span class="w-16 h-16 rounded-2xl bg-white shadow-lg flex items-center justify-center p-2.5 group-hover:-translate-y-1 transition-transform duration-300">
-                              <img src={tagIcons[t]} alt={t} class="h-10 w-auto max-w-full object-contain" />
+                              <img
+                                src={tagIcons[t]}
+                                alt={t}
+                                class="h-10 w-auto max-w-full object-contain"
+                              />
                             </span>
                           ))}
                         </div>
@@ -661,15 +751,27 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
                 />
                 <div class="relative h-full flex items-center justify-center">
                   <span class="w-16 h-16 rounded-2xl bg-white shadow-lg flex items-center justify-center text-orange-500">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 11a8 8 0 018 8M5 5a14 14 0 0114 14" />
+                    <svg
+                      class="w-8 h-8"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M5 11a8 8 0 018 8M5 5a14 14 0 0114 14"
+                      />
                       <circle cx="6" cy="18" r="1.5" fill="currentColor" />
                     </svg>
                   </span>
                 </div>
               </div>
               <div class="p-5 flex flex-col flex-1">
-                <p class="text-sm text-ink-400 dark:text-sand-500 mb-1">{posts.length} posts so far</p>
+                <p class="text-sm text-ink-400 dark:text-sand-500 mb-1">
+                  {posts.length} posts so far
+                </p>
                 <h3 class="font-bold text-lg leading-snug mb-2 group-hover:text-sand-600 dark:group-hover:text-sand-400 transition-colors">
                   Follow new posts by RSS
                 </h3>
@@ -679,7 +781,12 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
                 <span class="mt-auto inline-flex items-center gap-1.5 text-sm font-bold text-sand-600 dark:text-sand-400">
                   Subscribe
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={arrowPath} />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d={arrowPath}
+                    />
                   </svg>
                 </span>
               </div>
@@ -692,17 +799,42 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
 
   <!-- Footer -->
   <footer class="pt-10 pb-24 border-t border-sand-200 dark:border-ink-800">
-    <div class="max-w-6xl mx-auto px-4 md:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div
+      class="max-w-6xl mx-auto px-4 md:px-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+    >
       <p class="text-sm text-ink-400 dark:text-sand-500">&copy; {year} {footer.copyright}</p>
       <div class="flex items-center gap-4">
-        <a href={contact.github} target="_blank" rel="noopener" aria-label="GitHub" class="text-ink-400 dark:text-sand-500 hover:text-ink-700 dark:hover:text-sand-300 transition-colors">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d={icons.github}></path></svg>
+        <a
+          href={contact.github}
+          target="_blank"
+          rel="noopener"
+          aria-label="GitHub"
+          class="text-ink-400 dark:text-sand-500 hover:text-ink-700 dark:hover:text-sand-300 transition-colors"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"
+            ><path d={icons.github}></path></svg
+          >
         </a>
-        <a href={contact.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" class="text-ink-400 dark:text-sand-500 hover:text-ink-700 dark:hover:text-sand-300 transition-colors">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d={icons.linkedin}></path></svg>
+        <a
+          href={contact.linkedin}
+          target="_blank"
+          rel="noopener"
+          aria-label="LinkedIn"
+          class="text-ink-400 dark:text-sand-500 hover:text-ink-700 dark:hover:text-sand-300 transition-colors"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"
+            ><path d={icons.linkedin}></path></svg
+          >
         </a>
-        <a href={`mailto:${contact.email}`} aria-label="Email" class="text-ink-400 dark:text-sand-500 hover:text-ink-700 dark:hover:text-sand-300 transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={mailPath}></path></svg>
+        <a
+          href={`mailto:${contact.email}`}
+          aria-label="Email"
+          class="text-ink-400 dark:text-sand-500 hover:text-ink-700 dark:hover:text-sand-300 transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={mailPath}
+            ></path></svg
+          >
         </a>
       </div>
     </div>
@@ -906,9 +1038,7 @@ const arrowPath = 'M7 17L17 7M17 7H7M17 7v10';
     const root = document.querySelector('[data-variant="A"]');
     if (!root) return;
     const links = Array.from(root.querySelectorAll('.a-navlink'));
-    const sections = links
-      .map((l) => root.querySelector('#' + l.dataset.nav))
-      .filter(Boolean);
+    const sections = links.map((l) => root.querySelector('#' + l.dataset.nav)).filter(Boolean);
 
     function spy() {
       if (root.hidden) return;

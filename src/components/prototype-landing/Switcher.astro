@@ -9,9 +9,13 @@ const { variants } = Astro.props;
 <div
   class="fixed bottom-5 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-1 rounded-full bg-fuchsia-600 text-white shadow-2xl shadow-black/40 px-1.5 py-1.5 text-sm"
 >
-  <button data-sw="-1" class="w-8 h-8 rounded-full hover:bg-white/20" aria-label="Previous variant">←</button>
+  <button data-sw="-1" class="w-8 h-8 rounded-full hover:bg-white/20" aria-label="Previous variant"
+    >←</button
+  >
   <span data-sw-label class="px-3 min-w-[200px] text-center font-medium"></span>
-  <button data-sw="1" class="w-8 h-8 rounded-full hover:bg-white/20" aria-label="Next variant">→</button>
+  <button data-sw="1" class="w-8 h-8 rounded-full hover:bg-white/20" aria-label="Next variant"
+    >→</button
+  >
 </div>
 
 <script is:inline define:vars={{ variants }}>
@@ -36,9 +40,9 @@ const { variants } = Astro.props;
       current = show(keys[i]);
       window.scrollTo(0, 0);
     }
-    document.querySelectorAll('[data-sw]').forEach((b) =>
-      b.addEventListener('click', () => step(Number(b.dataset.sw)))
-    );
+    document
+      .querySelectorAll('[data-sw]')
+      .forEach((b) => b.addEventListener('click', () => step(Number(b.dataset.sw))));
     document.addEventListener('keydown', (e) => {
       const t = e.target;
       if (t.closest && t.closest('input, textarea, [contenteditable]')) return;
