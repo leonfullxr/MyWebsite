@@ -1,11 +1,9 @@
 ---
-// PROTOTYPE: four landing-page redesigns, switchable via ?variant=A|B|C|D at /en/prototype-landing.
+// PROTOTYPE: two landing-page redesigns, switchable via ?variant=A|B at /en/prototype-landing.
 // Only generated in dev; production builds emit no page for this route.
 import Layout from '../../layouts/Layout.astro';
 import VariantA from '../../components/prototype-landing/VariantA.astro';
 import VariantB from '../../components/prototype-landing/VariantB.astro';
-import VariantC from '../../components/prototype-landing/VariantC.astro';
-import VariantD from '../../components/prototype-landing/VariantD.astro';
 import Switcher from '../../components/prototype-landing/Switcher.astro';
 import { getPosts } from '../../components/prototype-landing/data';
 import data from '../../data/en.json';
@@ -21,14 +19,10 @@ const posts = getPosts(lang);
 <Layout title="PROTOTYPE · Landing redesign" description="prototype" lang={lang}>
   <div data-variant="A"><VariantA data={data} posts={posts} lang={lang} /></div>
   <div data-variant="B" hidden><VariantB data={data} posts={posts} lang={lang} /></div>
-  <div data-variant="C" hidden><VariantC data={data} posts={posts} lang={lang} /></div>
-  <div data-variant="D" hidden><VariantD data={data} posts={posts} lang={lang} /></div>
   <Switcher
     variants={[
       ['A', 'Current, refined'],
       ['B', 'Scroll journey (interactive)'],
-      ['C', 'Glass over Granada'],
-      ['D', 'Split stage'],
     ]}
   />
 </Layout>

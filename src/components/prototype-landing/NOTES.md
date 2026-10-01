@@ -23,3 +23,10 @@ Verdict: _pending_
 
 When a variant is picked, fold it into `src/components/*` properly and delete this folder
 and `src/pages/en/[prototype].astro`.
+
+## Round 3 (current)
+
+Leon picked B ("Scroll journey") on 2026-10-01 and asked for: skills and certifications merged into
+one section laid out like the other prototype set's variant A (`src/components/prototype-r3/`,
+section "Stack and certifications"), skill icons styled like the live site's tech icons (grey until
+hovered, no white tiles), a smaller Cypher image, and C and D removed. Done; A is kept for comparison.
