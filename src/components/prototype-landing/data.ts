@@ -47,6 +47,106 @@ export const icons = {
     'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z',
 };
 
+export type Icon = { name: string; src: string };
+
+// Skills shown as logos only; the full text list belongs in the downloadable resume.
+export const skillGroups: { name: string; icons: Icon[] }[] = [
+  {
+    name: 'Languages',
+    icons: [
+      { name: 'C', src: '/images/icons/c.svg' },
+      { name: 'C++', src: '/images/icons/cplusplus.svg' },
+      { name: 'Python', src: '/images/icons/python.svg' },
+      { name: 'Go', src: '/images/icons/go.svg' },
+      { name: 'TypeScript', src: '/images/icons/typescript.svg' },
+      { name: 'JavaScript', src: '/images/icons/javascript.svg' },
+      { name: 'Svelte', src: '/images/icons/svelte.svg' },
+      { name: 'HTML', src: '/images/icons/html5.svg' },
+      { name: 'CSS', src: '/images/icons/css3.svg' },
+      { name: 'Bash', src: '/images/icons/bash.svg' },
+    ],
+  },
+  {
+    name: 'Security & search',
+    icons: [
+      { name: 'Wazuh', src: '/images/icons/wazuh.png' },
+      { name: 'Elasticsearch', src: '/images/icons/elasticsearch.svg' },
+      { name: 'OpenSearch', src: '/images/icons/opensearch.svg' },
+    ],
+  },
+  {
+    name: 'Cloud & infrastructure',
+    icons: [
+      { name: 'Docker', src: '/images/icons/docker.svg' },
+      { name: 'Kubernetes', src: '/images/icons/kubernetes.svg' },
+      { name: 'AWS', src: '/images/icons/aws.svg' },
+      { name: 'Azure', src: '/images/icons/azure.svg' },
+      { name: 'Linux', src: '/images/icons/linux.svg' },
+      { name: 'Git', src: '/images/icons/git.svg' },
+      { name: 'PostgreSQL', src: '/images/icons/postgresql.svg' },
+    ],
+  },
+  {
+    name: 'Graphics & games',
+    icons: [
+      { name: 'Godot', src: '/images/icons/godot.svg' },
+      { name: 'Three.js', src: '/images/icons/threejs.svg' },
+    ],
+  },
+];
+
+export const allSkillIcons: Icon[] = skillGroups.flatMap((g) => g.icons);
+
+// One entry per cv.awards item, same order. kind "badge" is an official issued badge image
+// (show it large, uncropped); "logo" is an issuer logo to place inside a badge-shaped frame;
+// "monogram" has no image, so draw the letters inside the frame.
+export type Badge =
+  | { kind: 'badge'; src: string }
+  | { kind: 'logo'; src: string }
+  | { kind: 'monogram'; letters: string };
+
+export const awardBadges: Badge[] = [
+  { kind: 'badge', src: '/images/badges/comptia-security-plus.png' },
+  { kind: 'badge', src: '/images/badges/aws-ai-practitioner.png' },
+  { kind: 'logo', src: '/images/icons/elasticsearch.svg' },
+  { kind: 'badge', src: '/images/badges/aws-academy-cloud-developing.png' },
+  { kind: 'logo', src: '/images/icons/si-udemy.svg' },
+  { kind: 'monogram', letters: 'UGR' },
+  { kind: 'logo', src: '/images/icons/si-udemy.svg' },
+  { kind: 'logo', src: '/images/pichola.png' },
+  { kind: 'monogram', letters: 'IF' },
+];
+
+// Natural size of each project image, so layouts can size tiles to the picture's shape.
+export const imageSize: Record<string, { w: number; h: number }> = {
+  '/images/potocolom.png': { w: 1024, h: 513 },
+  '/images/hopf_torus.png': { w: 1920, h: 721 },
+  '/images/cypher_logo.png': { w: 1024, h: 1024 },
+  '/images/nextcloud_login.png': { w: 734, h: 605 },
+  '/images/mushroom_classification.png': { w: 1985, h: 990 },
+  '/images/ludo_game.png': { w: 764, h: 767 },
+  '/images/visual_pathfinding.png': { w: 1824, h: 1880 },
+  '/images/pichola.png': { w: 315, h: 250 },
+};
+
+// Posts without an image get a generated cover showing these logos for their tags.
+export const tagIcons: Record<string, string> = {
+  DevOps: '/images/icons/docker.svg',
+  Linux: '/images/icons/linux.svg',
+  Cybersecurity: '/images/icons/wazuh.png',
+};
+
+// "CompTIA Security+ ce - CompTIA (Sep 2026)" -> { title, issuer, date }.
+export function splitAward(text: string) {
+  const m = text.match(/^(.*?)\s*\(([^()]*)\)\s*$/);
+  const body = m ? m[1] : text;
+  const date = m ? m[2] : '';
+  const cut = body.lastIndexOf(' - ');
+  return cut === -1
+    ? { title: body, issuer: '', date }
+    : { title: body.slice(0, cut), issuer: body.slice(cut + 3), date };
+}
+
 export function awardText(a: string | { text: string; url?: string }) {
   return typeof a === 'string' ? { text: a, url: undefined } : a;
 }
