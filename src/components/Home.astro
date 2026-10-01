@@ -1,6 +1,7 @@
 ---
-// PROTOTYPE variant B: "Scroll journey". The Alhambra photo stays fixed behind the page and the scroll position drives every stage: the photo blurs, the portrait rises, skill logos fly from a scatter into a grid, badges drop in like collected achievements.
-import type { Data, Post } from './data';
+// Homepage. The Alhambra photo stays fixed behind the page and scroll position drives each stage:
+// the photo blurs, the portrait rises, skill logos gather into their groups, badges drop in.
+import type { Data, Post } from '../data/home';
 import {
   skillGroups,
   awardBadges,
@@ -9,7 +10,7 @@ import {
   imageSize,
   tagIcons,
   icons,
-} from './data';
+} from '../data/home';
 
 interface Props {
   data: Data;
@@ -17,6 +18,9 @@ interface Props {
   lang: string;
 }
 const { data, posts, lang } = Astro.props;
+const t = data.home;
+const otherLang = lang === 'es' ? 'en' : 'es';
+const fill = (s: string, n: number) => s.replace('{n}', String(n));
 
 const exp = data.cv.experience.items;
 const edu = data.cv.education.items;
@@ -35,15 +39,20 @@ const fmtDate = (d: string) => {
   const dt = new Date(d);
   return isNaN(dt.getTime())
     ? d
-    : dt.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    : dt.toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+      });
 };
 const year = new Date().getFullYear();
 const nav = [
-  ['About', 'b-about'],
-  ['Experience', 'b-exp'],
-  ['Skills', 'b-stack'],
-  ['Projects', 'b-projects'],
-  ['Blog', 'b-blog'],
+  [data.nav.about, '#about'],
+  [data.nav.cv, '#cv'],
+  [data.nav.skills, '#skills'],
+  [data.nav.projects, '#projects'],
+  [data.nav.thesis, `/${lang}/thesis`],
+  [data.nav.blog, '#blog'],
 ];
 const panel =
   'rounded-3xl bg-sand-50/90 dark:bg-ink-950/85 backdrop-blur-md shadow-xl shadow-black/10';
@@ -54,37 +63,41 @@ const hobbyIcons: string[] = [
 ];
 ---
 
-<div class="b-root relative text-ink-900 dark:text-sand-50">
+<div data-home class="home-root relative text-ink-900 dark:text-sand-50">
   <!-- Backdrop -->
   <div class="fixed inset-0 -z-10 overflow-hidden bg-ink-950" aria-hidden="true">
-    <img src="/images/alhambra.jpg" alt="" class="b-bg w-full h-full object-cover" />
+    <img src="/images/alhambra.jpg" alt="" class="home-bg w-full h-full object-cover" />
   </div>
 
   <!-- Progress bar -->
-  <div class="fixed top-0 left-0 z-[60] h-[3px] bg-sand-400 b-progress" aria-hidden="true"></div>
+  <div class="fixed top-0 left-0 z-[60] h-[3px] bg-sand-400 home-progress" aria-hidden="true"></div>
 
   <!-- Header -->
-  <header data-b-header class="b-header fixed top-0 inset-x-0 z-50">
+  <header data-home-header class="home-header fixed top-0 inset-x-0 z-50">
     <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between gap-6">
       <a href="#" class="text-xl font-black"
         ><span class="text-sand-400">return</span> leon<span class="text-sand-400">;</span></a
       >
       <nav class="flex items-center gap-1 text-sm font-bold">
         {
-          nav.map(([label, id]) => (
+          nav.map(([label, href]) => (
             <a
-              href={`#${id}`}
+              href={href}
               class="hidden md:inline-block px-3 py-2 rounded-full hover:bg-white/15 dark:hover:bg-white/10 transition-colors"
             >
               {label}
             </a>
           ))
         }
-        <a href="/es/" class="px-3 py-2 rounded-full hover:bg-white/15 transition-colors">ES</a>
+        <a
+          href={`/${otherLang}/`}
+          class="px-3 py-2 rounded-full hover:bg-white/15 transition-colors"
+          >{data.nav.switchLang}</a
+        >
         <button
           onclick="toggleTheme()"
           class="w-9 h-9 grid place-items-center rounded-full hover:bg-white/15 transition-colors"
-          aria-label="Toggle theme"
+          aria-label={t.toggleTheme}
         >
           <svg
             viewBox="0 0 24 24"
@@ -104,7 +117,38 @@ const hobbyIcons: string[] = [
             ></path></svg
           >
         </button>
+        <button
+          data-home-menu-toggle
+          class="md:hidden w-9 h-9 grid place-items-center rounded-full hover:bg-white/15 transition-colors"
+          aria-label={t.menu}
+          aria-expanded="false"
+          aria-controls="home-menu"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"></path></svg
+          >
+        </button>
       </nav>
+    </div>
+    <div
+      id="home-menu"
+      hidden
+      class="md:hidden mx-4 mb-3 rounded-2xl bg-sand-50/95 dark:bg-ink-950/95 text-ink-900 dark:text-sand-50 backdrop-blur-md shadow-xl p-2"
+    >
+      {
+        nav.map(([label, href]) => (
+          <a
+            href={href}
+            class="block rounded-xl px-4 py-3 text-base font-bold hover:bg-sand-200/70 dark:hover:bg-white/10"
+          >
+            {label}
+          </a>
+        ))
+      }
     </div>
   </header>
 
@@ -129,10 +173,10 @@ const hobbyIcons: string[] = [
       </p>
     </div>
     <a
-      href="#b-about"
+      href="#about"
       class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white text-sm font-bold drop-shadow-lg animate-bounce"
     >
-      Scroll
+      {t.scroll}
       <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5"
         ><path d="m6 9 6 6 6-6"></path></svg
       >
@@ -140,18 +184,18 @@ const hobbyIcons: string[] = [
   </section>
 
   <!-- About stage -->
-  <section id="b-about" data-scroll="pin" class="b-pin relative md:h-[220vh]">
+  <section id="about" data-scroll="pin" class="home-pin relative md:h-[220vh]">
     <div class="md:sticky md:top-0 md:h-screen flex items-center px-4 pt-20 pb-6">
       <div
         class="relative w-full max-w-6xl mx-auto p-6 md:p-10 flex flex-col md:flex-row items-center gap-8 md:gap-12"
       >
-        <div class={`b-about-bg absolute inset-0 ${panel}`} aria-hidden="true"></div>
+        <div class={`home-about-bg absolute inset-0 ${panel}`} aria-hidden="true"></div>
         <img
           src="/images/profile.jpg"
-          alt="Leon running under a red arch"
-          class="b-photo shrink-0 w-full md:w-[44%] aspect-[4/3] rounded-3xl object-cover object-[50%_35%] shadow-2xl shadow-black/30"
+          alt={t.profileAlt}
+          class="home-photo shrink-0 w-full md:w-[44%] aspect-[4/3] rounded-3xl object-cover object-[50%_35%] shadow-2xl shadow-black/30"
         />
-        <div class="b-about-text flex-1 min-w-0">
+        <div class="home-about-text flex-1 min-w-0">
           <h2 class="text-4xl md:text-5xl font-black">{data.about.title}</h2>
           <div class="mt-5 space-y-3 text-base leading-relaxed text-ink-700 dark:text-ink-200">
             {data.about.paragraphs.map((p) => <p>{p}</p>)}
@@ -183,10 +227,10 @@ const hobbyIcons: string[] = [
                 ><circle cx="12" cy="12" r="9"></circle><path
                   d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg
               >
-              English and Spanish, both native
+              {t.languages}
             </span>
           </div>
-          <div class="b-contact mt-6 flex flex-wrap gap-3">
+          <div class="home-contact mt-6 flex flex-wrap gap-3">
             <a
               href={`mailto:${data.contact.email}`}
               class="inline-flex items-center gap-2 rounded-full bg-ink-900 text-white dark:bg-sand-100 dark:text-ink-950 px-5 py-2.5 text-sm font-bold hover:bg-sand-700 dark:hover:bg-sand-300 transition-colors"
@@ -200,7 +244,7 @@ const hobbyIcons: string[] = [
                 ><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"
                 ></path></svg
               >
-              Email me
+              {t.emailMe}
             </a>
             <a
               href={data.contact.linkedin}
@@ -231,9 +275,9 @@ const hobbyIcons: string[] = [
   </section>
 
   <!-- Experience -->
-  <section id="b-exp" data-scroll="view" class="relative px-4 py-8">
+  <section id="cv" data-scroll="view" class="relative px-4 py-8">
     <div class={`${panel} relative max-w-6xl mx-auto p-6 md:p-12`}>
-      <h2 class="text-4xl md:text-5xl font-black">Experience</h2>
+      <h2 class="text-4xl md:text-5xl font-black">{data.cv.title}</h2>
       <div class="relative mt-8 pl-8 md:pl-12">
         <svg
           class="absolute left-[7px] md:left-[15px] top-0 h-full w-1 overflow-visible"
@@ -252,7 +296,7 @@ const hobbyIcons: string[] = [
             x2="2"
             y2="100%"
             pathLength="1"
-            class="b-line stroke-sand-500"
+            class="home-line stroke-sand-500"
             stroke-width="3"
             stroke-dasharray="1 1"></line>
         </svg>
@@ -281,7 +325,7 @@ const hobbyIcons: string[] = [
                 <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                   <h4 class="text-xl md:text-2xl font-black">
                     {job.role}
-                    <span class="font-normal text-ink-500 dark:text-ink-300"> at </span>
+                    <span class="font-normal text-ink-500 dark:text-ink-300"> {t.at} </span>
                     {job.url && job.url !== '#' ? (
                       <a
                         href={job.url}
@@ -299,7 +343,7 @@ const hobbyIcons: string[] = [
                     {job.period}
                     {job.current && (
                       <span class="ml-2 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200 px-2 py-0.5 text-xs">
-                        Current
+                        {t.current}
                       </span>
                     )}
                   </span>
@@ -308,11 +352,11 @@ const hobbyIcons: string[] = [
                   <div class="mt-4 flex flex-wrap gap-3">
                     <span class="rounded-xl bg-sand-100 dark:bg-ink-800 px-4 py-2">
                       <b class="text-2xl font-black">250B+</b>{' '}
-                      <span class="text-sm text-ink-600 dark:text-ink-300">events ingested</span>
+                      <span class="text-sm text-ink-600 dark:text-ink-300">{t.eventsIngested}</span>
                     </span>
                     <span class="rounded-xl bg-sand-100 dark:bg-ink-800 px-4 py-2">
                       <b class="text-2xl font-black">-20%</b>{' '}
-                      <span class="text-sm text-ink-600 dark:text-ink-300">cloud cost</span>
+                      <span class="text-sm text-ink-600 dark:text-ink-300">{t.cloudCost}</span>
                     </span>
                   </div>
                 )}
@@ -324,7 +368,7 @@ const hobbyIcons: string[] = [
                 {job.description.length > 4 && (
                   <details class="mt-3 group">
                     <summary class="cursor-pointer text-sm font-bold text-sand-700 dark:text-sand-300 hover:underline">
-                      Show {job.description.length - 4} more
+                      {fill(t.showMore, job.description.length - 4)}
                     </summary>
                     <ul class="mt-2 space-y-2 text-ink-700 dark:text-ink-200 leading-relaxed list-disc pl-5 marker:text-sand-400">
                       {job.description.slice(4).map((d) => (
@@ -370,36 +414,36 @@ const hobbyIcons: string[] = [
   </section>
 
   <!-- Skills + certifications: icons gather into their groups, badges drop in -->
-  <section id="b-stack" data-scroll="pin" class="b-pin relative md:h-[240vh]">
+  <section id="skills" data-scroll="pin" class="home-pin relative md:h-[240vh]">
     <div class="md:sticky md:top-0 md:h-screen flex items-center px-4 pt-20 pb-6">
       <div class={`${panel} w-full max-w-6xl mx-auto p-6 md:p-10`}>
-        <h2 class="text-4xl md:text-5xl font-black">Skills and certifications</h2>
+        <h2 class="text-4xl md:text-5xl font-black">{t.stackTitle}</h2>
         <div class="mt-8 grid lg:grid-cols-5 gap-8 lg:gap-10">
-          <div data-b-field class="b-field relative lg:col-span-3">
+          <div data-home-field class="home-field relative lg:col-span-3">
             {
               skillGroups.map((g) => (
                 <div class="mb-7 last:mb-0">
-                  <p class="b-label mb-3 text-sm font-bold text-sand-600 dark:text-sand-400">
-                    {g.name}
+                  <p class="home-label mb-3 text-sm font-bold text-sand-600 dark:text-sand-400">
+                    {t.skillGroups[g.id]}
                   </p>
                   <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
                     {g.icons.map((ic) => (
                       <span
-                        data-b-tile
+                        data-home-tile
                         tabindex="0"
                         title={ic.name}
-                        class="b-tile group relative flex h-10 items-center outline-none"
+                        class="home-tile group relative flex h-10 items-center outline-none"
                       >
                         <img
                           src={ic.src}
                           alt={ic.name}
                           loading="lazy"
                           class:list={[
-                            'b-icon h-9 w-auto max-w-[96px] object-contain',
-                            monoIcons.has(ic.name) && 'b-mono',
+                            'home-icon h-9 w-auto max-w-[96px] object-contain',
+                            monoIcons.has(ic.name) && 'home-mono',
                           ]}
                         />
-                        <span class="b-tip absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink-900 text-white text-xs font-bold px-2 py-0.5 pointer-events-none">
+                        <span class="home-tip absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink-900 text-white text-xs font-bold px-2 py-0.5 pointer-events-none">
                           {ic.name}
                         </span>
                       </span>
@@ -412,8 +456,9 @@ const hobbyIcons: string[] = [
 
           <div class="lg:col-span-2">
             <p class="mb-3 text-sm font-bold text-sand-600 dark:text-sand-400">
-              Certifications <span class="font-normal text-ink-500 dark:text-ink-300"
-                >(<span data-b-count>0</span> of {awards.length})</span
+              {t.certifications}{' '}
+              <span class="font-normal text-ink-500 dark:text-ink-300"
+                >(<span data-home-count>0</span> {t.countOf} {awards.length})</span
               >
             </p>
             <div
@@ -429,10 +474,10 @@ const hobbyIcons: string[] = [
                       title={a.title}
                       class="group text-center"
                     >
-                      <div data-b-badge class="b-badge-img">
+                      <div data-home-badge class="home-badge-img">
                         <img
                           src={a.badge.src}
-                          alt={`${a.title} badge`}
+                          alt={`${t.badgeAlt}: ${a.title}`}
                           loading="lazy"
                           class="w-full aspect-square object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-2"
                         />
@@ -450,9 +495,9 @@ const hobbyIcons: string[] = [
                 {
                   otherAwards.map((a) => (
                     <span
-                      data-b-badge
+                      data-home-badge
                       title={[a.issuer, a.date].filter(Boolean).join(', ')}
-                      class="b-badge-img inline-flex items-center gap-2 rounded-full bg-sand-100 dark:bg-ink-800 pl-1.5 pr-3 py-1 text-xs font-bold"
+                      class="home-badge-img inline-flex items-center gap-2 rounded-full bg-sand-100 dark:bg-ink-800 pl-1.5 pr-3 py-1 text-xs font-bold"
                     >
                       {a.badge.kind === 'logo' ? (
                         <img
@@ -477,12 +522,12 @@ const hobbyIcons: string[] = [
     </div>
   </section>
   <!-- Projects -->
-  <section id="b-projects" class="relative px-4 py-8">
+  <section id="projects" class="relative px-4 py-8">
     <div class={`${panel} max-w-6xl mx-auto p-6 md:p-12`}>
       <div class="flex flex-wrap items-end justify-between gap-2">
         <h2 class="text-4xl md:text-5xl font-black">{data.projects.title}</h2>
         <p class="text-sm font-bold text-sand-600 dark:text-sand-400">
-          {projects.length} projects, newest first
+          {fill(t.projectsCount, projects.length)}
         </p>
       </div>
       <div class="mt-10 space-y-14 md:space-y-16">
@@ -497,7 +542,7 @@ const hobbyIcons: string[] = [
             return (
               <article
                 data-scroll="view"
-                class="b-prow grid md:grid-cols-2 gap-6 md:gap-10 items-center"
+                class="home-prow grid md:grid-cols-2 gap-6 md:gap-10 items-center"
               >
                 <a
                   href={p.url}
@@ -507,7 +552,7 @@ const hobbyIcons: string[] = [
                   aria-label={p.name}
                 >
                   <div
-                    class="b-shot relative mx-auto overflow-hidden rounded-3xl bg-white shadow-xl shadow-black/10"
+                    class="home-shot relative mx-auto overflow-hidden rounded-3xl bg-white shadow-xl shadow-black/10"
                     style={`aspect-ratio:${size.w}/${size.h};width:min(100%, calc(${capVh}vh * ${ratio.toFixed(4)}))`}
                   >
                     {img ? (
@@ -555,10 +600,10 @@ const hobbyIcons: string[] = [
                     )}
                   </div>
                 </a>
-                <div class="b-ptext">
+                <div class="home-ptext">
                   {featured && (
                     <p class="text-sm font-bold text-sand-600 dark:text-sand-400 mb-2">
-                      Featured project
+                      {t.featured}
                     </p>
                   )}
                   <h3
@@ -585,7 +630,7 @@ const hobbyIcons: string[] = [
                     rel="noopener"
                     class="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-sand-700 dark:text-sand-300 hover:underline"
                   >
-                    View project
+                    {t.viewProject}
                     <svg
                       viewBox="0 0 24 24"
                       class="w-4 h-4"
@@ -614,20 +659,20 @@ const hobbyIcons: string[] = [
       <div class="rounded-2xl bg-white p-3 shadow-lg shadow-black/10">
         <img
           src="/images/hopf_torus.png"
-          alt="Hopf torus rendering"
+          alt={t.thesisImageAlt}
           class="w-full aspect-[1920/721] object-contain"
           loading="lazy"
         />
       </div>
       <div>
         <p class="text-sm font-bold text-sand-600 dark:text-sand-400">{data.thesis.title}</p>
-        <h2 class="mt-1 text-3xl md:text-4xl font-black">Hopf Torus Gallery</h2>
+        <h2 class="mt-1 text-3xl md:text-4xl font-black">{t.thesisProject}</h2>
         <p class="mt-3 text-ink-700 dark:text-ink-200 leading-relaxed">{data.thesis.description}</p>
         <a
           href={`/${lang}/thesis`}
           class="mt-5 inline-flex items-center gap-2 rounded-full bg-ink-900 text-white dark:bg-sand-100 dark:text-ink-950 px-5 py-2.5 text-sm font-bold hover:bg-sand-700 dark:hover:bg-sand-300 transition-colors"
         >
-          {data.thesis.cta}
+          {data.thesis.cta.replace(/\s*→\s*$/, '')}
           <svg
             viewBox="0 0 24 24"
             class="w-4 h-4"
@@ -641,7 +686,7 @@ const hobbyIcons: string[] = [
   </section>
 
   <!-- Blog -->
-  <section id="b-blog" class="relative px-4 py-8">
+  <section id="blog" class="relative px-4 py-8">
     <div class={`${panel} max-w-6xl mx-auto p-6 md:p-12`}>
       <h2 class="text-4xl md:text-5xl font-black">{data.blog.title}</h2>
       {
@@ -758,7 +803,7 @@ const hobbyIcons: string[] = [
       <a
         href={`mailto:${data.contact.email}`}
         class="mt-2 inline-block text-4xl md:text-7xl font-black hover:text-sand-700 dark:hover:text-sand-300 transition-colors"
-        >Let's build something.</a
+        >{t.footerCta}</a
       >
       <p class="mt-3 text-ink-600 dark:text-ink-300">{data.contact.email}</p>
       <div class="mt-6 flex justify-center gap-3">
@@ -796,58 +841,58 @@ const hobbyIcons: string[] = [
 </div>
 
 <style>
-  .b-root {
+  .home-root {
     overflow-x: clip;
   }
-  .b-bg {
+  .home-bg {
     filter: blur(calc(var(--page, 0) * 14px)) brightness(calc(1 - var(--page, 0) * 0.45));
     transform: scale(calc(1.05 + var(--page, 0) * 0.1));
   }
-  .b-progress {
+  .home-progress {
     width: calc(var(--page, 0) * 100%);
   }
 
-  .b-header {
+  .home-header {
     color: #fff;
     transition:
       background-color 0.3s,
       color 0.3s,
       box-shadow 0.3s;
   }
-  .b-header.is-scrolled {
+  .home-header.is-scrolled {
     color: #1a1a1a;
     background: rgb(250 248 245 / 0.78);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     box-shadow: 0 1px 0 rgb(0 0 0 / 0.06);
   }
-  :global(.dark) .b-header.is-scrolled {
+  :global(.dark) .home-header.is-scrolled {
     color: #faf8f5;
     background: rgb(26 26 26 / 0.7);
     box-shadow: 0 1px 0 rgb(255 255 255 / 0.06);
   }
 
   /* About */
-  .b-about-bg {
+  .home-about-bg {
     opacity: clamp(0, var(--p, 0) * 3, 1);
   }
-  .b-photo {
+  .home-photo {
     --a: min(var(--p, 0) * 2, 1);
     transform: translateY(calc((1 - var(--a)) * 40vh)) scale(calc(0.85 + var(--a) * 0.15));
   }
-  .b-about-text {
+  .home-about-text {
     --t: clamp(0, (var(--p, 0) - 0.3) * 2.5, 1);
     opacity: var(--t);
     transform: translateX(calc((1 - var(--t)) * 160px));
   }
-  .b-contact {
+  .home-contact {
     --c: clamp(0, (var(--p, 0) - 0.7) * 8, 1);
     opacity: var(--c);
     transform: translateY(calc((1 - var(--c)) * 16px));
   }
 
   /* Skills: icons look like the live site (grey until hovered), no tiles */
-  .b-icon {
+  .home-icon {
     filter: grayscale(1);
     opacity: 0.65;
     transition:
@@ -855,36 +900,36 @@ const hobbyIcons: string[] = [
       opacity 0.25s,
       transform 0.25s;
   }
-  .b-tile:hover .b-icon,
-  .b-tile:focus-visible .b-icon {
+  .home-tile:hover .home-icon,
+  .home-tile:focus-visible .home-icon {
     filter: none;
     opacity: 1;
     transform: translateY(-3px);
   }
-  :global(.dark) .b-mono {
+  :global(.dark) .home-mono {
     filter: grayscale(1) invert(1);
   }
-  :global(.dark) .b-tile:hover .b-mono,
-  :global(.dark) .b-tile:focus-visible .b-mono {
+  :global(.dark) .home-tile:hover .home-mono,
+  :global(.dark) .home-tile:focus-visible .home-mono {
     filter: invert(1) hue-rotate(180deg);
   }
-  .b-tip {
+  .home-tip {
     opacity: 0;
     transition: opacity 0.15s;
   }
-  .b-tile:hover .b-tip,
-  .b-tile:focus-visible .b-tip {
+  .home-tile:hover .home-tip,
+  .home-tile:focus-visible .home-tip {
     opacity: 1;
   }
-  .b-tile:hover,
-  .b-tile:focus-visible {
+  .home-tile:hover,
+  .home-tile:focus-visible {
     z-index: 5;
   }
   @media (min-width: 768px) {
-    .b-field {
+    .home-field {
       --q: min(var(--p, 0) / 0.6, 1);
     }
-    .b-tile {
+    .home-tile {
       transform: translate(
           calc(var(--dx, 0px) * (1 - var(--q))),
           calc(var(--dy, 0px) * (1 - var(--q)))
@@ -892,51 +937,42 @@ const hobbyIcons: string[] = [
         rotate(calc(var(--r, 0deg) * (1 - var(--q)))) scale(calc(0.7 + 0.3 * var(--q)));
       will-change: transform;
     }
-    .b-label {
+    .home-label {
       opacity: clamp(0, (var(--p, 0) - 0.45) * 6, 1);
     }
   }
   @media (max-width: 767px) {
-    .b-pin {
+    .home-pin {
       --p: 1 !important;
     }
   }
 
   /* Experience */
-  .b-line {
+  .home-line {
     stroke-dashoffset: calc(1 - var(--p, 0) * var(--p, 0));
   }
 
   /* Badges */
-  .b-hex {
-    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-  }
-  .b-badge-img {
+  .home-badge-img {
     opacity: 0;
     transform: translateY(-48px) scale(1.6);
     transition:
       transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
       opacity 0.3s ease;
   }
-  .b-badge-img.is-on {
+  .home-badge-img.is-on {
     opacity: 1;
     transform: none;
   }
-  .b-ghost {
-    transition: opacity 0.4s;
-  }
-  .is-got .b-ghost {
-    opacity: 0;
-  }
 
   /* Projects */
-  .b-shot {
+  .home-shot {
     clip-path: inset(calc((1 - var(--p, 0)) * 18%) round 24px);
   }
-  .b-shot img {
+  .home-shot img {
     transform: scale(calc(1.25 - var(--p, 0) * 0.25));
   }
-  .b-ptext {
+  .home-ptext {
     opacity: clamp(0, var(--p, 0) * 1.6 - 0.3, 1);
     transform: translateY(calc((1 - var(--p, 0)) * 48px));
   }
@@ -960,7 +996,7 @@ const hobbyIcons: string[] = [
 
   @media (prefers-reduced-motion: reduce) {
     [data-reveal],
-    .b-badge-img {
+    .home-badge-img {
       transition: none;
     }
   }
@@ -968,16 +1004,25 @@ const hobbyIcons: string[] = [
 
 <script is:inline>
   (function () {
-    const root = document.querySelector('[data-variant="B"]');
+    const root = document.querySelector('[data-home]');
     if (!root) return;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const scrollEls = Array.from(root.querySelectorAll('[data-scroll]'));
-    const header = root.querySelector('[data-b-header]');
-    const field = root.querySelector('[data-b-field]');
-    const badgeSection = root.querySelector('#b-stack');
-    const badges = Array.from(root.querySelectorAll('[data-b-badge]'));
-    const counter = root.querySelector('[data-b-count]');
+    const header = root.querySelector('[data-home-header]');
+    const field = root.querySelector('[data-home-field]');
+    const badgeSection = root.querySelector('#skills');
+    const badges = Array.from(root.querySelectorAll('[data-home-badge]'));
+    const counter = root.querySelector('[data-home-count]');
     const clamp = (v) => Math.min(1, Math.max(0, v));
+
+    const menu = root.querySelector('#home-menu');
+    const menuToggle = root.querySelector('[data-home-menu-toggle]');
+    function setMenu(open) {
+      menu.hidden = !open;
+      menuToggle.setAttribute('aria-expanded', String(open));
+    }
+    menuToggle.addEventListener('click', () => setMenu(menu.hidden));
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
 
     function hash(n) {
       let x = Math.imul(n ^ 0x9e3779b9, 0x85ebca6b);
@@ -989,27 +1034,18 @@ const hobbyIcons: string[] = [
 
     // Icons keep their normal flow position; each one only animates its offset from a scattered start.
     function layoutSkills() {
-      if (!field || root.hidden) return;
-      const tiles = Array.from(field.querySelectorAll('[data-b-tile]'));
+      if (!field) return;
+      const tiles = Array.from(field.querySelectorAll('[data-home-tile]'));
       if (window.innerWidth < 768) {
         tiles.forEach((t) => ['--dx', '--dy', '--r'].forEach((k) => t.style.removeProperty(k)));
         return;
       }
       const W = field.offsetWidth;
       const H = field.offsetHeight;
-      const fr = field.getBoundingClientRect();
       tiles.forEach((t, i) => {
-        let x = 0,
-          y = 0;
-        for (let el = t; el && el !== field; el = el.offsetParent) {
-          x += el.offsetLeft;
-          y += el.offsetTop;
-        }
-        if (t.offsetParent !== field && !field.contains(t.offsetParent)) {
-          const r = t.getBoundingClientRect();
-          x = r.left - fr.left;
-          y = r.top - fr.top;
-        }
+        // field is the tiles' offsetParent, and offsets ignore the transform being animated.
+        const x = t.offsetLeft;
+        const y = t.offsetTop;
         const sx = hash(i * 3 + 1) * (W - t.offsetWidth);
         const sy = hash(i * 3 + 2) * (H - t.offsetHeight);
         t.style.setProperty('--dx', (sx - x).toFixed(1) + 'px');
@@ -1023,14 +1059,12 @@ const hobbyIcons: string[] = [
       badges.forEach((b, i) => {
         const on = p > 0.35 + (i / badges.length) * 0.5;
         b.classList.toggle('is-on', on);
-        b.parentElement.classList.toggle('is-got', on);
         if (on) got++;
       });
       if (counter) counter.textContent = String(got);
     }
 
     function update() {
-      if (root.hidden) return;
       const ih = window.innerHeight;
       const mobile = window.innerWidth < 768;
       const max = document.documentElement.scrollHeight - ih;
@@ -1055,13 +1089,6 @@ const hobbyIcons: string[] = [
       revealEls.forEach((el) => el.classList.add('is-in'));
       if (header) header.classList.add('is-scrolled');
       setBadges(1);
-      const relayout = () => layoutSkills();
-      new MutationObserver(relayout).observe(root, {
-        attributes: true,
-        attributeFilter: ['hidden'],
-      });
-      window.addEventListener('load', relayout);
-      relayout();
       return;
     }
 
@@ -1080,7 +1107,7 @@ const hobbyIcons: string[] = [
 
     let ticking = false;
     function schedule() {
-      if (root.hidden || ticking) return;
+      if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
         ticking = false;
@@ -1088,14 +1115,12 @@ const hobbyIcons: string[] = [
       });
     }
     function refresh() {
-      if (root.hidden) return;
       layoutSkills();
       schedule();
     }
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', refresh, { passive: true });
     window.addEventListener('load', refresh);
-    new MutationObserver(refresh).observe(root, { attributes: true, attributeFilter: ['hidden'] });
     refresh();
   })();
 </script>

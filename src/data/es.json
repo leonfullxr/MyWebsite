@@ -6,6 +6,7 @@
   "nav": {
     "about": "Sobre mí",
     "cv": "Experiencia",
+    "skills": "Habilidades",
     "projects": "Proyectos",
     "thesis": "TFG",
     "blog": "Blog",
@@ -281,5 +282,34 @@
     "linkedin": "https://www.linkedin.com/in/leon-elliott-fuller-b48b7123a/",
     "github": "https://github.com/leonfullxr",
     "website": "https://leonfullxr.github.io/"
+  },
+  "home": {
+    "scroll": "Desliza",
+    "languages": "Inglés y español, ambos nativos",
+    "emailMe": "Escríbeme",
+    "at": "en",
+    "current": "Actual",
+    "eventsIngested": "eventos procesados",
+    "cloudCost": "coste en la nube",
+    "showMore": "Ver {n} más",
+    "stackTitle": "Habilidades y certificaciones",
+    "skillGroups": {
+      "languages": "Lenguajes",
+      "security": "Seguridad y búsqueda",
+      "cloud": "Nube e infraestructura",
+      "graphics": "Gráficos y videojuegos"
+    },
+    "certifications": "Certificaciones",
+    "countOf": "de",
+    "badgeAlt": "Insignia",
+    "projectsCount": "{n} proyectos, del más reciente al más antiguo",
+    "featured": "Proyecto destacado",
+    "viewProject": "Ver proyecto",
+    "thesisProject": "Hopf Torus Gallery",
+    "thesisImageAlt": "Render del toro de Hopf",
+    "profileAlt": "Leon corriendo bajo un arco rojo",
+    "footerCta": "Construyamos algo.",
+    "toggleTheme": "Cambiar tema",
+    "menu": "Menú"
   }
 }
