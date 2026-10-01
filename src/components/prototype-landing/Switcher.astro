@@ -1,0 +1,49 @@
+---
+// PROTOTYPE: floating variant switcher. Only mounted by the dev-only prototype route.
+interface Props {
+  variants: [string, string][];
+}
+const { variants } = Astro.props;
+---
+
+<div
+  class="fixed bottom-5 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-1 rounded-full bg-fuchsia-600 text-white shadow-2xl shadow-black/40 px-1.5 py-1.5 text-sm"
+>
+  <button data-sw="-1" class="w-8 h-8 rounded-full hover:bg-white/20" aria-label="Previous variant">←</button>
+  <span data-sw-label class="px-3 min-w-[200px] text-center font-medium"></span>
+  <button data-sw="1" class="w-8 h-8 rounded-full hover:bg-white/20" aria-label="Next variant">→</button>
+</div>
+
+<script is:inline define:vars={{ variants }}>
+  (function () {
+    const keys = variants.map((v) => v[0]);
+    const label = document.querySelector('[data-sw-label]');
+    function show(key) {
+      if (!keys.includes(key)) key = keys[0];
+      document.querySelectorAll('[data-variant]').forEach((el) => {
+        el.hidden = el.dataset.variant !== key;
+      });
+      const [k, name] = variants.find((v) => v[0] === key);
+      label.textContent = k + ' — ' + name;
+      const url = new URL(location.href);
+      url.searchParams.set('variant', key);
+      history.replaceState(null, '', url);
+      return key;
+    }
+    let current = show(new URLSearchParams(location.search).get('variant') || keys[0]);
+    function step(d) {
+      const i = (keys.indexOf(current) + d + keys.length) % keys.length;
+      current = show(keys[i]);
+      window.scrollTo(0, 0);
+    }
+    document.querySelectorAll('[data-sw]').forEach((b) =>
+      b.addEventListener('click', () => step(Number(b.dataset.sw)))
+    );
+    document.addEventListener('keydown', (e) => {
+      const t = e.target;
+      if (t.closest && t.closest('input, textarea, [contenteditable]')) return;
+      if (e.key === 'ArrowLeft') step(-1);
+      if (e.key === 'ArrowRight') step(1);
+    });
+  })();
+</script>
