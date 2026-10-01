@@ -184,7 +184,7 @@ const hobbyIcons: string[] = [
   </section>
 
   <!-- About stage -->
-  <section id="about" data-scroll="pin" class="home-pin relative md:h-[220vh]">
+  <section id="about" data-scroll="pin" data-settle="0.88" class="home-pin relative md:h-[220vh]">
     <div class="md:sticky md:top-0 md:h-screen flex items-center px-4 pt-20 pb-6">
       <div
         class="relative w-full max-w-6xl mx-auto p-6 md:p-10 flex flex-col md:flex-row items-center gap-8 md:gap-12"
@@ -414,7 +414,7 @@ const hobbyIcons: string[] = [
   </section>
 
   <!-- Skills + certifications: icons gather into their groups, badges drop in -->
-  <section id="skills" data-scroll="pin" class="home-pin relative md:h-[240vh]">
+  <section id="skills" data-scroll="pin" data-settle="0.88" class="home-pin relative md:h-[240vh]">
     <div class="md:sticky md:top-0 md:h-screen flex items-center px-4 pt-20 pb-6">
       <div class={`${panel} w-full max-w-6xl mx-auto p-6 md:p-10`}>
         <h2 class="text-4xl md:text-5xl font-black">{t.stackTitle}</h2>
@@ -456,10 +456,7 @@ const hobbyIcons: string[] = [
 
           <div class="lg:col-span-2">
             <p class="mb-3 text-sm font-bold text-sand-600 dark:text-sand-400">
-              {t.certifications}{' '}
-              <span class="font-normal text-ink-500 dark:text-ink-300"
-                >(<span data-home-count>0</span> {t.countOf} {awards.length})</span
-              >
+              {t.certifications}
             </p>
             <div
               class="rounded-2xl bg-white/80 dark:bg-ink-900/80 ring-1 ring-black/5 dark:ring-white/10 p-5"
@@ -891,26 +888,15 @@ const hobbyIcons: string[] = [
     transform: translateY(calc((1 - var(--c)) * 16px));
   }
 
-  /* Skills: icons look like the live site (grey until hovered), no tiles */
+  /* Skills: plain full-colour logos, no tiles */
   .home-icon {
-    filter: grayscale(1);
-    opacity: 0.65;
-    transition:
-      filter 0.25s,
-      opacity 0.25s,
-      transform 0.25s;
+    transition: transform 0.25s;
   }
   .home-tile:hover .home-icon,
   .home-tile:focus-visible .home-icon {
-    filter: none;
-    opacity: 1;
     transform: translateY(-3px);
   }
   :global(.dark) .home-mono {
-    filter: grayscale(1) invert(1);
-  }
-  :global(.dark) .home-tile:hover .home-mono,
-  :global(.dark) .home-tile:focus-visible .home-mono {
     filter: invert(1) hue-rotate(180deg);
   }
   .home-tip {
@@ -1012,7 +998,6 @@ const hobbyIcons: string[] = [
     const field = root.querySelector('[data-home-field]');
     const badgeSection = root.querySelector('#skills');
     const badges = Array.from(root.querySelectorAll('[data-home-badge]'));
-    const counter = root.querySelector('[data-home-count]');
     const clamp = (v) => Math.min(1, Math.max(0, v));
 
     const menu = root.querySelector('#home-menu');
@@ -1055,13 +1040,9 @@ const hobbyIcons: string[] = [
     }
 
     function setBadges(p) {
-      let got = 0;
       badges.forEach((b, i) => {
-        const on = p > 0.35 + (i / badges.length) * 0.5;
-        b.classList.toggle('is-on', on);
-        if (on) got++;
+        b.classList.toggle('is-on', p > 0.35 + (i / badges.length) * 0.5);
       });
-      if (counter) counter.textContent = String(got);
     }
 
     function update() {
@@ -1122,5 +1103,31 @@ const hobbyIcons: string[] = [
     window.addEventListener('resize', refresh, { passive: true });
     window.addEventListener('load', refresh);
     refresh();
+
+    // Pinned sections animate in as you scroll through them, so their top shows the
+    // unassembled start. Anchor jumps land at data-settle instead, once the stage is complete.
+    function settleTarget(hash) {
+      const sec = hash.length > 1 && root.querySelector(`section${hash}[data-settle]`);
+      if (!sec || window.innerWidth < 768) return null;
+      const top = sec.getBoundingClientRect().top + window.scrollY;
+      return top + (sec.offsetHeight - window.innerHeight) * Number(sec.dataset.settle);
+    }
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href]');
+      if (!a) return;
+      const url = new URL(a.href, location.href);
+      if (url.pathname !== location.pathname) return;
+      const y = settleTarget(url.hash);
+      if (y === null) return;
+      e.preventDefault();
+      history.pushState(null, '', url.hash);
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+    function settleOnLoad() {
+      const y = settleTarget(location.hash);
+      if (y !== null) window.scrollTo({ top: y, behavior: 'instant' });
+    }
+    if (document.readyState === 'complete') settleOnLoad();
+    else window.addEventListener('load', settleOnLoad);
   })();
 </script>
