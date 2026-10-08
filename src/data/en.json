@@ -178,6 +178,10 @@
           "text": "AWS Certified AI Practitioner - Amazon Web Services",
           "url": "https://www.credly.com/badges/2c0af649-dd04-400a-826d-e56bd4830fce/linked_in_profile"
         },
+        {
+          "text": "AWS Certified Cloud Practitioner - Amazon Web Services",
+          "url": "https://www.credly.com/badges/c9eae8ef-a069-490c-a509-c45469a8183b"
+        },
         "Elasticsearch Engineer - Elasticsearch (2025)",
         {
           "text": "AWS Academy Cloud Developing - Amazon Web Services (Nov 2024)",
@@ -198,16 +202,16 @@
         "name": "Potocolom Studio",
         "url": "https://potocolom.leonfuller.com/",
         "period": "2026",
-        "description": "Open source, real-time generative image platform. Generate images, enhance them, upscale them, or sketch on a canvas while a diffusion model paints over your strokes live. One click sends the result to a heavier model for the final image. One AGPL codebase runs it two ways: self-hosted on your own GPU for free, or as a managed cloud with subscriptions.",
-        "tags": ["AI", "Web App", "Open Source"],
+        "description": "Open source, real-time generative image platform. Sketch on a canvas and a diffusion model paints over your strokes live, then one click hands the result to a heavier model for the final render. Generate, enhance, and upscale are built in. One AGPL codebase runs self-hosted on your own GPU, or as a managed subscription cloud. SvelteKit, FastAPI, PostgreSQL, Redis, WebSockets, and CUDA/ROCm.",
+        "tags": ["AI", "Open Source", "Docker"],
         "image": "/images/potocolom.png"
       },
       {
         "name": "Elliptic Curve Visualization",
         "url": "https://github.com/leonfullxr/ECC-Thesis",
         "period": "2025",
-        "description": "Interactive plot of elliptic curves (y² = x³ + ax + b) with adjustable parameters and zoom. Part of my thesis on elliptic curve cryptography.",
-        "tags": ["Cybersecurity", "Web App"],
+        "description": "Interactive plot of elliptic curves (y² = x³ + ax + b) with adjustable parameters and zoom. Part of my thesis on elliptic curve cryptography. Built in C++ and run in Docker.",
+        "tags": ["Cybersecurity", "C++", "Docker"],
         "image": "/images/hopf_torus.png"
       },
       {
@@ -215,7 +219,7 @@
         "url": "https://github.com/leonfullxr/Cypher",
         "period": "2024",
         "description": "Encrypted chat app with end-to-end encryption, real-time messaging, and no metadata storage. It uses TLS, Signal-style protocols, and AES. Users stay anonymous by design.",
-        "tags": ["Cybersecurity", "Web App", "DevOps"],
+        "tags": ["Cybersecurity", "Web App", "C++"],
         "image": "/images/cypher_logo.png"
       },
       {
@@ -239,7 +243,7 @@
         "url": "https://github.com/leonfullxr/AI-for-Ludo-game",
         "period": "2023",
         "description": "Parchís variant with a deliberative AI agent. It uses MINIMAX and alpha-beta pruning to play against humans.",
-        "tags": ["AI", "Game Dev"],
+        "tags": ["AI", "C++", "Game Dev"],
         "image": "/images/ludo_game.png"
       },
       {
@@ -247,22 +251,15 @@
         "url": "https://github.com/leonfullxr/Visual-Path-Finding",
         "period": "2023",
         "description": "Interactive demo of path-finding algorithms such as A* and Dijkstra. Built as a teaching aid for algorithm behavior.",
-        "tags": ["AI", "Design"],
+        "tags": ["AI", "Design", "C++"],
         "image": "/images/visual_pathfinding.png"
-      },
-      {
-        "name": "Solar System Simulation",
-        "url": "https://github.com/leonfullxr/SolarSystem-Simulation",
-        "period": "2023",
-        "description": "Python simulation of orbits, gravity, collisions, and asteroids. Built with pygame.",
-        "tags": ["Game Dev", "Design"]
       },
       {
         "name": "Pichola - Award-Winning Game",
         "url": "https://github.com/leonfullxr/Pichola",
         "period": "Jan 2022",
         "description": "Game built in a 48-hour jam with Godot. Theme: start from nothing. You begin as an egg and collect others to unlock skills. Won Best Art.",
-        "tags": ["Game Dev", "Design"],
+        "tags": ["Game Dev", "Godot"],
         "image": "/images/pichola.png"
       }
     ]
@@ -297,7 +294,8 @@
       "languages": "Languages",
       "security": "Security & search",
       "cloud": "Cloud & infrastructure",
-      "graphics": "Graphics & games"
+      "graphics": "Graphics & games",
+      "aiml": "AI & machine learning"
     },
     "certifications": "Certifications",
     "badgeAlt": "Badge",

@@ -1,6 +1,6 @@
 ---
 // Homepage. The Alhambra photo stays fixed behind the page and scroll position drives each stage:
-// the photo blurs, the portrait rises, skill logos gather into their groups, badges drop in.
+// the photo blurs, the portrait rises, skill logos gather into a periodic table, badges drop in.
 import type { Data, Post } from '../data/home';
 import {
   skillGroups,
@@ -28,12 +28,10 @@ const awards = data.cv.awards.items.map((a, i) => {
   const t = awardText(a);
   return { ...splitAward(t.text), url: t.url, badge: awardBadges[i] };
 });
-const officialBadges = awards.filter(
-  (a) => a.badge.kind === 'badge'
-) as ((typeof awards)[number] & { badge: { kind: 'badge'; src: string } })[];
+const officialBadges = awards.filter((a) => a.badge.kind === 'badge');
 const otherAwards = awards.filter((a) => a.badge.kind !== 'badge');
 // Dark or black logos that need inverting on the dark theme.
-const monoIcons = new Set(['Three.js', 'Wazuh', 'AWS', 'OpenSearch', 'Bash']);
+const monoIcons = new Set(['Three.js', 'Wazuh', 'AWS', 'OpenSearch', 'Bash', 'NumPy', 'Pandas']);
 const projects = data.projects.items;
 const fmtDate = (d: string) => {
   const dt = new Date(d);
@@ -56,6 +54,57 @@ const nav = [
 ];
 const panel =
   'rounded-3xl bg-sand-50/90 dark:bg-ink-950/85 backdrop-blur-md shadow-xl shadow-black/10';
+// Periodic-table seats for the homepage skill logos. Row/col follow the short table:
+// two cells on top, a gap through the middle, then a wider bottom row.
+const cellPlace: Record<string, { n: number; row: number; col: number }> = {
+  'graphics-0': { n: 1, row: 1, col: 1 },
+  'graphics-1': { n: 2, row: 1, col: 18 },
+  'languages-0': { n: 3, row: 2, col: 1 },
+  'languages-1': { n: 4, row: 2, col: 2 },
+  'languages-2': { n: 5, row: 2, col: 13 },
+  'languages-3': { n: 6, row: 2, col: 14 },
+  'languages-4': { n: 7, row: 2, col: 15 },
+  'languages-5': { n: 8, row: 2, col: 16 },
+  'languages-6': { n: 9, row: 2, col: 17 },
+  'languages-7': { n: 10, row: 2, col: 18 },
+  'languages-8': { n: 11, row: 3, col: 1 },
+  'languages-9': { n: 12, row: 3, col: 2 },
+  'security-0': { n: 13, row: 3, col: 16 },
+  'security-1': { n: 14, row: 3, col: 17 },
+  'security-2': { n: 15, row: 3, col: 18 },
+  'cloud-0': { n: 16, row: 4, col: 1 },
+  'cloud-1': { n: 17, row: 4, col: 2 },
+  'cloud-2': { n: 18, row: 4, col: 3 },
+  'cloud-3': { n: 19, row: 4, col: 4 },
+  'cloud-4': { n: 20, row: 4, col: 5 },
+  'cloud-5': { n: 21, row: 4, col: 6 },
+  'cloud-6': { n: 22, row: 4, col: 7 },
+  'cloud-7': { n: 23, row: 4, col: 8 },
+  'aiml-0': { n: 24, row: 4, col: 9 },
+  'aiml-1': { n: 25, row: 4, col: 10 },
+  'aiml-2': { n: 26, row: 4, col: 11 },
+  'aiml-3': { n: 27, row: 4, col: 12 },
+  'aiml-4': { n: 28, row: 4, col: 13 },
+  'aiml-5': { n: 29, row: 4, col: 14 },
+  'aiml-6': { n: 30, row: 4, col: 15 },
+  'aiml-7': { n: 31, row: 4, col: 16 },
+  'aiml-8': { n: 32, row: 4, col: 17 },
+  'aiml-9': { n: 33, row: 4, col: 18 },
+};
+type SkillGroupId = (typeof skillGroups)[number]['id'];
+const toneClass: Record<SkillGroupId, string> = {
+  languages: 'bg-[#d4e2ec] text-[#163044] dark:bg-[#1b3344] dark:text-[#d7e8f4]',
+  security: 'bg-[#d9e6dc] text-[#1a3326] dark:bg-[#1c3328] dark:text-[#d7eee2]',
+  cloud: 'bg-[#ead9c4] text-[#3d2b16] dark:bg-[#3d2e1e] dark:text-[#f3e4d0]',
+  graphics: 'bg-[#e7d6de] text-[#3d2432] dark:bg-[#3a2832] dark:text-[#f6e0ea]',
+  aiml: 'bg-[#ddd6f3] text-[#2a2448] dark:bg-[#2c2848] dark:text-[#e6e0f8]',
+};
+const skillCells = skillGroups.flatMap((g) =>
+  g.icons.flatMap((ic, i) => {
+    const place = cellPlace[`${g.id}-${i}`];
+    return place ? [{ ...ic, ...place, group: g.id }] : [];
+  })
+);
 const hobbyIcons: string[] = [
   'M3 12h4l3-8 4 16 3-8h4',
   'M2 20 9 8l4 6 3-4 6 10z',
@@ -413,105 +462,147 @@ const hobbyIcons: string[] = [
     </div>
   </section>
 
-  <!-- Skills + certifications: icons gather into their groups, badges drop in -->
-  <section id="skills" data-scroll="pin" data-settle="0.88" class="home-pin relative md:h-[240vh]">
+  <!-- Skills + certifications: logos gather into the table, badges drop in -->
+  <section
+    id="skills"
+    data-scroll="pin"
+    data-lead="0.9"
+    data-settle="0.65"
+    class="home-pin relative md:h-[220vh]"
+  >
     <div class="md:sticky md:top-0 md:h-screen flex items-center px-4 pt-20 pb-6">
       <div class={`${panel} w-full max-w-6xl mx-auto p-6 md:p-10`}>
         <h2 class="text-4xl md:text-5xl font-black">{t.stackTitle}</h2>
-        <div class="mt-8 grid lg:grid-cols-5 gap-8 lg:gap-10">
-          <div data-home-field class="home-field relative lg:col-span-3">
+        <div class="mt-8 max-md:overflow-x-auto max-md:overscroll-x-contain">
+          <div
+            data-home-field
+            class="home-field relative grid gap-[3px] max-md:min-w-[52rem]"
+            style="grid-template-columns: 1.1rem repeat(18, minmax(0, 1fr));"
+          >
+            <div></div>
             {
-              skillGroups.map((g) => (
-                <div class="mb-7 last:mb-0">
-                  <p class="home-label mb-3 text-sm font-bold text-sand-600 dark:text-sand-400">
-                    {t.skillGroups[g.id]}
-                  </p>
-                  <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
-                    {g.icons.map((ic) => (
-                      <span
-                        data-home-tile
-                        tabindex="0"
-                        title={ic.name}
-                        class="home-tile group relative flex h-10 items-center outline-none"
-                      >
-                        <img
-                          src={ic.src}
-                          alt={ic.name}
-                          loading="lazy"
-                          class:list={[
-                            'home-icon h-9 w-auto max-w-[96px] object-contain',
-                            monoIcons.has(ic.name) && 'home-mono',
-                          ]}
-                        />
-                        <span class="home-tip absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink-900 text-white text-xs font-bold px-2 py-0.5 pointer-events-none">
-                          {ic.name}
-                        </span>
-                      </span>
-                    ))}
-                  </div>
+              Array.from({ length: 18 }, (_, i) => (
+                <div class="pb-1 text-center text-[10px] font-bold leading-none text-ink-500 dark:text-sand-400">
+                  {i + 1}
                 </div>
               ))
             }
+            {
+              [1, 2, 3, 4].map((row) => (
+                <div
+                  style={`grid-column: 1; grid-row: ${row + 1}`}
+                  class="flex items-center justify-end pr-1 text-[10px] font-bold text-ink-500 dark:text-sand-400"
+                >
+                  {row}
+                </div>
+              ))
+            }
+            {
+              skillCells.map((cell) => (
+                <span
+                  data-home-tile
+                  tabindex="0"
+                  title={cell.name}
+                  class:list={[
+                    'home-tile home-cell group relative flex aspect-square w-full select-none flex-col items-center justify-center border border-black/10 outline-none dark:border-white/10',
+                    'focus-visible:z-[5] focus-visible:ring-2 focus-visible:ring-ink-950 focus-visible:ring-offset-2 focus-visible:ring-offset-sand-50 dark:focus-visible:ring-sand-100 dark:focus-visible:ring-offset-ink-950',
+                    toneClass[cell.group],
+                  ]}
+                  style={`grid-column: ${cell.col + 1}; grid-row: ${cell.row + 1}`}
+                >
+                  <span class="absolute left-1 top-0.5 text-[9px] font-bold tabular-nums leading-none opacity-60">
+                    {cell.n}
+                  </span>
+                  <img
+                    src={cell.src}
+                    alt={cell.name}
+                    loading="lazy"
+                    class:list={[
+                      'home-icon h-7 w-auto max-w-[72%] object-contain',
+                      monoIcons.has(cell.name) && 'home-mono',
+                    ]}
+                  />
+                  <span class="home-tip absolute bottom-full left-1/2 z-10 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink-900 px-2 py-0.5 text-xs font-bold text-white pointer-events-none">
+                    {cell.name}
+                  </span>
+                </span>
+              ))
+            }
           </div>
+        </div>
+        <ul class="home-label mt-4 flex flex-wrap gap-x-5 gap-y-2">
+          {
+            skillGroups.map((g) => (
+              <li class="flex items-center gap-2 text-sm font-bold text-ink-700 dark:text-sand-200">
+                <span
+                  class:list={[
+                    'h-3.5 w-3.5 border border-black/10 dark:border-white/10',
+                    toneClass[g.id],
+                  ]}
+                />
+                {t.skillGroups[g.id]}
+              </li>
+            ))
+          }
+        </ul>
 
-          <div class="lg:col-span-2">
-            <p class="mb-3 text-sm font-bold text-sand-600 dark:text-sand-400">
-              {t.certifications}
-            </p>
+        <div class="mt-8">
+          <p class="mb-3 text-sm font-bold text-sand-600 dark:text-sand-400">
+            {t.certifications}
+          </p>
+          <div
+            class="rounded-2xl bg-white/80 dark:bg-ink-900/80 ring-1 ring-black/5 dark:ring-white/10 p-5 md:flex md:items-center md:gap-8"
+          >
+            <div class="grid w-full max-w-3xl grid-cols-2 items-start gap-4 sm:grid-cols-4">
+              {
+                officialBadges.map((a) => (
+                  <a
+                    href={a.url}
+                    target="_blank"
+                    rel="noopener"
+                    title={a.title}
+                    class="group text-center"
+                  >
+                    <div data-home-badge class="home-badge-img">
+                      <img
+                        src={a.badge.src}
+                        alt={`${t.badgeAlt}: ${a.title}`}
+                        loading="lazy"
+                        class="w-full aspect-square object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-2"
+                      />
+                    </div>
+                    <p class="mt-1 text-xs font-bold leading-tight text-ink-500 dark:text-ink-300">
+                      {a.date || a.issuer}
+                    </p>
+                  </a>
+                ))
+              }
+            </div>
             <div
-              class="rounded-2xl bg-white/80 dark:bg-ink-900/80 ring-1 ring-black/5 dark:ring-white/10 p-5"
+              class="mt-4 flex flex-wrap gap-2 border-t border-sand-200 pt-4 dark:border-ink-700 md:mt-0 md:flex-1 md:border-l md:border-t-0 md:pl-8 md:pt-0"
             >
-              <div class="grid grid-cols-3 gap-3 items-start">
-                {
-                  officialBadges.map((a) => (
-                    <a
-                      href={a.url}
-                      target="_blank"
-                      rel="noopener"
-                      title={a.title}
-                      class="group text-center"
-                    >
-                      <div data-home-badge class="home-badge-img">
-                        <img
-                          src={a.badge.src}
-                          alt={`${t.badgeAlt}: ${a.title}`}
-                          loading="lazy"
-                          class="w-full aspect-square object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-2"
-                        />
-                      </div>
-                      <p class="mt-1 text-xs font-bold leading-tight text-ink-500 dark:text-ink-300">
-                        {a.date || a.issuer}
-                      </p>
-                    </a>
-                  ))
-                }
-              </div>
-              <div
-                class="mt-4 pt-4 border-t border-sand-200 dark:border-ink-700 flex flex-wrap gap-2"
-              >
-                {
-                  otherAwards.map((a) => (
-                    <span
-                      data-home-badge
-                      title={[a.issuer, a.date].filter(Boolean).join(', ')}
-                      class="home-badge-img inline-flex items-center gap-2 rounded-full bg-sand-100 dark:bg-ink-800 pl-1.5 pr-3 py-1 text-xs font-bold"
-                    >
-                      {a.badge.kind === 'logo' ? (
-                        <img
-                          src={a.badge.src}
-                          alt=""
-                          class="w-5 h-5 rounded-full object-contain bg-white p-0.5"
-                        />
-                      ) : (
-                        <span class="w-5 h-5 rounded-full bg-sand-300 dark:bg-sand-600 grid place-items-center text-[9px] font-black text-sand-900">
-                          {a.badge.kind === 'monogram' ? a.badge.letters.slice(0, 2) : ''}
-                        </span>
-                      )}
-                      {a.title}
-                    </span>
-                  ))
-                }
-              </div>
+              {
+                otherAwards.map((a) => (
+                  <span
+                    data-home-badge
+                    title={[a.issuer, a.date].filter(Boolean).join(', ')}
+                    class="home-badge-img inline-flex items-center gap-2 rounded-full bg-sand-100 dark:bg-ink-800 pl-1.5 pr-3 py-1 text-xs font-bold"
+                  >
+                    {a.badge.kind === 'logo' ? (
+                      <img
+                        src={a.badge.src}
+                        alt=""
+                        class="w-5 h-5 rounded-full object-contain bg-white p-0.5"
+                      />
+                    ) : (
+                      <span class="w-5 h-5 rounded-full bg-sand-300 dark:bg-sand-600 grid place-items-center text-[9px] font-black text-sand-900">
+                        {a.badge.kind === 'monogram' ? a.badge.letters.slice(0, 2) : ''}
+                      </span>
+                    )}
+                    {a.title}
+                  </span>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -888,7 +979,7 @@ const hobbyIcons: string[] = [
     transform: translateY(calc((1 - var(--c)) * 16px));
   }
 
-  /* Skills: plain full-colour logos, no tiles */
+  /* Skills: logos sit in periodic-table cells and gather into place on scroll */
   .home-icon {
     transition: transform 0.25s;
   }
@@ -913,7 +1004,7 @@ const hobbyIcons: string[] = [
   }
   @media (min-width: 768px) {
     .home-field {
-      --q: min(var(--p, 0) / 0.6, 1);
+      --q: min(var(--p, 0) / 0.75, 1);
     }
     .home-tile {
       transform: translate(
@@ -924,7 +1015,7 @@ const hobbyIcons: string[] = [
       will-change: transform;
     }
     .home-label {
-      opacity: clamp(0, (var(--p, 0) - 0.45) * 6, 1);
+      opacity: clamp(0, (var(--p, 0) - 0.08) * 5, 1);
     }
   }
   @media (max-width: 767px) {
@@ -1041,7 +1132,7 @@ const hobbyIcons: string[] = [
 
     function setBadges(p) {
       badges.forEach((b, i) => {
-        b.classList.toggle('is-on', p > 0.35 + (i / badges.length) * 0.5);
+        b.classList.toggle('is-on', p > 0.18 + (i / badges.length) * 0.52);
       });
     }
 
@@ -1053,10 +1144,13 @@ const hobbyIcons: string[] = [
       if (header) header.classList.toggle('is-scrolled', window.scrollY > 40);
       for (const el of scrollEls) {
         const r = el.getBoundingClientRect();
+        // data-lead starts a pinned stage before it sticks, so skills begin
+        // gathering while experience is still on screen.
+        const lead = Number(el.dataset.lead || 0) * ih;
         const p =
           el.dataset.scroll === 'view' || mobile
             ? clamp((ih - r.top) / (ih / 2 + r.height / 2))
-            : clamp(-r.top / (r.height - ih));
+            : clamp((lead - r.top) / (r.height - ih + lead));
         el.style.setProperty('--p', p.toFixed(4));
         if (el === badgeSection) setBadges(p);
       }

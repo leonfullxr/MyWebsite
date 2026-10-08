@@ -178,6 +178,10 @@
           "text": "AWS Certified AI Practitioner - Amazon Web Services",
           "url": "https://www.credly.com/badges/2c0af649-dd04-400a-826d-e56bd4830fce/linked_in_profile"
         },
+        {
+          "text": "AWS Certified Cloud Practitioner - Amazon Web Services",
+          "url": "https://www.credly.com/badges/c9eae8ef-a069-490c-a509-c45469a8183b"
+        },
         "Elasticsearch Engineer - Elasticsearch (2025)",
         {
           "text": "AWS Academy Cloud Developing - Amazon Web Services (Nov 2024)",
@@ -198,16 +202,16 @@
         "name": "Potocolom Studio",
         "url": "https://potocolom.leonfuller.com/",
         "period": "2026",
-        "description": "Plataforma open source de generación de imágenes en tiempo real. Genera imágenes, mejóralas, haz upscale o dibuja en un lienzo mientras un modelo de difusión pinta sobre tus trazos en vivo. Un clic envía el resultado a un modelo más pesado para la imagen final. Un único código AGPL lo ejecuta de dos formas: autoalojado en tu propia GPU gratis, o como nube gestionada con suscripciones.",
-        "tags": ["IA", "Web App", "Open Source"],
+        "description": "Plataforma open source de generación de imágenes en tiempo real. Dibujas en un lienzo y un modelo de difusión pinta sobre los trazos en vivo; un clic pasa el resultado a un modelo más pesado para el render final. Generar, mejorar y hacer upscale van incluidos. Un único código AGPL corre autoalojado en tu GPU o como nube de suscripción. SvelteKit, FastAPI, PostgreSQL, Redis, WebSockets y CUDA/ROCm.",
+        "tags": ["IA", "Open Source", "Docker"],
         "image": "/images/potocolom.png"
       },
       {
         "name": "Visualización de Curvas Elípticas",
         "url": "https://github.com/leonfullxr/ECC-Thesis",
         "period": "2025",
-        "description": "Visualización interactiva de curvas elípticas (y² = x³ + ax + b) con parámetros ajustables y zoom. Parte de mi trabajo de fin de grado sobre criptografía de curvas elípticas.",
-        "tags": ["Ciberseguridad", "Web App"],
+        "description": "Visualización interactiva de curvas elípticas (y² = x³ + ax + b) con parámetros ajustables y zoom. Parte de mi trabajo de fin de grado sobre criptografía de curvas elípticas. Hecho en C++ y ejecutado en Docker.",
+        "tags": ["Ciberseguridad", "C++", "Docker"],
         "image": "/images/hopf_torus.png"
       },
       {
@@ -215,7 +219,7 @@
         "url": "https://github.com/leonfullxr/Cypher",
         "period": "2024",
         "description": "Aplicación de chat encriptada con cifrado de extremo a extremo, mensajería en tiempo real, sin almacenamiento de metadatos y protocolos avanzados como TLS y Signal. Usa cifrado AES y garantiza anonimato completo.",
-        "tags": ["Ciberseguridad", "Web App", "DevOps"],
+        "tags": ["Ciberseguridad", "Web App", "C++"],
         "image": "/images/cypher_logo.png"
       },
       {
@@ -239,7 +243,7 @@
         "url": "https://github.com/leonfullxr/AI-for-Ludo-game",
         "period": "2023",
         "description": "Parchís reinventado con un giro estratégico, con un agente de IA deliberativo usando MINIMAX y poda ALFA-BETA para juego inteligente contra humanos.",
-        "tags": ["IA", "Videojuegos"],
+        "tags": ["IA", "Videojuegos", "C++"],
         "image": "/images/ludo_game.png"
       },
       {
@@ -247,22 +251,15 @@
         "url": "https://github.com/leonfullxr/Visual-Path-Finding",
         "period": "2023",
         "description": "Herramienta interactiva de visualización de algoritmos de búsqueda de caminos como A*, Dijkstra y más. Recurso educativo para entender la mecánica algorítmica.",
-        "tags": ["IA", "Diseño"],
+        "tags": ["IA", "Diseño", "C++"],
         "image": "/images/visual_pathfinding.png"
-      },
-      {
-        "name": "Simulación del Sistema Solar",
-        "url": "https://github.com/leonfullxr/SolarSystem-Simulation",
-        "period": "2023",
-        "description": "Simulación del sistema solar en Python con atracción gravitacional, dinámica de colisiones e interacciones con asteroides. Construido con pygame.",
-        "tags": ["Videojuegos", "Diseño"]
       },
       {
         "name": "Pichola - Juego Premiado",
         "url": "https://github.com/leonfullxr/Pichola",
         "period": "Ene 2022",
         "description": "Juego premiado creado en una Game Jam de 48 horas con Godot Engine. Tema: 'Empezar de cero'. Los jugadores comienzan como un huevo, recolectando otros para desbloquear habilidades. Ganó 'Mejor Arte'.",
-        "tags": ["Videojuegos", "Diseño"],
+        "tags": ["Videojuegos", "Godot"],
         "image": "/images/pichola.png"
       }
     ]
@@ -297,7 +294,8 @@
       "languages": "Lenguajes",
       "security": "Seguridad y búsqueda",
       "cloud": "Nube e infraestructura",
-      "graphics": "Gráficos y videojuegos"
+      "graphics": "Gráficos y videojuegos",
+      "aiml": "IA y aprendizaje automático"
     },
     "certifications": "Certificaciones",
     "badgeAlt": "Insignia",
