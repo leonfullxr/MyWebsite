@@ -51,51 +51,69 @@ export type Icon = { name: string; src: string };
 
 // Skills shown as logos only; the full text list belongs in the downloadable resume.
 // `id` is looked up in home.skillGroups of en.json / es.json for the visible label.
-export const skillGroups: { id: 'languages' | 'security' | 'cloud' | 'graphics'; icons: Icon[] }[] =
-  [
-    {
-      id: 'languages',
-      icons: [
-        { name: 'C', src: '/images/icons/c.svg' },
-        { name: 'C++', src: '/images/icons/cplusplus.svg' },
-        { name: 'Python', src: '/images/icons/python.svg' },
-        { name: 'Go', src: '/images/icons/go.svg' },
-        { name: 'TypeScript', src: '/images/icons/typescript.svg' },
-        { name: 'JavaScript', src: '/images/icons/javascript.svg' },
-        { name: 'Svelte', src: '/images/icons/svelte.svg' },
-        { name: 'HTML', src: '/images/icons/html5.svg' },
-        { name: 'CSS', src: '/images/icons/css3.svg' },
-        { name: 'Bash', src: '/images/icons/bash.svg' },
-      ],
-    },
-    {
-      id: 'security',
-      icons: [
-        { name: 'Wazuh', src: '/images/icons/wazuh.png' },
-        { name: 'Elasticsearch', src: '/images/icons/elasticsearch.svg' },
-        { name: 'OpenSearch', src: '/images/icons/opensearch.svg' },
-      ],
-    },
-    {
-      id: 'cloud',
-      icons: [
-        { name: 'Docker', src: '/images/icons/docker.svg' },
-        { name: 'Kubernetes', src: '/images/icons/kubernetes.svg' },
-        { name: 'AWS', src: '/images/icons/aws.svg' },
-        { name: 'Azure', src: '/images/icons/azure.svg' },
-        { name: 'Linux', src: '/images/icons/linux.svg' },
-        { name: 'Git', src: '/images/icons/git.svg' },
-        { name: 'PostgreSQL', src: '/images/icons/postgresql.svg' },
-      ],
-    },
-    {
-      id: 'graphics',
-      icons: [
-        { name: 'Godot', src: '/images/icons/godot.svg' },
-        { name: 'Three.js', src: '/images/icons/threejs.svg' },
-      ],
-    },
-  ];
+export const skillGroups: {
+  id: 'languages' | 'security' | 'cloud' | 'graphics' | 'aiml';
+  icons: Icon[];
+}[] = [
+  {
+    id: 'languages',
+    icons: [
+      { name: 'C', src: '/images/icons/c.svg' },
+      { name: 'C++', src: '/images/icons/cplusplus.svg' },
+      { name: 'Python', src: '/images/icons/python.svg' },
+      { name: 'Go', src: '/images/icons/go.svg' },
+      { name: 'TypeScript', src: '/images/icons/typescript.svg' },
+      { name: 'JavaScript', src: '/images/icons/javascript.svg' },
+      { name: 'Svelte', src: '/images/icons/svelte.svg' },
+      { name: 'HTML', src: '/images/icons/html5.svg' },
+      { name: 'CSS', src: '/images/icons/css3.svg' },
+      { name: 'Bash', src: '/images/icons/bash.svg' },
+    ],
+  },
+  {
+    id: 'security',
+    icons: [
+      { name: 'Wazuh', src: '/images/icons/wazuh.png' },
+      { name: 'Elasticsearch', src: '/images/icons/elasticsearch.svg' },
+      { name: 'OpenSearch', src: '/images/icons/opensearch.svg' },
+    ],
+  },
+  {
+    id: 'cloud',
+    icons: [
+      { name: 'Docker', src: '/images/icons/docker.svg' },
+      { name: 'Kubernetes', src: '/images/icons/kubernetes.svg' },
+      { name: 'AWS', src: '/images/icons/aws.svg' },
+      { name: 'Azure', src: '/images/icons/azure.svg' },
+      { name: 'Linux', src: '/images/icons/linux.svg' },
+      { name: 'Git', src: '/images/icons/git.svg' },
+      { name: 'PostgreSQL', src: '/images/icons/postgresql.svg' },
+      { name: 'Redis', src: '/images/icons/redis.svg' },
+    ],
+  },
+  {
+    id: 'graphics',
+    icons: [
+      { name: 'Godot', src: '/images/icons/godot.svg' },
+      { name: 'Three.js', src: '/images/icons/threejs.svg' },
+    ],
+  },
+  {
+    id: 'aiml',
+    icons: [
+      { name: 'PyTorch', src: '/images/icons/pytorch.svg' },
+      { name: 'FastAPI', src: '/images/icons/fastapi.svg' },
+      { name: 'CUDA', src: '/images/icons/nvidia.svg' },
+      { name: 'OpenCV', src: '/images/icons/opencv.svg' },
+      { name: 'scikit-learn', src: '/images/icons/scikitlearn.svg' },
+      { name: 'NumPy', src: '/images/icons/numpy.svg' },
+      { name: 'Pandas', src: '/images/icons/pandas.svg' },
+      { name: 'Jupyter', src: '/images/icons/jupyter.svg' },
+      { name: 'Matplotlib', src: '/images/icons/matplotlib.svg' },
+      { name: 'OpenGL', src: '/images/icons/opengl.svg' },
+    ],
+  },
+];
 
 // One entry per cv.awards item, same order. kind "badge" is an official issued badge image
 // (show it large, uncropped); "logo" is an issuer logo to place inside a badge-shaped frame;
@@ -108,13 +126,14 @@ export type Badge =
 export const awardBadges: Badge[] = [
   { kind: 'badge', src: '/images/badges/comptia-security-plus.png' },
   { kind: 'badge', src: '/images/badges/aws-ai-practitioner.png' },
+  { kind: 'badge', src: '/images/badges/aws-cloud-practitioner.png' },
   { kind: 'logo', src: '/images/icons/elasticsearch.svg' },
   { kind: 'badge', src: '/images/badges/aws-academy-cloud-developing.png' },
-  { kind: 'logo', src: '/images/icons/si-udemy.svg' },
-  { kind: 'monogram', letters: 'UGR' },
+  { kind: 'logo', src: '/images/icons/cert-ml.svg' },
+  { kind: 'logo', src: '/images/icons/cert-ml.svg' },
   { kind: 'logo', src: '/images/icons/si-udemy.svg' },
   { kind: 'logo', src: '/images/pichola.png' },
-  { kind: 'monogram', letters: 'IF' },
+  { kind: 'logo', src: '/images/icons/cert-game.svg' },
 ];
 
 // Natural size of each project image, so the homepage can size it to the picture's shape.
