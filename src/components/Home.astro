@@ -28,7 +28,11 @@ const awards = data.cv.awards.items.map((a, i) => {
   const t = awardText(a);
   return { ...splitAward(t.text), url: t.url, badge: awardBadges[i] };
 });
-const officialBadges = awards.filter((a) => a.badge.kind === 'badge');
+const officialBadges = awards.filter(
+  (a) => a.badge.kind === 'badge'
+) as ((typeof awards)[number] & {
+  badge: { kind: 'badge'; src: string };
+})[];
 const otherAwards = awards.filter((a) => a.badge.kind !== 'badge');
 // Dark or black logos that need inverting on the dark theme.
 const monoIcons = new Set(['Three.js', 'Wazuh', 'AWS', 'OpenSearch', 'Bash', 'NumPy', 'Pandas']);
