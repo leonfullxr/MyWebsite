@@ -65,18 +65,14 @@
           "period": "Feb 2025 - Presente",
           "current": true,
           "description": [
-            "Diseño e implemento plataformas SOC para grandes empresas, con SIEM, XDR, HIDS y NIDS en infraestructuras on-prem y cloud.",
-            "Mantenedor principal del repositorio público de integraciones de Wazuh (https://github.com/wazuh/integrations) y referente de producto para clientes empresariales y la comunidad open source.",
-            "Construí pipelines de ingesta de logs que procesan más de 250B de eventos y mantienen precisión de detección y estabilidad del sistema a escala.",
-            "Reduje costes de infraestructura cloud de clientes hasta un 20% migrando pods de AWS EKS de ARM a AMD en entornos Wazuh multi-pod equivalentes, con right-sizing y ajuste de cargas.",
-            "Resolví incidencias de alto impacto en Wazuh para clientes empresariales, mejorando visibilidad, precisión de detección y estabilidad del sistema.",
-            "Asesoré en hardening de seguridad y ajuste de detección de anomalías, reduciendo ruido de alertas con umbrales, agrupación y refinamiento de reglas.",
-            "Despliego y gestiono Wazuh, OpenSearch (Open Distro) y Elastic Stack en entornos de cliente, ajustado a cada montaje.",
-            "Integré plataformas cloud en pipelines de monitorización: Azure vía Microsoft Graph API y AWS vía SQS, CloudTrail y VPC Flow Logs.",
-            "Configuré SSO y RBAC para proveedores de identidad empresariales (Okta, Entra ID, Google Workspace, LDAP).",
-            "Desarrollé políticas SCA personalizadas alineadas con marcos de cumplimiento (PCI-DSS, CJIS, ISO 27001).",
-            "Configuré pipelines de Filebeat y reenvío syslog desde dispositivos sin agente (Sophos, FortiGate, Cisco) con rsyslog y configuración localfile.",
-            "Rediseñé la estructura de carpetas por defecto, gestioné montajes de volúmenes, redimensioné sistemas de archivos y optimicé el uso de disco."
+            "Diseñé despliegues multi-nodo de Wazuh y OpenSearch on-premises, en cloud y en AWS EKS, EC2 o ECS cuando el manager estaba fuera de Kubernetes. Repartí réplicas de pods e índices entre zonas de disponibilidad alrededor de un master para configuración, enrollment y la API, y añadí workers para que los agentes reconecten si un worker falla.",
+            "Ajusté pipelines que procesaron más de 250B de eventos cuando la ingesta se retrasaba, cambiando la profundidad de colas de analysisd, los hilos de decodificación y de rule-matching, el tamaño de bulk y los workers de Filebeat, y el rendimiento del indexer.",
+            "Reduje el coste de AWS EKS hasta un 20% en entornos Wazuh multi-pod equivalentes, moviendo cargas de ARM a AMD y haciendo right-sizing de los nodos.",
+            "Restauré la visibilidad de seguridad y la estabilidad del clúster para clientes empresariales tras fallos críticos de ingesta, presión de disco, volúmenes persistentes y salud del indexer.",
+            "Mantuve los clústeres en alta disponibilidad entre zonas de disponibilidad y vigilé el retraso de ingesta, el uso de colas de analysisd, la presión de disco y la salud del indexer. Versioné los cambios de plataforma en EKS en GitHub para volver al commit anterior si un despliegue fallaba, y publiqué los cambios de contenido de detección solo tras una copia de seguridad, una prueba y una ventana de cambio.",
+            "Mantuve el repositorio público de integraciones de Wazuh como mantenedor principal, y publiqué reglas, decoders, búsqueda de IOC, enriquecimiento de alertas, feeds de threat intelligence, scripts de active response, políticas SCA e integraciones personalizadas para AWS (SQS, CloudTrail, VPC Flow Logs), Azure (Microsoft Graph), Okta, Entra ID, Google Workspace, LDAP, FortiGate, Sophos y Cisco.",
+            "Construí playbooks de respuesta en Wazuh en los que una regla correlaciona eventos en una ventana de tiempo sobre un campo compartido, un script de IOC o de enriquecimiento añade contexto, y un comando de active response con timeout se vincula a objetivos concretos. Las integraciones envían las notificaciones, el analista aísla el host o cambia la cuenta, y la calidad de las alertas sale de umbrales, agrupación y excepciones para automatizaciones conocidas tras comprobar el caso benigno.",
+            "Escribí baselines SCA mapeados a PCI-DSS, CJIS e ISO 27001 y los asigné por grupo de agentes, e ingerí logs de dispositivos con rsyslog sobre TCP y TLS hacia un balanceador de carga interno en una VPC aislada, donde una allowlist del proxy permite actualizaciones de paquetes y el feed CTI de vulnerabilidades."
           ]
         },
         {

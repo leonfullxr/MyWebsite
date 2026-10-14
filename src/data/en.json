@@ -65,18 +65,14 @@
           "period": "Feb 2025 - Present",
           "current": true,
           "description": [
-            "Design and deploy custom Security Operations Center (SOC) platforms for major enterprises, with SIEM, XDR, HIDS and NIDS across on-prem and cloud infrastructures.",
-            "Core maintainer of Wazuh's public integrations repository (https://github.com/wazuh/integrations) and product expert for enterprise customers and the open-source community.",
-            "Built log ingestion pipelines that process over 250B events while keeping detection accuracy and system stability at scale.",
-            "Cut client cloud infrastructure costs by up to 20% by migrating AWS EKS pods from ARM to AMD for equivalent multi-pod Wazuh environments at lower cost, plus right-sizing and workload tuning.",
-            "Resolved high-impact Wazuh issues for enterprise customers, improving visibility, detection accuracy and system stability.",
-            "Advised on security hardening and anomaly detection tuning, reducing alert noise through thresholding, grouping and rule refinement.",
-            "Deployed and managed Wazuh, OpenSearch (Open Distro) and Elastic Stack across client environments, tuned for each setup.",
-            "Integrated cloud platforms into monitoring pipelines: Azure via Microsoft Graph API and AWS via SQS, CloudTrail and VPC Flow Logs.",
-            "Configured SSO and RBAC for enterprise identity providers (Okta, Entra ID, Google Workspace, LDAP).",
-            "Developed custom SCA policies aligned with compliance frameworks (PCI-DSS, CJIS, ISO 27001).",
-            "Configured Filebeat pipelines and syslog forwarding from agentless devices (Sophos, FortiGate, Cisco) using rsyslog and localfile configuration.",
-            "Redesigned default folder structure, managed volume mounts, resized filesystems and optimized disk usage."
+            "Architected multi-node Wazuh and OpenSearch deployments on premises, in cloud, and on AWS EKS, EC2 or ECS when it was outside Kubernetes. Spread pod and index replicas across availability zones around one master for configuration, enrollment, and the API, and added workers so agents reconnect after a worker failure.",
+            "Tuned pipelines that processed more than 250B events when ingest lagged, by changing analysisd queue depth, decode threads, and rule-matching threads, Filebeat bulk size and workers, and indexer throughput.",
+            "Reduced AWS EKS cost by up to 20% for equivalent multi-pod Wazuh environments by moving workloads from ARM to AMD and right-sizing the nodes.",
+            "Restored security visibility and cluster stability for enterprise customers after critical failures in ingestion, disk pressure, persistent volumes, and indexer health.",
+            "Kept the clusters highly available across availability zones and watched ingest lag, analysisd queue usage, disk pressure, and indexer health. Versioned EKS platform changes in GitHub so a failed release could return to the previous commit, and released detection-content changes only after a backup, a test, and a change window.",
+            "Maintained the Wazuh public integrations repository as core maintainer, and shipped rules, decoders, IOC lookup, alert enrichment, threat intelligence feeds, active-response scripts, SCA policies, and custom integrations for AWS (SQS, CloudTrail, VPC Flow Logs), Azure (Microsoft Graph), Okta, Entra ID, Google Workspace, LDAP, FortiGate, Sophos, and Cisco.",
+            "Built Wazuh response playbooks in which a rule correlates events in a timeframe on a shared field, an IOC or enrichment script adds context, and a timed active-response command binds to specific targets. Integrations send the notifications, the analyst isolates the host or changes the account, and alert quality comes from thresholds, grouping, and exceptions for known automation after a check of the benign case.",
+            "Wrote SCA baselines mapped to PCI-DSS, CJIS, and ISO 27001 and assigned them by agent group, and ingested device logs with rsyslog over TCP and TLS into a load balancer kept internal in an air-gapped VPC, where a proxy allowlist permits package updates and the vulnerability CTI feed."
           ]
         },
         {
