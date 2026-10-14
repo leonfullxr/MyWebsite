@@ -22,9 +22,8 @@
   "about": {
     "title": "About me",
     "paragraphs": [
-      "I am a computer science engineer at Wazuh. I work on SIEM, XDR, and intrusion detection systems. I graduated in computer engineering from the University of Granada with a focus on computing and intelligent systems.",
-      "I build skills through practice and take on tasks that stretch what I know. I stay disciplined about learning and put in the work on hard problems.",
-      "At university I built projects in deep learning, machine learning, data science, game development, cybersecurity, and web development. I work proactively and like to learn."
+      "Production-focused Security Engineer specialized in architecting, scaling, and maintaining mission-critical SIEM/XDR infrastructure across enterprise on-premises and AWS EKS environments. Handled data engineering for high-throughput ingestion pipelines processing over 250 billion events, preventing data loss and ingestion bottlenecks through kernel and manager buffer tuning. Reduced AWS operational expenses by up to 20% through compute and storage right-sizing, while establishing automated GitOps deployment workflows and SLI/SLO-driven observability to resolve cluster outages before log loss occurred.",
+      "As a core maintainer for Wazuh's open-source integrations ecosystem, I develop detection rules, decoders, and integrations across AWS, Azure, enterprise identity providers, and network infrastructure. Working across platform engineering and SecOps, I build code-driven detection platforms with high-fidelity threat detection, audit-ready compliance against PCI-DSS and ISO 27001, and automated active-response playbooks that protect operations at enterprise scale without creating analyst fatigue."
     ],
     "location": "Granada, Spain"
   },
@@ -65,14 +64,14 @@
           "period": "Feb 2025 - Present",
           "current": true,
           "description": [
-            "Architected multi-node Wazuh and OpenSearch deployments on premises, in cloud, and on AWS EKS, EC2 or ECS when it was outside Kubernetes. Spread pod and index replicas across availability zones around one master for configuration, enrollment, and the API, and added workers so agents reconnect after a worker failure.",
-            "Tuned pipelines that processed more than 250B events when ingest lagged, by changing analysisd queue depth, decode threads, and rule-matching threads, Filebeat bulk size and workers, and indexer throughput.",
-            "Reduced AWS EKS cost by up to 20% for equivalent multi-pod Wazuh environments by moving workloads from ARM to AMD and right-sizing the nodes.",
-            "Restored security visibility and cluster stability for enterprise customers after critical failures in ingestion, disk pressure, persistent volumes, and indexer health.",
-            "Kept the clusters highly available across availability zones and watched ingest lag, analysisd queue usage, disk pressure, and indexer health. Versioned EKS platform changes in GitHub so a failed release could return to the previous commit, and released detection-content changes only after a backup, a test, and a change window.",
-            "Maintained the Wazuh public integrations repository as core maintainer, and shipped rules, decoders, IOC lookup, alert enrichment, threat intelligence feeds, active-response scripts, SCA policies, and custom integrations for AWS (SQS, CloudTrail, VPC Flow Logs), Azure (Microsoft Graph), Okta, Entra ID, Google Workspace, LDAP, FortiGate, Sophos, and Cisco.",
-            "Built Wazuh response playbooks in which a rule correlates events in a timeframe on a shared field, an IOC or enrichment script adds context, and a timed active-response command binds to specific targets. Integrations send the notifications, the analyst isolates the host or changes the account, and alert quality comes from thresholds, grouping, and exceptions for known automation after a check of the benign case.",
-            "Wrote SCA baselines mapped to PCI-DSS, CJIS, and ISO 27001 and assigned them by agent group, and ingested device logs with rsyslog over TCP and TLS into a load balancer kept internal in an air-gapped VPC, where a proxy allowlist permits package updates and the vulnerability CTI feed."
+            "Architected multi-node Wazuh and OpenSearch clusters across on-premises, hybrid cloud, and AWS EKS, EC2, or ECS when managers ran outside Kubernetes. Spread pod and index replicas across availability zones around an active master for cluster coordination, enrollment, and the API, scaling worker pools horizontally with pod anti-affinity to ensure immediate agent failover upon worker disruption.",
+            "Tuned ingestion pipelines processing over 250B events by profiling backpressure across analysisd queue depths, decode and rule-matching worker threads, Filebeat batching, and OpenSearch index buffer throughput. Correlated queue buffer saturation against event-to-index latency and dynamically adjusted memory limits to absorb sudden burst traffic without dropping agent events or exhausting host resources.",
+            "Reduced AWS EKS infrastructure costs by up to 20% through instance right-sizing, migrating multi-pod workloads from ARM to AMD instances for optimized indexing throughput, and implementing OpenSearch Index State Management policies to transition aging indices to warm and cold S3 storage tiers.",
+            "Restored security visibility and cluster stability for enterprise customers during production outages caused by ingestion bottlenecks, disk pressure, persistent volume exhaustion, split-brain states, and indexer cluster degradation.",
+            "Engineered declarative GitOps deployment workflows for EKS clusters versioned in GitHub with pod disruption budgets, rolling updates, and health-checked automated rollbacks when ingestion lag or worker queue saturation breached predefined SLI/SLO thresholds. Instrumented Prometheus, Grafana, and OpenSearch telemetry around cluster queues, memory pressure, and index write latency with automated runbook routing to resolve pipeline stalls before log loss occurred.",
+            "Maintained the Wazuh public integrations repository as core maintainer, authoring and shipping detection rules, decoders, IOC lookups, alert enrichment, threat intelligence feeds, active-response scripts, SCA policies, and custom integrations for AWS (SQS, CloudTrail, VPC Flow Logs), Azure (Microsoft Graph), Okta, Entra ID, Google Workspace, LDAP, FortiGate, Sophos, and Cisco.",
+            "Built Wazuh response playbooks where correlation rules identify temporal patterns across shared attributes, IOC and enrichment scripts append threat context, and active-response commands execute against targeted endpoints with strict execution timeouts and circuit-breaker rate limits to prevent alert storms. Channeled alerts and automated ticketing through enterprise integrations while reserving host isolation and credential actions for analyst review, maintaining high detection fidelity through frequency thresholds, exception grouping, and benign-case baseline validation.",
+            "Developed SCA baselines mapped to PCI-DSS, CJIS, and ISO 27001 assigned by agent group, and ingested device telemetry with rsyslog over TLS into internal Network Load Balancers inside air-gapped VPCs with egress strictly restricted to proxy allowlists for OS updates and vulnerability feeds. Enforced least-privilege separation across Wazuh APIs and OpenSearch index patterns using role-based access controls and identity provider synchronization, deploying detection content only after staging validation, backup verification, and approved change windows."
           ]
         },
         {
@@ -159,7 +158,10 @@
         },
         {
           "name": "Languages",
-          "items": ["English (Native)", "Spanish (Native)"]
+          "items": [
+            "English (Native)",
+            "Spanish (Native)"
+          ]
         }
       ]
     },
@@ -199,7 +201,11 @@
         "url": "https://potocolom.leonfuller.com/",
         "period": "2026",
         "description": "Open source, real-time generative image platform. Sketch on a canvas and a diffusion model paints over your strokes live, then one click hands the result to a heavier model for the final render. Generate, enhance, and upscale are built in. One AGPL codebase runs self-hosted on your own GPU, or as a managed subscription cloud. SvelteKit, FastAPI, PostgreSQL, Redis, WebSockets, and CUDA/ROCm.",
-        "tags": ["AI", "Open Source", "Docker"],
+        "tags": [
+          "AI",
+          "Open Source",
+          "Docker"
+        ],
         "image": "/images/potocolom.png"
       },
       {
@@ -207,7 +213,11 @@
         "url": "https://github.com/leonfullxr/ECC-Thesis",
         "period": "2025",
         "description": "Interactive plot of elliptic curves (y² = x³ + ax + b) with adjustable parameters and zoom. Part of my thesis on elliptic curve cryptography. Built in C++ and run in Docker.",
-        "tags": ["Cybersecurity", "C++", "Docker"],
+        "tags": [
+          "Cybersecurity",
+          "C++",
+          "Docker"
+        ],
         "image": "/images/hopf_torus.png"
       },
       {
@@ -215,7 +225,11 @@
         "url": "https://github.com/leonfullxr/Cypher",
         "period": "2024",
         "description": "Encrypted chat app with end-to-end encryption, real-time messaging, and no metadata storage. It uses TLS, Signal-style protocols, and AES. Users stay anonymous by design.",
-        "tags": ["Cybersecurity", "Web App", "C++"],
+        "tags": [
+          "Cybersecurity",
+          "Web App",
+          "C++"
+        ],
         "image": "/images/cypher_logo.png"
       },
       {
@@ -223,7 +237,11 @@
         "url": "https://nextcloud.leonfuller.com/",
         "period": "2024",
         "description": "Private file sync and storage on Docker and Traefik. Part of a homelab where I control my own data instead of using cloud drives.",
-        "tags": ["DevOps", "Docker", "Web App"],
+        "tags": [
+          "DevOps",
+          "Docker",
+          "Web App"
+        ],
         "image": "/images/nextcloud_login.png"
       },
       {
@@ -231,7 +249,10 @@
         "url": "https://github.com/leonfullxr/Classifying-Mushrooms",
         "period": "2024",
         "description": "Supervised models that classify mushroom edibility from the UCI Secondary Mushroom dataset. Course project at the University of Granada.",
-        "tags": ["AI", "Machine Learning"],
+        "tags": [
+          "AI",
+          "Machine Learning"
+        ],
         "image": "/images/mushroom_classification.png"
       },
       {
@@ -239,7 +260,11 @@
         "url": "https://github.com/leonfullxr/AI-for-Ludo-game",
         "period": "2023",
         "description": "Parchís variant with a deliberative AI agent. It uses MINIMAX and alpha-beta pruning to play against humans.",
-        "tags": ["AI", "C++", "Game Dev"],
+        "tags": [
+          "AI",
+          "C++",
+          "Game Dev"
+        ],
         "image": "/images/ludo_game.png"
       },
       {
@@ -247,7 +272,11 @@
         "url": "https://github.com/leonfullxr/Visual-Path-Finding",
         "period": "2023",
         "description": "Interactive demo of path-finding algorithms such as A* and Dijkstra. Built as a teaching aid for algorithm behavior.",
-        "tags": ["AI", "Design", "C++"],
+        "tags": [
+          "AI",
+          "Design",
+          "C++"
+        ],
         "image": "/images/visual_pathfinding.png"
       },
       {
@@ -255,7 +284,10 @@
         "url": "https://github.com/leonfullxr/Pichola",
         "period": "Jan 2022",
         "description": "Game built in a 48-hour jam with Godot. Theme: start from nothing. You begin as an egg and collect others to unlock skills. Won Best Art.",
-        "tags": ["Game Dev", "Godot"],
+        "tags": [
+          "Game Dev",
+          "Godot"
+        ],
         "image": "/images/pichola.png"
       }
     ]
