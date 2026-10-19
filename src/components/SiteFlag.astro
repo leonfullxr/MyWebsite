@@ -1,0 +1,29 @@
+---
+interface Props {
+  language: string;
+}
+const { language } = Astro.props;
+---
+
+<svg class="site-flag" viewBox="0 0 28 20" aria-hidden="true">
+  {
+    language === 'es' ? (
+      <>
+        <path fill="#AA151B" d="M0 0h28v20H0z" />
+        <path fill="#F1BF00" d="M0 5h28v10H0z" />
+        <path fill="#AA151B" d="M7 8h4v4a2 2 0 0 1-4 0z" />
+        <path fill="#F1BF00" d="M8 8h1v3H8z" />
+        <path fill="#eee5c9" d="M6 9h1v5H6zm5 0h1v5h-1z" />
+        <path fill="#AA151B" d="m7 7 1-1 1 1 1-1 1 1v1H7z" />
+      </>
+    ) : (
+      <>
+        <path fill="#012169" d="M0 0h28v20H0z" />
+        <path stroke="#fff" stroke-width="4" d="m0 0 28 20M28 0 0 20" />
+        <path stroke="#C8102E" stroke-width="1.5" d="m0 0 28 20M28 0 0 20" />
+        <path stroke="#fff" stroke-width="7" d="M14 0v20M0 10h28" />
+        <path stroke="#C8102E" stroke-width="4" d="M14 0v20M0 10h28" />
+      </>
+    )
+  }
+</svg>

@@ -158,10 +158,7 @@
         },
         {
           "name": "Idiomas",
-          "items": [
-            "Inglés (Nativo)",
-            "Español (Nativo)"
-          ]
+          "items": ["Inglés (Nativo)", "Español (Nativo)"]
         }
       ]
     },
@@ -201,11 +198,7 @@
         "url": "https://potocolom.leonfuller.com/",
         "period": "2026",
         "description": "Plataforma open source de generación de imágenes en tiempo real. Dibujas en un lienzo y un modelo de difusión pinta sobre los trazos en vivo; un clic pasa el resultado a un modelo más pesado para el render final. Generar, mejorar y hacer upscale van incluidos. Un único código AGPL corre autoalojado en tu GPU o como nube de suscripción. SvelteKit, FastAPI, PostgreSQL, Redis, WebSockets y CUDA/ROCm.",
-        "tags": [
-          "IA",
-          "Open Source",
-          "Docker"
-        ],
+        "tags": ["IA", "Open Source", "Docker"],
         "image": "/images/potocolom.png"
       },
       {
@@ -213,11 +206,7 @@
         "url": "https://github.com/leonfullxr/ECC-Thesis",
         "period": "2025",
         "description": "Visualización interactiva de curvas elípticas (y² = x³ + ax + b) con parámetros ajustables y zoom. Parte de mi trabajo de fin de grado sobre criptografía de curvas elípticas. Hecho en C++ y ejecutado en Docker.",
-        "tags": [
-          "Ciberseguridad",
-          "C++",
-          "Docker"
-        ],
+        "tags": ["Ciberseguridad", "C++", "Docker"],
         "image": "/images/hopf_torus.png"
       },
       {
@@ -225,11 +214,7 @@
         "url": "https://github.com/leonfullxr/Cypher",
         "period": "2024",
         "description": "Aplicación de chat encriptada con cifrado de extremo a extremo, mensajería en tiempo real, sin almacenamiento de metadatos y protocolos avanzados como TLS y Signal. Usa cifrado AES y garantiza anonimato completo.",
-        "tags": [
-          "Ciberseguridad",
-          "Web App",
-          "C++"
-        ],
+        "tags": ["Ciberseguridad", "Web App", "C++"],
         "image": "/images/cypher_logo.png"
       },
       {
@@ -237,11 +222,7 @@
         "url": "https://nextcloud.leonfuller.com/",
         "period": "2024",
         "description": "Alternativa privada y autoalojada a Google Drive usando Docker y Traefik. Parte de un homelab más amplio centrado en privacidad de datos y control total sobre archivos personales.",
-        "tags": [
-          "DevOps",
-          "Docker",
-          "Web App"
-        ],
+        "tags": ["DevOps", "Docker", "Web App"],
         "image": "/images/nextcloud_login.png"
       },
       {
@@ -249,10 +230,7 @@
         "url": "https://github.com/leonfullxr/Classifying-Mushrooms",
         "period": "2024",
         "description": "Clasificación de comestibilidad de hongos usando modelos de ML supervisado. Análisis del dataset UCI Secondary Mushroom como parte del curso de ML en la UGR.",
-        "tags": [
-          "IA",
-          "Machine Learning"
-        ],
+        "tags": ["IA", "Machine Learning"],
         "image": "/images/mushroom_classification.png"
       },
       {
@@ -260,11 +238,7 @@
         "url": "https://github.com/leonfullxr/AI-for-Ludo-game",
         "period": "2023",
         "description": "Parchís reinventado con un giro estratégico, con un agente de IA deliberativo usando MINIMAX y poda ALFA-BETA para juego inteligente contra humanos.",
-        "tags": [
-          "IA",
-          "Videojuegos",
-          "C++"
-        ],
+        "tags": ["IA", "Videojuegos", "C++"],
         "image": "/images/ludo_game.png"
       },
       {
@@ -272,11 +246,7 @@
         "url": "https://github.com/leonfullxr/Visual-Path-Finding",
         "period": "2023",
         "description": "Herramienta interactiva de visualización de algoritmos de búsqueda de caminos como A*, Dijkstra y más. Recurso educativo para entender la mecánica algorítmica.",
-        "tags": [
-          "IA",
-          "Diseño",
-          "C++"
-        ],
+        "tags": ["IA", "Diseño", "C++"],
         "image": "/images/visual_pathfinding.png"
       },
       {
@@ -284,10 +254,7 @@
         "url": "https://github.com/leonfullxr/Pichola",
         "period": "Ene 2022",
         "description": "Juego premiado creado en una Game Jam de 48 horas con Godot Engine. Tema: 'Empezar de cero'. Los jugadores comienzan como un huevo, recolectando otros para desbloquear habilidades. Ganó 'Mejor Arte'.",
-        "tags": [
-          "Videojuegos",
-          "Godot"
-        ],
+        "tags": ["Videojuegos", "Godot"],
         "image": "/images/pichola.png"
       }
     ]

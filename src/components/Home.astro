@@ -1,6 +1,10 @@
 ---
 // Homepage. The Alhambra photo stays fixed behind the page and scroll position drives each stage:
 // the photo blurs, the portrait rises, skill logos gather into a periodic table, badges drop in.
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+import SiteIcon from './SiteIcon.astro';
+import { projectSounds } from '../data/projectSounds';
 import type { Data, Post } from '../data/home';
 import {
   skillGroups,
@@ -19,7 +23,6 @@ interface Props {
 }
 const { data, posts, lang } = Astro.props;
 const t = data.home;
-const otherLang = lang === 'es' ? 'en' : 'es';
 const fill = (s: string, n: number) => s.replace('{n}', String(n));
 
 const exp = data.cv.experience.items;
@@ -47,15 +50,6 @@ const fmtDate = (d: string) => {
         year: 'numeric',
       });
 };
-const year = new Date().getFullYear();
-const nav = [
-  [data.nav.about, '#about'],
-  [data.nav.cv, '#cv'],
-  [data.nav.skills, '#skills'],
-  [data.nav.projects, '#projects'],
-  [data.nav.thesis, `/${lang}/thesis`],
-  [data.nav.blog, '#blog'],
-];
 const panel =
   'rounded-3xl bg-sand-50/90 dark:bg-ink-950/85 backdrop-blur-md shadow-xl shadow-black/10';
 // Periodic-table seats for the homepage skill logos. Row/col follow the short table:
@@ -118,92 +112,14 @@ const hobbyIcons: string[] = [
 
 <div data-home class="home-root relative text-ink-900 dark:text-sand-50">
   <!-- Backdrop -->
-  <div class="fixed inset-0 -z-10 overflow-hidden bg-ink-950" aria-hidden="true">
+  <div data-home-backdrop class="fixed inset-0 -z-10 overflow-hidden bg-ink-950" aria-hidden="true">
     <img src="/images/alhambra.jpg" alt="" class="home-bg w-full h-full object-cover" />
   </div>
 
   <!-- Progress bar -->
   <div class="fixed top-0 left-0 z-[60] h-[3px] bg-sand-400 home-progress" aria-hidden="true"></div>
 
-  <!-- Header -->
-  <header data-home-header class="home-header fixed top-0 inset-x-0 z-50">
-    <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between gap-6">
-      <a href="#" class="text-xl font-black"
-        ><span class="text-sand-400">return</span> leon<span class="text-sand-400">;</span></a
-      >
-      <nav class="flex items-center gap-1 text-sm font-bold">
-        {
-          nav.map(([label, href]) => (
-            <a
-              href={href}
-              class="hidden md:inline-block px-3 py-2 rounded-full hover:bg-white/15 dark:hover:bg-white/10 transition-colors"
-            >
-              {label}
-            </a>
-          ))
-        }
-        <a
-          href={`/${otherLang}/`}
-          class="px-3 py-2 rounded-full hover:bg-white/15 transition-colors"
-          >{data.nav.switchLang}</a
-        >
-        <button
-          onclick="toggleTheme()"
-          class="w-9 h-9 grid place-items-center rounded-full hover:bg-white/15 transition-colors"
-          aria-label={t.toggleTheme}
-        >
-          <svg
-            viewBox="0 0 24 24"
-            class="w-5 h-5 dark:hidden"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg
-          >
-          <svg
-            viewBox="0 0 24 24"
-            class="w-5 h-5 hidden dark:block"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            ><circle cx="12" cy="12" r="4"></circle><path
-              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
-            ></path></svg
-          >
-        </button>
-        <button
-          data-home-menu-toggle
-          class="md:hidden w-9 h-9 grid place-items-center rounded-full hover:bg-white/15 transition-colors"
-          aria-label={t.menu}
-          aria-expanded="false"
-          aria-controls="home-menu"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            class="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"></path></svg
-          >
-        </button>
-      </nav>
-    </div>
-    <div
-      id="home-menu"
-      hidden
-      class="md:hidden mx-4 mb-3 rounded-2xl bg-sand-50/95 dark:bg-ink-950/95 text-ink-900 dark:text-sand-50 backdrop-blur-md shadow-xl p-2"
-    >
-      {
-        nav.map(([label, href]) => (
-          <a
-            href={href}
-            class="block rounded-xl px-4 py-3 text-base font-bold hover:bg-sand-200/70 dark:hover:bg-white/10"
-          >
-            {label}
-          </a>
-        ))
-      }
-    </div>
-  </header>
+  <Nav nav={data.nav} lang={lang} home />
 
   <!-- Hero -->
   <section class="relative h-screen flex flex-col items-center justify-center text-center px-5">
@@ -505,6 +421,8 @@ const hobbyIcons: string[] = [
               skillCells.map((cell) => (
                 <span
                   data-home-tile
+                  data-ui-sound="skill"
+                  data-sound-note={cell.n}
                   tabindex="0"
                   title={cell.name}
                   class:list={[
@@ -565,6 +483,7 @@ const hobbyIcons: string[] = [
                     target="_blank"
                     rel="noopener"
                     title={a.title}
+                    data-ui-sound="certificate"
                     class="group text-center"
                   >
                     <div data-home-badge class="home-badge-img">
@@ -589,6 +508,8 @@ const hobbyIcons: string[] = [
                 otherAwards.map((a) => (
                   <span
                     data-home-badge
+                    data-ui-sound="certificate"
+                    tabindex="0"
                     title={[a.issuer, a.date].filter(Boolean).join(', ')}
                     class="home-badge-img inline-flex items-center gap-2 rounded-full bg-sand-100 dark:bg-ink-800 pl-1.5 pr-3 py-1 text-xs font-bold"
                   >
@@ -634,6 +555,7 @@ const hobbyIcons: string[] = [
             return (
               <article
                 data-scroll="view"
+                data-project-sound={i}
                 class="home-prow grid md:grid-cols-2 gap-6 md:gap-10 items-center"
               >
                 <a
@@ -703,7 +625,23 @@ const hobbyIcons: string[] = [
                   >
                     {p.name}
                   </h3>
-                  <p class="mt-1 text-sm font-bold text-ink-500 dark:text-ink-300">{p.period}</p>
+                  <div class="project-meta-line">
+                    <p class="text-sm font-bold text-ink-500 dark:text-ink-300">{p.period}</p>
+                    <button
+                      type="button"
+                      class="project-sound-preview"
+                      data-project-sound-preview={i}
+                      aria-label={`${lang === 'es' ? 'Escuchar' : 'Listen to'} ${projectSounds[4][lang === 'es' ? 'es' : 'en']}`}
+                    >
+                      <>
+                        <SiteIcon name="sound" />
+                        <span>
+                          {String(i + 1).padStart(2, '0')} ·{' '}
+                          {projectSounds[4][lang === 'es' ? 'es' : 'en']}
+                        </span>
+                      </>
+                    </button>
+                  </div>
                   <p
                     class={`mt-3 text-ink-700 dark:text-ink-200 leading-relaxed ${featured ? '' : 'line-clamp-3'}`}
                   >
@@ -851,9 +789,9 @@ const hobbyIcons: string[] = [
   </section>
 
   <!-- Hobbies -->
-  <section class="relative px-4 py-8">
+  <section id="beyond" class="relative px-4 py-8" aria-labelledby="beyond-title">
     <div class={`${panel} max-w-6xl mx-auto p-6 md:p-10`}>
-      <h2 class="text-3xl md:text-4xl font-black">{data.hobbies.title}</h2>
+      <h2 id="beyond-title" class="text-3xl md:text-4xl font-black">{data.hobbies.title}</h2>
       <div class="mt-6 grid md:grid-cols-3 gap-5">
         {
           data.hobbies.items.map((h, i) => (
@@ -888,48 +826,7 @@ const hobbyIcons: string[] = [
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="relative px-4 pt-8 pb-24">
-    <div class={`${panel} max-w-6xl mx-auto p-8 md:p-14 text-center`}>
-      <p class="text-sm font-bold text-sand-600 dark:text-sand-400">{data.contact.title}</p>
-      <a
-        href={`mailto:${data.contact.email}`}
-        class="mt-2 inline-block text-4xl md:text-7xl font-black hover:text-sand-700 dark:hover:text-sand-300 transition-colors"
-        >{t.footerCta}</a
-      >
-      <p class="mt-3 text-ink-600 dark:text-ink-300">{data.contact.email}</p>
-      <div class="mt-6 flex justify-center gap-3">
-        <a
-          href={data.contact.github}
-          target="_blank"
-          rel="noopener"
-          aria-label="GitHub"
-          title="GitHub"
-          class="w-12 h-12 rounded-full bg-ink-900 text-white dark:bg-sand-100 dark:text-ink-950 grid place-items-center hover:bg-sand-700 transition-colors"
-        >
-          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"
-            ><path d={icons.github}></path></svg
-          >
-        </a>
-        <a
-          href={data.contact.linkedin}
-          target="_blank"
-          rel="noopener"
-          aria-label="LinkedIn"
-          title="LinkedIn"
-          class="w-12 h-12 rounded-full bg-ink-900 text-white dark:bg-sand-100 dark:text-ink-950 grid place-items-center hover:bg-sand-700 transition-colors"
-        >
-          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"
-            ><path d={icons.linkedin}></path></svg
-          >
-        </a>
-      </div>
-      <p class="mt-8 text-sm text-ink-500 dark:text-ink-400">
-        &copy; {year}
-        {data.footer.copyright}
-      </p>
-    </div>
-  </footer>
+  <Footer footer={data.footer} contact={data.contact} nav={data.nav} lang={lang} home />
 </div>
 
 <style>
@@ -1087,6 +984,7 @@ const hobbyIcons: string[] = [
   (function () {
     const root = document.querySelector('[data-home]');
     if (!root) return;
+    const fullscreen = document.documentElement.dataset.layout === 'fullscreen';
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const scrollEls = Array.from(root.querySelectorAll('[data-scroll]'));
     const header = root.querySelector('[data-home-header]');
@@ -1094,15 +992,6 @@ const hobbyIcons: string[] = [
     const badgeSection = root.querySelector('#skills');
     const badges = Array.from(root.querySelectorAll('[data-home-badge]'));
     const clamp = (v) => Math.min(1, Math.max(0, v));
-
-    const menu = root.querySelector('#home-menu');
-    const menuToggle = root.querySelector('[data-home-menu-toggle]');
-    function setMenu(open) {
-      menu.hidden = !open;
-      menuToggle.setAttribute('aria-expanded', String(open));
-    }
-    menuToggle.addEventListener('click', () => setMenu(menu.hidden));
-    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
 
     function hash(n) {
       let x = Math.imul(n ^ 0x9e3779b9, 0x85ebca6b);
@@ -1152,7 +1041,7 @@ const hobbyIcons: string[] = [
         // gathering while experience is still on screen.
         const lead = Number(el.dataset.lead || 0) * ih;
         const p =
-          el.dataset.scroll === 'view' || mobile
+          el.dataset.scroll === 'view' || el.classList.contains('is-flow') || mobile
             ? clamp((ih - r.top) / (ih / 2 + r.height / 2))
             : clamp((lead - r.top) / (r.height - ih + lead));
         el.style.setProperty('--p', p.toFixed(4));
@@ -1166,7 +1055,13 @@ const hobbyIcons: string[] = [
       root.style.setProperty('--page', '1');
       scrollEls.forEach((el) => el.style.setProperty('--p', '1'));
       revealEls.forEach((el) => el.classList.add('is-in'));
-      if (header) header.classList.add('is-scrolled');
+      if (header) {
+        const syncHeader = () => {
+          header.classList.toggle('is-scrolled', window.scrollY > 40);
+        };
+        syncHeader();
+        window.addEventListener('scroll', syncHeader, { passive: true });
+      }
       setBadges(1);
       return;
     }
@@ -1194,6 +1089,21 @@ const hobbyIcons: string[] = [
       });
     }
     function refresh() {
+      if (fullscreen) {
+        root.querySelectorAll('.home-pin').forEach((section) => {
+          section.classList.remove('is-flow');
+          const viewport = section.firstElementChild;
+          const content = viewport?.firstElementChild;
+          if (!viewport || !content) return;
+          const style = getComputedStyle(viewport);
+          const available =
+            window.innerHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+          section.classList.toggle(
+            'is-flow',
+            window.innerWidth < 768 || content.offsetHeight > available
+          );
+        });
+      }
       layoutSkills();
       schedule();
     }
@@ -1206,7 +1116,7 @@ const hobbyIcons: string[] = [
     // unassembled start. Anchor jumps land at data-settle instead, once the stage is complete.
     function settleTarget(hash) {
       const sec = hash.length > 1 && root.querySelector(`section${hash}[data-settle]`);
-      if (!sec || window.innerWidth < 768) return null;
+      if (!sec || window.innerWidth < 768 || sec.classList.contains('is-flow')) return null;
       const top = sec.getBoundingClientRect().top + window.scrollY;
       return top + (sec.offsetHeight - window.innerHeight) * Number(sec.dataset.settle);
     }
