@@ -1,9 +1,12 @@
 ---
+import { icons } from '../data/home';
+
 interface Props {
   name: string;
   class?: string;
 }
 const { name, class: className = '' } = Astro.props;
+const brand = name === 'github' || name === 'linkedin';
 const paths: Record<string, string> = {
   sound: 'm11 5-6 4H2v6h3l6 4V5Zm4 3a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14',
   muted: 'm11 5-6 4H2v6h3l6 4V5Zm5 4 6 6m0-6-6 6',
@@ -16,14 +19,16 @@ const paths: Record<string, string> = {
   arrow: 'M5 12h14m-6-6 6 6-6 6',
   up: 'M12 20V4m-6 6 6-6 6 6',
   external: 'M7 17 17 7M7 7h10v10',
+  github: icons.github,
+  linkedin: icons.linkedin,
 };
 ---
 
 <svg
   class={`site-icon ${className}`}
   viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
+  fill={brand ? 'currentColor' : 'none'}
+  stroke={brand ? 'none' : 'currentColor'}
   stroke-width="1.8"
   stroke-linecap="round"
   stroke-linejoin="round"

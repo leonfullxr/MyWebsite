@@ -479,7 +479,7 @@
 }
 .site-footer-cols {
   display: grid;
-  grid-template-columns: repeat(3, 1fr) auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
   gap: 32px;
 }
 .site-footer-cols h2 {

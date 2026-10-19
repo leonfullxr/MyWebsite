@@ -32,7 +32,6 @@ const t = es
       eyebrow: 'Contacto',
       cta: 'Construyamos algo.',
       navigate: 'Navega',
-      elsewhere: 'En otros sitios',
       now: 'Ahora mismo',
       nowItems: [
         'Ingeniero de seguridad en Wazuh',
@@ -46,7 +45,6 @@ const t = es
       eyebrow: 'Contact',
       cta: "Let's build something.",
       navigate: 'Navigate',
-      elsewhere: 'Elsewhere',
       now: 'Right now',
       nowItems: ['Security engineer at Wazuh', 'Based in Granada, Spain', 'Running ultras for fun'],
       top: 'Back to top',
@@ -88,16 +86,6 @@ const t = es
         <a href={`/${lang}/thesis`} data-ui-sound>{labels.thesis}</a>
         <a href={anchor('blog')} data-ui-sound>{labels.blog}</a>
       </nav>
-      <nav aria-label={t.elsewhere}>
-        <h2>{t.elsewhere}</h2>
-        <a href={contact.github} target="_blank" rel="noopener noreferrer" data-ext data-ui-sound
-          >GitHub</a
-        >
-        <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" data-ext data-ui-sound
-          >LinkedIn</a
-        >
-        <a href={`/${lang}/blog/rss.xml`} data-ui-sound>RSS</a>
-      </nav>
       <div>
         <h2>{t.now}</h2>
         {t.nowItems.map((item) => <p>{item}</p>)}
@@ -108,7 +96,35 @@ const t = es
     </div>
     <div class="site-footer-bottom">
       <p>© {year} {footer.copyright} · {t.built}</p>
-      <SiteControls lang={lang} compact />
+      <SiteControls lang={lang} compact>
+        <Fragment slot="links">
+          <a
+            class="site-icon-button"
+            href={contact.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={es ? 'Visitar GitHub' : 'Visit GitHub'}
+            title="GitHub"
+            data-ui-sound><SiteIcon name="github" /></a
+          >
+          <a
+            class="site-icon-button"
+            href={contact.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={es ? 'Visitar LinkedIn' : 'Visit LinkedIn'}
+            title="LinkedIn"
+            data-ui-sound><SiteIcon name="linkedin" /></a
+          >
+          <a
+            class="site-icon-button site-rss"
+            href={`/${lang}/blog/rss.xml`}
+            aria-label={es ? 'Suscribirse por RSS' : 'Subscribe via RSS'}
+            title="RSS"
+            data-ui-sound><SiteIcon name="rss" /></a
+          >
+        </Fragment>
+      </SiteControls>
       <span class="site-wordmark" aria-hidden="true"
         ><span class="kw">return</span> leon<span class="semi">;</span></span
       >
