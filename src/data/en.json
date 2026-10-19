@@ -158,10 +158,7 @@
         },
         {
           "name": "Languages",
-          "items": [
-            "English (Native)",
-            "Spanish (Native)"
-          ]
+          "items": ["English (Native)", "Spanish (Native)"]
         }
       ]
     },
@@ -201,11 +198,7 @@
         "url": "https://potocolom.leonfuller.com/",
         "period": "2026",
         "description": "Open source, real-time generative image platform. Sketch on a canvas and a diffusion model paints over your strokes live, then one click hands the result to a heavier model for the final render. Generate, enhance, and upscale are built in. One AGPL codebase runs self-hosted on your own GPU, or as a managed subscription cloud. SvelteKit, FastAPI, PostgreSQL, Redis, WebSockets, and CUDA/ROCm.",
-        "tags": [
-          "AI",
-          "Open Source",
-          "Docker"
-        ],
+        "tags": ["AI", "Open Source", "Docker"],
         "image": "/images/potocolom.png"
       },
       {
@@ -213,11 +206,7 @@
         "url": "https://github.com/leonfullxr/ECC-Thesis",
         "period": "2025",
         "description": "Interactive plot of elliptic curves (y² = x³ + ax + b) with adjustable parameters and zoom. Part of my thesis on elliptic curve cryptography. Built in C++ and run in Docker.",
-        "tags": [
-          "Cybersecurity",
-          "C++",
-          "Docker"
-        ],
+        "tags": ["Cybersecurity", "C++", "Docker"],
         "image": "/images/hopf_torus.png"
       },
       {
@@ -225,11 +214,7 @@
         "url": "https://github.com/leonfullxr/Cypher",
         "period": "2024",
         "description": "Encrypted chat app with end-to-end encryption, real-time messaging, and no metadata storage. It uses TLS, Signal-style protocols, and AES. Users stay anonymous by design.",
-        "tags": [
-          "Cybersecurity",
-          "Web App",
-          "C++"
-        ],
+        "tags": ["Cybersecurity", "Web App", "C++"],
         "image": "/images/cypher_logo.png"
       },
       {
@@ -237,11 +222,7 @@
         "url": "https://nextcloud.leonfuller.com/",
         "period": "2024",
         "description": "Private file sync and storage on Docker and Traefik. Part of a homelab where I control my own data instead of using cloud drives.",
-        "tags": [
-          "DevOps",
-          "Docker",
-          "Web App"
-        ],
+        "tags": ["DevOps", "Docker", "Web App"],
         "image": "/images/nextcloud_login.png"
       },
       {
@@ -249,10 +230,7 @@
         "url": "https://github.com/leonfullxr/Classifying-Mushrooms",
         "period": "2024",
         "description": "Supervised models that classify mushroom edibility from the UCI Secondary Mushroom dataset. Course project at the University of Granada.",
-        "tags": [
-          "AI",
-          "Machine Learning"
-        ],
+        "tags": ["AI", "Machine Learning"],
         "image": "/images/mushroom_classification.png"
       },
       {
@@ -260,11 +238,7 @@
         "url": "https://github.com/leonfullxr/AI-for-Ludo-game",
         "period": "2023",
         "description": "Parchís variant with a deliberative AI agent. It uses MINIMAX and alpha-beta pruning to play against humans.",
-        "tags": [
-          "AI",
-          "C++",
-          "Game Dev"
-        ],
+        "tags": ["AI", "C++", "Game Dev"],
         "image": "/images/ludo_game.png"
       },
       {
@@ -272,11 +246,7 @@
         "url": "https://github.com/leonfullxr/Visual-Path-Finding",
         "period": "2023",
         "description": "Interactive demo of path-finding algorithms such as A* and Dijkstra. Built as a teaching aid for algorithm behavior.",
-        "tags": [
-          "AI",
-          "Design",
-          "C++"
-        ],
+        "tags": ["AI", "Design", "C++"],
         "image": "/images/visual_pathfinding.png"
       },
       {
@@ -284,10 +254,7 @@
         "url": "https://github.com/leonfullxr/Pichola",
         "period": "Jan 2022",
         "description": "Game built in a 48-hour jam with Godot. Theme: start from nothing. You begin as an egg and collect others to unlock skills. Won Best Art.",
-        "tags": [
-          "Game Dev",
-          "Godot"
-        ],
+        "tags": ["Game Dev", "Godot"],
         "image": "/images/pichola.png"
       }
     ]

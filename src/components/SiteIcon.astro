@@ -1,0 +1,31 @@
+---
+interface Props {
+  name: string;
+  class?: string;
+}
+const { name, class: className = '' } = Astro.props;
+const paths: Record<string, string> = {
+  sound: 'm11 5-6 4H2v6h3l6 4V5Zm4 3a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14',
+  muted: 'm11 5-6 4H2v6h3l6 4V5Zm5 4 6 6m0-6-6 6',
+  sun: 'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0-6v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5',
+  moon: 'M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10Z',
+  rss: 'M4 4a16 16 0 0 1 16 16M4 11a9 9 0 0 1 9 9M5 19h.01',
+  mail: 'M4 5h16v14H4zM4 7l8 6 8-6',
+  menu: 'M4 7h16M4 12h16M4 17h16',
+  close: 'm6 6 12 12M18 6 6 18',
+  arrow: 'M5 12h14m-6-6 6 6-6 6',
+  up: 'M12 20V4m-6 6 6-6 6 6',
+  external: 'M7 17 17 7M7 7h10v10',
+};
+---
+
+<svg
+  class={`site-icon ${className}`}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.8"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"><path d={paths[name] || paths.external}></path></svg
+>

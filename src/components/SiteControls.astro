@@ -1,0 +1,50 @@
+---
+import SiteIcon from './SiteIcon.astro';
+import SiteFlag from './SiteFlag.astro';
+interface Props {
+  lang: string;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+---
+
+<div class="site-controls">
+  <button
+    type="button"
+    class="site-icon-button"
+    data-sound-toggle
+    aria-pressed="false"
+    aria-label={es ? 'Silenciar sonidos' : 'Mute sounds'}
+    title={es ? 'Silenciar sonidos' : 'Mute sounds'}
+  >
+    <SiteIcon name="sound" class="sound-on" /><SiteIcon name="muted" class="sound-off" />
+  </button>
+  <button
+    type="button"
+    class="site-icon-button"
+    data-theme-toggle
+    data-ui-sound
+    aria-label={es ? 'Cambiar tema' : 'Toggle theme'}
+    title={es ? 'Cambiar tema' : 'Toggle theme'}
+  >
+    <SiteIcon name="moon" class="theme-moon" /><SiteIcon name="sun" class="theme-sun" />
+  </button>
+  <a
+    class="site-icon-button site-rss"
+    href={`/${lang}/blog/rss.xml`}
+    aria-label={es ? 'Suscribirse por RSS' : 'Subscribe via RSS'}
+    title="RSS"
+    data-ui-sound><SiteIcon name="rss" /></a
+  >
+  <a
+    class="site-language"
+    href={es ? '/en/' : '/es/'}
+    lang={es ? 'en' : 'es'}
+    aria-label={es ? 'Cambiar a inglés' : 'Switch to Spanish'}
+    title={es ? 'English' : 'Español'}
+    data-ui-sound><SiteFlag language={es ? 'en' : 'es'} /></a
+  >
+</div>
+<script>
+  import '../scripts/site-controls';
+</script>

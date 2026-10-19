@@ -1,0 +1,104 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import data from '../../data/en.json';
+export function getStaticPaths() {
+  return ['warm', 'playful', 'mono'].map((style) => ({ params: { style } }));
+}
+const { style } = Astro.params;
+---
+
+<Layout
+  title={`${style} — header and footer preview`}
+  description="Interactive portfolio design comparison"
+  lang="en"
+  chrome={style}
+  noindex
+>
+  <div class="chrome-sample">
+    <Nav nav={data.nav} lang="en" />
+    <main class="sample-main">
+      <div><p>Security engineer & software developer</p><h1>Leon Elliott Fuller</h1></div>
+    </main>
+    <Footer footer={data.footer} contact={data.contact} nav={data.nav} lang="en" />
+  </div>
+</Layout>
+<style is:global>
+  .chrome-sample {
+    background: #faf8f5;
+  }
+  .chrome-sample .sample-main {
+    display: grid;
+    align-items: center;
+    min-height: 224px;
+    padding: 100px 32px 40px;
+    width: min(1152px, 100%);
+    margin-inline: auto;
+  }
+  .chrome-sample .sample-main p {
+    font-size: 12px;
+    color: #786f63;
+  }
+  .chrome-sample .sample-main h1 {
+    font-size: 30px;
+    line-height: 1.3;
+    margin-top: 8px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    color: #302a24;
+  }
+  [data-layout='photo'] .chrome-sample .sample-main {
+    background:
+      linear-gradient(rgb(0 0 0 / 25%), rgb(0 0 0 / 25%)),
+      url('/images/alhambra.jpg') center 45% / cover;
+    max-width: none;
+  }
+  [data-layout='photo'] .chrome-sample .sample-main :is(h1, p) {
+    color: #fff;
+    text-shadow: 0 1px 4px rgb(0 0 0 / 30%);
+  }
+  .chrome-sample .site-footer {
+    margin-top: 0;
+  }
+  .dark .chrome-sample {
+    background: #1b1b1b;
+  }
+  .dark .chrome-sample .sample-main h1 {
+    color: #f1eee8;
+  }
+  .dark .chrome-sample .sample-main p {
+    color: #b9b1a6;
+  }
+  [data-chrome='playful'] .chrome-sample {
+    background: #fff9ef;
+  }
+  [data-chrome='mono'] .chrome-sample {
+    background: #fff;
+  }
+  .dark:is([data-chrome='playful'], [data-chrome='mono']) .chrome-sample {
+    background: #1b1b1b;
+  }
+  @media (max-width: 700px) {
+    .chrome-sample .sample-main {
+      min-height: 192px;
+      padding: 96px 20px 32px;
+    }
+    .chrome-sample .sample-main h1 {
+      font-size: 26px;
+    }
+  }
+</style>
+<script>
+  const sample = document.querySelector('.chrome-sample');
+  if (sample && window.parent !== window) {
+    const reportHeight = () =>
+      window.parent.postMessage(
+        { type: 'chrome-preview-size', height: Math.ceil(sample.getBoundingClientRect().height) },
+        location.origin
+      );
+    new ResizeObserver(reportHeight).observe(sample);
+    window.addEventListener('load', reportHeight);
+    reportHeight();
+  }
+</script>
