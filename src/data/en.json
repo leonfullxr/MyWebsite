@@ -100,12 +100,18 @@
         {
           "degree": "BSc. Computer Engineering",
           "institution": "University of Granada, Spain",
+          "country": "es",
+          "location": "Granada, Spain",
+          "url": "https://www.ugr.es/",
           "period": "Sep 2021 - Jun 2026",
           "details": "Focus on computing and intelligent systems. Coursework includes AI, machine learning, networking, C++, Python, OOP, OpenGL, and cybersecurity. Honors in calculus, statistics, machine learning, and programming."
         },
         {
           "degree": "BSc. Computer Engineering (Erasmus+)",
           "institution": "AGH University of Krakow, Poland",
+          "country": "pl",
+          "location": "Krakow, Poland",
+          "url": "https://www.agh.edu.pl/en/",
           "period": "Sep 2024 - Jun 2025",
           "details": "Final year abroad. Coursework includes computer vision, deep learning for medical imaging, cybersecurity, real-time operating systems in C, and cloud computing."
         }
@@ -303,6 +309,7 @@
     "viewProject": "View project",
     "thesisProject": "Hopf Torus Gallery",
     "thesisImageAlt": "Hopf torus rendering",
+    "thesisSource": "Thesis repository on GitHub",
     "profileAlt": "Leon running under a red arch",
     "footerCta": "Let's build something.",
     "toggleTheme": "Toggle theme",

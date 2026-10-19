@@ -13,6 +13,11 @@ const { language } = Astro.props;
         <path fill="#F1BF00" d="M0 5h20v10H0z" />
         <path fill="#AA151B" d="M4.5 8h3v3a1.5 1.5 0 0 1-3 0z" />
       </>
+    ) : language === 'pl' ? (
+      <>
+        <path fill="#fff" d="M0 0h20v10H0z" />
+        <path fill="#DC143C" d="M0 10h20v10H0z" />
+      </>
     ) : (
       <>
         <path fill="#012169" d="M0 0h20v20H0z" />

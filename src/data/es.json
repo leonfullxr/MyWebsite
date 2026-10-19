@@ -100,12 +100,18 @@
         {
           "degree": "Grado en Ingeniería Informática",
           "institution": "Universidad de Granada, España",
+          "country": "es",
+          "location": "Granada, España",
+          "url": "https://www.ugr.es/",
           "period": "Sep 2021 - Jun 2026",
           "details": "Especializado en Computación y Sistemas Inteligentes. Cursos: IA, Aprendizaje Automático, Redes, C++, Python, POO, OpenGL, Ciberseguridad. Matrículas de Honor en Cálculo, Estadística, Aprendizaje Automático y Programación."
         },
         {
           "degree": "Grado en Ingeniería Informática (Erasmus+)",
           "institution": "Universidad AGH de Cracovia, Polonia",
+          "country": "pl",
+          "location": "Cracovia, Polonia",
+          "url": "https://www.agh.edu.pl/en/",
           "period": "Sep 2024 - Jun 2025",
           "details": "Terminando estudios en el extranjero. Cursos: Visión por Computador, Deep Learning en Análisis de Imágenes Médicas, Ciberseguridad, Sistemas Operativos en Tiempo Real en C y Computación en la Nube."
         }
@@ -303,6 +309,7 @@
     "viewProject": "Ver proyecto",
     "thesisProject": "Hopf Torus Gallery",
     "thesisImageAlt": "Render del toro de Hopf",
+    "thesisSource": "Repositorio del TFG en GitHub",
     "profileAlt": "Leon corriendo bajo un arco rojo",
     "footerCta": "Construyamos algo.",
     "toggleTheme": "Cambiar tema",
