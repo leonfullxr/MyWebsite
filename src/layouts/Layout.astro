@@ -1,8 +1,6 @@
 ---
 import '../styles/global.css';
 import '../styles/site-chrome.css';
-import '../styles/chrome-options.css';
-import '../styles/fullscreen-preview.css';
 
 interface Props {
   title: string;
@@ -10,7 +8,6 @@ interface Props {
   lang: string;
   image?: string;
   alternate?: string;
-  chrome?: string;
   noindex?: boolean;
 }
 
@@ -20,9 +17,6 @@ const {
   lang,
   image,
   alternate,
-  // Keep the selected production chrome consistent on every route, including
-  // directly opened blog posts and the thesis page.
-  chrome = 'warm',
   noindex = false,
 } = Astro.props;
 const ogImage = image ? new URL(image, Astro.site).href : undefined;
@@ -32,7 +26,7 @@ const alternateLang = lang === 'en' ? 'es' : 'en';
 ---
 
 <!doctype html>
-<html lang={lang} class="" data-chrome={chrome}>
+<html lang={lang} class="">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -60,16 +54,6 @@ const alternateLang = lang === 'en' ? 'es' : 'en';
       src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
       onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true},{left: '$', right: '$', display: false}]});"
     ></script>
-    <script is:inline>
-      const previewParams = new URLSearchParams(location.search);
-      const previewStyle = previewParams.get('style');
-      if (['warm', 'playful', 'mono'].includes(previewStyle))
-        document.documentElement.dataset.chrome = previewStyle;
-      if (previewParams.get('layout') === 'photo')
-        document.documentElement.dataset.layout = 'photo';
-      if (previewParams.get('layout') === 'fullscreen')
-        document.documentElement.dataset.layout = 'fullscreen';
-    </script>
     <script is:inline>
       if (
         localStorage.getItem('theme') === 'dark' ||
@@ -109,23 +93,6 @@ const alternateLang = lang === 'en' ? 'es' : 'en';
       document.querySelectorAll('.observe-fade').forEach((el) => {
         observer.observe(el);
       });
-
-      // Retain the selected comparison style while following portfolio links.
-      if (['warm', 'playful', 'mono'].includes(document.documentElement.dataset.chrome)) {
-        document.querySelectorAll('.site-chrome a[href]').forEach((link) => {
-          const url = new URL(link.href, location.href);
-          if (
-            url.origin !== location.origin ||
-            !/^\/(en|es)(\/|$)/.test(url.pathname) ||
-            /\.(xml|pdf)$/.test(url.pathname)
-          )
-            return;
-          url.searchParams.set('style', document.documentElement.dataset.chrome);
-          if (document.documentElement.dataset.layout === 'fullscreen')
-            url.searchParams.set('layout', 'fullscreen');
-          link.href = url.href;
-        });
-      }
 
       // Mobile menu
       function toggleMenu() {
