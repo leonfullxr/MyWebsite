@@ -864,7 +864,9 @@
     transform: none !important;
   }
   .home-runner {
-    display: none;
+    offset-distance: 35%;
+    transform: scale(0.6);
+    opacity: 1;
   }
   .pol {
     opacity: 1;

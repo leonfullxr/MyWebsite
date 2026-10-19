@@ -415,8 +415,28 @@
     }
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   /* Tech icons */
   .tech-icon {
     @apply h-7 w-7 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
   }
 }
