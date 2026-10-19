@@ -91,8 +91,8 @@ const links = [
     const y = window.scrollY;
     header?.classList.toggle('is-scrolled', y > 24);
     if (home) header?.classList.toggle('is-revealed', y > Math.min(140, window.innerHeight * 0.18));
-    // Tuck it away while reading downwards fast, bring it back on any scroll up.
-    if (!reduce && y > window.innerHeight) header?.classList.toggle('is-tucked', y > lastY + 4);
+    // Tuck it away while reading downwards, bring it back on any scroll up.
+    if (!reduce && y > window.innerHeight) header?.classList.toggle('is-tucked', y > lastY);
     else header?.classList.remove('is-tucked');
     lastY = y;
   };
