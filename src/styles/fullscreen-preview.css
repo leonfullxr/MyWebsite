@@ -93,6 +93,7 @@
 }
 [data-layout='fullscreen'] .home-prow {
   min-height: 0;
+  margin-block-end: 0;
   padding-block: 24px;
   border-bottom: 1px solid rgb(128 115 100 / 18%);
 }
