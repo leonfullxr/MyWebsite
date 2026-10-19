@@ -77,21 +77,11 @@ const lang = 'es';
   <Nav nav={data.nav} lang={lang} />
   <main class="pt-28 pb-20">
     <article class="max-w-3xl mx-auto px-6">
-      <a
-        href={`/${lang}/#blog`}
-        class="inline-flex items-center gap-2 text-sm font-mono text-sand-500 hover:text-sand-700 dark:hover:text-sand-300 mb-8 transition-colors"
-      >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-          ><path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M15 19l-7-7 7-7"></path></svg
-        >
+      <a href={`/${lang}/#blog`} class="link inline-flex items-center text-sm font-mono mb-8">
         Volver
       </a>
       <header class="mb-10">
-        <p class="font-mono text-sm text-sand-500 mb-3">{date}</p>
+        <p class="font-mono text-sm text-lava-500 mb-3">{date}</p>
         <h1 class="font-display text-4xl md:text-5xl italic tracking-tight">{title}</h1>
       </header>
       {
@@ -102,7 +92,7 @@ const lang = 'es';
               {headings.map((h) => (
                 <li>
                   <a
-                    class="text-ink-500 dark:text-sand-400 hover:text-ink-800 dark:hover:text-sand-200 transition-colors"
+                    class="text-ink-500 dark:text-lava-400 hover:text-ink-800 dark:hover:text-sand-200 transition-colors"
                     href={`#${slugify(h)}`}
                   >
                     {h}
@@ -219,6 +209,11 @@ const lang = 'es';
       () => toTop.classList.toggle('visible', window.scrollY > 600),
       { passive: true }
     );
-    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    toTop.addEventListener('click', () =>
+      window.scrollTo({
+        top: 0,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      })
+    );
   </script>
 </Layout>

@@ -3,25 +3,32 @@ import SiteIcon from './SiteIcon.astro';
 import SiteFlag from './SiteFlag.astro';
 interface Props {
   lang: string;
+  compact?: boolean;
 }
-const { lang } = Astro.props;
+const { lang, compact = false } = Astro.props;
 const es = lang === 'es';
 ---
 
 <div class="site-controls">
+  <slot name="links" />
+  {
+    !compact && (
+      <button
+        type="button"
+        class="site-icon-button"
+        data-sound-toggle
+        aria-pressed="false"
+        aria-label={es ? 'Silenciar sonidos' : 'Mute sounds'}
+        title={es ? 'Silenciar sonidos' : 'Mute sounds'}
+      >
+        <SiteIcon name="sound" class="sound-on" />
+        <SiteIcon name="muted" class="sound-off" />
+      </button>
+    )
+  }
   <button
     type="button"
-    class="site-icon-button"
-    data-sound-toggle
-    aria-pressed="false"
-    aria-label={es ? 'Silenciar sonidos' : 'Mute sounds'}
-    title={es ? 'Silenciar sonidos' : 'Mute sounds'}
-  >
-    <SiteIcon name="sound" class="sound-on" /><SiteIcon name="muted" class="sound-off" />
-  </button>
-  <button
-    type="button"
-    class="site-icon-button"
+    class="site-icon-button site-theme"
     data-theme-toggle
     data-ui-sound
     aria-label={es ? 'Cambiar tema' : 'Toggle theme'}
@@ -29,21 +36,38 @@ const es = lang === 'es';
   >
     <SiteIcon name="moon" class="theme-moon" /><SiteIcon name="sun" class="theme-sun" />
   </button>
-  <a
-    class="site-icon-button site-rss"
-    href={`/${lang}/blog/rss.xml`}
-    aria-label={es ? 'Suscribirse por RSS' : 'Subscribe via RSS'}
-    title="RSS"
-    data-ui-sound><SiteIcon name="rss" /></a
-  >
-  <a
-    class="site-language"
-    href={es ? '/en/' : '/es/'}
-    lang={es ? 'en' : 'es'}
-    aria-label={es ? 'Cambiar a inglés' : 'Switch to Spanish'}
-    title={es ? 'English' : 'Español'}
-    data-ui-sound><SiteFlag language={es ? 'en' : 'es'} /></a
-  >
+  {
+    !compact && (
+      <a
+        class="site-icon-button site-rss"
+        href={`/${lang}/blog/rss.xml`}
+        aria-label={es ? 'Suscribirse por RSS' : 'Subscribe via RSS'}
+        title="RSS"
+        data-ui-sound
+      >
+        <SiteIcon name="rss" />
+      </a>
+    )
+  }
+  <div class="site-language" role="group" aria-label={es ? 'Idioma' : 'Language'}>
+    <a
+      href="/en/"
+      lang="en"
+      hreflang="en"
+      aria-current={es ? undefined : 'true'}
+      aria-label="English"
+      title="English"
+      data-ui-sound><SiteFlag language="en" /></a
+    ><a
+      href="/es/"
+      lang="es"
+      hreflang="es"
+      aria-current={es ? 'true' : undefined}
+      aria-label="Español"
+      title="Español"
+      data-ui-sound><SiteFlag language="es" /></a
+    >
+  </div>
 </div>
 <script>
   import '../scripts/site-controls';

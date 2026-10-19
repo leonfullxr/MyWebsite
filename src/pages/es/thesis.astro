@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
 import data from '../../data/es.json';
 
 const lang = 'es';
@@ -14,23 +15,13 @@ const lang = 'es';
   <Nav nav={data.nav} lang={lang} />
   <main class="pt-16 h-screen flex flex-col">
     <div class="max-w-5xl mx-auto px-6 py-6 shrink-0">
-      <a
-        href={`/${lang}/#thesis`}
-        class="inline-flex items-center gap-2 text-sm font-mono text-sand-500 hover:text-sand-700 dark:hover:text-sand-300 mb-4 transition-colors"
-      >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-          ><path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M15 19l-7-7 7-7"></path></svg
-        >
+      <a href={`/${lang}/#thesis`} class="link inline-flex items-center text-sm font-mono mb-4">
         Volver
       </a>
       <h1 class="font-display text-3xl md:text-4xl italic tracking-tight mb-2">
         Galería Hopf Torus
       </h1>
-      <p class="text-ink-500 dark:text-sand-400 text-sm leading-relaxed">
+      <p class="text-ink-500 dark:text-lava-400 text-sm leading-relaxed">
         Visualización 3D interactiva de curvas elípticas mediante la fibración de Hopf. Explora 18
         formas, 12 modos de color, 6 materiales y parámetros personalizados. Usa los controles del
         panel lateral o pulsa <kbd
@@ -46,4 +37,5 @@ const lang = 'es';
         title="Galería interactiva Hopf Torus"></iframe>
     </div>
   </main>
+  <Footer footer={data.footer} contact={data.contact} nav={data.nav} lang={lang} />
 </Layout>

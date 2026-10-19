@@ -11,29 +11,44 @@
   --font-body: Lato, system-ui, sans-serif;
   --font-mono: Lato, system-ui, sans-serif;
 
-  --color-sand-50: #faf8f5;
-  --color-sand-100: #f2ede6;
-  --color-sand-200: #e6ddd0;
-  --color-sand-300: #d4c7b2;
-  --color-sand-400: #bfab90;
-  --color-sand-500: #a99072;
-  --color-sand-600: #947a5e;
-  --color-sand-700: #7c654f;
-  --color-sand-800: #665344;
-  --color-sand-900: #54453a;
-  --color-sand-950: #2d241e;
+  --color-sand-50: #f5f6f8;
+  --color-sand-100: #eceff2;
+  --color-sand-200: #dde3e9;
+  --color-sand-300: #c5d0d8;
+  --color-sand-400: #9fb0be;
+  --color-sand-500: #7d8fa0;
+  --color-sand-600: #5f7182;
+  --color-sand-700: #475666;
+  --color-sand-800: #33404d;
+  --color-sand-900: #222c36;
+  --color-sand-950: #141b22;
 
-  --color-ink-50: #f6f6f6;
-  --color-ink-100: #e7e7e7;
-  --color-ink-200: #d1d1d1;
-  --color-ink-300: #b0b0b0;
-  --color-ink-400: #888888;
-  --color-ink-500: #6d6d6d;
-  --color-ink-600: #5d5d5d;
-  --color-ink-700: #4f4f4f;
-  --color-ink-800: #454545;
-  --color-ink-900: #3d3d3d;
-  --color-ink-950: #1a1a1a;
+  --color-ink-50: #f4f6f9;
+  --color-ink-100: #e4e9ef;
+  --color-ink-200: #c9d2dc;
+  --color-ink-300: #9aa7b6;
+  --color-ink-400: #7a8799;
+  --color-ink-500: #5b6878;
+  --color-ink-600: #465364;
+  --color-ink-700: #354152;
+  --color-ink-800: #222c3a;
+  --color-ink-900: #121a24;
+  --color-ink-950: #0b1016;
+
+  --color-lava-50: #fff1f3;
+  --color-lava-100: #ffe1e7;
+  --color-lava-200: #ffc4cf;
+  --color-lava-300: #ff8fa3;
+  --color-lava-400: #ff6b86;
+  --color-lava-500: #ef3b62;
+  --color-lava-600: #c92a4f;
+  --color-lava-700: #a8213f;
+  --color-lava-800: #7f1931;
+  --color-lava-900: #561022;
+
+  --color-amber-300: #ffd27a;
+  --color-amber-400: #ffb53d;
+  --color-amber-500: #f59e0b;
 
   --color-emerald-100: #d1fae5;
   --color-emerald-200: #a7f3d0;
@@ -82,11 +97,11 @@
   }
 
   ::selection {
-    @apply bg-sand-400/30;
+    @apply bg-lava-400/30;
   }
 
   .dark ::selection {
-    @apply bg-sand-500/30;
+    @apply bg-lava-500/30;
   }
 }
 
@@ -119,12 +134,53 @@
     @apply border-ink-600 shadow-lg shadow-black/20;
   }
 
+  /* Tags: Lato bold pills, sentence case. */
   .tag {
-    @apply inline-block text-xs font-mono px-2.5 py-1 rounded-full bg-sand-200/80 text-sand-700 transition-colors;
+    @apply inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full bg-sand-200 text-ink-800 transition-colors;
   }
 
   .dark .tag {
-    @apply bg-ink-800 text-sand-300;
+    @apply bg-ink-800 text-sand-100;
+  }
+
+  /* Links carry an arrow: → stays on the site, ↗ leaves it. The no-break space keeps the arrow
+     on the same line as the last word. */
+  .link {
+    @apply font-bold text-lava-700 dark:text-lava-300 underline decoration-2 underline-offset-4 decoration-lava-400/60 hover:decoration-lava-500 transition-colors;
+  }
+  .link::after,
+  .prose-blog a:not(:has(img))::after {
+    content: '\00a0→';
+    position: relative;
+    left: 0;
+    top: 0;
+    transition:
+      left 0.25s cubic-bezier(0.5, 1.6, 0.4, 1),
+      top 0.25s cubic-bezier(0.5, 1.6, 0.4, 1);
+  }
+  .link[data-ext]::after,
+  .prose-blog a[href^='http']:not(:has(img))::after {
+    content: '\00a0↗';
+  }
+  .link:hover::after,
+  .prose-blog a:not(:has(img)):hover::after {
+    left: 4px;
+  }
+  .link[data-ext]:hover::after,
+  .prose-blog a[href^='http']:not(:has(img)):hover::after {
+    left: 3px;
+    top: -3px;
+  }
+
+  /* Primary pill button with a trailing arrow that nudges forward. */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-full bg-ink-900 text-white dark:bg-sand-50 dark:text-ink-950 px-5 py-2.5 text-sm font-bold transition-colors hover:bg-lava-600 dark:hover:bg-lava-300;
+  }
+  .btn-primary svg {
+    transition: transform 0.25s cubic-bezier(0.5, 1.6, 0.4, 1);
+  }
+  .btn-primary:hover svg {
+    transform: translateX(3px);
   }
 
   /* Hero banner */
@@ -186,11 +242,11 @@
 
   /* Timeline */
   .timeline-dot {
-    @apply w-3 h-3 rounded-full bg-sand-400 border-2 border-sand-50 absolute -left-[7px] top-2;
+    @apply w-3 h-3 rounded-full bg-lava-400 border-2 border-sand-50 absolute -left-[7px] top-2;
   }
 
   .dark .timeline-dot {
-    @apply bg-sand-500 border-ink-950;
+    @apply bg-lava-500 border-ink-950;
   }
 
   /* Blog post styles */
@@ -235,11 +291,11 @@
   }
 
   .prose-blog a {
-    @apply text-sand-600 dark:text-sand-400 underline underline-offset-2 hover:text-sand-800 dark:hover:text-sand-200 transition-colors;
+    @apply text-lava-700 dark:text-lava-300 font-bold underline decoration-2 underline-offset-4 decoration-lava-400/60 hover:decoration-lava-500 transition-colors;
   }
 
   .prose-blog blockquote {
-    @apply border-l-2 border-sand-300 dark:border-ink-600 pl-4 my-4 italic text-ink-500 dark:text-sand-400;
+    @apply border-l-2 border-sand-300 dark:border-ink-600 pl-4 my-4 italic text-ink-500 dark:text-lava-400;
   }
 
   .prose-blog hr {
@@ -266,7 +322,7 @@
   }
 
   .code-block-lang {
-    @apply text-xs font-mono uppercase tracking-wider text-ink-400 dark:text-sand-500;
+    @apply text-xs font-bold text-ink-500 dark:text-ink-300;
   }
 
   .prose-blog pre {
@@ -290,7 +346,7 @@
   }
 
   .code-copy {
-    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono text-ink-500 dark:text-sand-400 hover:text-ink-800 dark:hover:text-sand-100 hover:bg-sand-200/80 dark:hover:bg-ink-800 transition-colors cursor-pointer;
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono text-ink-500 dark:text-lava-400 hover:text-ink-800 dark:hover:text-sand-100 hover:bg-sand-200/80 dark:hover:bg-ink-800 transition-colors cursor-pointer;
   }
 
   .code-copy.copied {
@@ -299,7 +355,7 @@
 
   /* Back to top */
   .back-to-top {
-    @apply fixed bottom-6 right-6 z-50 p-3 rounded-full border border-sand-300 dark:border-ink-700 bg-sand-50/90 dark:bg-ink-900/90 text-ink-600 dark:text-sand-300 shadow-lg backdrop-blur-xs transition-all duration-300 opacity-0 translate-y-4 pointer-events-none invisible hover:bg-sand-200 dark:hover:bg-ink-800 cursor-pointer;
+    @apply fixed bottom-6 right-6 z-50 p-3 rounded-full border border-sand-300 dark:border-ink-700 bg-sand-50/90 dark:bg-ink-900/90 text-ink-600 dark:text-lava-300 shadow-lg backdrop-blur-xs transition-all duration-300 opacity-0 translate-y-4 pointer-events-none invisible hover:bg-sand-200 dark:hover:bg-ink-800 cursor-pointer;
   }
 
   .back-to-top.visible {
@@ -429,8 +485,28 @@
     }
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   /* Tech icons */
   .tech-icon {
     @apply h-7 w-7 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
   }
 }

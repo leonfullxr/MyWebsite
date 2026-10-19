@@ -169,3 +169,97 @@ export function splitAward(text: string) {
 export function awardText(a: string | { text: string; url?: string }) {
   return typeof a === 'string' ? { text: a, url: undefined } : a;
 }
+
+// Experience impact board: logo sets shown when a card opens.
+export const platforms: Icon[] = [
+  { name: 'AWS', src: '/images/icons/aws.svg' },
+  { name: 'Google Cloud', src: '/images/icons/googlecloud.svg' },
+  { name: 'Azure', src: '/images/icons/azure.svg' },
+  { name: 'Active Directory', src: '/images/icons/active-directory.svg' },
+  { name: 'Microsoft 365', src: '/images/icons/microsoft365.svg' },
+  { name: 'Google Workspace', src: '/images/icons/google.svg' },
+  { name: 'Okta', src: '/images/icons/okta.svg' },
+  { name: 'FortiGate', src: '/images/icons/fortinet.svg' },
+  { name: 'Sophos', src: '/images/icons/sophos.svg' },
+  { name: 'Cisco', src: '/images/icons/cisco.svg' },
+];
+export const clusters: Icon[] = [
+  { name: 'AWS EKS', src: '/images/icons/amazoneks.svg' },
+  { name: 'Google Cloud', src: '/images/icons/googlecloud.svg' },
+  { name: 'Azure AKS', src: '/images/icons/azure.svg' },
+  { name: 'Proxmox', src: '/images/icons/proxmox.svg' },
+];
+// 24px stroke icons for the impact themes.
+export const impactIcons: Record<string, string> = {
+  layers: 'M12 3 2 8l10 5 10-5-10-5zM2 13l10 5 10-5M2 18l10 5 10-5',
+  gauge: 'M12 14l4-4M3.5 18a9 9 0 1 1 17 0',
+  down: 'M3 7l6 6 4-4 8 8M21 11v6h-6',
+  buoy: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM5.6 5.6l3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6',
+  branch:
+    'M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9',
+  plug: 'M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0V8zM12 18v4',
+  zap: 'M13 2 3 14h9l-1 8 10-12h-9l1-8z',
+  shield: 'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3zM9 12l2 2 4-4',
+};
+
+// What each project is built with, keyed by its image (the same in both languages).
+const i = (name: string, file: string): Icon => ({ name, src: `/images/icons/${file}` });
+export const projectStacks: Record<string, Icon[]> = {
+  '/images/potocolom.png': [
+    i('SvelteKit', 'svelte.svg'),
+    i('FastAPI', 'fastapi.svg'),
+    i('PostgreSQL', 'postgresql.svg'),
+    i('Redis', 'redis.svg'),
+    i('CUDA', 'nvidia.svg'),
+    i('Docker', 'docker.svg'),
+  ],
+  '/images/hopf_torus.png': [i('C++', 'cplusplus.svg'), i('Docker', 'docker.svg')],
+  '/images/cypher_logo.png': [
+    i('React', 'react.svg'),
+    i('Node.js', 'nodedotjs.svg'),
+    i('Express', 'express.svg'),
+    i('Socket.IO', 'socketdotio.svg'),
+    i('MongoDB', 'mongodb.svg'),
+    i('Docker', 'docker.svg'),
+  ],
+  '/images/nextcloud_login.png': [
+    i('Docker', 'docker.svg'),
+    i('Traefik', 'traefikproxy.svg'),
+    i('PostgreSQL', 'postgresql.svg'),
+    i('Redis', 'redis.svg'),
+    i("Let's Encrypt", 'letsencrypt.svg'),
+  ],
+  '/images/mushroom_classification.png': [
+    i('Python', 'python.svg'),
+    i('Jupyter', 'jupyter.svg'),
+    i('scikit-learn', 'scikitlearn.svg'),
+    i('NumPy', 'numpy.svg'),
+    i('Matplotlib', 'matplotlib.svg'),
+  ],
+  '/images/ludo_game.png': [i('C++', 'cplusplus.svg')],
+  '/images/visual_pathfinding.png': [i('C++', 'cplusplus.svg')],
+  '/images/pichola.png': [i('Godot', 'godot.svg')],
+};
+// How each picture sits in a square polaroid: logos and diagrams are contained on their own colour.
+export const polaroidFit: Record<string, { fit: 'cover' | 'contain'; bg: string }> = {
+  '/images/potocolom.png': { fit: 'cover', bg: '#14151a' },
+  '/images/hopf_torus.png': { fit: 'cover', bg: '#f1f1f1' },
+  '/images/cypher_logo.png': { fit: 'contain', bg: '#ffffff' },
+  '/images/nextcloud_login.png': { fit: 'cover', bg: '#2b6c8e' },
+  '/images/mushroom_classification.png': { fit: 'contain', bg: '#ffffff' },
+  '/images/ludo_game.png': { fit: 'cover', bg: '#b4501a' },
+  '/images/visual_pathfinding.png': { fit: 'cover', bg: '#e9e9e9' },
+  '/images/pichola.png': { fit: 'contain', bg: '#f6c9a0' },
+};
+// Dark logos that need inverting in dark mode wherever they sit on the page ground.
+export const monoLogos = new Set([
+  'Three.js',
+  'Wazuh',
+  'AWS',
+  'OpenSearch',
+  'Bash',
+  'NumPy',
+  'Pandas',
+  'Express',
+  'Socket.IO',
+]);
