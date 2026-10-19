@@ -116,11 +116,11 @@
     background-color 0.3s ease,
     box-shadow 0.3s ease;
 }
-.site-header-home:not(.is-revealed):not(.is-menu) {
+.site-header-home:not(.is-revealed):not(.is-menu):not(:has(:focus-visible)) {
   transform: translateY(-110%);
   box-shadow: none;
 }
-.site-header.is-tucked:not(.is-menu) {
+.site-header.is-tucked:not(.is-menu):not(:has(:focus-visible)) {
   transform: translateY(-110%);
 }
 .site-header-inner {
