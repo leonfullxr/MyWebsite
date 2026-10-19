@@ -29,7 +29,6 @@ const labels = nav ?? {
 };
 const t = es
   ? {
-      eyebrow: 'Contacto',
       cta: 'Construyamos algo.',
       navigate: 'Navega',
       now: 'Ahora mismo',
@@ -42,7 +41,6 @@ const t = es
       built: 'Hecho con Astro',
     }
   : {
-      eyebrow: 'Contact',
       cta: "Let's build something.",
       navigate: 'Navigate',
       now: 'Right now',
@@ -71,7 +69,6 @@ const t = es
       </button>
     </div>
     <div class="site-footer-head" data-reveal-footer>
-      <p class="site-footer-eyebrow">{t.eyebrow}</p>
       <p class="site-footer-cta">{t.cta}</p>
       <a class="site-footer-mail" href={`mailto:${contact.email}`} data-ui-sound>{contact.email}</a>
     </div>

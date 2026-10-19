@@ -386,15 +386,6 @@
 .dark .site-footer-head {
   color: var(--color-sand-50);
 }
-.site-footer-eyebrow {
-  margin: 0;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--color-ink-700);
-}
-.dark .site-footer-eyebrow {
-  color: var(--color-lava-300);
-}
 .site-footer-cta {
   margin: 6px 0 0;
   font-size: clamp(36px, 6vw, 80px);
