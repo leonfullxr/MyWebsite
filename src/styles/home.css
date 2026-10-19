@@ -263,6 +263,17 @@
 .dark .ic-ico {
   color: var(--color-lava-300);
 }
+.ic-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.ic-heading .ic-ico {
+  flex-shrink: 0;
+}
+.ic .ic-heading h4 {
+  margin: 0;
+}
 .ic:hover .ic-ico {
   transform: rotate(-8deg) scale(1.12);
 }
