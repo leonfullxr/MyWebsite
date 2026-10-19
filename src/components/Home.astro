@@ -713,35 +713,36 @@ const hobbyIcons: string[] = [
 
   <!-- Thesis -->
   <section id="thesis" class="relative px-4 py-8">
-    <div
-      data-reveal
-      class={`${panel} max-w-6xl mx-auto p-6 md:p-10 grid md:grid-cols-[1.5fr_1fr] gap-6 md:gap-10 items-center`}
-    >
-      <div class="rounded-2xl bg-white p-3 shadow-lg shadow-black/10">
-        <img
-          src="/images/hopf_torus.png"
-          alt={t.thesisImageAlt}
-          class="w-full aspect-[1920/721] object-contain"
-          loading="lazy"
-        />
-      </div>
-      <div>
-        <p class="text-sm font-bold text-lava-600 dark:text-lava-400">{data.thesis.title}</p>
-        <h2 class="mt-1 text-3xl md:text-4xl font-black">{t.thesisProject}</h2>
-        <p class="mt-3 text-ink-700 dark:text-ink-200 leading-relaxed">{data.thesis.description}</p>
-        <a
-          href={`/${lang}/thesis`}
-          class="mt-5 inline-flex items-center gap-2 rounded-full bg-ink-900 text-white dark:bg-sand-100 dark:text-ink-950 px-5 py-2.5 text-sm font-bold hover:bg-lava-700 dark:hover:bg-lava-300 transition-colors"
-        >
-          {data.thesis.cta.replace(/\s*→\s*$/, '')}
-          <svg
-            viewBox="0 0 24 24"
-            class="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg
+    <div data-reveal class={`${panel} max-w-6xl mx-auto p-6 md:p-12`}>
+      <h2 class="home-title text-4xl md:text-5xl font-black" data-title>{data.thesis.title}</h2>
+      <div class="mt-8 grid md:grid-cols-[1.5fr_1fr] gap-6 md:gap-10 items-center">
+        <div class="rounded-2xl bg-white p-3 shadow-lg shadow-black/10">
+          <img
+            src="/images/hopf_torus.png"
+            alt={t.thesisImageAlt}
+            class="w-full aspect-[1920/721] object-contain"
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <h3 class="text-3xl md:text-4xl font-black">{t.thesisProject}</h3>
+          <p class="mt-3 text-ink-700 dark:text-ink-200 leading-relaxed">
+            {data.thesis.description}
+          </p>
+          <a
+            href={`/${lang}/thesis`}
+            class="mt-5 inline-flex items-center gap-2 rounded-full bg-ink-900 text-white dark:bg-sand-100 dark:text-ink-950 px-5 py-2.5 text-sm font-bold hover:bg-lava-700 dark:hover:bg-lava-300 transition-colors"
           >
-        </a>
+            {data.thesis.cta.replace(/\s*→\s*$/, '')}
+            <svg
+              viewBox="0 0 24 24"
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg
+            >
+          </a>
+        </div>
       </div>
     </div>
   </section>
