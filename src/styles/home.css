@@ -412,6 +412,12 @@
   .ic.is-open .ic-sum {
     flex: none;
   }
+  .ic.is-open .ic-tog {
+    position: static;
+    order: -1;
+    align-self: flex-end;
+    margin-bottom: 8px;
+  }
   .ic.is-open .ic-more {
     padding-right: 0;
     margin-top: 14px;
