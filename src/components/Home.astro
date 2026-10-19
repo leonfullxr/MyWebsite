@@ -6,6 +6,8 @@ import Nav from './Nav.astro';
 import Footer from './Footer.astro';
 import Tiles from './LogoTiles.astro';
 import FrameworkSeals from './FrameworkSeals.astro';
+import SiteFlag from './SiteFlag.astro';
+import SiteIcon from './SiteIcon.astro';
 import '../styles/home.css';
 import type { Data, Post } from '../data/home';
 import {
@@ -20,6 +22,7 @@ import {
   impactIcons,
   projectStacks,
   polaroidFit,
+  thesisRepositoryURL,
 } from '../data/home';
 
 interface Props {
@@ -147,7 +150,6 @@ const hobbyIcons: string[] = [
     <div class="home-hero-shade absolute inset-0 pointer-events-none" aria-hidden="true"></div>
     <div class="home-hero-copy relative z-[2] px-5 pt-[12vh] md:pt-[13vh]">
       <p class="mt-3 text-lg md:text-xl font-bold text-white/90">
-        {data.hero.greeting}{' '}
         <span class="text-white">{data.hero.name}</span>
       </p>
       <h1
@@ -156,18 +158,6 @@ const hobbyIcons: string[] = [
         <span class="home-line-a block">{data.hero.line1}</span>
         <span class="home-line-b block text-lava-200">{data.hero.line2}</span>
       </h1>
-      <p
-        class="home-hero-lead mx-auto mt-5 max-w-xl text-base md:text-xl md:leading-7 text-white/90 leading-relaxed"
-      >
-        {data.hero.lead}
-      </p>
-      <div class="home-hero-chips mt-5 flex flex-wrap justify-center gap-2.5 text-[13px] font-bold">
-        <span class="rounded-full bg-ink-950/40 px-3.5 py-2 backdrop-blur-md"
-          >{data.about.location}</span
-        >
-        <span class="rounded-full bg-ink-950/40 px-3.5 py-2 backdrop-blur-md">{data.hero.chip}</span
-        >
-      </div>
     </div>
     <div class="home-runner" data-home-runner aria-hidden="true">
       <img src="/images/mascot/running.webp" alt="" width="640" height="640" />
@@ -296,13 +286,6 @@ const hobbyIcons: string[] = [
                 </h3>
                 <p class="text-sm font-bold text-ink-500 dark:text-ink-300">{current.period}</p>
               </div>
-              <span class="ml-auto inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1.5 text-xs font-bold text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200">
-                <span class="relative flex h-2 w-2">
-                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
-                  <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                </span>
-                {t.current}
-              </span>
             </header>
             <div class="impact-grid mt-6">
               {im.stats.map((st, i) => (
@@ -450,8 +433,18 @@ const hobbyIcons: string[] = [
               style={`--d:${i * 120}ms`}
               class="ic-edu rounded-2xl border border-sand-200 dark:border-ink-800 bg-white/70 dark:bg-ink-900/70 p-5 md:p-6"
             >
-              <h4 class="text-lg font-black">{e.degree}</h4>
-              <p class="mt-1 text-sm font-bold text-lava-700 dark:text-lava-300">{e.institution}</p>
+              <div class="edu-heading">
+                <h4 class="text-lg font-black">{e.degree}</h4>
+                <span class="edu-location" role="img" title={e.location} aria-label={e.location}>
+                  <SiteIcon name="pin" />
+                  <SiteFlag language={e.country} />
+                </span>
+              </div>
+              <p class="mt-1 text-sm font-bold text-lava-700 dark:text-lava-300">
+                <a href={e.url} target="_blank" rel="noopener noreferrer" class="link" data-ext>
+                  {e.institution}
+                </a>
+              </p>
               <p class="text-sm text-ink-500 dark:text-ink-300">{e.period}</p>
               <p class="mt-3 text-ink-700 dark:text-ink-200 leading-relaxed">{e.details}</p>
             </article>
@@ -548,9 +541,6 @@ const hobbyIcons: string[] = [
         </ul>
 
         <div class="mt-8">
-          <p class="mb-3 text-sm font-bold text-lava-600 dark:text-lava-400">
-            {t.certifications}
-          </p>
           <div
             class="rounded-2xl bg-white/80 dark:bg-ink-900/80 ring-1 ring-black/5 dark:ring-white/10 p-5 md:flex md:items-center md:gap-8"
           >
@@ -726,19 +716,32 @@ const hobbyIcons: string[] = [
           <p class="mt-3 text-ink-700 dark:text-ink-200 leading-relaxed">
             {data.thesis.description}
           </p>
-          <a
-            href={`/${lang}/thesis`}
-            class="mt-5 inline-flex items-center gap-2 rounded-full bg-ink-900 text-white dark:bg-sand-100 dark:text-ink-950 px-5 py-2.5 text-sm font-bold hover:bg-lava-700 dark:hover:bg-lava-300 transition-colors"
-          >
-            {data.thesis.cta.replace(/\s*→\s*$/, '')}
-            <svg
-              viewBox="0 0 24 24"
-              class="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg
+          <div class="mt-5 flex flex-wrap items-center gap-3">
+            <a
+              href={`/${lang}/thesis`}
+              class="inline-flex items-center gap-2 rounded-full bg-ink-900 text-white dark:bg-sand-100 dark:text-ink-950 px-5 py-2.5 text-sm font-bold hover:bg-lava-700 dark:hover:bg-lava-300 transition-colors"
             >
-          </a>
+              {data.thesis.cta.replace(/\s*→\s*$/, '')}
+              <svg
+                viewBox="0 0 24 24"
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg
+              >
+            </a>
+            <a
+              href={thesisRepositoryURL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t.thesisSource}
+              title={t.thesisSource}
+              data-ui-sound
+              class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-ink-900 text-white transition-colors hover:bg-lava-700 dark:bg-sand-100 dark:text-ink-950 dark:hover:bg-lava-300"
+            >
+              <SiteIcon name="github" class="h-5 w-5" />
+            </a>
+          </div>
         </div>
       </div>
     </div>
