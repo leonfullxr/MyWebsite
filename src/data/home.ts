@@ -189,9 +189,6 @@ export const clusters: Icon[] = [
   { name: 'Azure AKS', src: '/images/icons/azure.svg' },
   { name: 'Proxmox', src: '/images/icons/proxmox.svg' },
 ];
-// Seal colours for the six compliance frameworks, same order as impact.frameworks in the JSON.
-export const frameworkColors = ['#1f6f8b', '#3b4a8f', '#2e7d4f', '#9c2f5a', '#1d4ea0', '#7a4a12'];
-
 // 24px stroke icons for the impact themes.
 export const impactIcons: Record<string, string> = {
   layers: 'M12 3 2 8l10 5 10-5-10-5zM2 13l10 5 10-5M2 18l10 5 10-5',
