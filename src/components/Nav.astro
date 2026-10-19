@@ -39,7 +39,12 @@ const links = [
     >
       {
         links.map(([label, href]) => (
-          <a href={href} class="site-nav-link" data-ui-sound>
+          <a
+            href={href}
+            class="site-nav-link"
+            data-ui-sound
+            data-spy={href.startsWith('#') ? href.slice(1) : undefined}
+          >
             {label}
           </a>
         ))
@@ -74,24 +79,57 @@ const links = [
       ))
     }
   </nav>
-  <svg class="site-header-wave" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"
-    ><path class="header-wave-back" d="M0 0H1440V12C1180 45 1080 2 860 21S430 51 210 21 70 15 0 26Z"
-    ></path><path
-      class="header-wave-front"
-      d="M0 0H1440V8C1240 0 1150 36 920 16S480 2 280 21 80 20 0 8Z"></path></svg
-  >
 </header>
 <script>
-  const header = document.querySelector('.site-header');
-  const syncScrolled = () => header?.classList.toggle('is-scrolled', window.scrollY > 40);
-  window.addEventListener('scroll', syncScrolled, { passive: true });
-  syncScrolled();
+  const header = document.querySelector<HTMLElement>('.site-header');
+  const home = header?.classList.contains('site-header-home');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let lastY = window.scrollY;
+  // On the homepage the header waits off-screen while the lake hero is in view and slides
+  // down once you start scrolling. Everywhere else it is always there.
+  const sync = () => {
+    const y = window.scrollY;
+    header?.classList.toggle('is-scrolled', y > 24);
+    if (home) header?.classList.toggle('is-revealed', y > Math.min(140, window.innerHeight * 0.18));
+    // Tuck it away while reading downwards fast, bring it back on any scroll up.
+    if (!reduce && y > window.innerHeight) header?.classList.toggle('is-tucked', y > lastY + 4);
+    else header?.classList.remove('is-tucked');
+    lastY = y;
+  };
+  window.addEventListener('scroll', sync, { passive: true });
+  sync();
+
+  // Scroll-spy: the link for the section on screen gets aria-current.
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>('.site-desktop-nav [data-spy]')
+  );
+  const sections = links
+    .map((l) => document.getElementById(l.dataset.spy || ''))
+    .filter((el): el is HTMLElement => Boolean(el));
+  if (sections.length) {
+    const spy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          links.forEach((l) =>
+            l.dataset.spy === e.target.id
+              ? l.setAttribute('aria-current', 'true')
+              : l.removeAttribute('aria-current')
+          );
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px' }
+    );
+    sections.forEach((s) => spy.observe(s));
+  }
+
   const button = document.querySelector<HTMLButtonElement>('.site-menu-toggle');
   const menu = document.getElementById('site-mobile-menu');
   const es = document.documentElement.lang === 'es';
   function setMenu(open: boolean) {
     if (!menu || !button) return;
     menu.hidden = !open;
+    header?.classList.toggle('is-menu', open);
     button.setAttribute('aria-expanded', String(open));
     button.setAttribute(
       'aria-label',

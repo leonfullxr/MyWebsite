@@ -11,14 +11,7 @@ interface Props {
   noindex?: boolean;
 }
 
-const {
-  title,
-  description,
-  lang,
-  image,
-  alternate,
-  noindex = false,
-} = Astro.props;
+const { title, description, lang, image, alternate, noindex = false } = Astro.props;
 const ogImage = image ? new URL(image, Astro.site).href : undefined;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const alternateUrl = alternate ? new URL(alternate, Astro.site).href : undefined;

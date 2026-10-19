@@ -1,0 +1,26 @@
+---
+// A grid of named logo tiles that pop in one after another when their impact card opens.
+import { monoLogos } from '../data/home';
+interface Props {
+  items: { name: string; src: string }[];
+}
+const { items } = Astro.props;
+---
+
+<ul class="ic-tiles">
+  {
+    items.map((it, i) => (
+      <li style={`--j:${i}`}>
+        <span class="ic-logo">
+          <img
+            src={it.src}
+            alt=""
+            loading="lazy"
+            class:list={[monoLogos.has(it.name) && 'is-mono']}
+          />
+        </span>
+        {it.name}
+      </li>
+    ))
+  }
+</ul>

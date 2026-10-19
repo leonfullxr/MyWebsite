@@ -1,0 +1,19 @@
+---
+// Round seals for the compliance frameworks: acronym on a coloured disc, full name beside it.
+import { frameworkColors } from '../data/home';
+interface Props {
+  items: string[][];
+}
+const { items } = Astro.props;
+---
+
+<ul class="ic-seals">
+  {
+    items.map(([short, full], i) => (
+      <li style={`--j:${i};--c:${frameworkColors[i % frameworkColors.length]}`}>
+        <b set:html={short.replace(' ', '<br>')} />
+        <span>{full}</span>
+      </li>
+    ))
+  }
+</ul>

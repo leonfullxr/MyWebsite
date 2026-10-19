@@ -1,8 +1,6 @@
 ---
-import SiteBrand from './SiteBrand.astro';
 import SiteControls from './SiteControls.astro';
 import SiteIcon from './SiteIcon.astro';
-import { icons } from '../data/home';
 interface Props {
   footer: { copyright: string };
   contact: { email: string; github: string; linkedin: string };
@@ -24,90 +22,131 @@ const anchor = (id: string) => (home ? `#${id}` : `/${lang}/#${id}`);
 const labels = nav ?? {
   about: es ? 'Sobre mí' : 'About',
   cv: es ? 'Experiencia' : 'Experience',
+  skills: es ? 'Habilidades' : 'Skills',
   projects: es ? 'Proyectos' : 'Projects',
   thesis: es ? 'TFG' : 'Thesis',
   blog: 'Blog',
 };
+const t = es
+  ? {
+      eyebrow: 'Contacto',
+      cta: 'Construyamos algo.',
+      navigate: 'Navega',
+      elsewhere: 'En otros sitios',
+      now: 'Ahora mismo',
+      nowItems: [
+        'Ingeniero de seguridad en Wazuh',
+        'Vivo en Granada, España',
+        'Corriendo ultras por diversión',
+      ],
+      top: 'Volver arriba',
+      built: 'Hecho con Astro',
+    }
+  : {
+      eyebrow: 'Contact',
+      cta: "Let's build something.",
+      navigate: 'Navigate',
+      elsewhere: 'Elsewhere',
+      now: 'Right now',
+      nowItems: ['Security engineer at Wazuh', 'Based in Granada, Spain', 'Running ultras for fun'],
+      top: 'Back to top',
+      built: 'Built with Astro',
+    };
 ---
 
 <footer class="site-chrome site-footer">
-  <svg class="site-footer-wave" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true"
-    ><path
-      class="footer-wave-back"
-      d="M0 56C140 92 210 7 340 35S580 112 720 65 960 2 1110 40 1300 90 1440 26V140H0Z"></path><path
-      class="footer-wave-front"
-      d="M0 94C170 135 240 43 390 76S600 132 790 94 1010 57 1170 101 1350 82 1440 65V140H0Z"
-    ></path></svg
-  >
+  <div class="site-footer-scene">
+    <div class="site-footer-art-wrap">
+      <picture>
+        <source media="(max-width: 900px)" srcset="/images/scenes/glow-ridge-1280.webp" />
+        <img
+          class="site-footer-art"
+          src="/images/scenes/glow-ridge.webp"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
+      <button type="button" class="site-footer-perch" data-perch aria-label={t.top} data-ui-sound>
+        <img class="perch-rest" src="/images/mascot/reclining.webp" alt="" loading="lazy" />
+        <img class="perch-jump" src="/images/mascot/jumping.webp" alt="" loading="lazy" />
+      </button>
+    </div>
+    <div class="site-footer-head" data-reveal-footer>
+      <p class="site-footer-eyebrow">{t.eyebrow}</p>
+      <p class="site-footer-cta">{t.cta}</p>
+      <a class="site-footer-mail" href={`mailto:${contact.email}`} data-ui-sound>{contact.email}</a>
+    </div>
+  </div>
   <div class="site-footer-inner">
-    <div class="site-footer-main">
-      <div class="site-footer-intro">
-        <SiteBrand lang={lang} home={home} />
-        <p class="site-footer-farewell">
-          {es ? 'Gracias por pasarte.' : 'Thanks for stopping by.'}<span aria-hidden="true">✳</span>
-        </p>
+    <div class="site-footer-cols">
+      <nav aria-label={t.navigate}>
+        <h2>{t.navigate}</h2>
+        <a href={anchor('about')} data-ui-sound>{labels.about}</a>
+        <a href={anchor('cv')} data-ui-sound>{labels.cv}</a>
+        <a href={anchor('projects')} data-ui-sound>{labels.projects}</a>
+        <a href={`/${lang}/thesis`} data-ui-sound>{labels.thesis}</a>
+        <a href={anchor('blog')} data-ui-sound>{labels.blog}</a>
+      </nav>
+      <nav aria-label={t.elsewhere}>
+        <h2>{t.elsewhere}</h2>
+        <a href={contact.github} target="_blank" rel="noopener noreferrer" data-ext data-ui-sound
+          >GitHub</a
+        >
+        <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" data-ext data-ui-sound
+          >LinkedIn</a
+        >
+        <a href={`/${lang}/blog/rss.xml`} data-ext data-ui-sound>RSS</a>
+      </nav>
+      <div>
+        <h2>{t.now}</h2>
+        {t.nowItems.map((item) => <p>{item}</p>)}
       </div>
-      <nav class="site-footer-links" aria-label={es ? 'Explora' : 'Explore'}>
-        <h2>{es ? 'Explora' : 'Explore'}</h2><a href={anchor('about')} data-ui-sound
-          >{labels.about}</a
-        ><a href={anchor('cv')} data-ui-sound>{labels.cv}</a><a
-          href={anchor('skills')}
-          data-ui-sound>{es ? 'Habilidades' : 'Skills'}</a
-        >
-      </nav>
-      <nav class="site-footer-links" aria-label={es ? 'Lo que hago' : 'Things I make'}>
-        <h2>{es ? 'Lo que hago' : 'Things I make'}</h2><a href={anchor('projects')} data-ui-sound
-          >{labels.projects}</a
-        ><a href={`/${lang}/thesis`} data-ui-sound>{labels.thesis}<SiteIcon name="external" /></a><a
-          href={anchor('blog')}
-          data-ui-sound>{labels.blog}</a
-        >
-      </nav>
+      <a href="#top" class="site-back-top" data-back-top data-ui-sound>
+        {t.top}<SiteIcon name="up" />
+      </a>
     </div>
     <div class="site-footer-bottom">
-      <p>© {year} {footer.copyright}</p>
-      <div class="site-footer-actions">
-        <div
-          class="site-footer-socials"
-          aria-label={es ? 'Perfiles y contacto' : 'Profiles and contact'}
-        >
-          <a
-            class="site-footer-social-link site-icon-button"
-            href={contact.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            title="GitHub"
-            data-ui-sound
-            ><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-              ><path d={icons.github}></path></svg
-            ></a
-          >
-          <a
-            class="site-footer-social-link site-icon-button"
-            href={contact.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            title="LinkedIn"
-            data-ui-sound
-            ><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-              ><path d={icons.linkedin}></path></svg
-            ></a
-          >
-          <a
-            class="site-footer-social-link site-icon-button"
-            href={`mailto:${contact.email}`}
-            aria-label={`${es ? 'Correo electrónico' : 'Email'}: ${contact.email}`}
-            title={contact.email}
-            data-ui-sound><SiteIcon name="mail" /></a
-          >
-        </div>
-        <SiteControls lang={lang} />
-      </div>
-      <a href="#top" class="site-back-top" data-ui-sound
-        >{es ? 'Volver arriba' : 'Back to top'}<SiteIcon name="up" /></a
+      <p>© {year} {footer.copyright} · {t.built}</p>
+      <SiteControls lang={lang} compact />
+      <span class="site-wordmark" aria-hidden="true"
+        ><span class="kw">return</span> leon<span class="semi">;</span></span
       >
     </div>
   </div>
 </footer>
+<script>
+  // Back to top: the mascot on the summit hops before the page scrolls up.
+  const perch = document.querySelector<HTMLElement>('[data-perch]');
+  const hop = () => {
+    if (!perch) return;
+    perch.classList.remove('is-hopping');
+    void perch.offsetWidth;
+    perch.classList.add('is-hopping');
+    window.setTimeout(() => perch.classList.remove('is-hopping'), 900);
+  };
+  const toTop = (event: Event) => {
+    event.preventDefault();
+    hop();
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.setTimeout(
+      () => window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }),
+      reduce ? 0 : 380
+    );
+  };
+  perch?.addEventListener('click', toTop);
+  document.querySelector('[data-back-top]')?.addEventListener('click', toTop);
+  const head = document.querySelector('[data-reveal-footer]');
+  if (head && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          head.classList.add('is-in');
+          io.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    io.observe(head);
+  } else head?.classList.add('is-in');
+</script>

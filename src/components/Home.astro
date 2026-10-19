@@ -1,19 +1,25 @@
 ---
-// Homepage. The Alhambra photo stays fixed behind the page and scroll position drives each stage:
-// the photo blurs, the portrait rises, skill logos gather into a periodic table, badges drop in.
+// Homepage. The painted lake stays fixed behind the page and scroll position drives each stage:
+// the runner comes down the trail, the lake blurs, the portrait rises, skill logos gather into a
+// periodic table, badges drop in, and the projects hang on a polaroid wall.
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
-import SiteIcon from './SiteIcon.astro';
-import { projectSounds } from '../data/projectSounds';
+import Tiles from './LogoTiles.astro';
+import FrameworkSeals from './FrameworkSeals.astro';
+import '../styles/home.css';
 import type { Data, Post } from '../data/home';
 import {
   skillGroups,
   awardBadges,
   awardText,
   splitAward,
-  imageSize,
   tagIcons,
   icons,
+  platforms,
+  clusters,
+  impactIcons,
+  projectStacks,
+  polaroidFit,
 } from '../data/home';
 
 interface Props {
@@ -23,9 +29,11 @@ interface Props {
 }
 const { data, posts, lang } = Astro.props;
 const t = data.home;
-const fill = (s: string, n: number) => s.replace('{n}', String(n));
 
 const exp = data.cv.experience.items;
+const current = exp.find((j) => j.current) ?? exp[0];
+const earlier = exp.filter((j) => j !== current);
+const im = data.impact;
 const edu = data.cv.education.items;
 const awards = data.cv.awards.items.map((a, i) => {
   const t = awardText(a);
@@ -40,6 +48,7 @@ const otherAwards = awards.filter((a) => a.badge.kind !== 'badge');
 // Dark or black logos that need inverting on the dark theme.
 const monoIcons = new Set(['Three.js', 'Wazuh', 'AWS', 'OpenSearch', 'Bash', 'NumPy', 'Pandas']);
 const projects = data.projects.items;
+const rots = [-6, 3, -2, 5, -4, 2, -5, 4];
 const fmtDate = (d: string) => {
   const dt = new Date(d);
   return isNaN(dt.getTime())
@@ -111,9 +120,18 @@ const hobbyIcons: string[] = [
 ---
 
 <div data-home class="home-root relative text-ink-900 dark:text-sand-50">
-  <!-- Backdrop -->
+  <!-- Backdrop: the painted lake, dimmed to dusk in dark mode -->
   <div data-home-backdrop class="fixed inset-0 -z-10 overflow-hidden bg-ink-950" aria-hidden="true">
-    <img src="/images/alhambra.jpg" alt="" class="home-bg w-full h-full object-cover" />
+    <picture>
+      <source media="(max-width: 900px)" srcset="/images/scenes/lake-dawn-1280.webp" />
+      <img
+        src="/images/scenes/lake-dawn.webp"
+        alt=""
+        class="home-bg w-full h-full object-cover"
+        fetchpriority="high"
+      />
+    </picture>
+    <div class="home-stars" data-home-stars></div>
   </div>
 
   <!-- Progress bar -->
@@ -121,29 +139,48 @@ const hobbyIcons: string[] = [
 
   <Nav nav={data.nav} lang={lang} home />
 
-  <!-- Hero -->
-  <section class="relative h-screen flex flex-col items-center justify-center text-center px-5">
-    <div
-      class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.32),transparent_65%)] pointer-events-none"
-      aria-hidden="true"
-    >
-    </div>
-    <div class="relative">
-      <p class="text-xl md:text-2xl font-bold text-white/90 drop-shadow-lg">{data.hero.greeting}</p>
-      <h1
-        class="mt-2 font-black text-6xl md:text-8xl text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.45)] leading-[0.95]"
+  <!-- Hero: the lake, the runner coming down the trail, and the header still tucked away -->
+  <section
+    class="home-hero relative h-[100svh] min-h-[560px] overflow-hidden text-center text-white"
+    data-home-hero
+  >
+    <div class="home-hero-shade absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+    <div class="home-hero-copy relative z-[2] px-5 pt-[12vh] md:pt-[13vh]">
+      <p
+        class="home-typed font-[JetBrains_Mono,ui-monospace,monospace] text-base md:text-lg font-medium text-sand-100"
       >
-        {data.hero.name}
+        <span data-home-typed>return leon;</span><span class="home-caret" aria-hidden="true"></span>
+      </p>
+      <p class="mt-3 text-lg md:text-xl font-bold text-white/90">
+        {data.hero.greeting}
+        <span class="text-white">{data.hero.name}</span>
+      </p>
+      <h1
+        class="home-hero-title mt-3 font-black text-[clamp(2.6rem,7.4vw,5.6rem)] leading-[0.98] tracking-[-0.025em]"
+      >
+        <span class="home-line-a block">{data.hero.line1}</span>
+        <span class="home-line-b block text-lava-200">{data.hero.line2}</span>
       </h1>
       <p
-        class="mt-6 max-w-2xl mx-auto text-base md:text-lg font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
+        class="home-hero-lead mx-auto mt-5 max-w-xl text-base md:text-xl text-white/90 leading-relaxed"
       >
-        {data.hero.tagline}
+        {data.hero.lead}
       </p>
+      <div class="home-hero-chips mt-5 flex flex-wrap justify-center gap-2.5 text-[13px] font-bold">
+        <span class="rounded-full bg-ink-950/40 px-3.5 py-2 backdrop-blur-md"
+          >{data.about.location}</span
+        >
+        <span class="rounded-full bg-ink-950/40 px-3.5 py-2 backdrop-blur-md">{data.hero.chip}</span
+        >
+      </div>
+    </div>
+    <div class="home-runner" data-home-runner aria-hidden="true">
+      <img src="/images/mascot/running.webp" alt="" width="640" height="640" />
     </div>
     <a
       href="#about"
-      class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white text-sm font-bold drop-shadow-lg animate-bounce"
+      class="home-cue absolute bottom-6 left-1/2 z-[2] -translate-x-1/2 flex flex-col items-center gap-1 text-white text-sm font-bold"
+      data-ui-sound
     >
       {t.scroll}
       <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -243,141 +280,186 @@ const hobbyIcons: string[] = [
     </div>
   </section>
 
-  <!-- Experience -->
+  <!-- Experience: an impact board. Numbers first, one line per theme, and every card opens in place. -->
   <section id="cv" data-scroll="view" class="relative px-4 py-8">
     <div class={`${panel} relative max-w-6xl mx-auto p-6 md:p-12`}>
-      <h2 class="text-4xl md:text-5xl font-black">{data.cv.title}</h2>
-      <div class="relative mt-8 pl-8 md:pl-12">
-        <svg
-          class="absolute left-[7px] md:left-[15px] top-0 h-full w-1 overflow-visible"
-          aria-hidden="true"
-        >
-          <line
-            x1="2"
-            y1="0"
-            x2="2"
-            y2="100%"
-            class="stroke-sand-200 dark:stroke-ink-800"
-            stroke-width="3"></line>
-          <line
-            x1="2"
-            y1="0"
-            x2="2"
-            y2="100%"
-            pathLength="1"
-            class="home-line stroke-lava-500"
-            stroke-width="3"
-            stroke-dasharray="1 1"></line>
-        </svg>
-
-        <h3 class="text-sm font-bold text-lava-600 dark:text-lava-400 mb-4">
-          {data.cv.experience.title}
-        </h3>
-        <div class="space-y-5">
-          {
-            exp.map((job) => (
-              <article
-                data-reveal="left"
-                class="relative rounded-2xl bg-white/80 dark:bg-ink-900/80 ring-1 ring-black/5 dark:ring-white/10 p-5 md:p-7"
-              >
-                <span
-                  class="absolute -left-[30px] md:-left-[38px] top-8 flex h-4 w-4"
-                  aria-hidden="true"
-                >
-                  {job.current && (
-                    <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60 animate-ping" />
-                  )}
-                  <span
-                    class={`relative inline-flex h-4 w-4 rounded-full ring-4 ring-sand-50 dark:ring-ink-950 ${job.current ? 'bg-emerald-500' : 'bg-lava-400'}`}
-                  />
+      <h2 class="home-title text-4xl md:text-5xl font-black" data-title>{data.cv.title}</h2>
+      {
+        current && (
+          <article class="impact mt-8" data-impact>
+            <header class="flex flex-wrap items-center gap-3.5">
+              <span class="grid h-[52px] w-[52px] place-items-center rounded-2xl bg-white ring-1 ring-sand-200 dark:ring-ink-700">
+                <img src="/images/icons/wazuh.png" alt="Wazuh" class="w-10" />
+              </span>
+              <div>
+                <h3 class="text-2xl md:text-[26px] font-black leading-tight">
+                  {current.role}{' '}
+                  <span class="font-normal text-ink-500 dark:text-ink-300">{t.at}</span>{' '}
+                  <a href={current.url} target="_blank" rel="noopener" class="link" data-ext>
+                    {current.company}
+                  </a>
+                </h3>
+                <p class="text-sm font-bold text-ink-500 dark:text-ink-300">{current.period}</p>
+              </div>
+              <span class="ml-auto inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1.5 text-xs font-bold text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200">
+                <span class="relative flex h-2 w-2">
+                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
+                  <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                 </span>
-                <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <h4 class="text-xl md:text-2xl font-black">
-                    {job.role}
-                    <span class="font-normal text-ink-500 dark:text-ink-300"> {t.at} </span>
-                    {job.url && job.url !== '#' ? (
-                      <a
-                        href={job.url}
-                        target="_blank"
-                        rel="noopener"
-                        class="text-lava-700 dark:text-lava-300 hover:underline"
-                      >
-                        {job.company}
-                      </a>
-                    ) : (
-                      <span class="text-lava-700 dark:text-lava-300">{job.company}</span>
-                    )}
-                  </h4>
-                  <span class="text-sm font-bold text-ink-500 dark:text-ink-300">
-                    {job.period}
-                    {job.current && (
-                      <span class="ml-2 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200 px-2 py-0.5 text-xs">
-                        {t.current}
-                      </span>
-                    )}
-                  </span>
-                </div>
-                {job.company === 'Wazuh' && (
-                  <div class="mt-4 flex flex-wrap gap-3">
-                    <span class="rounded-xl bg-sand-100 dark:bg-ink-800 px-4 py-2">
-                      <b class="text-2xl font-black">250B+</b>{' '}
-                      <span class="text-sm text-ink-600 dark:text-ink-300">{t.eventsIngested}</span>
-                    </span>
-                    <span class="rounded-xl bg-sand-100 dark:bg-ink-800 px-4 py-2">
-                      <b class="text-2xl font-black">-20%</b>{' '}
-                      <span class="text-sm text-ink-600 dark:text-ink-300">{t.cloudCost}</span>
-                    </span>
+                {t.current}
+              </span>
+            </header>
+            <div class="impact-grid mt-6">
+              {im.stats.map((st, i) => (
+                <article class="ic ic-stat" data-ic data-reveal style={`--d:${i * 80}ms`}>
+                  <div class="ic-sum" data-ic-sum>
+                    <b class="ic-num" data-count={st.num}>
+                      {st.num}
+                    </b>
+                    <h4>{st.label}</h4>
+                    <p class="ic-line">{st.summary}</p>
                   </div>
-                )}
-                <ul class="mt-4 space-y-2 text-ink-700 dark:text-ink-200 leading-relaxed list-disc pl-5 marker:text-lava-400">
-                  {job.description.slice(0, 4).map((d) => (
-                    <li>{d}</li>
-                  ))}
-                </ul>
-                {job.description.length > 4 && (
-                  <details class="mt-3 group">
-                    <summary class="cursor-pointer text-sm font-bold text-lava-700 dark:text-lava-300 hover:underline">
-                      {fill(t.showMore, job.description.length - 4)}
-                    </summary>
-                    <ul class="mt-2 space-y-2 text-ink-700 dark:text-ink-200 leading-relaxed list-disc pl-5 marker:text-lava-400">
-                      {job.description.slice(4).map((d) => (
+                  <div class="ic-more" id={`ic-${st.k}`} hidden>
+                    {st.k === 'events' && (
+                      <div class="ic-pipe">
+                        {im.pipeline.map((step, j) => (
+                          <>
+                            {j > 0 && <i aria-hidden="true">→</i>}
+                            <span style={`--j:${j}`}>{step}</span>
+                          </>
+                        ))}
+                      </div>
+                    )}
+                    {st.k === 'cost' && (
+                      <ol class="ic-levers">
+                        {im.levers.map(([b, rest]) => (
+                          <li>
+                            <b>{b}</b> {rest}
+                          </li>
+                        ))}
+                      </ol>
+                    )}
+                    {st.k === 'platforms' && <Tiles items={platforms} />}
+                    {st.k === 'frameworks' && <FrameworkSeals items={im.frameworks} />}
+                    {'full' in st && typeof st.full === 'number' && (
+                      <p class="ic-full">{current.description[st.full]}</p>
+                    )}
+                  </div>
+                  <button
+                    type="button"
+                    class="ic-tog"
+                    aria-expanded="false"
+                    aria-controls={`ic-${st.k}`}
+                    data-ui-sound
+                  >
+                    <span>{im.details}</span>
+                    <i aria-hidden="true">+</i>
+                  </button>
+                </article>
+              ))}
+            </div>
+            <div class="impact-grid mt-3">
+              {im.themes.map((th, i) => (
+                <article class="ic" data-ic data-reveal style={`--d:${(i % 4) * 70}ms`}>
+                  <div class="ic-sum" data-ic-sum>
+                    <svg
+                      class="ic-ico"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d={impactIcons[th.icon]} />
+                    </svg>
+                    <h4>{th.title}</h4>
+                    <p class="ic-line">{th.line}</p>
+                  </div>
+                  <div class="ic-more" id={`ic-t-${th.k}`} hidden>
+                    {th.logos === 'clusters' && <Tiles items={clusters} />}
+                    {th.logos === 'platforms' && <Tiles items={platforms} />}
+                    {th.logos === 'frameworks' && <FrameworkSeals items={im.frameworks} />}
+                    <p class="ic-full">{current.description[th.full]}</p>
+                  </div>
+                  <button
+                    type="button"
+                    class="ic-tog"
+                    aria-expanded="false"
+                    aria-controls={`ic-t-${th.k}`}
+                    data-ui-sound
+                  >
+                    <span>{im.details}</span>
+                    <i aria-hidden="true">+</i>
+                  </button>
+                </article>
+              ))}
+            </div>
+          </article>
+        )
+      }
+
+      {
+        earlier.length > 0 && (
+          <>
+            <h3 class="mt-10 mb-4 text-[15px] font-black text-ink-500 dark:text-ink-300">
+              {im.earlier}
+            </h3>
+            <div class="impact-grid impact-grid-wide">
+              {earlier.map((job, i) => (
+                <article class="ic" data-ic data-reveal style={`--d:${i * 80}ms`}>
+                  <div class="ic-sum" data-ic-sum>
+                    <h4>
+                      {job.role}{' '}
+                      <span class="font-normal text-ink-500 dark:text-ink-300">{t.at}</span>{' '}
+                      {job.company}
+                    </h4>
+                    <p class="text-sm font-bold text-ink-500 dark:text-ink-300">{job.period}</p>
+                    <p class="ic-line">{job.description[0]}</p>
+                  </div>
+                  <div class="ic-more" id={`ic-job-${i}`} hidden>
+                    <ul class="ic-list">
+                      {job.description.slice(1).map((d) => (
                         <li>{d}</li>
                       ))}
                     </ul>
-                  </details>
-                )}
-              </article>
-            ))
-          }
-        </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="ic-tog"
+                    aria-expanded="false"
+                    aria-controls={`ic-job-${i}`}
+                    data-ui-sound
+                  >
+                    <span>{im.details}</span>
+                    <i aria-hidden="true">+</i>
+                  </button>
+                </article>
+              ))}
+            </div>
+          </>
+        )
+      }
 
-        <h3 class="text-sm font-bold text-lava-600 dark:text-lava-400 mt-10 mb-4">
-          {data.cv.education.title}
-        </h3>
-        <div class="grid md:grid-cols-2 gap-5">
-          {
-            edu.map((e, i) => (
-              <article
-                data-reveal="left"
-                style={`--d:${i * 120}ms`}
-                class="relative rounded-2xl bg-white/80 dark:bg-ink-900/80 ring-1 ring-black/5 dark:ring-white/10 p-5 md:p-6"
-              >
-                {i === 0 && (
-                  <span
-                    class="absolute -left-[30px] md:-left-[38px] top-7 h-4 w-4 rounded-full bg-lava-400 ring-4 ring-sand-50 dark:ring-ink-950"
-                    aria-hidden="true"
-                  />
-                )}
-                <h4 class="text-lg font-black">{e.degree}</h4>
-                <p class="mt-1 text-sm font-bold text-lava-700 dark:text-lava-300">
-                  {e.institution}
-                </p>
-                <p class="text-sm text-ink-500 dark:text-ink-300">{e.period}</p>
-                <p class="mt-3 text-ink-700 dark:text-ink-200 leading-relaxed">{e.details}</p>
-              </article>
-            ))
-          }
-        </div>
+      <h3 class="mt-10 mb-4 text-[15px] font-black text-ink-500 dark:text-ink-300">
+        {data.cv.education.title}
+      </h3>
+      <div class="grid md:grid-cols-2 gap-4">
+        {
+          edu.map((e, i) => (
+            <article
+              data-reveal
+              style={`--d:${i * 120}ms`}
+              class="ic-edu rounded-2xl border border-sand-200 dark:border-ink-800 bg-white/70 dark:bg-ink-900/70 p-5 md:p-6"
+            >
+              <h4 class="text-lg font-black">{e.degree}</h4>
+              <p class="mt-1 text-sm font-bold text-lava-700 dark:text-lava-300">{e.institution}</p>
+              <p class="text-sm text-ink-500 dark:text-ink-300">{e.period}</p>
+              <p class="mt-3 text-ink-700 dark:text-ink-200 leading-relaxed">{e.details}</p>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -534,148 +616,98 @@ const hobbyIcons: string[] = [
       </div>
     </div>
   </section>
-  <!-- Projects -->
+  <!-- Projects: a polaroid wall. Pick one up and its story and stack fill the drawer. -->
   <section id="projects" class="relative px-4 py-8">
     <div class={`${panel} max-w-6xl mx-auto p-6 md:p-12`}>
       <div class="flex flex-wrap items-end justify-between gap-2">
-        <h2 class="text-4xl md:text-5xl font-black">{data.projects.title}</h2>
-        <p class="text-sm font-bold text-lava-600 dark:text-lava-400">
-          {fill(t.projectsCount, projects.length)}
-        </p>
+        <h2 class="home-title text-4xl md:text-5xl font-black" data-title>{data.projects.title}</h2>
+        <p class="text-sm font-bold text-ink-500 dark:text-ink-300">{t.projectsHint}</p>
       </div>
-      <div class="mt-10 space-y-14 md:space-y-16">
-        {
-          projects.map((p, i) => {
-            const img = 'image' in p ? (p.image as string) : undefined;
-            const size = img ? imageSize[img] : { w: 16, h: 10 };
-            const ratio = size.w / size.h;
-            const featured = i === 0;
-            // Square and tall images would tower over their text; logos get the smallest cap.
-            const capVh = p.name.startsWith('Cypher') ? 30 : ratio < 1.25 ? 46 : 70;
-            return (
-              <article
-                data-scroll="view"
-                data-project-sound={i}
-                class="home-prow grid md:grid-cols-2 gap-6 md:gap-10 items-center"
-              >
-                <a
-                  href={p.url}
-                  target="_blank"
-                  rel="noopener"
-                  class={`block ${i % 2 ? 'md:order-2' : ''}`}
-                  aria-label={p.name}
+      <div class="pw mt-8" data-polaroids>
+        <div class="pw-board">
+          {
+            projects.map((p, i) => {
+              const img = 'image' in p ? (p.image as string) : '';
+              const fit = polaroidFit[img] ?? { fit: 'cover', bg: '#eee' };
+              return (
+                <button
+                  type="button"
+                  class="pol"
+                  data-pol={i}
+                  data-project-sound={i}
+                  data-ui-sound
+                  aria-controls="pw-drawer"
+                  aria-pressed="false"
+                  style={`--r:${rots[i % rots.length]}deg;--d:${i * 70}ms`}
                 >
-                  <div
-                    class="home-shot relative mx-auto overflow-hidden rounded-3xl bg-white shadow-xl shadow-black/10"
-                    style={`aspect-ratio:${size.w}/${size.h};width:min(100%, calc(${capVh}vh * ${ratio.toFixed(4)}))`}
-                  >
-                    {img ? (
-                      <img
-                        src={img}
-                        alt={p.name}
-                        class="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div class="w-full h-full relative bg-gradient-to-br from-ink-900 via-ink-800 to-lava-800 grid place-items-center">
-                        <svg
-                          viewBox="0 0 160 100"
-                          class="absolute inset-0 w-full h-full"
-                          fill="none"
-                          aria-hidden="true"
-                        >
-                          <circle
-                            cx="80"
-                            cy="50"
-                            r="22"
-                            class="stroke-white/20"
-                            stroke-width="0.5"
-                          />
-                          <circle
-                            cx="80"
-                            cy="50"
-                            r="34"
-                            class="stroke-white/15"
-                            stroke-width="0.5"
-                          />
-                          <circle
-                            cx="80"
-                            cy="50"
-                            r="46"
-                            class="stroke-white/10"
-                            stroke-width="0.5"
-                          />
-                          <circle cx="102" cy="50" r="2.5" class="fill-lava-300" />
-                          <circle cx="56" cy="27" r="3.5" class="fill-lava-400" />
-                          <circle cx="120" cy="78" r="2" class="fill-white/70" />
-                        </svg>
-                        <span class="relative text-8xl font-black text-sand-200">{p.name[0]}</span>
-                      </div>
-                    )}
-                  </div>
-                </a>
-                <div class="home-ptext">
-                  {featured && (
-                    <p class="text-sm font-bold text-lava-600 dark:text-lava-400 mb-2">
-                      {t.featured}
-                    </p>
-                  )}
-                  <h3
-                    class={`${featured ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'} font-black`}
-                  >
-                    {p.name}
-                  </h3>
-                  <div class="project-meta-line">
-                    <p class="text-sm font-bold text-ink-500 dark:text-ink-300">{p.period}</p>
-                    <button
-                      type="button"
-                      class="project-sound-preview"
-                      data-project-sound-preview={i}
-                      aria-label={`${lang === 'es' ? 'Escuchar' : 'Listen to'} ${projectSounds[4][lang === 'es' ? 'es' : 'en']}`}
-                    >
-                      <>
-                        <SiteIcon name="sound" />
-                        <span>
-                          {String(i + 1).padStart(2, '0')} ·{' '}
-                          {projectSounds[4][lang === 'es' ? 'es' : 'en']}
-                        </span>
-                      </>
-                    </button>
-                  </div>
-                  <p
-                    class={`mt-3 text-ink-700 dark:text-ink-200 leading-relaxed ${featured ? '' : 'line-clamp-3'}`}
-                  >
-                    {p.description}
-                  </p>
-                  <div class="mt-4 flex flex-wrap gap-2">
-                    {p.tags.map((t) => (
-                      <span class="rounded-full bg-sand-100 dark:bg-ink-800 px-3 py-1 text-xs font-bold text-lava-800 dark:text-sand-200">
-                        {t}
-                      </span>
+                  <span class="pol-tape" aria-hidden="true" />
+                  <span class="pol-shot" style={`background:${fit.bg}`}>
+                    <img src={img} alt="" loading="lazy" style={`object-fit:${fit.fit}`} />
+                  </span>
+                  <span class="pol-cap">{p.name.replace(/\s+-\s+.*$/, '')}</span>
+                  <span class="pol-yr">{p.period.replace(/^.*?(\d{4}).*$/, '$1')}</span>
+                </button>
+              );
+            })
+          }
+        </div>
+        <aside class="pw-drawer" id="pw-drawer" aria-live="polite">
+          <div class="pw-empty" data-pd-empty>
+            <img src="/images/mascot/reclining.webp" alt="" loading="lazy" />
+            <p>{t.pickUp}</p>
+          </div>
+          {
+            projects.map((p, i) => {
+              const img = 'image' in p ? (p.image as string) : '';
+              const stack = projectStacks[img] ?? [];
+              return (
+                <div class="pd" data-pd={i} hidden>
+                  <h3>{p.name.replace(/\s+-\s+.*$/, '')}</h3>
+                  {img === '/images/pichola.png' && <span class="pd-award">★ {t.award}</span>}
+                  <div class="pd-tags">
+                    {p.tags.map((tag) => (
+                      <span class="tag">{tag}</span>
                     ))}
                   </div>
+                  <p class="pd-desc">{p.description}</p>
+                  {stack.length > 0 && (
+                    <div class="pd-stack">
+                      <h4>{t.builtWith}</h4>
+                      <ul>
+                        {stack.map((it, j) => (
+                          <li style={`--j:${j}`}>
+                            <span>
+                              <img src={it.src} alt="" loading="lazy" />
+                            </span>
+                            {it.name}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                   <a
                     href={p.url}
                     target="_blank"
                     rel="noopener"
-                    class="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-lava-700 dark:text-lava-300 hover:underline"
+                    class="btn-primary pd-go"
+                    data-ui-sound
                   >
-                    {t.viewProject}
+                    {t.openProject}
                     <svg
                       viewBox="0 0 24 24"
                       class="w-4 h-4"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2.5"
+                      stroke-width="2.2"
                     >
-                      <path d="M7 17 17 7M8 7h9v9" />
+                      <path d="M5 12h14m-6-6 6 6-6 6" />
                     </svg>
                   </a>
                 </div>
-              </article>
-            );
-          })
-        }
+              );
+            })
+          }
+        </aside>
       </div>
     </div>
   </section>
@@ -834,7 +866,8 @@ const hobbyIcons: string[] = [
     overflow-x: clip;
   }
   .home-bg {
-    filter: blur(calc(var(--page, 0) * 14px)) brightness(calc(1 - var(--page, 0) * 0.45));
+    filter: blur(calc(var(--page, 0) * 14px))
+      brightness(calc((1 - var(--page, 0) * 0.45) * var(--dim, 1)));
     transform: scale(calc(1.05 + var(--page, 0) * 0.1));
   }
   .home-progress {
@@ -943,18 +976,6 @@ const hobbyIcons: string[] = [
     transform: none;
   }
 
-  /* Projects */
-  .home-shot {
-    clip-path: inset(calc((1 - var(--p, 0)) * 18%) round 24px);
-  }
-  .home-shot img {
-    transform: scale(calc(1.25 - var(--p, 0) * 0.25));
-  }
-  .home-ptext {
-    opacity: clamp(0, var(--p, 0) * 1.6 - 0.3, 1);
-    transform: translateY(calc((1 - var(--p, 0)) * 48px));
-  }
-
   /* Reveal */
   [data-reveal] {
     opacity: 0;
@@ -984,7 +1005,6 @@ const hobbyIcons: string[] = [
   (function () {
     const root = document.querySelector('[data-home]');
     if (!root) return;
-    const fullscreen = document.documentElement.dataset.layout === 'fullscreen';
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const scrollEls = Array.from(root.querySelectorAll('[data-scroll]'));
     const header = root.querySelector('[data-home-header]');
@@ -992,6 +1012,7 @@ const hobbyIcons: string[] = [
     const badgeSection = root.querySelector('#skills');
     const badges = Array.from(root.querySelectorAll('[data-home-badge]'));
     const clamp = (v) => Math.min(1, Math.max(0, v));
+    const hero = root.querySelector('[data-home-hero]');
 
     function hash(n) {
       let x = Math.imul(n ^ 0x9e3779b9, 0x85ebca6b);
@@ -1034,6 +1055,7 @@ const hobbyIcons: string[] = [
       const mobile = window.innerWidth < 768;
       const max = document.documentElement.scrollHeight - ih;
       root.style.setProperty('--page', (max > 0 ? clamp(window.scrollY / max) : 0).toFixed(4));
+      if (hero) hero.style.setProperty('--hero', clamp(window.scrollY / (ih * 0.7)).toFixed(4));
       if (header) header.classList.toggle('is-scrolled', window.scrollY > 40);
       for (const el of scrollEls) {
         const r = el.getBoundingClientRect();
@@ -1089,21 +1111,6 @@ const hobbyIcons: string[] = [
       });
     }
     function refresh() {
-      if (fullscreen) {
-        root.querySelectorAll('.home-pin').forEach((section) => {
-          section.classList.remove('is-flow');
-          const viewport = section.firstElementChild;
-          const content = viewport?.firstElementChild;
-          if (!viewport || !content) return;
-          const style = getComputedStyle(viewport);
-          const available =
-            window.innerHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
-          section.classList.toggle(
-            'is-flow',
-            window.innerWidth < 768 || content.offsetHeight > available
-          );
-        });
-      }
       layoutSkills();
       schedule();
     }
@@ -1137,5 +1144,196 @@ const hobbyIcons: string[] = [
     }
     if (document.readyState === 'complete') settleOnLoad();
     else window.addEventListener('load', settleOnLoad);
+  })();
+</script>
+
+<script is:inline>
+  // Playful layer: stars, typing, the runner on the trail, swashes under titles, counting numbers,
+  // impact cards that open in place, and the polaroid wall.
+  (function () {
+    const root = document.querySelector('[data-home]');
+    if (!root) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const seen = (els, cb, opts) => {
+      if (!('IntersectionObserver' in window) || reduce) {
+        els.forEach((el) => cb(el));
+        return;
+      }
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              cb(e.target);
+              io.unobserve(e.target);
+            }
+          });
+        },
+        opts || { threshold: 0.35 }
+      );
+      els.forEach((el) => io.observe(el));
+    };
+
+    // Stars over the lake at night.
+    const stars = root.querySelector('[data-home-stars]');
+    if (stars) {
+      for (let k = 0; k < 60; k++) {
+        const s = document.createElement('i');
+        s.style.left = Math.random() * 100 + '%';
+        s.style.top = Math.random() * 100 + '%';
+        s.style.animationDelay = Math.random() * 3 + 's';
+        stars.appendChild(s);
+      }
+    }
+
+    // return leon; types itself.
+    const typed = root.querySelector('[data-home-typed]');
+    if (typed && !reduce) {
+      const text = typed.textContent || '';
+      typed.textContent = '';
+      let n = 0;
+      const step = () => {
+        typed.textContent = text.slice(0, ++n);
+        if (n < text.length) setTimeout(step, 80 + Math.random() * 70);
+      };
+      setTimeout(step, 450);
+    }
+
+    // The runner: a path laid over the painted trail, recomputed for how the picture is cropped.
+    const runner = root.querySelector('[data-home-runner]');
+    const IW = 2400;
+    const IH = 1695;
+    const TRAIL = [
+      [0.171, 0.852],
+      [0.185, 0.897],
+      [0.204, 0.944],
+      [0.238, 1.015],
+      [0.276, 1.1],
+      [0.29, 1.16],
+    ];
+    function placeRunner() {
+      if (!runner || reduce) return;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const s = Math.max(vw / IW, vh / IH);
+      const w = IW * s;
+      const h = IH * s;
+      const ox = (vw - w) * (vw <= 700 ? 0.24 : 0.5);
+      const oy = vh - h;
+      const p = TRAIL.map(([x, y]) => [(ox + x * w).toFixed(1), (oy + y * h).toFixed(1)]);
+      runner.style.offsetPath = `path("M ${p[0][0]} ${p[0][1]} C ${p[1][0]} ${p[1][1]}, ${p[2][0]} ${p[2][1]}, ${p[3][0]} ${p[3][1]} S ${p[4][0]} ${p[4][1]}, ${p[5][0]} ${p[5][1]}")`;
+      runner.style.setProperty('--runner', Math.max(90, (150 * w) / 1200).toFixed(0) + 'px');
+      runner.classList.add('is-running');
+    }
+    placeRunner();
+    window.addEventListener('resize', placeRunner, { passive: true });
+
+    // Swashes draw in under section titles.
+    seen(Array.from(root.querySelectorAll('[data-title]')), (el) => el.classList.add('is-in'), {
+      threshold: 0.6,
+    });
+
+    // Numbers count up the first time they are seen.
+    const counters = Array.from(root.querySelectorAll('[data-count]'));
+    const parts = (v) => v.match(/^([^0-9]*)([0-9]+)(.*)$/);
+    if (!reduce)
+      counters.forEach((el) => {
+        const m = parts(el.dataset.count || '');
+        if (m) el.textContent = m[1] + '0' + m[3];
+      });
+    seen(counters, (el) => {
+      const m = parts(el.dataset.count || '');
+      if (!m || reduce) {
+        el.textContent = el.dataset.count || '';
+        return;
+      }
+      const end = Number(m[2]);
+      const t0 = performance.now();
+      el.classList.add('is-counting');
+      const tick = (now) => {
+        const k = Math.min(1, (now - t0) / 1300);
+        const eased = 1 - Math.pow(1 - k, 3);
+        el.textContent = m[1] + Math.round(end * eased) + m[3];
+        if (k < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+
+    // Impact cards open in place, one at a time.
+    const cards = Array.from(root.querySelectorAll('[data-ic]'));
+    cards.forEach((c, i) => (c.style.viewTransitionName = 'ic-' + i));
+    const swap = (fn) =>
+      document.startViewTransition && !reduce ? document.startViewTransition(fn) : fn();
+    function setOpen(c, on) {
+      c.classList.toggle('is-open', on);
+      const more = c.querySelector('.ic-more');
+      if (more) more.hidden = !on;
+      const tog = c.querySelector('.ic-tog');
+      if (!tog) return;
+      tog.setAttribute('aria-expanded', String(on));
+      const label = tog.querySelector('span');
+      if (label) label.textContent = on ? tog.dataset.close : tog.dataset.open;
+    }
+    cards.forEach((c) => {
+      const tog = c.querySelector('.ic-tog');
+      if (tog) {
+        tog.dataset.open = tog.querySelector('span')?.textContent || '';
+        tog.dataset.close = document.documentElement.lang === 'es' ? 'Cerrar' : 'Close';
+      }
+      const go = () => {
+        const on = !c.classList.contains('is-open');
+        const t = swap(() => {
+          cards.forEach((x) => x !== c && x.classList.contains('is-open') && setOpen(x, false));
+          setOpen(c, on);
+        });
+        const after = () => {
+          const r = c.getBoundingClientRect();
+          if (on && (r.top < 80 || r.top > window.innerHeight - 120))
+            c.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+        };
+        if (t && t.finished) t.finished.then(after);
+        else after();
+      };
+      tog?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        go();
+      });
+      c.querySelector('[data-ic-sum]')?.addEventListener('click', go);
+    });
+
+    // Polaroid wall: drop in, tilt towards the cursor, pick one up to fill the drawer.
+    const wall = root.querySelector('[data-polaroids]');
+    if (wall) {
+      seen([wall], (el) => el.classList.add('is-in'), { threshold: 0.15 });
+      const pols = Array.from(wall.querySelectorAll('[data-pol]'));
+      const panes = Array.from(wall.querySelectorAll('[data-pd]'));
+      const empty = wall.querySelector('[data-pd-empty]');
+      const drawer = wall.querySelector('.pw-drawer');
+      const show = (i, fromTap) => {
+        pols.forEach((p) => p.setAttribute('aria-pressed', String(p.dataset.pol === String(i))));
+        panes.forEach((p) => (p.hidden = p.dataset.pd !== String(i)));
+        if (empty) empty.hidden = true;
+        if (fromTap && drawer && window.innerWidth <= 960) {
+          drawer.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' });
+        }
+      };
+      const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      pols.forEach((p) => {
+        p.addEventListener('click', () => show(p.dataset.pol, true));
+        if (!fine) return;
+        p.addEventListener('mouseenter', () => show(p.dataset.pol, false));
+        if (reduce) return;
+        p.addEventListener('mousemove', (e) => {
+          const r = p.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          p.style.setProperty('--tx', (x * 14).toFixed(2) + 'deg');
+          p.style.setProperty('--ty', (-y * 14).toFixed(2) + 'deg');
+        });
+        p.addEventListener('mouseleave', () => {
+          p.style.removeProperty('--tx');
+          p.style.removeProperty('--ty');
+        });
+      });
+    }
   })();
 </script>

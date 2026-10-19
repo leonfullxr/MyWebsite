@@ -17,7 +17,11 @@
     "name": "Leon Elliott Fuller",
     "tagline": "Computer Engineering · Security Engineer · Cybersecurity · Software Engineer",
     "description": "Security engineer at Wazuh. I graduated in computer engineering from the University of Granada and studied one year at AGH Krakow through Erasmus+. I build systems, learn new tools, and take on hard problems.",
-    "cta": "Get to know me"
+    "cta": "Get to know me",
+    "line1": "Security engineer.",
+    "line2": "Ultramarathon runner.",
+    "lead": "Detection engineering at Wazuh by day, long mountain miles around Granada by weekend.",
+    "chip": "Running ultras for fun, not for podiums"
   },
   "about": {
     "title": "About me",
@@ -214,7 +218,7 @@
         "url": "https://github.com/leonfullxr/Cypher",
         "period": "2024",
         "description": "Encrypted chat app with end-to-end encryption, real-time messaging, and no metadata storage. It uses TLS, Signal-style protocols, and AES. Users stay anonymous by design.",
-        "tags": ["Cybersecurity", "Web App", "C++"],
+        "tags": ["Cybersecurity", "Web App", "JavaScript"],
         "image": "/images/cypher_logo.png"
       },
       {
@@ -302,6 +306,125 @@
     "profileAlt": "Leon running under a red arch",
     "footerCta": "Let's build something.",
     "toggleTheme": "Toggle theme",
-    "menu": "Menu"
+    "menu": "Menu",
+    "builtWith": "Built with",
+    "pickUp": "Pick up a photo to read about it.",
+    "openProject": "Open project",
+    "award": "Best Art · 48h jam",
+    "projectsHint": "Hover or tap a photo"
+  },
+  "impact": {
+    "details": "Details",
+    "close": "Close",
+    "earlier": "Earlier",
+    "stats": [
+      {
+        "k": "events",
+        "num": "250B+",
+        "label": "events through tuned pipelines",
+        "summary": "Tuned every stage between the agent and the index so bursts never drop events.",
+        "full": 1
+      },
+      {
+        "k": "cost",
+        "num": "−20%",
+        "label": "cloud cost",
+        "summary": "Up to a fifth off the AWS EKS bill without losing indexing throughput.",
+        "full": 2
+      },
+      {
+        "k": "platforms",
+        "num": "10",
+        "label": "platforms integrated",
+        "summary": "Rules, decoders and connectors shipped in the public Wazuh integrations repository."
+      },
+      {
+        "k": "frameworks",
+        "num": "6",
+        "label": "compliance frameworks",
+        "summary": "SCA baselines and controls mapped per agent group."
+      }
+    ],
+    "pipeline": [
+      "Agents",
+      "analysisd queues",
+      "Decoders & rules",
+      "Filebeat batches",
+      "OpenSearch index"
+    ],
+    "levers": [
+      ["Right-sizing", "instance types to the real load"],
+      ["ARM → AMD", "for indexing-heavy pods"],
+      ["ISM tiering", "of old indices to warm and cold S3"]
+    ],
+    "frameworks": [
+      ["PCI-DSS", "Payment Card Industry Data Security Standard"],
+      ["CJIS", "Criminal Justice Information Services"],
+      ["ISO 27001", "Information security management"],
+      ["HIPAA", "US health data privacy and security"],
+      ["GDPR", "EU General Data Protection Regulation"],
+      ["NIST", "NIST Cybersecurity Framework"]
+    ],
+    "themes": [
+      {
+        "k": "arch",
+        "icon": "layers",
+        "title": "Cluster architecture",
+        "line": "Multi-node Wazuh + OpenSearch clusters on AWS EKS, Google Cloud, Azure AKS and Proxmox — replicas across zones, instant agent failover.",
+        "full": 0,
+        "logos": "clusters"
+      },
+      {
+        "k": "ingest",
+        "icon": "gauge",
+        "title": "Ingestion tuning",
+        "line": "Tuned queues, worker threads and index buffers so traffic bursts never drop agent events.",
+        "full": 1
+      },
+      {
+        "k": "cost",
+        "icon": "down",
+        "title": "Cloud cost",
+        "line": "Right-sized instances, moved indexing from ARM to AMD, and tiered old indices to warm/cold S3.",
+        "full": 2
+      },
+      {
+        "k": "incident",
+        "icon": "buoy",
+        "title": "Incident recovery",
+        "line": "Brought enterprise clusters back from disk pressure, split-brain and ingestion stalls.",
+        "full": 3
+      },
+      {
+        "k": "gitops",
+        "icon": "branch",
+        "title": "GitOps & observability",
+        "line": "Declarative EKS deploys that roll back on SLO breach; Prometheus and Grafana on every queue.",
+        "full": 4
+      },
+      {
+        "k": "integ",
+        "icon": "plug",
+        "title": "Integrations",
+        "line": "Core maintainer of the public integrations repo: rules, decoders and connectors for 10 platforms.",
+        "full": 5,
+        "logos": "platforms"
+      },
+      {
+        "k": "play",
+        "icon": "zap",
+        "title": "Response playbooks",
+        "line": "Correlation, enrichment and active response with circuit breakers — automation without alert storms.",
+        "full": 6
+      },
+      {
+        "k": "comp",
+        "icon": "shield",
+        "title": "Compliance",
+        "line": "SCA baselines mapped to PCI-DSS, CJIS, ISO 27001, HIPAA, GDPR and NIST; TLS syslog into air-gapped VPCs; least-privilege RBAC.",
+        "full": 7,
+        "logos": "frameworks"
+      }
+    ]
   }
 }

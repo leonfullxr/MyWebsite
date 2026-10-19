@@ -8,10 +8,14 @@ const { lang, home = false } = Astro.props;
 
 <a
   class="site-brand"
-  href={home ? '#' : `/${lang}/`}
+  href={home ? '#top' : `/${lang}/`}
   aria-label="Leon Elliott Fuller"
   data-ui-sound
 >
-  <span aria-hidden="true">Leon</span><span class="site-brand-initial" aria-hidden="true">E.</span
-  ><span aria-hidden="true">Fuller</span>
+  <span class="site-avatar" aria-hidden="true"
+    ><img src="/images/mascot/head.webp" alt="" width="40" height="40" /></span
+  >
+  <span class="site-wordmark" aria-hidden="true"
+    ><span class="kw">return</span> leon<span class="semi">;</span></span
+  >
 </a>

@@ -17,7 +17,11 @@
     "name": "Leon Elliott Fuller",
     "tagline": "Ingeniería Informática · Ingeniero de Seguridad · Ciberseguridad · Ingeniero Software",
     "description": "Ingeniero de seguridad en Wazuh. Me gradué en Ingeniería Informática en la Universidad de Granada y cursé un año Erasmus+ en AGH Cracovia. Construyo sistemas, aprendo herramientas nuevas y asumo retos difíciles.",
-    "cta": "Conóceme"
+    "cta": "Conóceme",
+    "line1": "Ingeniero de seguridad.",
+    "line2": "Corredor de ultras.",
+    "lead": "Ingeniería de detección en Wazuh entre semana; kilómetros de montaña por Granada el fin de semana.",
+    "chip": "Corro ultras por diversión, no por podios"
   },
   "about": {
     "title": "Sobre mí",
@@ -214,7 +218,7 @@
         "url": "https://github.com/leonfullxr/Cypher",
         "period": "2024",
         "description": "Aplicación de chat encriptada con cifrado de extremo a extremo, mensajería en tiempo real, sin almacenamiento de metadatos y protocolos avanzados como TLS y Signal. Usa cifrado AES y garantiza anonimato completo.",
-        "tags": ["Ciberseguridad", "Web App", "C++"],
+        "tags": ["Ciberseguridad", "Web App", "JavaScript"],
         "image": "/images/cypher_logo.png"
       },
       {
@@ -302,6 +306,125 @@
     "profileAlt": "Leon corriendo bajo un arco rojo",
     "footerCta": "Construyamos algo.",
     "toggleTheme": "Cambiar tema",
-    "menu": "Menú"
+    "menu": "Menú",
+    "builtWith": "Hecho con",
+    "pickUp": "Coge una foto para leer sobre ella.",
+    "openProject": "Abrir proyecto",
+    "award": "Mejor arte · jam de 48h",
+    "projectsHint": "Pasa el ratón o toca una foto"
+  },
+  "impact": {
+    "details": "Detalles",
+    "close": "Cerrar",
+    "earlier": "Antes",
+    "stats": [
+      {
+        "k": "events",
+        "num": "250B+",
+        "label": "eventos en pipelines ajustados",
+        "summary": "Ajusté cada etapa entre el agente y el índice para que los picos no pierdan eventos.",
+        "full": 1
+      },
+      {
+        "k": "cost",
+        "num": "−20%",
+        "label": "coste en la nube",
+        "summary": "Hasta una quinta parte menos en la factura de AWS EKS sin perder rendimiento de indexación.",
+        "full": 2
+      },
+      {
+        "k": "platforms",
+        "num": "10",
+        "label": "plataformas integradas",
+        "summary": "Reglas, decoders y conectores publicados en el repositorio público de integraciones de Wazuh."
+      },
+      {
+        "k": "frameworks",
+        "num": "6",
+        "label": "marcos de cumplimiento",
+        "summary": "Baselines SCA y controles asignados por grupo de agentes."
+      }
+    ],
+    "pipeline": [
+      "Agentes",
+      "Colas de analysisd",
+      "Decoders y reglas",
+      "Lotes de Filebeat",
+      "Índice de OpenSearch"
+    ],
+    "levers": [
+      ["Right-sizing", "de instancias a la carga real"],
+      ["ARM → AMD", "para los pods de indexación"],
+      ["Políticas ISM", "que mueven índices antiguos a S3 warm y cold"]
+    ],
+    "frameworks": [
+      ["PCI-DSS", "Estándar de seguridad de datos de tarjetas de pago"],
+      ["CJIS", "Servicios de Información de Justicia Criminal (EE. UU.)"],
+      ["ISO 27001", "Gestión de la seguridad de la información"],
+      ["HIPAA", "Privacidad y seguridad de datos de salud (EE. UU.)"],
+      ["GDPR", "Reglamento General de Protección de Datos (UE)"],
+      ["NIST", "Marco de Ciberseguridad del NIST"]
+    ],
+    "themes": [
+      {
+        "k": "arch",
+        "icon": "layers",
+        "title": "Arquitectura de clústeres",
+        "line": "Clústeres multi-nodo de Wazuh + OpenSearch en AWS EKS, Google Cloud, Azure AKS y Proxmox, con réplicas entre zonas y failover inmediato de agentes.",
+        "full": 0,
+        "logos": "clusters"
+      },
+      {
+        "k": "ingest",
+        "icon": "gauge",
+        "title": "Ajuste de ingesta",
+        "line": "Colas, hilos y buffers ajustados para que los picos de tráfico nunca pierdan eventos.",
+        "full": 1
+      },
+      {
+        "k": "cost",
+        "icon": "down",
+        "title": "Coste en la nube",
+        "line": "Right-sizing de instancias, indexación de ARM a AMD e índices antiguos movidos a S3 warm/cold.",
+        "full": 2
+      },
+      {
+        "k": "incident",
+        "icon": "buoy",
+        "title": "Recuperación de incidentes",
+        "line": "Clústeres empresariales recuperados de presión de disco, split-brain y atascos de ingesta.",
+        "full": 3
+      },
+      {
+        "k": "gitops",
+        "icon": "branch",
+        "title": "GitOps y observabilidad",
+        "line": "Despliegues declarativos en EKS que hacen rollback al romper un SLO; Prometheus y Grafana en cada cola.",
+        "full": 4
+      },
+      {
+        "k": "integ",
+        "icon": "plug",
+        "title": "Integraciones",
+        "line": "Mantenedor principal del repositorio público de integraciones: reglas, decoders y conectores para 10 plataformas.",
+        "full": 5,
+        "logos": "platforms"
+      },
+      {
+        "k": "play",
+        "icon": "zap",
+        "title": "Playbooks de respuesta",
+        "line": "Correlación, enriquecimiento y respuesta activa con circuit breakers: automatización sin tormentas de alertas.",
+        "full": 6
+      },
+      {
+        "k": "comp",
+        "icon": "shield",
+        "title": "Cumplimiento",
+        "line": "Baselines SCA alineados con PCI-DSS, CJIS, ISO 27001, HIPAA, GDPR y NIST; syslog TLS en VPCs aisladas; RBAC de mínimo privilegio.",
+        "full": 7,
+        "logos": "frameworks"
+      }
+    ]
   }
 }

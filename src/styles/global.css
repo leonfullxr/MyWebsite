@@ -64,12 +64,53 @@
     @apply border-ink-600 shadow-lg shadow-black/20;
   }
 
+  /* Tags: Lato bold pills, sentence case. */
   .tag {
-    @apply inline-block text-xs font-mono px-2.5 py-1 rounded-full bg-sand-200/80 text-lava-700 transition-colors;
+    @apply inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full bg-sand-200 text-ink-800 transition-colors;
   }
 
   .dark .tag {
-    @apply bg-ink-800 text-lava-300;
+    @apply bg-ink-800 text-sand-100;
+  }
+
+  /* Links carry an arrow: → stays on the site, ↗ leaves it. The no-break space keeps the arrow
+     on the same line as the last word. */
+  .link {
+    @apply font-bold text-lava-700 dark:text-lava-300 underline decoration-2 underline-offset-4 decoration-lava-400/60 hover:decoration-lava-500 transition-colors;
+  }
+  .link::after,
+  .prose-blog a:not(:has(img))::after {
+    content: '\00a0→';
+    position: relative;
+    left: 0;
+    top: 0;
+    transition:
+      left 0.25s cubic-bezier(0.5, 1.6, 0.4, 1),
+      top 0.25s cubic-bezier(0.5, 1.6, 0.4, 1);
+  }
+  .link[data-ext]::after,
+  .prose-blog a[href^='http']:not(:has(img))::after {
+    content: '\00a0↗';
+  }
+  .link:hover::after,
+  .prose-blog a:not(:has(img)):hover::after {
+    left: 4px;
+  }
+  .link[data-ext]:hover::after,
+  .prose-blog a[href^='http']:not(:has(img)):hover::after {
+    left: 3px;
+    top: -3px;
+  }
+
+  /* Primary pill button with a trailing arrow that nudges forward. */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-full bg-ink-900 text-white dark:bg-sand-50 dark:text-ink-950 px-5 py-2.5 text-sm font-bold transition-colors hover:bg-lava-600 dark:hover:bg-lava-300;
+  }
+  .btn-primary svg {
+    transition: transform 0.25s cubic-bezier(0.5, 1.6, 0.4, 1);
+  }
+  .btn-primary:hover svg {
+    transform: translateX(3px);
   }
 
   /* Hero banner */
@@ -180,7 +221,7 @@
   }
 
   .prose-blog a {
-    @apply text-lava-600 dark:text-lava-400 underline underline-offset-2 hover:text-lava-800 dark:hover:text-sand-200 transition-colors;
+    @apply text-lava-700 dark:text-lava-300 font-bold underline decoration-2 underline-offset-4 decoration-lava-400/60 hover:decoration-lava-500 transition-colors;
   }
 
   .prose-blog blockquote {
@@ -211,7 +252,7 @@
   }
 
   .code-block-lang {
-    @apply text-xs font-mono uppercase tracking-wider text-ink-400 dark:text-lava-500;
+    @apply text-xs font-bold text-ink-500 dark:text-ink-300;
   }
 
   .prose-blog pre {
