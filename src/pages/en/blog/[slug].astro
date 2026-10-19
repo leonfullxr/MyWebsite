@@ -79,7 +79,7 @@ const lang = 'en';
     <article class="max-w-3xl mx-auto px-6">
       <a
         href={`/${lang}/#blog`}
-        class="inline-flex items-center gap-2 text-sm font-mono text-sand-500 hover:text-sand-700 dark:hover:text-sand-300 mb-8 transition-colors"
+        class="inline-flex items-center gap-2 text-sm font-mono text-lava-500 hover:text-lava-700 dark:hover:text-lava-300 mb-8 transition-colors"
       >
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
           ><path
@@ -91,7 +91,7 @@ const lang = 'en';
         Back
       </a>
       <header class="mb-10">
-        <p class="font-mono text-sm text-sand-500 mb-3">{date}</p>
+        <p class="font-mono text-sm text-lava-500 mb-3">{date}</p>
         <h1 class="font-display text-4xl md:text-5xl italic tracking-tight">{title}</h1>
       </header>
       {
@@ -102,7 +102,7 @@ const lang = 'en';
               {headings.map((h) => (
                 <li>
                   <a
-                    class="text-ink-500 dark:text-sand-400 hover:text-ink-800 dark:hover:text-sand-200 transition-colors"
+                    class="text-ink-500 dark:text-lava-400 hover:text-ink-800 dark:hover:text-sand-200 transition-colors"
                     href={`#${slugify(h)}`}
                   >
                     {h}
