@@ -1,10 +1,80 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@config "../../tailwind.config.mjs";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme static {
+  --font-sans: Lato, system-ui, sans-serif;
+  --font-display: Lato, system-ui, sans-serif;
+  --font-body: Lato, system-ui, sans-serif;
+  --font-mono: Lato, system-ui, sans-serif;
+
+  --color-sand-50: #f5f6f8;
+  --color-sand-100: #eceff2;
+  --color-sand-200: #dde3e9;
+  --color-sand-300: #c5d0d8;
+  --color-sand-400: #9fb0be;
+  --color-sand-500: #7d8fa0;
+  --color-sand-600: #5f7182;
+  --color-sand-700: #475666;
+  --color-sand-800: #33404d;
+  --color-sand-900: #222c36;
+  --color-sand-950: #141b22;
+
+  --color-ink-50: #f4f6f9;
+  --color-ink-100: #e4e9ef;
+  --color-ink-200: #c9d2dc;
+  --color-ink-300: #9aa7b6;
+  --color-ink-400: #7a8799;
+  --color-ink-500: #5b6878;
+  --color-ink-600: #465364;
+  --color-ink-700: #354152;
+  --color-ink-800: #222c3a;
+  --color-ink-900: #121a24;
+  --color-ink-950: #0b1016;
+
+  --color-lava-50: #fff1f3;
+  --color-lava-100: #ffe1e7;
+  --color-lava-200: #ffc4cf;
+  --color-lava-300: #ff8fa3;
+  --color-lava-400: #ff6b86;
+  --color-lava-500: #ef3b62;
+  --color-lava-600: #c92a4f;
+  --color-lava-700: #a8213f;
+  --color-lava-800: #7f1931;
+  --color-lava-900: #561022;
+
+  --color-amber-300: #ffd27a;
+  --color-amber-400: #ffb53d;
+  --color-amber-500: #f59e0b;
+
+  --color-emerald-100: #d1fae5;
+  --color-emerald-200: #a7f3d0;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-emerald-700: #047857;
+  --color-emerald-800: #065f46;
+  --color-emerald-900: #064e3b;
+
+  --color-gray-200: #e5e7eb;
+}
 
 @layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
@@ -49,7 +119,7 @@
   }
 
   .card {
-    @apply bg-white/60 backdrop-blur-sm border border-sand-200 rounded-2xl p-6 md:p-8 transition-all duration-300;
+    @apply bg-white/60 backdrop-blur-xs border border-sand-200 rounded-2xl p-6 md:p-8 transition-all duration-300;
   }
 
   .dark .card {
@@ -233,7 +303,7 @@
   }
 
   .prose-blog :not(pre) > code {
-    @apply text-[0.875em] bg-sand-200 text-ink-800 px-1.5 py-0.5 rounded;
+    @apply text-[0.875em] bg-sand-200 text-ink-800 px-1.5 py-0.5 rounded-sm;
     font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     font-variant-ligatures: none;
   }
@@ -244,7 +314,7 @@
 
   /* Code blocks. Page background is sand-50 / ink-950, so the block needs its own surface. */
   .code-block {
-    @apply my-6 rounded-xl border border-sand-300 dark:border-ink-700 overflow-hidden bg-white dark:bg-[#222] shadow-sm shadow-sand-300/40 dark:shadow-none;
+    @apply my-6 rounded-xl border border-sand-300 dark:border-ink-700 overflow-hidden bg-white dark:bg-[#222] shadow-xs shadow-sand-300/40 dark:shadow-none;
   }
 
   .code-block-header {
@@ -261,11 +331,11 @@
     font-variant-ligatures: none;
     tab-size: 2;
     scrollbar-width: thin;
-    scrollbar-color: theme('colors.sand.300') transparent;
+    scrollbar-color: var(--color-sand-300) transparent;
   }
 
   .dark .prose-blog pre {
-    scrollbar-color: theme('colors.ink.600') transparent;
+    scrollbar-color: var(--color-ink-600) transparent;
   }
 
   .prose-blog pre code,
@@ -285,7 +355,7 @@
 
   /* Back to top */
   .back-to-top {
-    @apply fixed bottom-6 right-6 z-50 p-3 rounded-full border border-sand-300 dark:border-ink-700 bg-sand-50/90 dark:bg-ink-900/90 text-ink-600 dark:text-lava-300 shadow-lg backdrop-blur-sm transition-all duration-300 opacity-0 translate-y-4 pointer-events-none invisible hover:bg-sand-200 dark:hover:bg-ink-800 cursor-pointer;
+    @apply fixed bottom-6 right-6 z-50 p-3 rounded-full border border-sand-300 dark:border-ink-700 bg-sand-50/90 dark:bg-ink-900/90 text-ink-600 dark:text-lava-300 shadow-lg backdrop-blur-xs transition-all duration-300 opacity-0 translate-y-4 pointer-events-none invisible hover:bg-sand-200 dark:hover:bg-ink-800 cursor-pointer;
   }
 
   .back-to-top.visible {
