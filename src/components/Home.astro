@@ -146,9 +146,6 @@ const hobbyIcons: string[] = [
   >
     <div class="home-hero-shade absolute inset-0 pointer-events-none" aria-hidden="true"></div>
     <div class="home-hero-copy relative z-[2] px-5 pt-[12vh] md:pt-[13vh]">
-      <p class="home-typed font-body text-base md:text-lg font-medium text-sand-100">
-        <span data-home-typed>return leon;</span><span class="home-caret" aria-hidden="true"></span>
-      </p>
       <p class="mt-3 text-lg md:text-xl font-bold text-white/90">
         {data.hero.greeting}{' '}
         <span class="text-white">{data.hero.name}</span>
@@ -1148,7 +1145,7 @@ const hobbyIcons: string[] = [
 </script>
 
 <script is:inline>
-  // Playful layer: stars, typing, the runner on the trail, swashes under titles, counting numbers,
+  // Playful layer: stars, the runner on the trail, swashes under titles, counting numbers,
   // impact cards that open in place, and the polaroid wall.
   (function () {
     const root = document.querySelector('[data-home]');
@@ -1183,19 +1180,6 @@ const hobbyIcons: string[] = [
         s.style.animationDelay = Math.random() * 3 + 's';
         stars.appendChild(s);
       }
-    }
-
-    // return leon; types itself.
-    const typed = root.querySelector('[data-home-typed]');
-    if (typed && !reduce) {
-      const text = typed.textContent || '';
-      typed.textContent = '';
-      let n = 0;
-      const step = () => {
-        typed.textContent = text.slice(0, ++n);
-        if (n < text.length) setTimeout(step, 80 + Math.random() * 70);
-      };
-      setTimeout(step, 450);
     }
 
     // The runner: a path laid over the painted trail, recomputed for how the picture is cropped.
