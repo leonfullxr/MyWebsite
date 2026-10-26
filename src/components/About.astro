@@ -18,12 +18,6 @@ const pins = [
   { name: a.pins[0], lon: -3.6, lat: 37.18 },
   { name: a.pins[1], lon: 19.94, lat: 50.06 },
 ];
-const nodes = [
-  { x: 280, y: 52 },
-  { x: 486, y: 200 },
-  { x: 280, y: 348 },
-  { x: 74, y: 200 },
-];
 const check =
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>';
 ---
@@ -126,11 +120,54 @@ const check =
         </div>
         <p class="ab-track-out" aria-live="polite">
           <b data-dist>60 km</b>
-          <span data-zone data-road={f.ultra.road} data-ultra-label={f.ultra.ultra}
-            >{f.ultra.ultra}</span
+          <span
+            data-zone
+            data-road={f.ultra.road}
+            data-ultra-label={f.ultra.ultra}
+            data-pb={f.race.pb}
+            data-pbs={JSON.stringify(f.race.rows.map((r) => [r.km, r.time]))}>{f.ultra.ultra}</span
           >
         </p>
       </div>
+    </article>
+
+    <article class="tile t-race" data-race data-reveal>
+      <svg class="t-trophy" viewBox="0 0 64 64" aria-hidden="true"
+        ><path class="cup" d="M18 8h28v14a14 14 0 0 1-28 0z"></path><path
+          class="arm"
+          d="M18 12H9v4a9 9 0 0 0 9 9M46 12h9v4a9 9 0 0 1-9 9"></path><path
+          class="cup"
+          d="M28 35h8v9h-8zM20 52a12 6 0 0 1 24 0v4H20z"></path><path class="shine" d="M24 13v8"
+        ></path></svg
+      >
+      <h3>{f.race.title}</h3>
+      <p class="t-text">{f.race.text}</p>
+      <table class="t-pb">
+        <thead>
+          <tr><th>{f.race.dist}</th><th>{f.race.time}</th><th>{f.race.pace}</th></tr>
+        </thead>
+        <tbody>
+          {
+            f.race.rows.map((r) => {
+              const pace = r.secs / r.km;
+              const mm = Math.floor(pace / 60);
+              const ss = String(Math.round(pace % 60)).padStart(2, '0');
+              return (
+                <tr>
+                  <td>{r.dist}</td>
+                  <td>
+                    <b>{r.time}</b>
+                  </td>
+                  <td>
+                    {mm}:{ss}
+                    <small>{f.race.unit}</small>
+                  </td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
     </article>
 
     <article class="tile t-jam" data-jam data-reveal>
@@ -204,75 +241,6 @@ const check =
         <a class="ab-btn" href={f.aoc.url} target="_blank" rel="noopener" data-ui-sound
           >{f.aoc.link}&nbsp;↗</a
         >
-      </div>
-    </article>
-
-    <article class="tile t-work" data-graph data-reveal>
-      <img class="t-peek t-peek-work" src="/images/mascot/reclining.webp" alt="" />
-      <div class="t-work-head">
-        <h2>{a.values.title}</h2>
-        <p class="t-text t-left">{a.values.lead}</p>
-      </div>
-      <div class="ab-graph">
-        <div class="ab-graph-map">
-          <svg viewBox="0 0 560 400" aria-hidden="true">
-            <g class="ab-ring">
-              {
-                nodes.map((n, i) => {
-                  const m = nodes[(i + 1) % nodes.length];
-                  return <line x1={n.x} y1={n.y} x2={m.x} y2={m.y} />;
-                })
-              }
-            </g>
-            {
-              nodes.map((n, i) => (
-                <g class="ab-edge" data-edge={i}>
-                  <line x1="280" y1="200" x2={n.x} y2={n.y} />
-                  <circle r="4">
-                    <animateMotion
-                      dur={`${2.2 + i * 0.35}s`}
-                      repeatCount="indefinite"
-                      path={`M280 200 L${n.x} ${n.y}`}
-                    />
-                  </circle>
-                </g>
-              ))
-            }
-          </svg>
-          <span class="ab-graph-core" aria-hidden="true">
-            <img src="/images/mascot/head.webp" alt="" width="64" height="64" />
-            <b>{a.values.center}</b>
-          </span>
-          {
-            nodes.map((n, i) => (
-              <button
-                type="button"
-                class:list={['ab-node', { 'is-on': i === 0 }]}
-                style={`left:${(n.x / 560) * 100}%;top:${(n.y / 400) * 100}%`}
-                aria-pressed={i === 0 ? 'true' : 'false'}
-                data-node={i}
-                data-ui-sound
-              >
-                <span class="ab-node-num">{String(i + 1).padStart(2, '0')}</span>
-                {a.values.items[i].short}
-              </button>
-            ))
-          }
-        </div>
-        <div class="ab-graph-panel" aria-live="polite">
-          {
-            a.values.items.map((v, i) => (
-              <article class="ab-graph-card" data-card={i} hidden={i !== 0}>
-                <span class="ab-num">{String(i + 1).padStart(2, '0')}</span>
-                <h3>{v.title}</h3>
-                <p>{v.text}</p>
-              </article>
-            ))
-          }
-          <div class="ab-graph-dots" aria-hidden="true">
-            {a.values.items.map((_, i) => <i class:list={{ 'is-on': i === 0 }} data-dot={i} />)}
-          </div>
-        </div>
       </div>
     </article>
 

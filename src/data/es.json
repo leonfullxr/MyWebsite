@@ -501,33 +501,6 @@
     "title": "¡Hola! Soy Leon.",
     "globeLabel": "Globo con Granada y Cracovia",
     "pins": ["Granada", "Cracovia"],
-    "values": {
-      "title": "Cómo trabajo",
-      "lead": "Cuatro hábitos, todos conectados. Elige un nodo.",
-      "center": "Yo",
-      "items": [
-        {
-          "title": "Problemas difíciles, a propósito",
-          "short": "Problemas difíciles",
-          "text": "Doy lo mejor de mí cuando el trabajo es complejo y tengo que pensar, diseñar y empujar hasta llegar a un resultado sólido. Pásame los ambiguos."
-        },
-        {
-          "title": "Mentalidad de producción",
-          "short": "Producción",
-          "text": "La seguridad, los planes de rollback, las pruebas y la mantenibilidad van antes de publicar, no después."
-        },
-        {
-          "title": "Causas, no síntomas",
-          "short": "Causas raíz",
-          "text": "Sigo un problema por todas sus capas, de los datos al hardware, hasta poder explicarlo."
-        },
-        {
-          "title": "Siempre aprendiendo",
-          "short": "Aprendizaje",
-          "text": "Aprendo rápido, me gusta la responsabilidad, y aprender constantemente es lo que me mantiene ambicioso."
-        }
-      ]
-    },
     "story": {
       "label": "De lo que más orgulloso estoy",
       "title": "Cuando mis resultados no coincidían con los libros",
@@ -596,6 +569,36 @@
         "link": "Mis soluciones en GitHub",
         "url": "https://github.com/leonfullxr?tab=repositories&q=advent",
         "site": "adventofcode.com"
+      },
+      "race": {
+        "title": "He ganado varias carreras de montaña",
+        "text": "Mis mejores marcas hasta ahora:",
+        "dist": "Distancia",
+        "time": "Tiempo",
+        "pace": "Ritmo",
+        "rows": [
+          {
+            "dist": "21 km",
+            "time": "1:22",
+            "secs": 4920,
+            "km": 21
+          },
+          {
+            "dist": "Maratón",
+            "time": "3:20",
+            "secs": 12000,
+            "km": 42.195
+          },
+          {
+            "dist": "100 km",
+            "time": "15:00",
+            "secs": 54000,
+            "km": 100
+          }
+        ],
+        "unit": "/km",
+        "note": "h:mm",
+        "pb": "Mi mejor marca: {t}"
       }
     },
     "intro": [

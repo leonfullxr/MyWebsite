@@ -501,33 +501,6 @@
     "title": "Hi there! I’m Leon.",
     "globeLabel": "Globe showing Granada and Kraków",
     "pins": ["Granada", "Kraków"],
-    "values": {
-      "title": "How I work",
-      "lead": "Four habits, all wired together. Pick a node.",
-      "center": "Me",
-      "items": [
-        {
-          "title": "Hard problems, on purpose",
-          "short": "Hard problems",
-          "text": "I’m at my best when the work is complex and I have to think, design and push through to a solid result. Hand me the ambiguous ones."
-        },
-        {
-          "title": "Production-minded",
-          "short": "Production-minded",
-          "text": "Security, rollback plans, testing and maintainability come before shipping, not after."
-        },
-        {
-          "title": "Root causes, not symptoms",
-          "short": "Root causes",
-          "text": "I trace a problem through every layer, from the data down to the hardware, until I can explain it."
-        },
-        {
-          "title": "Always learning",
-          "short": "Always learning",
-          "text": "I learn fast, I like responsibility, and constant learning is what keeps me ambitious."
-        }
-      ]
-    },
     "story": {
       "label": "Proudest work",
       "title": "When my results disagreed with the textbooks",
@@ -596,6 +569,36 @@
         "link": "My solutions on GitHub",
         "url": "https://github.com/leonfullxr?tab=repositories&q=advent",
         "site": "adventofcode.com"
+      },
+      "race": {
+        "title": "I’ve won several mountain races",
+        "text": "My personal bests so far:",
+        "dist": "Distance",
+        "time": "Time",
+        "pace": "Pace",
+        "rows": [
+          {
+            "dist": "21 km",
+            "time": "1:22",
+            "secs": 4920,
+            "km": 21
+          },
+          {
+            "dist": "Marathon",
+            "time": "3:20",
+            "secs": 12000,
+            "km": 42.195
+          },
+          {
+            "dist": "100 km",
+            "time": "15:00",
+            "secs": 54000,
+            "km": 100
+          }
+        ],
+        "unit": "/km",
+        "note": "h:mm",
+        "pb": "My best: {t}"
       }
     },
     "intro": [

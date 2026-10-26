@@ -1,5 +1,5 @@
-// About page toys: things rise in as you scroll, the How I work graph, the ultra distance
-// slider, a 48-hour jam clock, a contest judge, an ASCII Advent tree, and the time in Granada.
+// About page toys: things rise in as you scroll, the ultra distance slider
+// with personal bests, a 48-hour jam clock, a contest judge, an ASCII Advent tree, and the time in Granada.
 const reduce = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function reveals(root: HTMLElement) {
@@ -30,6 +30,7 @@ function ultra(root: HTMLElement) {
   const zone = box.querySelector<HTMLElement>('[data-zone]')!;
   const units = Array.from(box.querySelectorAll<HTMLButtonElement>('[data-unit]'));
   let unit = 'km';
+  const pbs: [number, string][] = JSON.parse(zone.dataset.pbs || '[]');
   const render = () => {
     const km = Number(range.value);
     const pct = `${km}%`;
@@ -38,7 +39,14 @@ function ultra(root: HTMLElement) {
     const value = unit === 'km' ? km : km * 0.621371;
     dist.textContent = `${value.toFixed(value < 10 ? 1 : 0)} ${unit}`;
     const isUltra = km > 42.195;
-    zone.textContent = isUltra ? zone.dataset.ultraLabel || '' : zone.dataset.road || '';
+    // Near one of the distances I've raced, show my best time instead.
+    const pb = pbs.find(([d]) => Math.abs(d - km) <= 1);
+    zone.textContent = pb
+      ? (zone.dataset.pb || '{t}').replace('{t}', pb[1])
+      : isUltra
+        ? zone.dataset.ultraLabel || ''
+        : zone.dataset.road || '';
+    box.classList.toggle('is-pb', Boolean(pb));
     box.classList.toggle('is-ultra', isUltra);
   };
   range.addEventListener('input', render);
@@ -50,37 +58,6 @@ function ultra(root: HTMLElement) {
     })
   );
   render();
-}
-
-function graph(root: HTMLElement) {
-  const box = root.querySelector<HTMLElement>('[data-graph]');
-  if (!box) return;
-  const nodes = Array.from(box.querySelectorAll<HTMLButtonElement>('[data-node]'));
-  const cards = Array.from(box.querySelectorAll<HTMLElement>('[data-card]'));
-  const dots = Array.from(box.querySelectorAll<HTMLElement>('[data-dot]'));
-  const edges = Array.from(box.querySelectorAll<SVGGElement>('[data-edge]'));
-  let current = 0;
-  let timer = 0;
-  const show = (i: number) => {
-    current = i;
-    nodes.forEach((n, j) => {
-      n.classList.toggle('is-on', j === i);
-      n.setAttribute('aria-pressed', String(j === i));
-    });
-    cards.forEach((c, j) => (c.hidden = j !== i));
-    dots.forEach((d, j) => d.classList.toggle('is-on', j === i));
-    edges.forEach((e, j) => e.classList.toggle('is-on', j === i));
-  };
-  const stopAuto = () => window.clearInterval(timer);
-  nodes.forEach((n, i) =>
-    n.addEventListener('click', () => {
-      stopAuto();
-      show(i);
-    })
-  );
-  // Walk the graph on its own until someone picks a node.
-  if (!reduce()) timer = window.setInterval(() => show((current + 1) % nodes.length), 4200);
-  show(0);
 }
 
 function jam(root: HTMLElement) {
@@ -212,7 +189,6 @@ export function mountAboutToys(root: HTMLElement | null) {
   if (!root) return;
   reveals(root);
   ultra(root);
-  graph(root);
   jam(root);
   judge(root);
   tree(root);

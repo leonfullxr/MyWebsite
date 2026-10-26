@@ -377,203 +377,6 @@
   line-height: 1.5;
   opacity: 0.75;
 }
-/* How I work: a small graph */
-.ab-graph {
-  margin-top: 2rem;
-  display: grid;
-  gap: 1.5rem;
-  align-items: center;
-  padding: 1.5rem;
-  border-radius: 1.75rem;
-  background: var(--tint);
-}
-@media (min-width: 900px) {
-  .ab-graph {
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-    gap: 2.5rem;
-    padding: 2rem 2.5rem;
-  }
-}
-.ab-graph-map {
-  position: relative;
-  aspect-ratio: 560 / 400;
-}
-.ab-graph-map svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-.ab-ring line {
-  stroke: rgb(11 16 22 / 0.12);
-  stroke-width: 1.5;
-  stroke-dasharray: 3 7;
-}
-.dark .ab-ring line {
-  stroke: rgb(255 255 255 / 0.14);
-}
-.ab-edge line {
-  stroke: rgb(11 16 22 / 0.22);
-  stroke-width: 2;
-  transition: stroke 0.3s;
-}
-.dark .ab-edge line {
-  stroke: rgb(255 255 255 / 0.22);
-}
-.ab-edge circle {
-  fill: var(--color-ink-500);
-  transition: fill 0.3s;
-}
-.ab-edge.is-on line {
-  stroke: var(--color-lava-500);
-  stroke-width: 3;
-}
-.ab-edge.is-on circle {
-  fill: var(--color-lava-500);
-}
-.ab-graph-core {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: grid;
-  place-items: center;
-  gap: 0.25rem;
-  width: 6rem;
-  height: 6rem;
-  border-radius: 50%;
-  background: var(--card);
-  box-shadow:
-    0 0 0 6px rgb(239 59 98 / 0.12),
-    0 14px 30px -14px rgb(11 16 22 / 0.4);
-}
-.ab-graph-core img {
-  width: 2.75rem;
-  height: 2.75rem;
-  object-fit: contain;
-  margin-top: 0.5rem;
-}
-.ab-graph-core b {
-  margin-top: -0.4rem;
-  font-size: 0.8125rem;
-  font-weight: 900;
-}
-.ab-node {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 0.9rem 0.55rem 0.55rem;
-  border-radius: 999px;
-  background: var(--card);
-  font-size: 0.875rem;
-  font-weight: 900;
-  white-space: nowrap;
-  cursor: pointer;
-  box-shadow: 0 6px 16px -10px rgb(11 16 22 / 0.5);
-  transition:
-    transform 0.35s var(--spring),
-    box-shadow 0.25s,
-    background-color 0.25s,
-    color 0.25s;
-}
-.ab-node:hover {
-  transform: translate(-50%, -50%) scale(1.06);
-}
-.ab-node.is-on {
-  background: var(--color-lava-500);
-  color: #fff;
-  transform: translate(-50%, -50%) scale(1.1);
-  box-shadow: 0 10px 24px -10px rgb(239 59 98 / 0.7);
-}
-.ab-node-num {
-  display: grid;
-  place-items: center;
-  width: 1.6rem;
-  height: 1.6rem;
-  border-radius: 50%;
-  background: var(--tint);
-  font-size: 0.6875rem;
-  font-variant-numeric: tabular-nums;
-}
-.ab-node.is-on .ab-node-num {
-  background: rgb(255 255 255 / 0.25);
-}
-.ab-node:focus-visible {
-  outline: 2px solid var(--color-lava-500);
-  outline-offset: 3px;
-}
-@media (max-width: 520px) {
-  .ab-node {
-    font-size: 0.75rem;
-    padding: 0.4rem 0.65rem 0.4rem 0.4rem;
-  }
-  .ab-node-num {
-    display: none;
-  }
-  .ab-graph-core {
-    width: 4.5rem;
-    height: 4.5rem;
-  }
-  .ab-graph-core b {
-    display: none;
-  }
-}
-.ab-graph-panel {
-  min-height: 12rem;
-}
-.ab-graph-card {
-  animation: ab-card-in 0.45s var(--soft);
-}
-.ab-graph-card[hidden] {
-  display: none;
-}
-@keyframes ab-card-in {
-  from {
-    opacity: 0;
-    transform: translateX(14px);
-  }
-}
-.ab-graph-card .ab-num {
-  font-size: 2.75rem;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-.ab-graph-card h3 {
-  margin-top: 0.5rem;
-  font-size: 1.625rem;
-  font-weight: 900;
-  line-height: 1.15;
-}
-.ab-graph-card p {
-  margin-top: 0.75rem;
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  color: var(--soft-text);
-}
-.ab-graph-dots {
-  margin-top: 1.25rem;
-  display: flex;
-  gap: 0.4rem;
-}
-.ab-graph-dots i {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 999px;
-  background: rgb(11 16 22 / 0.18);
-  transition:
-    width 0.35s var(--spring),
-    background-color 0.25s;
-}
-.dark .ab-graph-dots i {
-  background: rgb(255 255 255 / 0.2);
-}
-.ab-graph-dots i.is-on {
-  width: 1.5rem;
-  background: var(--color-lava-500);
-}
 /* Game jam */
 .ab-jam-clock {
   padding: 0.35rem 0.7rem;
@@ -822,7 +625,6 @@
   .t-globe,
   .t-ultra,
   .t-story,
-  .t-work,
   .t-look {
     grid-column: 1 / -1;
   }
@@ -830,13 +632,13 @@
 @media (min-width: 900px) {
   .ab-bento {
     grid-template-columns: repeat(6, minmax(0, 1fr));
+    align-items: start;
     grid-template-areas:
       'globe globe globe globe langs langs'
       'globe globe globe globe edu edu'
-      'jam jam ultra ultra ultra ultra'
+      'ultra ultra ultra ultra race race'
       'jam jam cp cp aoc aoc'
       'story story story story story story'
-      'work work work work work work'
       'look look look look look look';
   }
   .t-globe {
@@ -848,23 +650,23 @@
   .t-edu {
     grid-area: edu;
   }
-  .t-jam {
-    grid-area: jam;
-  }
   .t-ultra {
     grid-area: ultra;
+  }
+  .t-race {
+    grid-area: race;
+  }
+  .t-jam {
+    grid-area: jam;
   }
   .t-cp {
     grid-area: cp;
   }
-  .t-story {
-    grid-area: story;
-  }
   .t-aoc {
     grid-area: aoc;
   }
-  .t-work {
-    grid-area: work;
+  .t-story {
+    grid-area: story;
   }
   .t-look {
     grid-area: look;
@@ -939,11 +741,6 @@
   left: -1.75rem;
   top: -2.25rem;
   transform: rotate(-8deg);
-}
-.t-peek-work {
-  width: 7rem;
-  right: 1.5rem;
-  top: -4.4rem;
 }
 
 /* Globe tile */
@@ -1122,63 +919,89 @@
   background: #fff;
 }
 
-/* How I work tile */
-.t-work {
-  align-items: stretch;
-  text-align: left;
-  padding: 1.5rem;
-}
-.t-work h2 {
-  font-size: 1.5rem;
-  font-weight: 900;
-}
-.t-work .ab-graph {
-  margin-top: 0;
-  padding: 0;
-  background: none;
-}
-.t-work .ab-graph-core {
-  background: var(--tint);
-}
-.dark .t-work .ab-node,
-.dark .t-work .ab-graph-core {
-  background: var(--color-ink-800);
-}
-.t-work .ab-node:not(.is-on) {
-  background: var(--color-sand-100);
-}
-.dark .t-work .ab-node.is-on {
-  background: var(--color-lava-500);
-}
-
 /* What I'm looking for tile */
 .t-look {
   display: grid;
   align-items: start;
   text-align: left;
 }
-.dark .t-work .ab-node:not(.is-on) {
-  background: var(--color-ink-800);
-  color: var(--color-sand-50);
-}
-.t-jam .ab-jam-board {
-  flex: 1;
-}
+
 @media (min-width: 900px) {
   .tile.t-look {
     grid-template-columns: 14rem 1fr;
   }
 }
 @media (max-width: 899px) {
-  .t-peek-work {
-    display: none;
-  }
   .ab-hero-me {
     width: min(11rem, 50vw);
   }
 }
-@media (max-width: 520px) {
-  .t-work .ab-graph-map {
-    margin: 0 2.25rem;
-  }
+
+/* Race results tile */
+.t-race {
+  padding-top: 1.75rem;
+}
+.t-trophy {
+  position: absolute;
+  right: -0.9rem;
+  top: -1.6rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  transform: rotate(12deg);
+  filter: drop-shadow(0 8px 8px rgb(0 0 0 / 0.2));
+  transition: transform 0.4s var(--spring);
+}
+.t-race:hover .t-trophy {
+  transform: rotate(-4deg) scale(1.1);
+}
+.t-trophy .cup {
+  fill: var(--color-amber-300);
+  stroke: #e9a93a;
+  stroke-width: 2;
+}
+.t-trophy .arm {
+  fill: none;
+  stroke: #e9a93a;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.t-trophy .shine {
+  stroke: #fff7e0;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.t-pb {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  text-align: left;
+}
+.t-pb th {
+  padding: 0 0.25rem 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+.t-pb td {
+  padding: 0.5rem 0.25rem;
+  border-top: 1px solid rgb(11 16 22 / 0.08);
+  font-variant-numeric: tabular-nums;
+}
+.dark .t-pb td {
+  border-color: rgb(255 255 255 / 0.08);
+}
+.t-pb td:first-child {
+  font-weight: 700;
+}
+.t-pb td b {
+  font-size: 1.0625rem;
+  font-weight: 900;
+  color: var(--accent);
+}
+.t-pb small {
+  margin-left: 2px;
+  color: var(--muted);
+}
+.is-pb .ab-track-out span {
+  color: var(--color-amber-500);
 }
