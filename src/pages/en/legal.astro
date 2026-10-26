@@ -1,0 +1,16 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Legal from '../../components/Legal.astro';
+import data from '../../data/en.json';
+
+const lang = 'en';
+---
+
+<Layout
+  title={data.legal.meta.title}
+  description={data.legal.meta.description}
+  lang={lang}
+  alternate="/es/legal"
+>
+  <Legal data={data} lang={lang} />
+</Layout>

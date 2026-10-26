@@ -29,7 +29,66 @@
       "Production-focused Security Engineer specialized in architecting, scaling, and maintaining mission-critical SIEM/XDR infrastructure across enterprise on-premises and AWS EKS environments. Handled data engineering for high-throughput ingestion pipelines processing over 250 billion events, preventing data loss and ingestion bottlenecks through kernel and manager buffer tuning. Reduced AWS operational expenses by up to 20% through compute and storage right-sizing, while establishing automated GitOps deployment workflows and SLI/SLO-driven observability to resolve cluster outages before log loss occurred.",
       "As a core maintainer for Wazuh's open-source integrations ecosystem, I develop detection rules, decoders, and integrations across AWS, Azure, enterprise identity providers, and network infrastructure. Working across platform engineering and SecOps, I build code-driven detection platforms with high-fidelity threat detection, audit-ready compliance against PCI-DSS and ISO 27001, and automated active-response playbooks that protect operations at enterprise scale without creating analyst fatigue."
     ],
-    "location": "Granada, Spain"
+    "location": "Granada, Spain",
+    "plainLabel": "Plain",
+    "techLabel": "Technical",
+    "switchLabel": "Show the technical version",
+    "hint": "Hover or tap an underlined word to see what it’s called at work",
+    "more": "More about me",
+    "plain": [
+      [
+        {
+          "text": "I look after "
+        },
+        {
+          "text": "the alarm system",
+          "tip": "SIEM / XDR: collects logs from every machine and raises alerts on attacks"
+        },
+        {
+          "text": " that big companies use to spot hackers. It reads "
+        },
+        {
+          "text": "billions of messages",
+          "tip": "250B+ events through high-throughput ingestion pipelines"
+        },
+        {
+          "text": " from their computers, and I make sure "
+        },
+        {
+          "text": "none get lost",
+          "tip": "Kernel and manager buffer tuning to prevent ingestion bottlenecks"
+        },
+        {
+          "text": ", while "
+        },
+        {
+          "text": "cutting the cloud bill",
+          "tip": "Compute and storage right-sizing on AWS EKS: up to −20%"
+        },
+        {
+          "text": "."
+        }
+      ],
+      [
+        {
+          "text": "I also write the "
+        },
+        {
+          "text": "“what counts as suspicious” rules",
+          "tip": "Detection rules and decoders for AWS, Azure, identity providers and network gear"
+        },
+        {
+          "text": " that anyone can download for free, and the "
+        },
+        {
+          "text": "automatic responses",
+          "tip": "Active-response playbooks"
+        },
+        {
+          "text": " that kick in when something looks wrong."
+        }
+      ]
+    ]
   },
   "thesis": {
     "title": "Thesis",
@@ -433,5 +492,207 @@
         "logos": "frameworks"
       }
     ]
+  },
+  "aboutPage": {
+    "meta": {
+      "title": "About - Leon Elliott Fuller",
+      "description": "Who Leon Elliott Fuller is, what he does as a security engineer at Wazuh, how he works and what he is looking for next."
+    },
+    "kicker": "About",
+    "title": "Hi, I’m Leon.",
+    "lead": "I’m a security engineer at Wazuh, based in Granada, Spain. I design, run and fix security platforms that have to keep working at enormous scale, and I’m at my best when the problem is hard.",
+    "offline": "Outside work I run ultramarathons, hike in the mountains and always have music on.",
+    "globeHint": "Drag to spin",
+    "globeLabel": "Globe showing Granada and Kraków",
+    "pins": ["Granada", "Kraków"],
+    "stats": [
+      {
+        "value": "250B+",
+        "label": "security events through pipelines I tune"
+      },
+      {
+        "value": "−20%",
+        "label": "AWS EKS cost, same protection"
+      },
+      {
+        "value": "Top 2",
+        "label": "contributor by commits to Wazuh’s public integrations"
+      },
+      {
+        "value": "Honors",
+        "label": "Matrícula de Honor for my thesis on elliptic-curve cryptography"
+      }
+    ],
+    "doing": {
+      "title": "What I do",
+      "lead": "I enjoy problem solving and designing the architecture of the services I run, with a focus on stability, scale and efficiency.",
+      "groups": [
+        {
+          "title": "Architecture & scale",
+          "items": [
+            "SOC platforms on Wazuh for large enterprises: SIEM, XDR, HIDS and NIDS, on-prem and in the cloud",
+            "Multi-node clusters on Docker, Kubernetes and AWS EKS across availability zones",
+            "Pipelines of 250B+ events, tuned from queues and workers down to the indexer",
+            "Restoring security visibility when production goes down"
+          ]
+        },
+        {
+          "title": "Detection & automation",
+          "items": [
+            "Core maintainer of Wazuh’s public integrations repository",
+            "Custom rules, decoders and noise reduction analysts can trust",
+            "SCA policies for PCI DSS, CJIS and ISO 27001",
+            "Automated response, with analyst approval kept for disruptive actions"
+          ]
+        },
+        {
+          "title": "Cloud, identity & AI",
+          "items": [
+            "AWS: SQS, CloudTrail, VPC Flow Logs and WAF; Azure through Microsoft Graph",
+            "SSO and RBAC with Okta, Entra ID, Google and LDAP",
+            "Syslog and Filebeat from Cisco, FortiGate and Sophos",
+            "RAG on AWS: Bedrock with Claude, Titan embeddings, OpenSearch, FastAPI, LangChain and ECS"
+          ]
+        }
+      ]
+    },
+    "now": {
+      "label": "Right now",
+      "title": "Möbius, Wazuh’s AI-powered SOC",
+      "text": "I have sole end-to-end technical ownership of Möbius: architecture, application, AWS infrastructure in Terraform, deployment, security and reliability. The goal is to take the SIEM further with AI-assisted alert triage, threat investigation, incident correlation and controlled automated response.",
+      "tags": ["Architecture", "AWS", "Terraform", "AI triage", "Automated response"]
+    },
+    "values": {
+      "title": "How I work",
+      "lead": "What I bring to a team.",
+      "items": [
+        {
+          "title": "Hard problems, on purpose",
+          "text": "I’m at my best when the work is complex and I have to think, design and push through to a solid result. Hand me the ambiguous ones."
+        },
+        {
+          "title": "Production-minded",
+          "text": "Security, rollback plans, testing and maintainability come before shipping, not after."
+        },
+        {
+          "title": "Root causes, not symptoms",
+          "text": "I trace a problem through every layer, from the data down to the hardware, until I can explain it."
+        },
+        {
+          "title": "Always learning",
+          "text": "I learn fast, I like responsibility, and constant learning is what keeps me ambitious."
+        }
+      ]
+    },
+    "story": {
+      "label": "Proudest work",
+      "title": "When my results disagreed with the textbooks",
+      "text": "For my thesis I spent over a year implementing elliptic-curve cryptography from scratch in C++. The speedups the literature predicted didn’t show up in my measurements, because of years of hardware and assembly-level optimisation. So I stopped assuming the theory was right and dug through every layer (algorithm, implementation, compiler, hardware) until I could explain the gap. It earned Honors.",
+      "badge": "Matrícula de Honor",
+      "cta": "Explore the thesis in 3D"
+    },
+    "looking": {
+      "title": "What I’m looking for",
+      "lead": "Where I’d do my best work next.",
+      "cta": "Let’s talk",
+      "items": [
+        {
+          "title": "A competitive, ambitious team",
+          "text": "People who raise the bar and expect me to raise mine."
+        },
+        {
+          "title": "Infrastructure at scale",
+          "text": "Production systems where stability, scale and efficiency really matter."
+        },
+        {
+          "title": "Ownership and autonomy",
+          "text": "Where technical judgment and owning production systems end to end are valued."
+        },
+        {
+          "title": "Room to grow",
+          "text": "Hard problems, people to learn from, and a clear path to senior and beyond."
+        }
+      ]
+    },
+    "back": "Back to home",
+    "fun": {
+      "title": "A few fun facts",
+      "lead": "The things that don’t fit on a CV. Go ahead, play with them.",
+      "ultra": {
+        "title": "I run ultramarathons",
+        "text": "An ultra is any race longer than a marathon. I run them for fun, not podiums, and often with friends. Drag the runner.",
+        "marathon": "Marathon",
+        "ultra": "Ultra territory",
+        "road": "Still on the road",
+        "km": "km",
+        "mi": "mi",
+        "label": "Distance"
+      },
+      "ports": {
+        "title": "My home server has zero open ports",
+        "text": "It’s a Raspberry Pi 5 behind a Cloudflare Tunnel with Zero Trust, so nothing listens on the internet. Go on, scan it.",
+        "button": "Scan ports",
+        "scanning": "Scanning…",
+        "result": "{n} ports scanned · 0 open",
+        "again": "Scan again",
+        "link": "Read how I did it",
+        "post": "from-port-forwarding-to-cloudflare-tunnels"
+      },
+      "music": {
+        "title": "There’s always music on",
+        "text": "While I code, run or relax. Lately on repeat:",
+        "artists": ["Dave", "Knucks", "Little Simz", "Burna Boy"]
+      },
+      "time": {
+        "same": "I’m in Granada, where it’s {g}. Same time as you, so I’m probably awake.",
+        "diff": "I’m in Granada, where it’s {g}. For you it’s {l}."
+      }
+    }
+  },
+  "legal": {
+    "meta": {
+      "title": "Privacy & legal notice - Leon Elliott Fuller",
+      "description": "Privacy policy and legal notice for resume.leonfuller.com."
+    },
+    "title": "Privacy & legal notice",
+    "updated": "Last updated: 26 October 2026",
+    "link": "Privacy & legal",
+    "summary": "No cookies, no analytics, no tracking and no forms. I don’t collect personal data on this site myself.",
+    "sections": [
+      {
+        "title": "Who runs this site",
+        "body": [
+          "This is the personal, non-commercial website of Leon Elliott Fuller, based in Granada, Spain. You can reach me at <a href=\"mailto:l.elliottfuller@gmail.com\">l.elliottfuller@gmail.com</a>."
+        ]
+      },
+      {
+        "title": "What happens when you visit",
+        "body": [
+          "<b>Hosting.</b> The site is served by GitHub Pages. Like any web server, GitHub processes your IP address and request details to deliver the pages and keep them secure. See <a href=\"https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub’s privacy statement</a>.",
+          "<b>Fonts.</b> Lato and JetBrains Mono load from Google Fonts, so your browser sends your IP address to Google. See <a href=\"https://policies.google.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">Google’s privacy policy</a>.",
+          "<b>Maths rendering.</b> KaTeX loads from the jsDelivr CDN, which also receives your IP address. See <a href=\"https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net\" target=\"_blank\" rel=\"noopener noreferrer\">jsDelivr’s privacy policy</a>.",
+          "<b>Your preferences.</b> Your theme (light or dark) and sound setting are saved in your browser’s local storage. They never leave your device, and you can clear them at any time."
+        ]
+      },
+      {
+        "title": "If you email me",
+        "body": [
+          "I use your email address and message only to reply to you, keep the conversation only as long as it’s useful, and never share it with anyone."
+        ]
+      },
+      {
+        "title": "Your rights",
+        "body": [
+          "Under the GDPR you can ask to access, correct or delete any personal data I hold about you, or object to its use, by writing to the address above. You can also complain to the Spanish Data Protection Agency (<a href=\"https://www.aepd.es\" target=\"_blank\" rel=\"noopener noreferrer\">AEPD</a>)."
+        ]
+      },
+      {
+        "title": "Content and code",
+        "body": [
+          "Texts, photos and illustrations on this site are © Leon Elliott Fuller unless stated otherwise. The site’s source code is <a href=\"https://github.com/leonfullxr/MyWebsite\" target=\"_blank\" rel=\"noopener noreferrer\">MIT-licensed on GitHub</a>. Links to other sites are there for convenience, and I’m not responsible for their content."
+        ]
+      }
+    ],
+    "back": "Back to home"
   }
 }

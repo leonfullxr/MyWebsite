@@ -7,6 +7,9 @@ interface Props {
 }
 const { lang, compact = false } = Astro.props;
 const es = lang === 'es';
+// Pages that exist in both languages keep you on the same page when you switch.
+const page = Astro.url.pathname.replace(/^\/(en|es)\/?/, '').replace(/\/$/, '');
+const same = ['about', 'legal', 'thesis'].includes(page) ? page : '';
 ---
 
 <div class="site-controls">
@@ -51,7 +54,7 @@ const es = lang === 'es';
   }
   <div class="site-language" role="group" aria-label={es ? 'Idioma' : 'Language'}>
     <a
-      href="/en/"
+      href={`/en/${same}`}
       lang="en"
       hreflang="en"
       aria-current={es ? undefined : 'true'}
@@ -59,7 +62,7 @@ const es = lang === 'es';
       title="English"
       data-ui-sound><SiteFlag language="en" /></a
     ><a
-      href="/es/"
+      href={`/es/${same}`}
       lang="es"
       hreflang="es"
       aria-current={es ? 'true' : undefined}

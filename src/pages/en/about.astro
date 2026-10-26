@@ -1,0 +1,16 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import About from '../../components/About.astro';
+import data from '../../data/en.json';
+
+const lang = 'en';
+---
+
+<Layout
+  title={data.aboutPage.meta.title}
+  description={data.aboutPage.meta.description}
+  lang={lang}
+  alternate="/es/about"
+>
+  <About data={data} lang={lang} />
+</Layout>

@@ -1,0 +1,249 @@
+---
+// The longer story: who Leon is, what he does, how he works and what he wants next.
+// Plain words first, details in tidy lists, a few toys to play with.
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+import '../styles/about.css';
+import type { Data } from '../data/home';
+
+interface Props {
+  data: Data;
+  lang: string;
+}
+const { data, lang } = Astro.props;
+const a = data.aboutPage;
+const f = a.fun;
+const pins = [
+  { name: a.pins[0], lon: -3.6, lat: 37.18 },
+  { name: a.pins[1], lon: 19.94, lat: 50.06 },
+];
+const check =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>';
+---
+
+<Nav nav={data.nav} lang={lang} />
+<main class="about-page" data-about>
+  <!-- Hello -->
+  <section class="ab-wrap ab-hero">
+    <div class="ab-hero-copy">
+      <p class="ab-kicker">
+        <img src="/images/mascot/head.webp" alt="" width="64" height="64" />{a.kicker}
+      </p>
+      <h1 class="ab-h1">
+        <span class="ab-wave-word">{a.title}</span>
+        <img class="ab-wave" src="/images/mascot/waving.webp" alt="" width="160" height="160" />
+      </h1>
+      <p class="ab-lead">{a.lead}</p>
+      <p class="ab-offline">{a.offline}</p>
+    </div>
+    <div class="ab-globe" data-globe data-label={a.globeLabel} data-pins={JSON.stringify(pins)}>
+      <img
+        class="ab-globe-mascot"
+        src="/images/mascot/reclining.webp"
+        alt=""
+        width="200"
+        height="200"
+      />
+      <span class="ab-globe-hint" aria-hidden="true">{a.globeHint} ↻</span>
+    </div>
+  </section>
+
+  <!-- Numbers -->
+  <section class="ab-wrap">
+    <ul class="ab-stats">
+      {
+        a.stats.map((s, i) => (
+          <li style={`--d:${i * 80}ms`} data-reveal>
+            <b>{s.value}</b>
+            <span>{s.label}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- What I do -->
+  <section class="ab-wrap ab-section">
+    <h2 class="ab-h2">{a.doing.title}</h2>
+    <p class="ab-sub">{a.doing.lead}</p>
+    <div class="ab-doing">
+      {
+        a.doing.groups.map((g, i) => (
+          <article class="ab-group" style={`--d:${i * 90}ms`} data-reveal>
+            <span class="ab-num">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{g.title}</h3>
+            <ul>
+              {g.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+    <aside class="ab-now" data-reveal>
+      <span class="ab-now-dot" aria-hidden="true"></span>
+      <div>
+        <p class="ab-now-label">{a.now.label}</p>
+        <h3>{a.now.title}</h3>
+        <p>{a.now.text}</p>
+        <ul class="ab-tags">{a.now.tags.map((tag) => <li>{tag}</li>)}</ul>
+      </div>
+    </aside>
+  </section>
+
+  <!-- How I work -->
+  <section class="ab-wrap ab-section">
+    <h2 class="ab-h2">{a.values.title}</h2>
+    <p class="ab-sub">{a.values.lead}</p>
+    <div class="ab-values">
+      {
+        a.values.items.map((v, i) => (
+          <article class="ab-value" style={`--d:${i * 80}ms`} data-reveal>
+            <span class="ab-num">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{v.title}</h3>
+            <p>{v.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Proudest work -->
+  <section class="ab-wrap ab-section">
+    <article class="ab-story" data-reveal>
+      <div class="ab-story-medal" aria-hidden="true">
+        <svg viewBox="0 0 64 64"
+          ><circle cx="32" cy="36" r="20"></circle><path d="M22 4h8l4 14h-8zM34 4h8l-4 14h-8z"
+          ></path><path
+            class="star"
+            d="m32 26 3 6.2 6.8 1-5 4.8 1.2 6.8L32 41.6l-6 3.2 1.2-6.8-5-4.8 6.8-1z"></path></svg
+        >
+      </div>
+      <div>
+        <p class="ab-now-label">{a.story.label}</p>
+        <h3>{a.story.title}</h3>
+        <p>{a.story.text}</p>
+        <div class="ab-story-foot">
+          <span class="ab-badge">{a.story.badge}</span>
+          <a class="link font-bold" href={`/${lang}/thesis`} data-ui-sound>{a.story.cta}</a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- Fun facts -->
+  <section class="ab-wrap ab-section">
+    <h2 class="ab-h2">{f.title}</h2>
+    <p class="ab-sub">{f.lead}</p>
+    <div class="ab-fun">
+      <article class="ab-toy ab-toy-wide" data-ultra data-reveal>
+        <div class="ab-toy-head">
+          <h3>{f.ultra.title}</h3>
+          <div class="ab-units" role="group" aria-label={f.ultra.label}>
+            <button type="button" aria-pressed="true" data-unit="km">{f.ultra.km}</button>
+            <button type="button" aria-pressed="false" data-unit="mi">{f.ultra.mi}</button>
+          </div>
+        </div>
+        <p>{f.ultra.text}</p>
+        <div class="ab-track">
+          <div class="ab-track-line">
+            <span class="ab-track-fill" data-fill></span>
+            <span class="ab-track-mark" style="left: 42.195%"><i></i>{f.ultra.marathon}</span>
+            <img class="ab-track-runner" src="/images/mascot/running.webp" alt="" data-runner />
+            <input
+              type="range"
+              min="0"
+              max="100"
+              step="0.5"
+              value="60"
+              aria-label={f.ultra.label}
+              data-range
+            />
+          </div>
+
+          <p class="ab-track-out" aria-live="polite">
+            <b data-dist>60 km</b>
+            <span data-zone data-road={f.ultra.road} data-ultra-label={f.ultra.ultra}
+              >{f.ultra.ultra}</span
+            >
+          </p>
+        </div>
+      </article>
+      <article class="ab-toy" data-ports data-reveal>
+        <h3>{f.ports.title}</h3>
+        <p>{f.ports.text}</p>
+        <div class="ab-term" aria-live="polite">
+          <span class="ab-term-line">$ scan home-server --ports 1-65535</span>
+          <span
+            class="ab-term-out"
+            data-out
+            data-scanning={f.ports.scanning}
+            data-result={f.ports.result}>&nbsp;</span
+          >
+          <span class="ab-term-bar"><i data-bar></i></span>
+        </div>
+        <div class="ab-toy-foot">
+          <button type="button" class="ab-btn" data-scan data-again={f.ports.again} data-ui-sound
+            >{f.ports.button}</button
+          >
+          <a class="link text-sm font-bold" href={`/${lang}/blog/${f.ports.post}`} data-ui-sound
+            >{f.ports.link}</a
+          >
+        </div>
+      </article>
+      <article class="ab-toy" data-reveal>
+        <h3>{f.music.title}</h3>
+        <p>{f.music.text}</p>
+        <ul class="ab-records">
+          {
+            f.music.artists.map((artist, i) => (
+              <li>
+                <button type="button" class="ab-record" style={`--h:${i * 70 + 330}`} data-record>
+                  <span class="ab-disc" aria-hidden="true" />
+                  <span>{artist}</span>
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- What I'm looking for -->
+  <section class="ab-wrap ab-section">
+    <div class="ab-look" data-reveal>
+      <div>
+        <h2>{a.looking.title}</h2>
+        <p class="ab-look-sub">{a.looking.lead}</p>
+        <a class="ab-look-cta" href={`mailto:${data.contact.email}`} data-ui-sound
+          >{a.looking.cta}&nbsp;→</a
+        >
+      </div>
+      <ul>
+        {
+          a.looking.items.map((item) => (
+            <li>
+              <i set:html={check} />
+              <div>
+                <b>{item.title}</b>
+                <span>{item.text}</span>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <p class="ab-clock" data-clock data-same={f.time.same} data-diff={f.time.diff}></p>
+  </section>
+</main>
+<Footer footer={data.footer} contact={data.contact} nav={data.nav} lang={lang} />
+
+<script>
+  import { mountGlobe } from '../scripts/globe';
+  import { mountAboutToys } from '../scripts/about-toys';
+  const host = document.querySelector<HTMLElement>('[data-globe]');
+  if (host) mountGlobe(host, JSON.parse(host.dataset.pins || '[]'));
+  mountAboutToys(document.querySelector<HTMLElement>('[data-about]'));
+</script>

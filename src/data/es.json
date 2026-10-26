@@ -29,7 +29,66 @@
       "Ingeniero de seguridad enfocado a producción, especializado en la arquitectura, escalabilidad y mantenimiento de infraestructura crítica de SIEM/XDR en entornos empresariales on-premises y AWS EKS. Gestioné la ingeniería de datos en pipelines de alta ingesta que procesan más de 250 mil millones de eventos, evitando pérdidas de datos y cuellos de botella mediante el ajuste de buffers de kernel y del gestor. Reduje costes operativos en AWS hasta un 20% mediante right-sizing de cómputo y almacenamiento, a la vez que establecí despliegues declarativos con GitOps y observabilidad guiada por SLIs/SLOs para resolver caídas del clúster antes de que se produjeran pérdidas de registros.",
       "Como mantenedor principal del repositorio público de integraciones de Wazuh, desarrollo reglas de detección, decoders e integraciones para AWS, Azure, proveedores de identidad y perímetros de red. Trabajando entre ingeniería de plataformas y SecOps, construyo sistemas de detección basados en código con alta precisión, cumplimiento auditable frente a PCI-DSS e ISO 27001 y playbooks automatizados de active response que protegen operaciones a escala empresarial evitando la fatiga de alertas."
     ],
-    "location": "Granada, España"
+    "location": "Granada, España",
+    "plainLabel": "Sencillo",
+    "techLabel": "Técnico",
+    "switchLabel": "Mostrar la versión técnica",
+    "hint": "Pasa el ratón o toca una palabra subrayada para ver cómo se llama en el trabajo",
+    "more": "Más sobre mí",
+    "plain": [
+      [
+        {
+          "text": "Me encargo del "
+        },
+        {
+          "text": "sistema de alarma",
+          "tip": "SIEM / XDR: recoge los registros de cada máquina y lanza alertas ante ataques"
+        },
+        {
+          "text": " que usan las grandes empresas para detectar a los hackers. Lee "
+        },
+        {
+          "text": "miles de millones de mensajes",
+          "tip": "Más de 250 mil millones de eventos en pipelines de alta ingesta"
+        },
+        {
+          "text": " de sus ordenadores, y me aseguro de que "
+        },
+        {
+          "text": "no se pierda ninguno",
+          "tip": "Ajuste de buffers del kernel y del gestor para evitar cuellos de botella"
+        },
+        {
+          "text": ", mientras "
+        },
+        {
+          "text": "reduzco la factura de la nube",
+          "tip": "Right-sizing de cómputo y almacenamiento en AWS EKS: hasta un −20%"
+        },
+        {
+          "text": "."
+        }
+      ],
+      [
+        {
+          "text": "También escribo las "
+        },
+        {
+          "text": "reglas de «qué es sospechoso»",
+          "tip": "Reglas de detección y decoders para AWS, Azure, proveedores de identidad y equipos de red"
+        },
+        {
+          "text": " que cualquiera puede descargar gratis, y las "
+        },
+        {
+          "text": "respuestas automáticas",
+          "tip": "Playbooks de active response"
+        },
+        {
+          "text": " que se activan cuando algo no va bien."
+        }
+      ]
+    ]
   },
   "thesis": {
     "title": "Trabajo de Fin de Grado",
@@ -433,5 +492,207 @@
         "logos": "frameworks"
       }
     ]
+  },
+  "aboutPage": {
+    "meta": {
+      "title": "Sobre mí - Leon Elliott Fuller",
+      "description": "Quién es Leon Elliott Fuller, qué hace como ingeniero de seguridad en Wazuh, cómo trabaja y qué busca a continuación."
+    },
+    "kicker": "Sobre mí",
+    "title": "Hola, soy Leon.",
+    "lead": "Soy ingeniero de seguridad en Wazuh y vivo en Granada. Diseño, opero y arreglo plataformas de seguridad que tienen que seguir funcionando a una escala enorme, y doy lo mejor de mí cuando el problema es difícil.",
+    "offline": "Fuera del trabajo corro ultramaratones, hago montaña y siempre tengo música puesta.",
+    "globeHint": "Arrastra para girar",
+    "globeLabel": "Globo con Granada y Cracovia",
+    "pins": ["Granada", "Cracovia"],
+    "stats": [
+      {
+        "value": "250B+",
+        "label": "eventos de seguridad en pipelines que optimizo"
+      },
+      {
+        "value": "−20%",
+        "label": "de coste en AWS EKS, con la misma protección"
+      },
+      {
+        "value": "Top 2",
+        "label": "en commits en las integraciones públicas de Wazuh"
+      },
+      {
+        "value": "MH",
+        "label": "Matrícula de Honor en mi TFG sobre criptografía de curvas elípticas"
+      }
+    ],
+    "doing": {
+      "title": "Qué hago",
+      "lead": "Disfruto resolviendo problemas y diseñando la arquitectura de los servicios que opero, con foco en la estabilidad, la escala y la eficiencia.",
+      "groups": [
+        {
+          "title": "Arquitectura y escala",
+          "items": [
+            "Plataformas SOC con Wazuh para grandes empresas: SIEM, XDR, HIDS y NIDS, on-prem y en la nube",
+            "Clústeres multinodo con Docker, Kubernetes y AWS EKS en varias zonas de disponibilidad",
+            "Pipelines de más de 250 mil millones de eventos, ajustados desde las colas y los workers hasta el indexador",
+            "Recuperar la visibilidad de seguridad cuando cae producción"
+          ]
+        },
+        {
+          "title": "Detección y automatización",
+          "items": [
+            "Mantenedor principal del repositorio público de integraciones de Wazuh",
+            "Reglas, decoders y reducción de ruido en los que los analistas pueden confiar",
+            "Políticas SCA para PCI DSS, CJIS e ISO 27001",
+            "Respuesta automática, reservando la aprobación del analista para las acciones disruptivas"
+          ]
+        },
+        {
+          "title": "Nube, identidad e IA",
+          "items": [
+            "AWS: SQS, CloudTrail, VPC Flow Logs y WAF; Azure mediante Microsoft Graph",
+            "SSO y RBAC con Okta, Entra ID, Google y LDAP",
+            "Syslog y Filebeat desde Cisco, FortiGate y Sophos",
+            "RAG en AWS: Bedrock con Claude, embeddings de Titan, OpenSearch, FastAPI, LangChain y ECS"
+          ]
+        }
+      ]
+    },
+    "now": {
+      "label": "Ahora mismo",
+      "title": "Möbius, el SOC con IA de Wazuh",
+      "text": "Tengo la responsabilidad técnica completa de Möbius: arquitectura, aplicación, infraestructura en AWS con Terraform, despliegue, seguridad y fiabilidad. El objetivo es llevar el SIEM más lejos con triaje de alertas asistido por IA, investigación de amenazas, correlación de incidentes y respuesta automática controlada.",
+      "tags": ["Arquitectura", "AWS", "Terraform", "Triaje con IA", "Respuesta automática"]
+    },
+    "values": {
+      "title": "Cómo trabajo",
+      "lead": "Lo que aporto a un equipo.",
+      "items": [
+        {
+          "title": "Problemas difíciles, a propósito",
+          "text": "Doy lo mejor de mí cuando el trabajo es complejo y tengo que pensar, diseñar y empujar hasta llegar a un resultado sólido. Pásame los ambiguos."
+        },
+        {
+          "title": "Mentalidad de producción",
+          "text": "La seguridad, los planes de rollback, las pruebas y la mantenibilidad van antes de publicar, no después."
+        },
+        {
+          "title": "Causas, no síntomas",
+          "text": "Sigo un problema por todas sus capas, de los datos al hardware, hasta poder explicarlo."
+        },
+        {
+          "title": "Siempre aprendiendo",
+          "text": "Aprendo rápido, me gusta la responsabilidad, y aprender constantemente es lo que me mantiene ambicioso."
+        }
+      ]
+    },
+    "story": {
+      "label": "De lo que más orgulloso estoy",
+      "title": "Cuando mis resultados no coincidían con los libros",
+      "text": "Para mi TFG pasé más de un año implementando criptografía de curvas elípticas desde cero en C++. Las mejoras que predecía la literatura no aparecían en mis mediciones, por años de optimizaciones de hardware y de ensamblador. Así que dejé de dar la teoría por buena y revisé cada capa (algoritmo, implementación, compilador, hardware) hasta poder explicar la diferencia. Obtuvo Matrícula de Honor.",
+      "badge": "Matrícula de Honor",
+      "cta": "Explora el TFG en 3D"
+    },
+    "looking": {
+      "title": "Qué busco",
+      "lead": "Dónde daría lo mejor de mí a continuación.",
+      "cta": "Hablemos",
+      "items": [
+        {
+          "title": "Un equipo competitivo y ambicioso",
+          "text": "Gente que sube el listón y espera que yo suba el mío."
+        },
+        {
+          "title": "Infraestructura a escala",
+          "text": "Sistemas en producción donde la estabilidad, la escala y la eficiencia importan de verdad."
+        },
+        {
+          "title": "Responsabilidad y autonomía",
+          "text": "Donde se valore el criterio técnico y hacerse cargo de sistemas en producción de principio a fin."
+        },
+        {
+          "title": "Espacio para crecer",
+          "text": "Problemas difíciles, gente de la que aprender y un camino claro hacia senior y más allá."
+        }
+      ]
+    },
+    "back": "Volver al inicio",
+    "fun": {
+      "title": "Algunas curiosidades",
+      "lead": "Lo que no cabe en un CV. Adelante, juega con ellas.",
+      "ultra": {
+        "title": "Corro ultramaratones",
+        "text": "Un ultra es cualquier carrera más larga que un maratón. Los corro por gusto, no por podios, y a menudo con amigos. Arrastra al corredor.",
+        "marathon": "Maratón",
+        "ultra": "Territorio ultra",
+        "road": "Aún en asfalto",
+        "km": "km",
+        "mi": "mi",
+        "label": "Distancia"
+      },
+      "ports": {
+        "title": "Mi servidor de casa tiene cero puertos abiertos",
+        "text": "Es una Raspberry Pi 5 detrás de un Cloudflare Tunnel con Zero Trust, así que nada escucha en internet. Venga, escanéalo.",
+        "button": "Escanear puertos",
+        "scanning": "Escaneando…",
+        "result": "{n} puertos escaneados · 0 abiertos",
+        "again": "Escanear otra vez",
+        "link": "Cómo lo hice",
+        "post": "de-puertos-abiertos-a-tuneles-cloudflare"
+      },
+      "music": {
+        "title": "Siempre hay música puesta",
+        "text": "Mientras programo, corro o descanso. Últimamente en bucle:",
+        "artists": ["Dave", "Knucks", "Little Simz", "Burna Boy"]
+      },
+      "time": {
+        "same": "Estoy en Granada, donde son las {g}. La misma hora que tú, así que seguramente estoy despierto.",
+        "diff": "Estoy en Granada, donde son las {g}. Para ti son las {l}."
+      }
+    }
+  },
+  "legal": {
+    "meta": {
+      "title": "Privacidad y aviso legal - Leon Elliott Fuller",
+      "description": "Política de privacidad y aviso legal de resume.leonfuller.com."
+    },
+    "title": "Privacidad y aviso legal",
+    "updated": "Última actualización: 26 de octubre de 2026",
+    "link": "Privacidad y aviso legal",
+    "summary": "Sin cookies, sin analítica, sin seguimiento y sin formularios. Yo no recojo datos personales en esta web.",
+    "sections": [
+      {
+        "title": "Quién gestiona esta web",
+        "body": [
+          "Esta es la web personal y sin ánimo comercial de Leon Elliott Fuller, con residencia en Granada, España. Puedes escribirme a <a href=\"mailto:l.elliottfuller@gmail.com\">l.elliottfuller@gmail.com</a>."
+        ]
+      },
+      {
+        "title": "Qué ocurre cuando la visitas",
+        "body": [
+          "<b>Alojamiento.</b> La web se sirve desde GitHub Pages. Como cualquier servidor web, GitHub trata tu dirección IP y los datos de la petición para entregar las páginas y mantenerlas seguras. Consulta la <a href=\"https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement\" target=\"_blank\" rel=\"noopener noreferrer\">declaración de privacidad de GitHub</a>.",
+          "<b>Tipografías.</b> Lato y JetBrains Mono se cargan desde Google Fonts, por lo que tu navegador envía tu dirección IP a Google. Consulta la <a href=\"https://policies.google.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">política de privacidad de Google</a>.",
+          "<b>Fórmulas.</b> KaTeX se carga desde la CDN de jsDelivr, que también recibe tu dirección IP. Consulta la <a href=\"https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net\" target=\"_blank\" rel=\"noopener noreferrer\">política de privacidad de jsDelivr</a>.",
+          "<b>Tus preferencias.</b> El tema (claro u oscuro) y el ajuste de sonido se guardan en el almacenamiento local de tu navegador. Nunca salen de tu dispositivo y puedes borrarlos cuando quieras."
+        ]
+      },
+      {
+        "title": "Si me escribes",
+        "body": [
+          "Uso tu correo y tu mensaje solo para responderte, conservo la conversación solo mientras sea útil y nunca la comparto con nadie."
+        ]
+      },
+      {
+        "title": "Tus derechos",
+        "body": [
+          "Según el RGPD puedes solicitar el acceso, la rectificación o la supresión de los datos personales que tenga sobre ti, u oponerte a su uso, escribiendo a la dirección anterior. También puedes presentar una reclamación ante la Agencia Española de Protección de Datos (<a href=\"https://www.aepd.es\" target=\"_blank\" rel=\"noopener noreferrer\">AEPD</a>)."
+        ]
+      },
+      {
+        "title": "Contenido y código",
+        "body": [
+          "Los textos, fotos e ilustraciones de esta web son © Leon Elliott Fuller salvo que se indique lo contrario. El código fuente tiene <a href=\"https://github.com/leonfullxr/MyWebsite\" target=\"_blank\" rel=\"noopener noreferrer\">licencia MIT en GitHub</a>. Los enlaces a otras webs se incluyen por comodidad y no me hago responsable de su contenido."
+        ]
+      }
+    ],
+    "back": "Volver al inicio"
   }
 }
