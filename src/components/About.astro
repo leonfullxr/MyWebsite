@@ -17,6 +17,12 @@ const pins = [
   { name: a.pins[0], lon: -3.6, lat: 37.18 },
   { name: a.pins[1], lon: 19.94, lat: 50.06 },
 ];
+const nodes = [
+  { x: 280, y: 52 },
+  { x: 486, y: 200 },
+  { x: 280, y: 348 },
+  { x: 74, y: 200 },
+];
 const check =
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>';
 ---
@@ -26,9 +32,6 @@ const check =
   <!-- Hello -->
   <section class="ab-wrap ab-hero">
     <div class="ab-hero-copy">
-      <p class="ab-kicker">
-        <img src="/images/mascot/head.webp" alt="" width="64" height="64" />{a.kicker}
-      </p>
       <h1 class="ab-h1">
         <span class="ab-wave-word">{a.title}</span>
         <img class="ab-wave" src="/images/mascot/waving.webp" alt="" width="160" height="160" />
@@ -48,64 +51,70 @@ const check =
     </div>
   </section>
 
-  <!-- Numbers -->
-  <section class="ab-wrap">
-    <ul class="ab-stats">
-      {
-        a.stats.map((s, i) => (
-          <li style={`--d:${i * 80}ms`} data-reveal>
-            <b>{s.value}</b>
-            <span>{s.label}</span>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-
-  <!-- What I do -->
-  <section class="ab-wrap ab-section">
-    <h2 class="ab-h2">{a.doing.title}</h2>
-    <p class="ab-sub">{a.doing.lead}</p>
-    <div class="ab-doing">
-      {
-        a.doing.groups.map((g, i) => (
-          <article class="ab-group" style={`--d:${i * 90}ms`} data-reveal>
-            <span class="ab-num">{String(i + 1).padStart(2, '0')}</span>
-            <h3>{g.title}</h3>
-            <ul>
-              {g.items.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          </article>
-        ))
-      }
-    </div>
-    <aside class="ab-now" data-reveal>
-      <span class="ab-now-dot" aria-hidden="true"></span>
-      <div>
-        <p class="ab-now-label">{a.now.label}</p>
-        <h3>{a.now.title}</h3>
-        <p>{a.now.text}</p>
-        <ul class="ab-tags">{a.now.tags.map((tag) => <li>{tag}</li>)}</ul>
-      </div>
-    </aside>
-  </section>
-
-  <!-- How I work -->
-  <section class="ab-wrap ab-section">
+  <!-- How I work: a small graph, every habit wired to the others -->
+  <section class="ab-wrap ab-section ab-first">
     <h2 class="ab-h2">{a.values.title}</h2>
     <p class="ab-sub">{a.values.lead}</p>
-    <div class="ab-values">
-      {
-        a.values.items.map((v, i) => (
-          <article class="ab-value" style={`--d:${i * 80}ms`} data-reveal>
-            <span class="ab-num">{String(i + 1).padStart(2, '0')}</span>
-            <h3>{v.title}</h3>
-            <p>{v.text}</p>
-          </article>
-        ))
-      }
+    <div class="ab-graph" data-graph data-reveal>
+      <div class="ab-graph-map">
+        <svg viewBox="0 0 560 400" aria-hidden="true">
+          <g class="ab-ring">
+            {
+              nodes.map((n, i) => {
+                const m = nodes[(i + 1) % nodes.length];
+                return <line x1={n.x} y1={n.y} x2={m.x} y2={m.y} />;
+              })
+            }
+          </g>
+          {
+            nodes.map((n, i) => (
+              <g class="ab-edge" data-edge={i}>
+                <line x1="280" y1="200" x2={n.x} y2={n.y} />
+                <circle r="4">
+                  <animateMotion
+                    dur={`${2.2 + i * 0.35}s`}
+                    repeatCount="indefinite"
+                    path={`M280 200 L${n.x} ${n.y}`}
+                  />
+                </circle>
+              </g>
+            ))
+          }
+        </svg>
+        <span class="ab-graph-core" aria-hidden="true">
+          <img src="/images/mascot/head.webp" alt="" width="64" height="64" />
+          <b>{a.values.center}</b>
+        </span>
+        {
+          nodes.map((n, i) => (
+            <button
+              type="button"
+              class:list={['ab-node', { 'is-on': i === 0 }]}
+              style={`left:${(n.x / 560) * 100}%;top:${(n.y / 400) * 100}%`}
+              aria-pressed={i === 0 ? 'true' : 'false'}
+              data-node={i}
+              data-ui-sound
+            >
+              <span class="ab-node-num">{String(i + 1).padStart(2, '0')}</span>
+              {a.values.items[i].short}
+            </button>
+          ))
+        }
+      </div>
+      <div class="ab-graph-panel" aria-live="polite">
+        {
+          a.values.items.map((v, i) => (
+            <article class="ab-graph-card" data-card={i} hidden={i !== 0}>
+              <span class="ab-num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{v.title}</h3>
+              <p>{v.text}</p>
+            </article>
+          ))
+        }
+        <div class="ab-graph-dots" aria-hidden="true">
+          {a.values.items.map((_, i) => <i class:list={{ 'is-on': i === 0 }} data-dot={i} />)}
+        </div>
+      </div>
     </div>
   </section>
 
@@ -170,43 +179,68 @@ const check =
           </p>
         </div>
       </article>
-      <article class="ab-toy" data-ports data-reveal>
-        <h3>{f.ports.title}</h3>
-        <p>{f.ports.text}</p>
-        <div class="ab-term" aria-live="polite">
-          <span class="ab-term-line">$ scan home-server --ports 1-65535</span>
-          <span
-            class="ab-term-out"
-            data-out
-            data-scanning={f.ports.scanning}
-            data-result={f.ports.result}>&nbsp;</span
-          >
-          <span class="ab-term-bar"><i data-bar></i></span>
+      <article class="ab-toy" data-jam data-reveal>
+        <div class="ab-toy-head">
+          <h3>{f.jam.title}</h3>
+          <span class="ab-jam-clock" data-jam-clock>48:00:00</span>
+        </div>
+        <p>{f.jam.text}</p>
+        <div class="ab-jam-board" aria-live="polite">
+          <p class="ab-jam-idle" data-jam-idle>{f.jam.idle}</p>
+          <p class="ab-jam-done" data-jam-done hidden>{f.jam.done}</p>
+          <ol class="ab-jam-awards" data-jam-awards hidden>
+            {f.jam.awards.map((award, i) => <li style={`--d:${i * 140}ms`}>{award}</li>)}
+          </ol>
         </div>
         <div class="ab-toy-foot">
-          <button type="button" class="ab-btn" data-scan data-again={f.ports.again} data-ui-sound
-            >{f.ports.button}</button
+          <button type="button" class="ab-btn" data-jam-start data-again={f.jam.again} data-ui-sound
+            >{f.jam.start}</button
           >
-          <a class="link text-sm font-bold" href={`/${lang}/blog/${f.ports.post}`} data-ui-sound
-            >{f.ports.link}</a
+          <a class="link text-sm font-bold" href={f.jam.url} target="_blank" rel="noopener" data-ext
+            >{f.jam.link}</a
           >
         </div>
       </article>
-      <article class="ab-toy" data-reveal>
-        <h3>{f.music.title}</h3>
-        <p>{f.music.text}</p>
-        <ul class="ab-records">
-          {
-            f.music.artists.map((artist, i) => (
-              <li>
-                <button type="button" class="ab-record" style={`--h:${i * 70 + 330}`} data-record>
-                  <span class="ab-disc" aria-hidden="true" />
-                  <span>{artist}</span>
-                </button>
-              </li>
-            ))
-          }
-        </ul>
+      <article class="ab-toy" data-cp data-reveal>
+        <h3>{f.cp.title}</h3>
+        <p>{f.cp.text}</p>
+        <div class="ab-judge" aria-live="polite">
+          <span class="ab-judge-verdict" data-verdict>—</span>
+          <span
+            class="ab-judge-meta"
+            data-verdict-meta
+            data-running={f.cp.running}
+            data-accepted={f.cp.accepted}
+            data-meta={f.cp.meta}>&nbsp;</span
+          >
+          <span class="ab-judge-tests" aria-hidden="true">
+            {Array.from({ length: 10 }, () => <i />)}
+          </span>
+        </div>
+        <div class="ab-toy-foot">
+          <button type="button" class="ab-btn" data-submit data-again={f.cp.again} data-ui-sound
+            >{f.cp.submit}</button
+          >
+        </div>
+      </article>
+      <article class="ab-toy ab-toy-wide ab-aoc" data-aoc data-reveal>
+        <div>
+          <h3>{f.aoc.title}</h3>
+          <p>{f.aoc.text}</p>
+          <div class="ab-toy-foot">
+            <a class="ab-btn" href={f.aoc.url} target="_blank" rel="noopener" data-ui-sound
+              >{f.aoc.link}&nbsp;↗</a
+            >
+            <a
+              class="link text-sm font-bold"
+              href="https://adventofcode.com/"
+              target="_blank"
+              rel="noopener"
+              data-ext>{f.aoc.site}</a
+            >
+          </div>
+        </div>
+        <pre class="ab-aoc-tree" aria-hidden="true" data-tree></pre>
       </article>
     </div>
   </section>

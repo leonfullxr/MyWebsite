@@ -498,88 +498,35 @@
       "title": "Sobre mí - Leon Elliott Fuller",
       "description": "Quién es Leon Elliott Fuller, qué hace como ingeniero de seguridad en Wazuh, cómo trabaja y qué busca a continuación."
     },
-    "kicker": "Sobre mí",
     "title": "Hola, soy Leon.",
     "lead": "Soy ingeniero de seguridad en Wazuh y vivo en Granada. Diseño, opero y arreglo plataformas de seguridad que tienen que seguir funcionando a una escala enorme, y doy lo mejor de mí cuando el problema es difícil.",
     "offline": "Fuera del trabajo corro ultramaratones, hago montaña y siempre tengo música puesta.",
     "globeHint": "Arrastra para girar",
     "globeLabel": "Globo con Granada y Cracovia",
     "pins": ["Granada", "Cracovia"],
-    "stats": [
-      {
-        "value": "250B+",
-        "label": "eventos de seguridad en pipelines que optimizo"
-      },
-      {
-        "value": "−20%",
-        "label": "de coste en AWS EKS, con la misma protección"
-      },
-      {
-        "value": "Top 2",
-        "label": "en commits en las integraciones públicas de Wazuh"
-      },
-      {
-        "value": "MH",
-        "label": "Matrícula de Honor en mi TFG sobre criptografía de curvas elípticas"
-      }
-    ],
-    "doing": {
-      "title": "Qué hago",
-      "lead": "Disfruto resolviendo problemas y diseñando la arquitectura de los servicios que opero, con foco en la estabilidad, la escala y la eficiencia.",
-      "groups": [
-        {
-          "title": "Arquitectura y escala",
-          "items": [
-            "Plataformas SOC con Wazuh para grandes empresas: SIEM, XDR, HIDS y NIDS, on-prem y en la nube",
-            "Clústeres multinodo con Docker, Kubernetes y AWS EKS en varias zonas de disponibilidad",
-            "Pipelines de más de 250 mil millones de eventos, ajustados desde las colas y los workers hasta el indexador",
-            "Recuperar la visibilidad de seguridad cuando cae producción"
-          ]
-        },
-        {
-          "title": "Detección y automatización",
-          "items": [
-            "Mantenedor principal del repositorio público de integraciones de Wazuh",
-            "Reglas, decoders y reducción de ruido en los que los analistas pueden confiar",
-            "Políticas SCA para PCI DSS, CJIS e ISO 27001",
-            "Respuesta automática, reservando la aprobación del analista para las acciones disruptivas"
-          ]
-        },
-        {
-          "title": "Nube, identidad e IA",
-          "items": [
-            "AWS: SQS, CloudTrail, VPC Flow Logs y WAF; Azure mediante Microsoft Graph",
-            "SSO y RBAC con Okta, Entra ID, Google y LDAP",
-            "Syslog y Filebeat desde Cisco, FortiGate y Sophos",
-            "RAG en AWS: Bedrock con Claude, embeddings de Titan, OpenSearch, FastAPI, LangChain y ECS"
-          ]
-        }
-      ]
-    },
-    "now": {
-      "label": "Ahora mismo",
-      "title": "Möbius, el SOC con IA de Wazuh",
-      "text": "Tengo la responsabilidad técnica completa de Möbius: arquitectura, aplicación, infraestructura en AWS con Terraform, despliegue, seguridad y fiabilidad. El objetivo es llevar el SIEM más lejos con triaje de alertas asistido por IA, investigación de amenazas, correlación de incidentes y respuesta automática controlada.",
-      "tags": ["Arquitectura", "AWS", "Terraform", "Triaje con IA", "Respuesta automática"]
-    },
     "values": {
       "title": "Cómo trabajo",
-      "lead": "Lo que aporto a un equipo.",
+      "lead": "Cuatro hábitos, todos conectados. Elige un nodo.",
+      "center": "Yo",
       "items": [
         {
           "title": "Problemas difíciles, a propósito",
+          "short": "Problemas difíciles",
           "text": "Doy lo mejor de mí cuando el trabajo es complejo y tengo que pensar, diseñar y empujar hasta llegar a un resultado sólido. Pásame los ambiguos."
         },
         {
           "title": "Mentalidad de producción",
+          "short": "Producción",
           "text": "La seguridad, los planes de rollback, las pruebas y la mantenibilidad van antes de publicar, no después."
         },
         {
           "title": "Causas, no síntomas",
+          "short": "Causas raíz",
           "text": "Sigo un problema por todas sus capas, de los datos al hardware, hasta poder explicarlo."
         },
         {
           "title": "Siempre aprendiendo",
+          "short": "Aprendizaje",
           "text": "Aprendo rápido, me gusta la responsabilidad, y aprender constantemente es lo que me mantiene ambicioso."
         }
       ]
@@ -628,24 +575,36 @@
         "mi": "mi",
         "label": "Distancia"
       },
-      "ports": {
-        "title": "Mi servidor de casa tiene cero puertos abiertos",
-        "text": "Es una Raspberry Pi 5 detrás de un Cloudflare Tunnel con Zero Trust, así que nada escucha en internet. Venga, escanéalo.",
-        "button": "Escanear puertos",
-        "scanning": "Escaneando…",
-        "result": "{n} puertos escaneados · 0 abiertos",
-        "again": "Escanear otra vez",
-        "link": "Cómo lo hice",
-        "post": "de-puertos-abiertos-a-tuneles-cloudflare"
-      },
-      "music": {
-        "title": "Siempre hay música puesta",
-        "text": "Mientras programo, corro o descanso. Últimamente en bucle:",
-        "artists": ["Dave", "Knucks", "Little Simz", "Burna Boy"]
-      },
       "time": {
         "same": "Estoy en Granada, donde son las {g}. La misma hora que tú, así que seguramente estoy despierto.",
         "diff": "Estoy en Granada, donde son las {g}. Para ti son las {l}."
+      },
+      "jam": {
+        "title": "Hago videojuegos en 48 horas",
+        "text": "Game jams: una temática, un fin de semana y un equipo. En la jam de Pichola nuestro equipo de cinco ganó Mejor Arte.",
+        "start": "Empezar la jam",
+        "again": "Otra vez",
+        "done": "¡Tiempo! Resultados:",
+        "awards": ["1.º · Mejor Arte", "3.º · Mayor Potencial Comercial", "3.º · Más Popular"],
+        "link": "Pichola en GitHub",
+        "url": "https://github.com/leonfullxr/Pichola",
+        "idle": "48 horas en el reloj. ¿Listo?"
+      },
+      "cp": {
+        "title": "Participo en concursos de programación",
+        "text": "Límites de tiempo ajustados, casos de prueba ocultos y un juez que solo dice Accepted o Wrong Answer.",
+        "submit": "Enviar solución",
+        "again": "Enviar otra vez",
+        "running": "Ejecutando el test {n}…",
+        "accepted": "Accepted",
+        "meta": "Todos los tests superados"
+      },
+      "aoc": {
+        "title": "Cada diciembre hago el Advent of Code",
+        "text": "25 días de retos, dos partes al día y una estrella dorada por cada una.",
+        "link": "Mis soluciones en GitHub",
+        "url": "https://github.com/leonfullxr?tab=repositories&q=advent",
+        "site": "adventofcode.com"
       }
     }
   },

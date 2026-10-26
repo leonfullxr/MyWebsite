@@ -498,88 +498,35 @@
       "title": "About - Leon Elliott Fuller",
       "description": "Who Leon Elliott Fuller is, what he does as a security engineer at Wazuh, how he works and what he is looking for next."
     },
-    "kicker": "About",
     "title": "Hi, I’m Leon.",
     "lead": "I’m a security engineer at Wazuh, based in Granada, Spain. I design, run and fix security platforms that have to keep working at enormous scale, and I’m at my best when the problem is hard.",
     "offline": "Outside work I run ultramarathons, hike in the mountains and always have music on.",
     "globeHint": "Drag to spin",
     "globeLabel": "Globe showing Granada and Kraków",
     "pins": ["Granada", "Kraków"],
-    "stats": [
-      {
-        "value": "250B+",
-        "label": "security events through pipelines I tune"
-      },
-      {
-        "value": "−20%",
-        "label": "AWS EKS cost, same protection"
-      },
-      {
-        "value": "Top 2",
-        "label": "contributor by commits to Wazuh’s public integrations"
-      },
-      {
-        "value": "Honors",
-        "label": "Matrícula de Honor for my thesis on elliptic-curve cryptography"
-      }
-    ],
-    "doing": {
-      "title": "What I do",
-      "lead": "I enjoy problem solving and designing the architecture of the services I run, with a focus on stability, scale and efficiency.",
-      "groups": [
-        {
-          "title": "Architecture & scale",
-          "items": [
-            "SOC platforms on Wazuh for large enterprises: SIEM, XDR, HIDS and NIDS, on-prem and in the cloud",
-            "Multi-node clusters on Docker, Kubernetes and AWS EKS across availability zones",
-            "Pipelines of 250B+ events, tuned from queues and workers down to the indexer",
-            "Restoring security visibility when production goes down"
-          ]
-        },
-        {
-          "title": "Detection & automation",
-          "items": [
-            "Core maintainer of Wazuh’s public integrations repository",
-            "Custom rules, decoders and noise reduction analysts can trust",
-            "SCA policies for PCI DSS, CJIS and ISO 27001",
-            "Automated response, with analyst approval kept for disruptive actions"
-          ]
-        },
-        {
-          "title": "Cloud, identity & AI",
-          "items": [
-            "AWS: SQS, CloudTrail, VPC Flow Logs and WAF; Azure through Microsoft Graph",
-            "SSO and RBAC with Okta, Entra ID, Google and LDAP",
-            "Syslog and Filebeat from Cisco, FortiGate and Sophos",
-            "RAG on AWS: Bedrock with Claude, Titan embeddings, OpenSearch, FastAPI, LangChain and ECS"
-          ]
-        }
-      ]
-    },
-    "now": {
-      "label": "Right now",
-      "title": "Möbius, Wazuh’s AI-powered SOC",
-      "text": "I have sole end-to-end technical ownership of Möbius: architecture, application, AWS infrastructure in Terraform, deployment, security and reliability. The goal is to take the SIEM further with AI-assisted alert triage, threat investigation, incident correlation and controlled automated response.",
-      "tags": ["Architecture", "AWS", "Terraform", "AI triage", "Automated response"]
-    },
     "values": {
       "title": "How I work",
-      "lead": "What I bring to a team.",
+      "lead": "Four habits, all wired together. Pick a node.",
+      "center": "Me",
       "items": [
         {
           "title": "Hard problems, on purpose",
+          "short": "Hard problems",
           "text": "I’m at my best when the work is complex and I have to think, design and push through to a solid result. Hand me the ambiguous ones."
         },
         {
           "title": "Production-minded",
+          "short": "Production-minded",
           "text": "Security, rollback plans, testing and maintainability come before shipping, not after."
         },
         {
           "title": "Root causes, not symptoms",
+          "short": "Root causes",
           "text": "I trace a problem through every layer, from the data down to the hardware, until I can explain it."
         },
         {
           "title": "Always learning",
+          "short": "Always learning",
           "text": "I learn fast, I like responsibility, and constant learning is what keeps me ambitious."
         }
       ]
@@ -628,24 +575,36 @@
         "mi": "mi",
         "label": "Distance"
       },
-      "ports": {
-        "title": "My home server has zero open ports",
-        "text": "It’s a Raspberry Pi 5 behind a Cloudflare Tunnel with Zero Trust, so nothing listens on the internet. Go on, scan it.",
-        "button": "Scan ports",
-        "scanning": "Scanning…",
-        "result": "{n} ports scanned · 0 open",
-        "again": "Scan again",
-        "link": "Read how I did it",
-        "post": "from-port-forwarding-to-cloudflare-tunnels"
-      },
-      "music": {
-        "title": "There’s always music on",
-        "text": "While I code, run or relax. Lately on repeat:",
-        "artists": ["Dave", "Knucks", "Little Simz", "Burna Boy"]
-      },
       "time": {
         "same": "I’m in Granada, where it’s {g}. Same time as you, so I’m probably awake.",
         "diff": "I’m in Granada, where it’s {g}. For you it’s {l}."
+      },
+      "jam": {
+        "title": "I make games in 48 hours",
+        "text": "Game jams: a theme, a weekend and a team. At the Pichola jam our team of five won Best Art.",
+        "start": "Start the jam",
+        "again": "Again",
+        "done": "Time’s up! Results:",
+        "awards": ["1st · Best Art", "3rd · Best Commercial Potential", "3rd · Most Popular"],
+        "link": "Pichola on GitHub",
+        "url": "https://github.com/leonfullxr/Pichola",
+        "idle": "48 hours on the clock. Ready?"
+      },
+      "cp": {
+        "title": "I compete in programming contests",
+        "text": "Tight time limits, hidden test cases, and a judge that only ever says Accepted or Wrong Answer.",
+        "submit": "Submit solution",
+        "again": "Submit again",
+        "running": "Running on test {n}…",
+        "accepted": "Accepted",
+        "meta": "All tests passed"
+      },
+      "aoc": {
+        "title": "Every December I do Advent of Code",
+        "text": "25 days of puzzles, two parts a day and a gold star for each one.",
+        "link": "My solutions on GitHub",
+        "url": "https://github.com/leonfullxr?tab=repositories&q=advent",
+        "site": "adventofcode.com"
       }
     }
   },

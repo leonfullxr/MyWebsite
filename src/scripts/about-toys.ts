@@ -1,5 +1,5 @@
-// About page toys: things rise in as you scroll, the ultra distance slider, a port scan that
-// finds nothing, records that spin, and the time in Granada next to the visitor's own.
+// About page toys: things rise in as you scroll, the How I work graph, the ultra distance
+// slider, a 48-hour jam clock, a contest judge, an ASCII Advent tree, and the time in Granada.
 const reduce = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function reveals(root: HTMLElement) {
@@ -52,45 +52,133 @@ function ultra(root: HTMLElement) {
   render();
 }
 
-function ports(root: HTMLElement) {
-  const box = root.querySelector<HTMLElement>('[data-ports]');
+function graph(root: HTMLElement) {
+  const box = root.querySelector<HTMLElement>('[data-graph]');
   if (!box) return;
-  const btn = box.querySelector<HTMLButtonElement>('[data-scan]')!;
-  const out = box.querySelector<HTMLElement>('[data-out]')!;
-  const bar = box.querySelector<HTMLElement>('[data-bar]')!;
-  const label = btn.textContent;
-  const total = 65535;
-  const fmt = (n: number) => n.toLocaleString(document.documentElement.lang);
+  const nodes = Array.from(box.querySelectorAll<HTMLButtonElement>('[data-node]'));
+  const cards = Array.from(box.querySelectorAll<HTMLElement>('[data-card]'));
+  const dots = Array.from(box.querySelectorAll<HTMLElement>('[data-dot]'));
+  const edges = Array.from(box.querySelectorAll<SVGGElement>('[data-edge]'));
+  let current = 0;
+  let timer = 0;
+  const show = (i: number) => {
+    current = i;
+    nodes.forEach((n, j) => {
+      n.classList.toggle('is-on', j === i);
+      n.setAttribute('aria-pressed', String(j === i));
+    });
+    cards.forEach((c, j) => (c.hidden = j !== i));
+    dots.forEach((d, j) => d.classList.toggle('is-on', j === i));
+    edges.forEach((e, j) => e.classList.toggle('is-on', j === i));
+  };
+  const stopAuto = () => window.clearInterval(timer);
+  nodes.forEach((n, i) =>
+    n.addEventListener('click', () => {
+      stopAuto();
+      show(i);
+    })
+  );
+  // Walk the graph on its own until someone picks a node.
+  if (!reduce()) timer = window.setInterval(() => show((current + 1) % nodes.length), 4200);
+  show(0);
+}
+
+function jam(root: HTMLElement) {
+  const box = root.querySelector<HTMLElement>('[data-jam]');
+  if (!box) return;
+  const clock = box.querySelector<HTMLElement>('[data-jam-clock]')!;
+  const btn = box.querySelector<HTMLButtonElement>('[data-jam-start]')!;
+  const done = box.querySelector<HTMLElement>('[data-jam-done]')!;
+  const awards = box.querySelector<HTMLElement>('[data-jam-awards]')!;
+  const idle = box.querySelector<HTMLElement>('[data-jam-idle]');
+  const total = 48 * 3600;
+  const fmt = (sec: number) =>
+    [Math.floor(sec / 3600), Math.floor((sec % 3600) / 60), sec % 60]
+      .map((n) => String(n).padStart(2, '0'))
+      .join(':');
   btn.addEventListener('click', () => {
     btn.disabled = true;
-    box.classList.remove('is-done');
+    done.hidden = true;
+    awards.hidden = true;
+    if (idle) idle.hidden = true;
+    box.classList.add('is-running');
     const t0 = performance.now();
-    const ms = reduce() ? 0 : 1600;
+    const ms = reduce() ? 0 : 2200;
     const step = (now: number) => {
       const k = ms ? Math.min(1, (now - t0) / ms) : 1;
-      bar.style.width = `${k * 100}%`;
-      out.textContent = `${out.dataset.scanning} ${fmt(Math.round(k * total))}`;
+      // Ease out so the last hour crawls, like it does at a real jam.
+      const eased = 1 - Math.pow(1 - k, 3);
+      clock.textContent = fmt(Math.round(total * (1 - eased)));
       if (k < 1) return requestAnimationFrame(step);
-      out.textContent = (out.dataset.result || '').replace('{n}', fmt(total));
-      box.classList.add('is-done');
+      box.classList.remove('is-running');
+      done.hidden = false;
+      awards.hidden = false;
       btn.disabled = false;
-      btn.textContent = btn.dataset.again || label;
+      btn.textContent = btn.dataset.again || btn.textContent;
     };
     requestAnimationFrame(step);
   });
 }
 
-function records(root: HTMLElement) {
-  root.querySelectorAll<HTMLButtonElement>('[data-record]').forEach((b) =>
-    b.addEventListener('click', () => {
-      const on = !b.classList.contains('is-playing');
-      root
-        .querySelectorAll('[data-record].is-playing')
-        .forEach((r) => r.classList.remove('is-playing'));
-      b.classList.toggle('is-playing', on);
-      b.setAttribute('aria-pressed', String(on));
-    })
-  );
+function judge(root: HTMLElement) {
+  const box = root.querySelector<HTMLElement>('[data-cp]');
+  if (!box) return;
+  const btn = box.querySelector<HTMLButtonElement>('[data-submit]')!;
+  const verdict = box.querySelector<HTMLElement>('[data-verdict]')!;
+  const meta = box.querySelector<HTMLElement>('[data-verdict-meta]')!;
+  const tests = Array.from(box.querySelectorAll<HTMLElement>('.ab-judge-tests i'));
+  btn.addEventListener('click', () => {
+    btn.disabled = true;
+    box.classList.remove('is-accepted');
+    tests.forEach((t) => t.classList.remove('is-pass'));
+    verdict.textContent = '…';
+    let i = 0;
+    const next = () => {
+      if (i < tests.length) {
+        meta.textContent = (meta.dataset.running || '').replace('{n}', String(i + 1));
+        tests[i].classList.add('is-pass');
+        i += 1;
+        window.setTimeout(next, reduce() ? 0 : 160 + Math.random() * 140);
+        return;
+      }
+      verdict.textContent = meta.dataset.accepted || 'Accepted';
+      meta.textContent = meta.dataset.meta || '';
+      box.classList.add('is-accepted');
+      btn.disabled = false;
+      btn.textContent = btn.dataset.again || btn.textContent;
+    };
+    next();
+  });
+}
+
+function tree(root: HTMLElement) {
+  const pre = root.querySelector<HTMLElement>('[data-tree]');
+  if (!pre) return;
+  // An ASCII tree in the spirit of the Advent of Code calendar: ornaments twinkle,
+  // and the star on top is gold.
+  const body = ['*', '>o<', '>@>o<', '>>*<o<<', '>o>>@<<*<', '>>*<o>>@<<<', '>o>>*<@<<o>><'];
+  const width = 13;
+  const center = (row: string) => {
+    const pad = Math.floor((width - row.length) / 2);
+    return ' '.repeat(pad) + row + ' '.repeat(width - row.length - pad);
+  };
+  const rows = [...body.map(center), center('|_|')];
+  const ornaments = new Set(['o', '@', '*']);
+  const wrap = (ch: string, r: number, c: number) => {
+    if (r === 0 && ch === '*') return '<b class="t-star">*</b>';
+    if (ch === '|' || ch === '_') return `<span class="t-trunk">${ch}</span>`;
+    if (ornaments.has(ch))
+      return `<span class="t-orn" style="--i:${(r * 7 + c * 3) % 10}">${ch}</span>`;
+    if (ch === '<' || ch === '>') return `<span class="t-leaf">${ch}</span>`;
+    return ch;
+  };
+  pre.innerHTML = rows
+    .map((row, r) =>
+      Array.from(row)
+        .map((ch, c) => wrap(ch, r, c))
+        .join('')
+    )
+    .join('\n');
 }
 
 function clock(root: HTMLElement) {
@@ -113,7 +201,9 @@ export function mountAboutToys(root: HTMLElement | null) {
   if (!root) return;
   reveals(root);
   ultra(root);
-  ports(root);
-  records(root);
+  graph(root);
+  jam(root);
+  judge(root);
+  tree(root);
   clock(root);
 }
