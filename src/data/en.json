@@ -498,10 +498,7 @@
       "title": "About - Leon Elliott Fuller",
       "description": "Who Leon Elliott Fuller is, what he does as a security engineer at Wazuh, how he works and what he is looking for next."
     },
-    "title": "Hi, I’m Leon.",
-    "lead": "I’m a security engineer at Wazuh, based in Granada, Spain. I design, run and fix security platforms that have to keep working at enormous scale, and I’m at my best when the problem is hard.",
-    "offline": "Outside work I run ultramarathons, hike in the mountains and always have music on.",
-    "globeHint": "Drag to spin",
+    "title": "Hi there! I’m Leon.",
     "globeLabel": "Globe showing Granada and Kraków",
     "pins": ["Granada", "Kraków"],
     "values": {
@@ -563,8 +560,6 @@
     },
     "back": "Back to home",
     "fun": {
-      "title": "A few fun facts",
-      "lead": "The things that don’t fit on a CV. Go ahead, play with them.",
       "ultra": {
         "title": "I run ultramarathons",
         "text": "An ultra is any race longer than a marathon. I run them for fun, not podiums, and often with friends. Drag the runner.",
@@ -574,10 +569,6 @@
         "km": "km",
         "mi": "mi",
         "label": "Distance"
-      },
-      "time": {
-        "same": "I’m in Granada, where it’s {g}. Same time as you, so I’m probably awake.",
-        "diff": "I’m in Granada, where it’s {g}. For you it’s {l}."
       },
       "jam": {
         "title": "I make games in 48 hours",
@@ -606,6 +597,23 @@
         "url": "https://github.com/leonfullxr?tab=repositories&q=advent",
         "site": "adventofcode.com"
       }
+    },
+    "intro": [
+      "I’m a security engineer at Wazuh, based in Granada, Spain.",
+      "I design, run and fix security platforms that have to keep working at enormous scale, and I’m at my best when the problem is hard.",
+      "Outside work I run ultramarathons, hike in the mountains and always have music on."
+    ],
+    "place": {
+      "same": "I live in Granada, Spain, where it’s {g}, same as for you.",
+      "diff": "I live in Granada, Spain, where it’s {g}. For you it’s {l}.",
+      "note": "I spent a year in Kraków, and these days I work remotely. Drag the globe to spin it."
+    },
+    "langs": {
+      "words": ["Hello!", "¡Hola!"],
+      "text": "English and Spanish are both my native languages."
+    },
+    "edu": {
+      "text": "I studied computer engineering at the University of Granada, with an Erasmus+ year at AGH in Kraków."
     }
   },
   "legal": {

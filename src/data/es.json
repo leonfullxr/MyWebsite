@@ -498,10 +498,7 @@
       "title": "Sobre mí - Leon Elliott Fuller",
       "description": "Quién es Leon Elliott Fuller, qué hace como ingeniero de seguridad en Wazuh, cómo trabaja y qué busca a continuación."
     },
-    "title": "Hola, soy Leon.",
-    "lead": "Soy ingeniero de seguridad en Wazuh y vivo en Granada. Diseño, opero y arreglo plataformas de seguridad que tienen que seguir funcionando a una escala enorme, y doy lo mejor de mí cuando el problema es difícil.",
-    "offline": "Fuera del trabajo corro ultramaratones, hago montaña y siempre tengo música puesta.",
-    "globeHint": "Arrastra para girar",
+    "title": "¡Hola! Soy Leon.",
     "globeLabel": "Globo con Granada y Cracovia",
     "pins": ["Granada", "Cracovia"],
     "values": {
@@ -563,8 +560,6 @@
     },
     "back": "Volver al inicio",
     "fun": {
-      "title": "Algunas curiosidades",
-      "lead": "Lo que no cabe en un CV. Adelante, juega con ellas.",
       "ultra": {
         "title": "Corro ultramaratones",
         "text": "Un ultra es cualquier carrera más larga que un maratón. Los corro por gusto, no por podios, y a menudo con amigos. Arrastra al corredor.",
@@ -574,10 +569,6 @@
         "km": "km",
         "mi": "mi",
         "label": "Distancia"
-      },
-      "time": {
-        "same": "Estoy en Granada, donde son las {g}. La misma hora que tú, así que seguramente estoy despierto.",
-        "diff": "Estoy en Granada, donde son las {g}. Para ti son las {l}."
       },
       "jam": {
         "title": "Hago videojuegos en 48 horas",
@@ -606,6 +597,23 @@
         "url": "https://github.com/leonfullxr?tab=repositories&q=advent",
         "site": "adventofcode.com"
       }
+    },
+    "intro": [
+      "Soy ingeniero de seguridad en Wazuh y vivo en Granada, España.",
+      "Diseño, opero y arreglo plataformas de seguridad que tienen que seguir funcionando a una escala enorme, y doy lo mejor de mí cuando el problema es difícil.",
+      "Fuera del trabajo corro ultramaratones, hago montaña y siempre tengo música puesta."
+    ],
+    "place": {
+      "same": "Vivo en Granada, España, donde son las {g}, igual que para ti.",
+      "diff": "Vivo en Granada, España, donde son las {g}. Para ti son las {l}.",
+      "note": "Pasé un año en Cracovia y ahora trabajo en remoto. Arrastra el globo para girarlo."
+    },
+    "langs": {
+      "words": ["¡Hola!", "Hello!"],
+      "text": "El inglés y el español son mis dos lenguas nativas."
+    },
+    "edu": {
+      "text": "Estudié ingeniería informática en la Universidad de Granada, con un año de Erasmus+ en la AGH de Cracovia."
     }
   },
   "legal": {

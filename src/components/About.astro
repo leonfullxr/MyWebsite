@@ -1,8 +1,9 @@
 ---
-// The longer story: who Leon is, what he does, how he works and what he wants next.
-// Plain words first, details in tidy lists, a few toys to play with.
+// The longer story, laid out as one connected bento: a big hello, then tiles of different
+// sizes that lock together, with the clay mascot climbing over their edges.
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
+import SiteFlag from './SiteFlag.astro';
 import '../styles/about.css';
 import type { Data } from '../data/home';
 
@@ -30,224 +31,252 @@ const check =
 <Nav nav={data.nav} lang={lang} />
 <main class="about-page" data-about>
   <!-- Hello -->
-  <section class="ab-wrap ab-hero">
-    <div class="ab-hero-copy">
-      <h1 class="ab-h1">
-        <span class="ab-wave-word">{a.title}</span>
-        <img class="ab-wave" src="/images/mascot/waving.webp" alt="" width="160" height="160" />
-      </h1>
-      <p class="ab-lead">{a.lead}</p>
-      <p class="ab-offline">{a.offline}</p>
-    </div>
-    <div class="ab-globe" data-globe data-label={a.globeLabel} data-pins={JSON.stringify(pins)}>
+  <section class="ab-hero">
+    <div class="ab-hero-inner">
+      <div class="ab-hero-copy">
+        <h1 class="ab-h1">{a.title}</h1>
+        {a.intro.map((p) => <p>{p}</p>)}
+      </div>
       <img
-        class="ab-globe-mascot"
-        src="/images/mascot/reclining.webp"
+        class="ab-hero-me"
+        src="/images/mascot/waving.webp"
         alt=""
-        width="200"
-        height="200"
+        width="640"
+        height="640"
+        fetchpriority="high"
       />
-      <span class="ab-globe-hint" aria-hidden="true">{a.globeHint} ↻</span>
     </div>
+    <svg class="ab-ridge" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+      <path
+        class="r1"
+        d="M0 120 L120 70 L210 98 L330 40 L440 92 L560 56 L680 104 L790 48 L900 86 L1010 30 L1130 90 L1250 60 L1350 96 L1440 70 V160 H0 Z"
+      ></path>
+      <path
+        class="r2"
+        d="M0 140 L160 102 L280 128 L420 88 L560 126 L700 96 L840 132 L980 92 L1110 124 L1250 100 L1440 128 V160 H0 Z"
+      ></path>
+    </svg>
   </section>
 
-  <!-- How I work: a small graph, every habit wired to the others -->
-  <section class="ab-wrap ab-section ab-first">
-    <h2 class="ab-h2">{a.values.title}</h2>
-    <p class="ab-sub">{a.values.lead}</p>
-    <div class="ab-graph" data-graph data-reveal>
-      <div class="ab-graph-map">
-        <svg viewBox="0 0 560 400" aria-hidden="true">
-          <g class="ab-ring">
-            {
-              nodes.map((n, i) => {
-                const m = nodes[(i + 1) % nodes.length];
-                return <line x1={n.x} y1={n.y} x2={m.x} y2={m.y} />;
-              })
-            }
-          </g>
-          {
-            nodes.map((n, i) => (
-              <g class="ab-edge" data-edge={i}>
-                <line x1="280" y1="200" x2={n.x} y2={n.y} />
-                <circle r="4">
-                  <animateMotion
-                    dur={`${2.2 + i * 0.35}s`}
-                    repeatCount="indefinite"
-                    path={`M280 200 L${n.x} ${n.y}`}
-                  />
-                </circle>
-              </g>
-            ))
-          }
-        </svg>
-        <span class="ab-graph-core" aria-hidden="true">
-          <img src="/images/mascot/head.webp" alt="" width="64" height="64" />
-          <b>{a.values.center}</b>
-        </span>
-        {
-          nodes.map((n, i) => (
-            <button
-              type="button"
-              class:list={['ab-node', { 'is-on': i === 0 }]}
-              style={`left:${(n.x / 560) * 100}%;top:${(n.y / 400) * 100}%`}
-              aria-pressed={i === 0 ? 'true' : 'false'}
-              data-node={i}
-              data-ui-sound
-            >
-              <span class="ab-node-num">{String(i + 1).padStart(2, '0')}</span>
-              {a.values.items[i].short}
-            </button>
-          ))
-        }
+  <!-- The bento -->
+  <section class="ab-bento">
+    <article class="tile t-globe" data-reveal>
+      <div class="ab-globe" data-globe data-label={a.globeLabel} data-pins={JSON.stringify(pins)}>
       </div>
-      <div class="ab-graph-panel" aria-live="polite">
+      <p class="t-text" data-clock data-same={a.place.same} data-diff={a.place.diff}>&nbsp;</p>
+      <p class="t-note">{a.place.note}</p>
+    </article>
+
+    <article class="tile t-langs" data-reveal>
+      <p class="t-hello" aria-hidden="true">
         {
-          a.values.items.map((v, i) => (
-            <article class="ab-graph-card" data-card={i} hidden={i !== 0}>
-              <span class="ab-num">{String(i + 1).padStart(2, '0')}</span>
-              <h3>{v.title}</h3>
-              <p>{v.text}</p>
-            </article>
+          a.langs.words.map((w, i) => (
+            <span class:list={{ 'is-on': i === 0 }} data-word>
+              {w}
+            </span>
           ))
         }
-        <div class="ab-graph-dots" aria-hidden="true">
-          {a.values.items.map((_, i) => <i class:list={{ 'is-on': i === 0 }} data-dot={i} />)}
+      </p>
+      <div class="t-flags" aria-hidden="true">
+        <SiteFlag language="en" /><SiteFlag language="es" />
+      </div>
+      <p class="t-text">{a.langs.text}</p>
+    </article>
+
+    <article class="tile t-edu" data-reveal>
+      <div class="t-flags" aria-hidden="true">
+        <SiteFlag language="es" />
+        <svg class="t-flag-pl" viewBox="0 0 24 24"
+          ><clipPath id="pl"><circle cx="12" cy="12" r="12"></circle></clipPath><g
+            clip-path="url(#pl)"
+            ><rect width="24" height="12" fill="#fff"></rect><rect
+              y="12"
+              width="24"
+              height="12"
+              fill="#dc143c"></rect></g
+          ></svg
+        >
+      </div>
+      <p class="t-text">{a.edu.text}</p>
+    </article>
+
+    <article class="tile t-ultra" data-ultra data-reveal>
+      <div class="t-head">
+        <h3>{f.ultra.title}</h3>
+        <div class="ab-units" role="group" aria-label={f.ultra.label}>
+          <button type="button" aria-pressed="true" data-unit="km">{f.ultra.km}</button>
+          <button type="button" aria-pressed="false" data-unit="mi">{f.ultra.mi}</button>
         </div>
       </div>
-    </div>
-  </section>
+      <p class="t-text t-left">{f.ultra.text}</p>
+      <div class="ab-track">
+        <div class="ab-track-line">
+          <span class="ab-track-fill" data-fill></span>
+          <span class="ab-track-mark" style="left: 42.195%"><i></i>{f.ultra.marathon}</span>
+          <img class="ab-track-runner" src="/images/mascot/running.webp" alt="" data-runner />
+          <input
+            type="range"
+            min="0"
+            max="100"
+            step="0.5"
+            value="60"
+            aria-label={f.ultra.label}
+            data-range
+          />
+        </div>
+        <p class="ab-track-out" aria-live="polite">
+          <b data-dist>60 km</b>
+          <span data-zone data-road={f.ultra.road} data-ultra-label={f.ultra.ultra}
+            >{f.ultra.ultra}</span
+          >
+        </p>
+      </div>
+    </article>
 
-  <!-- Proudest work -->
-  <section class="ab-wrap ab-section">
-    <article class="ab-story" data-reveal>
-      <div class="ab-story-medal" aria-hidden="true">
+    <article class="tile t-jam" data-jam data-reveal>
+      <img class="t-peek t-peek-jam" src="/images/mascot/jumping.webp" alt="" />
+      <span class="ab-jam-clock" data-jam-clock>48:00:00</span>
+      <h3>{f.jam.title}</h3>
+      <p class="t-text">{f.jam.text}</p>
+      <div class="ab-jam-board" aria-live="polite">
+        <p class="ab-jam-idle" data-jam-idle>{f.jam.idle}</p>
+        <p class="ab-jam-done" data-jam-done hidden>{f.jam.done}</p>
+        <ol class="ab-jam-awards" data-jam-awards hidden>
+          {f.jam.awards.map((award, i) => <li style={`--d:${i * 140}ms`}>{award}</li>)}
+        </ol>
+      </div>
+      <div class="t-foot">
+        <button type="button" class="ab-btn" data-jam-start data-again={f.jam.again} data-ui-sound
+          >{f.jam.start}</button
+        >
+        <a class="link text-sm font-bold" href={f.jam.url} target="_blank" rel="noopener" data-ext
+          >{f.jam.link}</a
+        >
+      </div>
+    </article>
+
+    <article class="tile t-story" data-reveal>
+      <div class="t-medal" aria-hidden="true">
         <svg viewBox="0 0 64 64"
-          ><circle cx="32" cy="36" r="20"></circle><path d="M22 4h8l4 14h-8zM34 4h8l-4 14h-8z"
-          ></path><path
+          ><path d="M22 4h8l4 14h-8zM34 4h8l-4 14h-8z"></path><circle cx="32" cy="36" r="20"
+          ></circle><path
             class="star"
             d="m32 26 3 6.2 6.8 1-5 4.8 1.2 6.8L32 41.6l-6 3.2 1.2-6.8-5-4.8 6.8-1z"></path></svg
         >
       </div>
-      <div>
-        <p class="ab-now-label">{a.story.label}</p>
-        <h3>{a.story.title}</h3>
-        <p>{a.story.text}</p>
-        <div class="ab-story-foot">
-          <span class="ab-badge">{a.story.badge}</span>
-          <a class="link font-bold" href={`/${lang}/thesis`} data-ui-sound>{a.story.cta}</a>
+      <p class="t-label">{a.story.label}</p>
+      <h3>{a.story.title}</h3>
+      <p class="t-text t-left">{a.story.text}</p>
+      <div class="t-foot">
+        <span class="ab-badge">{a.story.badge}</span>
+        <a class="link text-sm font-bold" href={`/${lang}/thesis`} data-ui-sound>{a.story.cta}</a>
+      </div>
+    </article>
+
+    <article class="tile t-cp" data-cp data-reveal>
+      <h3>{f.cp.title}</h3>
+      <p class="t-text">{f.cp.text}</p>
+      <div class="ab-judge" aria-live="polite">
+        <span class="ab-judge-verdict" data-verdict>—</span>
+        <span
+          class="ab-judge-meta"
+          data-verdict-meta
+          data-running={f.cp.running}
+          data-accepted={f.cp.accepted}
+          data-meta={f.cp.meta}>&nbsp;</span
+        >
+        <span class="ab-judge-tests" aria-hidden="true">
+          {Array.from({ length: 10 }, () => <i />)}
+        </span>
+      </div>
+      <div class="t-foot">
+        <button type="button" class="ab-btn" data-submit data-again={f.cp.again} data-ui-sound
+          >{f.cp.submit}</button
+        >
+      </div>
+    </article>
+
+    <article class="tile t-aoc" data-aoc data-reveal>
+      <pre class="ab-aoc-tree" aria-hidden="true" data-tree></pre>
+      <h3>{f.aoc.title}</h3>
+      <p class="t-text">{f.aoc.text}</p>
+      <div class="t-foot">
+        <a class="ab-btn" href={f.aoc.url} target="_blank" rel="noopener" data-ui-sound
+          >{f.aoc.link}&nbsp;↗</a
+        >
+      </div>
+    </article>
+
+    <article class="tile t-work" data-graph data-reveal>
+      <img class="t-peek t-peek-work" src="/images/mascot/reclining.webp" alt="" />
+      <div class="t-work-head">
+        <h2>{a.values.title}</h2>
+        <p class="t-text t-left">{a.values.lead}</p>
+      </div>
+      <div class="ab-graph">
+        <div class="ab-graph-map">
+          <svg viewBox="0 0 560 400" aria-hidden="true">
+            <g class="ab-ring">
+              {
+                nodes.map((n, i) => {
+                  const m = nodes[(i + 1) % nodes.length];
+                  return <line x1={n.x} y1={n.y} x2={m.x} y2={m.y} />;
+                })
+              }
+            </g>
+            {
+              nodes.map((n, i) => (
+                <g class="ab-edge" data-edge={i}>
+                  <line x1="280" y1="200" x2={n.x} y2={n.y} />
+                  <circle r="4">
+                    <animateMotion
+                      dur={`${2.2 + i * 0.35}s`}
+                      repeatCount="indefinite"
+                      path={`M280 200 L${n.x} ${n.y}`}
+                    />
+                  </circle>
+                </g>
+              ))
+            }
+          </svg>
+          <span class="ab-graph-core" aria-hidden="true">
+            <img src="/images/mascot/head.webp" alt="" width="64" height="64" />
+            <b>{a.values.center}</b>
+          </span>
+          {
+            nodes.map((n, i) => (
+              <button
+                type="button"
+                class:list={['ab-node', { 'is-on': i === 0 }]}
+                style={`left:${(n.x / 560) * 100}%;top:${(n.y / 400) * 100}%`}
+                aria-pressed={i === 0 ? 'true' : 'false'}
+                data-node={i}
+                data-ui-sound
+              >
+                <span class="ab-node-num">{String(i + 1).padStart(2, '0')}</span>
+                {a.values.items[i].short}
+              </button>
+            ))
+          }
+        </div>
+        <div class="ab-graph-panel" aria-live="polite">
+          {
+            a.values.items.map((v, i) => (
+              <article class="ab-graph-card" data-card={i} hidden={i !== 0}>
+                <span class="ab-num">{String(i + 1).padStart(2, '0')}</span>
+                <h3>{v.title}</h3>
+                <p>{v.text}</p>
+              </article>
+            ))
+          }
+          <div class="ab-graph-dots" aria-hidden="true">
+            {a.values.items.map((_, i) => <i class:list={{ 'is-on': i === 0 }} data-dot={i} />)}
+          </div>
         </div>
       </div>
     </article>
-  </section>
 
-  <!-- Fun facts -->
-  <section class="ab-wrap ab-section">
-    <h2 class="ab-h2">{f.title}</h2>
-    <p class="ab-sub">{f.lead}</p>
-    <div class="ab-fun">
-      <article class="ab-toy ab-toy-wide" data-ultra data-reveal>
-        <div class="ab-toy-head">
-          <h3>{f.ultra.title}</h3>
-          <div class="ab-units" role="group" aria-label={f.ultra.label}>
-            <button type="button" aria-pressed="true" data-unit="km">{f.ultra.km}</button>
-            <button type="button" aria-pressed="false" data-unit="mi">{f.ultra.mi}</button>
-          </div>
-        </div>
-        <p>{f.ultra.text}</p>
-        <div class="ab-track">
-          <div class="ab-track-line">
-            <span class="ab-track-fill" data-fill></span>
-            <span class="ab-track-mark" style="left: 42.195%"><i></i>{f.ultra.marathon}</span>
-            <img class="ab-track-runner" src="/images/mascot/running.webp" alt="" data-runner />
-            <input
-              type="range"
-              min="0"
-              max="100"
-              step="0.5"
-              value="60"
-              aria-label={f.ultra.label}
-              data-range
-            />
-          </div>
-
-          <p class="ab-track-out" aria-live="polite">
-            <b data-dist>60 km</b>
-            <span data-zone data-road={f.ultra.road} data-ultra-label={f.ultra.ultra}
-              >{f.ultra.ultra}</span
-            >
-          </p>
-        </div>
-      </article>
-      <article class="ab-toy" data-jam data-reveal>
-        <div class="ab-toy-head">
-          <h3>{f.jam.title}</h3>
-          <span class="ab-jam-clock" data-jam-clock>48:00:00</span>
-        </div>
-        <p>{f.jam.text}</p>
-        <div class="ab-jam-board" aria-live="polite">
-          <p class="ab-jam-idle" data-jam-idle>{f.jam.idle}</p>
-          <p class="ab-jam-done" data-jam-done hidden>{f.jam.done}</p>
-          <ol class="ab-jam-awards" data-jam-awards hidden>
-            {f.jam.awards.map((award, i) => <li style={`--d:${i * 140}ms`}>{award}</li>)}
-          </ol>
-        </div>
-        <div class="ab-toy-foot">
-          <button type="button" class="ab-btn" data-jam-start data-again={f.jam.again} data-ui-sound
-            >{f.jam.start}</button
-          >
-          <a class="link text-sm font-bold" href={f.jam.url} target="_blank" rel="noopener" data-ext
-            >{f.jam.link}</a
-          >
-        </div>
-      </article>
-      <article class="ab-toy" data-cp data-reveal>
-        <h3>{f.cp.title}</h3>
-        <p>{f.cp.text}</p>
-        <div class="ab-judge" aria-live="polite">
-          <span class="ab-judge-verdict" data-verdict>—</span>
-          <span
-            class="ab-judge-meta"
-            data-verdict-meta
-            data-running={f.cp.running}
-            data-accepted={f.cp.accepted}
-            data-meta={f.cp.meta}>&nbsp;</span
-          >
-          <span class="ab-judge-tests" aria-hidden="true">
-            {Array.from({ length: 10 }, () => <i />)}
-          </span>
-        </div>
-        <div class="ab-toy-foot">
-          <button type="button" class="ab-btn" data-submit data-again={f.cp.again} data-ui-sound
-            >{f.cp.submit}</button
-          >
-        </div>
-      </article>
-      <article class="ab-toy ab-toy-wide ab-aoc" data-aoc data-reveal>
-        <div>
-          <h3>{f.aoc.title}</h3>
-          <p>{f.aoc.text}</p>
-          <div class="ab-toy-foot">
-            <a class="ab-btn" href={f.aoc.url} target="_blank" rel="noopener" data-ui-sound
-              >{f.aoc.link}&nbsp;↗</a
-            >
-            <a
-              class="link text-sm font-bold"
-              href="https://adventofcode.com/"
-              target="_blank"
-              rel="noopener"
-              data-ext>{f.aoc.site}</a
-            >
-          </div>
-        </div>
-        <pre class="ab-aoc-tree" aria-hidden="true" data-tree></pre>
-      </article>
-    </div>
-  </section>
-
-  <!-- What I'm looking for -->
-  <section class="ab-wrap ab-section">
-    <div class="ab-look" data-reveal>
+    <article class="tile t-look" data-reveal>
       <div>
         <h2>{a.looking.title}</h2>
         <p class="ab-look-sub">{a.looking.lead}</p>
@@ -268,8 +297,7 @@ const check =
           ))
         }
       </ul>
-    </div>
-    <p class="ab-clock" data-clock data-same={f.time.same} data-diff={f.time.diff}></p>
+    </article>
   </section>
 </main>
 <Footer footer={data.footer} contact={data.contact} nav={data.nav} lang={lang} />

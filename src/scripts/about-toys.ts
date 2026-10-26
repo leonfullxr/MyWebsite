@@ -181,6 +181,17 @@ function tree(root: HTMLElement) {
     .join('\n');
 }
 
+function words(root: HTMLElement) {
+  const els = Array.from(root.querySelectorAll<HTMLElement>('[data-word]'));
+  if (els.length < 2 || reduce()) return;
+  let i = 0;
+  window.setInterval(() => {
+    els[i].classList.remove('is-on');
+    i = (i + 1) % els.length;
+    els[i].classList.add('is-on');
+  }, 1800);
+}
+
 function clock(root: HTMLElement) {
   const el = root.querySelector<HTMLElement>('[data-clock]');
   if (!el) return;
@@ -205,5 +216,6 @@ export function mountAboutToys(root: HTMLElement | null) {
   jam(root);
   judge(root);
   tree(root);
+  words(root);
   clock(root);
 }
