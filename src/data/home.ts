@@ -184,6 +184,11 @@ export const platforms: Icon[] = [
   { name: 'FortiGate', src: '/images/icons/fortinet.svg' },
   { name: 'Sophos', src: '/images/icons/sophos.svg' },
   { name: 'Cisco', src: '/images/icons/cisco.svg' },
+  { name: 'Cortex XDR', src: '/images/icons/paloaltonetworks.svg' },
+  { name: 'Splunk SOAR', src: '/images/icons/splunk.svg' },
+  { name: 'VirusTotal', src: '/images/icons/virustotal.svg' },
+  { name: 'MISP', src: '/images/icons/misp.svg' },
+  { name: 'AlienVault OTX', src: '/images/icons/alienvault-otx.png' },
 ];
 export const clusters: Icon[] = [
   { name: 'AWS EKS', src: '/images/icons/amazoneks.svg' },

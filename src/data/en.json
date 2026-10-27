@@ -158,7 +158,7 @@
             "Reduced AWS EKS infrastructure costs by up to 20% through instance right-sizing, migrating multi-pod workloads from ARM to AMD instances for optimized indexing throughput, and implementing OpenSearch Index State Management policies to transition aging indices to warm and cold S3 storage tiers.",
             "Restored security visibility and cluster stability for enterprise customers during production outages caused by ingestion bottlenecks, disk pressure, persistent volume exhaustion, split-brain states, and indexer cluster degradation.",
             "Engineered declarative GitOps deployment workflows for EKS clusters versioned in GitHub with pod disruption budgets, rolling updates, and health-checked automated rollbacks when ingestion lag or worker queue saturation breached predefined SLI/SLO thresholds. Instrumented Prometheus, Grafana, and OpenSearch telemetry around cluster queues, memory pressure, and index write latency with automated runbook routing to resolve pipeline stalls before log loss occurred.",
-            "Maintained the Wazuh public integrations repository as core maintainer, authoring and shipping detection rules, decoders, IOC lookups, alert enrichment, threat intelligence feeds, active-response scripts, SCA policies, and custom integrations for AWS (SQS, CloudTrail, VPC Flow Logs), Azure (Microsoft Graph), Microsoft 365, Okta, Entra ID, Active Directory, Google Workspace, LDAP, FortiGate, Sophos, and Cisco.",
+            "Maintained the Wazuh public integrations repository as core maintainer, publishing detection rules, decoders, enrichment scripts, and connectors for AWS, Azure, Microsoft 365, Okta, Entra ID, Active Directory, Google Workspace, LDAP, FortiGate, Sophos, and Cisco. Built integrations for Cortex XDR, Splunk SOAR, AlienVault OTX, MISP, VirusTotal, AbuseIPDB, Bitdefender GravityZone, Trend Micro DDI, Nessus, UniFi, QNAP, and Synology, alongside GitHub enterprise audit collection.",
             "Built Wazuh response playbooks where correlation rules identify temporal patterns across shared attributes, IOC and enrichment scripts append threat context, and active-response commands execute against targeted endpoints with strict execution timeouts and circuit-breaker rate limits to prevent alert storms. Channeled alerts and automated ticketing through enterprise integrations while reserving host isolation and credential actions for analyst review, maintaining high detection fidelity through frequency thresholds, exception grouping, and benign-case baseline validation.",
             "Developed SCA baselines mapped to PCI-DSS, CJIS, ISO 27001, HIPAA, GDPR, and NIST, assigned by agent group, and ingested device telemetry with rsyslog over TLS into internal Network Load Balancers inside air-gapped VPCs with egress strictly restricted to proxy allowlists for OS updates and vulnerability feeds. Enforced least-privilege separation across Wazuh APIs and OpenSearch index patterns using role-based access controls and identity provider synchronization, deploying detection content only after staging validation, backup verification, and approved change windows."
           ]
@@ -426,9 +426,9 @@
       },
       {
         "k": "platforms",
-        "num": "10",
-        "label": "platforms integrated",
-        "summary": "Rules, decoders and connectors shipped in the public Wazuh integrations repository."
+        "num": "150+",
+        "label": "integration and ruleset entries",
+        "summary": "Across Wazuh repositories, with selected platforms highlighted below."
       },
       {
         "k": "frameworks",
@@ -498,7 +498,7 @@
         "k": "integ",
         "icon": "plug",
         "title": "Integrations",
-        "line": "Core maintainer of the public integrations repo: rules, decoders and connectors for 10 platforms.",
+        "line": "Rules, decoders, enrichment and connectors across cloud, identity, endpoint and network platforms.",
         "full": 5,
         "logos": "platforms"
       },
