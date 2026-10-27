@@ -32,3 +32,7 @@ Thumbs.db
 .cache/
 .npm/
 *.tsbuildinfo
+
+# Local agent tooling
+.review/
+.taste-skill/

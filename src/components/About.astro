@@ -1,0 +1,285 @@
+---
+// The longer story, laid out as one connected bento: a big hello, then tiles of different
+// sizes that lock together, with the clay mascot climbing over their edges.
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+import SiteFlag from './SiteFlag.astro';
+import RunningReflection from './RunningReflection.astro';
+import RunningJournal from './RunningJournal.astro';
+import '../styles/about.css';
+import type { Data } from '../data/home';
+
+interface Props {
+  data: Data;
+  lang: string;
+}
+const { data, lang } = Astro.props;
+const a = data.aboutPage;
+const f = a.fun;
+const pins = [
+  { name: a.pins[0], lon: -3.6, lat: 37.18 },
+  { name: a.pins[1], lon: 19.94, lat: 50.06 },
+];
+const check =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>';
+---
+
+<Nav nav={data.nav} lang={lang} />
+<main class="about-page" data-about>
+  <!-- Hello -->
+  <section class="ab-hero">
+    <div class="ab-hero-inner">
+      <div class="ab-hero-copy">
+        <h1 class="ab-h1">{a.title}</h1>
+        {a.intro.map((p) => <p>{p}</p>)}
+      </div>
+      <img
+        class="ab-hero-me"
+        src="/images/mascot/waving.webp"
+        alt=""
+        width="640"
+        height="640"
+        fetchpriority="high"
+      />
+    </div>
+    <svg class="ab-ridge" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+      <path
+        class="r1"
+        d="M0 120 L120 70 L210 98 L330 40 L440 92 L560 56 L680 104 L790 48 L900 86 L1010 30 L1130 90 L1250 60 L1350 96 L1440 70 V160 H0 Z"
+      ></path>
+      <path
+        class="r2"
+        d="M0 140 L160 102 L280 128 L420 88 L560 126 L700 96 L840 132 L980 92 L1110 124 L1250 100 L1440 128 V160 H0 Z"
+      ></path>
+    </svg>
+  </section>
+
+  <!-- The bento -->
+  <section class="ab-bento">
+    <article class="tile t-globe" data-reveal>
+      <div class="ab-globe" data-globe data-label={a.globeLabel} data-pins={JSON.stringify(pins)}>
+      </div>
+      <p class="t-text" data-clock data-same={a.place.same} data-diff={a.place.diff}>&nbsp;</p>
+      <p class="t-note">{a.place.note}</p>
+    </article>
+
+    <article class="tile t-langs" data-reveal>
+      <p class="t-hello" aria-hidden="true">
+        {
+          a.langs.words.map((w, i) => (
+            <span class:list={{ 'is-on': i === 0 }} data-word>
+              {w}
+            </span>
+          ))
+        }
+      </p>
+      <div class="t-flags" aria-hidden="true">
+        <SiteFlag language="en" /><SiteFlag language="es" />
+      </div>
+      <p class="t-text">{a.langs.text}</p>
+    </article>
+
+    <article class="tile t-edu" data-reveal>
+      <div class="t-flags" aria-hidden="true">
+        <SiteFlag language="es" />
+        <svg class="t-flag-pl" viewBox="0 0 24 24"
+          ><clipPath id="pl"><circle cx="12" cy="12" r="12"></circle></clipPath><g
+            clip-path="url(#pl)"
+            ><rect width="24" height="12" fill="#fff"></rect><rect
+              y="12"
+              width="24"
+              height="12"
+              fill="#dc143c"></rect></g
+          ></svg
+        >
+      </div>
+      <p class="t-text">{a.edu.text}</p>
+    </article>
+
+    <article class="tile t-ultra" id="running-start" data-ultra data-reveal>
+      <div class="t-head">
+        <h3>{f.ultra.title}</h3>
+        <div class="ab-units" role="group" aria-label={f.ultra.label}>
+          <button type="button" aria-pressed="true" data-unit="km">{f.ultra.km}</button>
+          <button type="button" aria-pressed="false" data-unit="mi">{f.ultra.mi}</button>
+        </div>
+      </div>
+      <p class="t-text t-left">{f.ultra.text}</p>
+      <div class="ab-track">
+        <div class="ab-track-line">
+          <span class="ab-track-fill" data-fill></span>
+          <span class="ab-track-mark" style="left: 42.195%"><i></i>{f.ultra.marathon}</span>
+          <img class="ab-track-runner" src="/images/mascot/running.webp" alt="" data-runner />
+          <input
+            type="range"
+            min="0"
+            max="100"
+            step="0.5"
+            value="60"
+            aria-label={f.ultra.label}
+            data-range
+          />
+        </div>
+        <p class="ab-track-out" aria-live="polite">
+          <b data-dist>60 km</b>
+          <span
+            data-zone
+            data-road={f.ultra.road}
+            data-ultra-label={f.ultra.ultra}
+            data-pb={f.race.pb}
+            data-pbs={JSON.stringify(f.race.rows.map((r) => [r.km, r.time]))}>{f.ultra.ultra}</span
+          >
+        </p>
+      </div>
+    </article>
+
+    <article class="tile t-race" data-race data-reveal>
+      <svg class="t-trophy" viewBox="0 0 64 64" aria-hidden="true"
+        ><path class="cup" d="M18 8h28v14a14 14 0 0 1-28 0z"></path><path
+          class="arm"
+          d="M18 12H9v4a9 9 0 0 0 9 9M46 12h9v4a9 9 0 0 1-9 9"></path><path
+          class="cup"
+          d="M28 35h8v9h-8zM20 52a12 6 0 0 1 24 0v4H20z"></path><path class="shine" d="M24 13v8"
+        ></path></svg
+      >
+      <h3>{f.race.title}</h3>
+      <p class="t-text">{f.race.text}</p>
+      <table class="t-pb">
+        <thead>
+          <tr><th>{f.race.dist}</th><th>{f.race.time}</th><th>{f.race.pace}</th></tr>
+        </thead>
+        <tbody>
+          {
+            f.race.rows.map((r) => {
+              const pace = r.secs / r.km;
+              const mm = Math.floor(pace / 60);
+              const ss = String(Math.round(pace % 60)).padStart(2, '0');
+              return (
+                <tr>
+                  <td>{r.dist}</td>
+                  <td>
+                    <b>{r.time}</b>
+                  </td>
+                  <td>
+                    {mm}:{ss}
+                    <small>{f.race.unit}</small>
+                  </td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
+    </article>
+
+    <RunningJournal lang={lang} />
+
+    <article class="tile t-jam" data-jam data-reveal>
+      <img class="t-peek t-peek-jam" src="/images/mascot/jumping.webp" alt="" />
+      <span class="ab-jam-clock" data-jam-clock>48:00:00</span>
+      <h3>{f.jam.title}</h3>
+      <p class="t-text">{f.jam.text}</p>
+      <div class="ab-jam-board" aria-live="polite">
+        <p class="ab-jam-idle" data-jam-idle>{f.jam.idle}</p>
+        <p class="ab-jam-done" data-jam-done hidden>{f.jam.done}</p>
+        <ol class="ab-jam-awards" data-jam-awards hidden>
+          {f.jam.awards.map((award, i) => <li style={`--d:${i * 140}ms`}>{award}</li>)}
+        </ol>
+      </div>
+      <div class="t-foot">
+        <button type="button" class="ab-btn" data-jam-start data-again={f.jam.again} data-ui-sound
+          >{f.jam.start}</button
+        >
+        <a class="link text-sm font-bold" href={f.jam.url} target="_blank" rel="noopener" data-ext
+          >{f.jam.link}</a
+        >
+      </div>
+    </article>
+
+    <article class="tile t-story" data-reveal>
+      <div class="t-medal" aria-hidden="true">
+        <svg viewBox="0 0 64 64"
+          ><path d="M22 4h8l4 14h-8zM34 4h8l-4 14h-8z"></path><circle cx="32" cy="36" r="20"
+          ></circle><path
+            class="star"
+            d="m32 26 3 6.2 6.8 1-5 4.8 1.2 6.8L32 41.6l-6 3.2 1.2-6.8-5-4.8 6.8-1z"></path></svg
+        >
+      </div>
+      <p class="t-label">{a.story.label}</p>
+      <h3>{a.story.title}</h3>
+      <p class="t-text t-left">{a.story.text}</p>
+      <div class="t-foot">
+        <span class="ab-badge">{a.story.badge}</span>
+        <a class="link text-sm font-bold" href={`/${lang}/thesis`} data-ui-sound>{a.story.cta}</a>
+      </div>
+    </article>
+
+    <article class="tile t-cp" data-cp data-reveal>
+      <h3>{f.cp.title}</h3>
+      <p class="t-text">{f.cp.text}</p>
+      <div class="ab-judge" aria-live="polite">
+        <span class="ab-judge-verdict" data-verdict>—</span>
+        <span
+          class="ab-judge-meta"
+          data-verdict-meta
+          data-running={f.cp.running}
+          data-accepted={f.cp.accepted}
+          data-meta={f.cp.meta}>&nbsp;</span
+        >
+        <span class="ab-judge-tests" aria-hidden="true">
+          {Array.from({ length: 10 }, () => <i />)}
+        </span>
+      </div>
+      <div class="t-foot">
+        <button type="button" class="ab-btn" data-submit data-again={f.cp.again} data-ui-sound
+          >{f.cp.submit}</button
+        >
+      </div>
+    </article>
+
+    <article class="tile t-aoc" data-aoc data-reveal>
+      <pre class="ab-aoc-tree" aria-hidden="true" data-tree></pre>
+      <h3>{f.aoc.title}</h3>
+      <p class="t-text">{f.aoc.text}</p>
+      <div class="t-foot">
+        <a class="ab-btn" href={f.aoc.url} target="_blank" rel="noopener" data-ui-sound
+          >{f.aoc.link}&nbsp;↗</a
+        >
+      </div>
+    </article>
+
+    <article class="tile t-look" data-reveal>
+      <div>
+        <h2>{a.looking.title}</h2>
+        <p class="ab-look-sub">{a.looking.lead}</p>
+        <a class="ab-look-cta" href={`mailto:${data.contact.email}`} data-ui-sound
+          >{a.looking.cta}&nbsp;→</a
+        >
+      </div>
+      <ul>
+        {
+          a.looking.items.map((item) => (
+            <li>
+              <i set:html={check} />
+              <div>
+                <b>{item.title}</b>
+                <span>{item.text}</span>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </article>
+  </section>
+
+  <RunningReflection lang={lang} />
+</main>
+<Footer footer={data.footer} contact={data.contact} nav={data.nav} lang={lang} />
+
+<script>
+  import { mountGlobe } from '../scripts/globe';
+  import { mountAboutToys } from '../scripts/about-toys';
+  const host = document.querySelector<HTMLElement>('[data-globe]');
+  if (host) mountGlobe(host, JSON.parse(host.dataset.pins || '[]'));
+  mountAboutToys(document.querySelector<HTMLElement>('[data-about]'));
+</script>

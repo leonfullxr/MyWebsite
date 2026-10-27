@@ -7,6 +7,7 @@ interface Props {
   lang?: string;
   home?: boolean;
   nav?: {
+    intro?: string;
     about: string;
     cv: string;
     skills?: string;
@@ -19,8 +20,9 @@ const { footer, contact, lang = 'en', home = false, nav } = Astro.props;
 const es = lang === 'es';
 const year = new Date().getFullYear();
 const anchor = (id: string) => (home ? `#${id}` : `/${lang}/#${id}`);
-const labels = nav ?? {
-  about: es ? 'Sobre mí' : 'About',
+const labels = {
+  intro: nav?.intro ?? 'Intro',
+  about: nav?.about ?? (es ? 'Sobre mí' : 'About'),
   cv: es ? 'Experiencia' : 'Experience',
   skills: es ? 'Habilidades' : 'Skills',
   projects: es ? 'Proyectos' : 'Projects',
@@ -39,6 +41,8 @@ const t = es
       ],
       top: 'Volver arriba',
       built: 'Hecho con Astro',
+      more: 'Más sobre mí',
+      legal: 'Privacidad y aviso legal',
     }
   : {
       cta: "Let's build something.",
@@ -47,6 +51,8 @@ const t = es
       nowItems: ['Security engineer at Wazuh', 'Based in Granada, Spain', 'Running ultras for fun'],
       top: 'Back to top',
       built: 'Built with Astro',
+      more: 'More about me',
+      legal: 'Privacy & legal',
     };
 ---
 
@@ -77,7 +83,8 @@ const t = es
     <div class="site-footer-cols">
       <nav aria-label={t.navigate}>
         <h2>{t.navigate}</h2>
-        <a href={anchor('about')} data-ui-sound>{labels.about}</a>
+        <a href={anchor('intro')} data-ui-sound>{labels.intro}</a>
+        <a href={`/${lang}/about`} data-ui-sound>{t.more}</a>
         <a href={anchor('cv')} data-ui-sound>{labels.cv}</a>
         <a href={anchor('projects')} data-ui-sound>{labels.projects}</a>
         <a href={`/${lang}/thesis`} data-ui-sound>{labels.thesis}</a>
@@ -92,7 +99,13 @@ const t = es
       </a>
     </div>
     <div class="site-footer-bottom">
-      <p>© {year} {footer.copyright} · {t.built}</p>
+      <p>
+        {`© ${year} ${footer.copyright} · ${t.built} · `}<a
+          href={`/${lang}/legal`}
+          class="site-footer-legal"
+          data-ui-sound>{t.legal}</a
+        >
+      </p>
       <SiteControls lang={lang} compact>
         <Fragment slot="links">
           <a

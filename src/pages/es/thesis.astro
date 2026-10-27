@@ -15,13 +15,15 @@ const lang = 'es';
   <Nav nav={data.nav} lang={lang} />
   <main class="pt-16 h-screen flex flex-col">
     <div class="max-w-5xl mx-auto px-6 py-6 shrink-0">
-      <a href={`/${lang}/#thesis`} class="link inline-flex items-center text-sm font-mono mb-4">
-        Volver
+      <a href={`/${lang}/#thesis`} class="link inline-flex items-center text-sm font-bold mb-4">
+        ← Volver
       </a>
-      <h1 class="font-display text-3xl md:text-4xl italic tracking-tight mb-2">
+      <h1
+        class="text-3xl md:text-4xl font-black tracking-tight mb-2 text-ink-900 dark:text-sand-50"
+      >
         Galería Hopf Torus
       </h1>
-      <p class="text-ink-500 dark:text-lava-400 text-sm leading-relaxed">
+      <p class="text-ink-600 dark:text-ink-300 text-sm leading-relaxed">
         Visualización 3D interactiva de curvas elípticas mediante la fibración de Hopf. Explora 18
         formas, 12 modos de color, 6 materiales y parámetros personalizados. Usa los controles del
         panel lateral o pulsa <kbd

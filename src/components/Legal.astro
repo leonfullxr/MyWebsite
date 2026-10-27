@@ -1,0 +1,48 @@
+---
+// Privacy policy and legal notice in one short page.
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+import type { Data } from '../data/home';
+
+interface Props {
+  data: Data;
+  lang: string;
+}
+const { data, lang } = Astro.props;
+const l = data.legal;
+---
+
+<Nav nav={data.nav} lang={lang} />
+<main class="legal-page max-w-3xl mx-auto px-5 md:px-8 pt-28 pb-20">
+  <h1 class="text-4xl md:text-5xl font-black tracking-tight">{l.title}</h1>
+  <p class="mt-3 text-sm font-bold text-ink-500 dark:text-ink-300">{l.updated}</p>
+  <p
+    class="mt-8 rounded-2xl bg-lava-50 dark:bg-lava-900/30 px-5 py-4 text-lg font-bold text-lava-800 dark:text-lava-200"
+  >
+    {l.summary}
+  </p>
+  {
+    l.sections.map((s) => (
+      <section class="mt-10">
+        <h2 class="text-2xl font-black">{s.title}</h2>
+        {s.body.map((p) => (
+          <p class="mt-3 text-base leading-relaxed text-ink-700 dark:text-ink-200" set:html={p} />
+        ))}
+      </section>
+    ))
+  }
+  <a href={`/${lang}/`} class="link mt-12 inline-flex font-bold" data-ui-sound>{l.back}</a>
+</main>
+<Footer footer={data.footer} contact={data.contact} nav={data.nav} lang={lang} />
+
+<style>
+  .legal-page :global(a:not(.link)) {
+    font-weight: 700;
+    color: var(--color-lava-700);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  :global(.dark) .legal-page :global(a:not(.link)) {
+    color: var(--color-lava-300);
+  }
+</style>

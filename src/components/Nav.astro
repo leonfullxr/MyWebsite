@@ -4,6 +4,7 @@ import SiteControls from './SiteControls.astro';
 import SiteIcon from './SiteIcon.astro';
 interface Props {
   nav: {
+    intro?: string;
     about: string;
     cv: string;
     skills?: string;
@@ -16,9 +17,11 @@ interface Props {
   home?: boolean;
 }
 const { nav, lang, home = false } = Astro.props;
+const currentPath = Astro.url.pathname.replace(/\/$/, '');
 const anchor = (id: string) => (home ? `#${id}` : `/${lang}/#${id}`);
 const links = [
-  [nav.about, anchor('about')],
+  [nav.intro ?? 'Intro', anchor('intro')],
+  [nav.about, `/${lang}/about`],
   [nav.cv, anchor('cv')],
   ...(nav.skills ? [[nav.skills, anchor('skills')]] : []),
   [nav.projects, anchor('projects')],
@@ -38,16 +41,21 @@ const links = [
       aria-label={lang === 'es' ? 'Navegación principal' : 'Main navigation'}
     >
       {
-        links.map(([label, href]) => (
-          <a
-            href={href}
-            class="site-nav-link"
-            data-ui-sound
-            data-spy={href.startsWith('#') ? href.slice(1) : undefined}
-          >
-            {label}
-          </a>
-        ))
+        links.map(([label, href]) => {
+          const isPageLink = !href.startsWith('#');
+          const isCurrent = isPageLink && currentPath === href.replace(/\/$/, '');
+          return (
+            <a
+              href={href}
+              class="site-nav-link"
+              data-ui-sound
+              data-spy={href.startsWith('#') ? href.slice(1) : undefined}
+              aria-current={isCurrent ? 'page' : undefined}
+            >
+              {label}
+            </a>
+          );
+        })
       }
     </nav>
     <SiteControls lang={lang} />
@@ -71,12 +79,21 @@ const links = [
     aria-label={lang === 'es' ? 'Navegación móvil' : 'Mobile navigation'}
   >
     {
-      links.map(([label, href]) => (
-        <a href={href} class="site-nav-link" data-ui-sound>
-          {label}
-          <SiteIcon name="arrow" />
-        </a>
-      ))
+      links.map(([label, href]) => {
+        const isPageLink = !href.startsWith('#');
+        const isCurrent = isPageLink && currentPath === href.replace(/\/$/, '');
+        return (
+          <a
+            href={href}
+            class="site-nav-link"
+            data-ui-sound
+            aria-current={isCurrent ? 'page' : undefined}
+          >
+            {label}
+            <SiteIcon name="arrow" />
+          </a>
+        );
+      })
     }
   </nav>
 </header>

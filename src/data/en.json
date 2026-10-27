@@ -4,6 +4,7 @@
     "description": "Personal portfolio of Leon Elliott Fuller. Computer engineering graduate focused on cybersecurity, deep learning, and web development."
   },
   "nav": {
+    "intro": "Intro",
     "about": "About",
     "cv": "Experience",
     "skills": "Skills",
@@ -18,8 +19,7 @@
     "tagline": "Computer Engineering · Security Engineer · Cybersecurity · Software Engineer",
     "description": "Security engineer at Wazuh. I graduated in computer engineering from the University of Granada and studied one year at AGH Krakow through Erasmus+. I build systems, learn new tools, and take on hard problems.",
     "cta": "Get to know me",
-    "line1": "Security engineer.",
-    "line2": "Ultramarathon runner.",
+    "line1": "Leon Elliott Fuller",
     "lead": "Detection engineering at Wazuh by day, long mountain miles around Granada by weekend.",
     "chip": "Running ultras for fun"
   },
@@ -29,7 +29,92 @@
       "Production-focused Security Engineer specialized in architecting, scaling, and maintaining mission-critical SIEM/XDR infrastructure across enterprise on-premises and AWS EKS environments. Handled data engineering for high-throughput ingestion pipelines processing over 250 billion events, preventing data loss and ingestion bottlenecks through kernel and manager buffer tuning. Reduced AWS operational expenses by up to 20% through compute and storage right-sizing, while establishing automated GitOps deployment workflows and SLI/SLO-driven observability to resolve cluster outages before log loss occurred.",
       "As a core maintainer for Wazuh's open-source integrations ecosystem, I develop detection rules, decoders, and integrations across AWS, Azure, enterprise identity providers, and network infrastructure. Working across platform engineering and SecOps, I build code-driven detection platforms with high-fidelity threat detection, audit-ready compliance against PCI-DSS and ISO 27001, and automated active-response playbooks that protect operations at enterprise scale without creating analyst fatigue."
     ],
-    "location": "Granada, Spain"
+    "location": "Granada, Spain",
+    "plainLabel": "Plain",
+    "techLabel": "Technical",
+    "switchLabel": "Show the technical version",
+    "hint": "Hover or tap an underlined word to see what it’s called at work",
+    "more": "More about me",
+    "plain": [
+      [
+        {
+          "text": "I build and run the "
+        },
+        {
+          "text": "security systems",
+          "tip": "SIEM / XDR platforms on Wazuh and OpenSearch, on-prem and in the cloud"
+        },
+        {
+          "text": " big companies rely on to spot attacks. They can’t ever switch off, so I design them to "
+        },
+        {
+          "text": "survive failures",
+          "tip": "High availability: multi-node clusters across availability zones with automatic failover"
+        },
+        {
+          "text": ": if one machine goes down, another takes over before anyone notices."
+        }
+      ],
+      [
+        {
+          "text": "They also deal with a lot: "
+        },
+        {
+          "text": "billions of messages",
+          "tip": "250B+ events through high-throughput ingestion pipelines"
+        },
+        {
+          "text": " from computers all over the world. I make sure "
+        },
+        {
+          "text": "none get lost",
+          "tip": "Queue and buffer tuning to absorb burst traffic without dropping events"
+        },
+        {
+          "text": " when traffic spikes, "
+        },
+        {
+          "text": "grow the system",
+          "tip": "Horizontal scaling on Kubernetes (AWS EKS, Azure AKS), Google Cloud and Proxmox"
+        },
+        {
+          "text": " as companies grow, and "
+        },
+        {
+          "text": "cut the cloud bill",
+          "tip": "Compute and storage right-sizing on AWS EKS: up to −20%"
+        },
+        {
+          "text": " along the way."
+        }
+      ],
+      [
+        {
+          "text": "When something breaks in production, I’m the one who "
+        },
+        {
+          "text": "finds out why",
+          "tip": "Root-cause analysis and incident recovery: ingestion bottlenecks, disk pressure, split-brain clusters"
+        },
+        {
+          "text": " and gets it running again. I also write the "
+        },
+        {
+          "text": "“what counts as suspicious” rules",
+          "tip": "Detection rules and decoders for AWS, Azure, identity providers and network gear"
+        },
+        {
+          "text": " and "
+        },
+        {
+          "text": "automatic responses",
+          "tip": "Active-response playbooks"
+        },
+        {
+          "text": " that anyone can download for free."
+        }
+      ]
+    ]
   },
   "thesis": {
     "title": "Thesis",
@@ -73,7 +158,7 @@
             "Reduced AWS EKS infrastructure costs by up to 20% through instance right-sizing, migrating multi-pod workloads from ARM to AMD instances for optimized indexing throughput, and implementing OpenSearch Index State Management policies to transition aging indices to warm and cold S3 storage tiers.",
             "Restored security visibility and cluster stability for enterprise customers during production outages caused by ingestion bottlenecks, disk pressure, persistent volume exhaustion, split-brain states, and indexer cluster degradation.",
             "Engineered declarative GitOps deployment workflows for EKS clusters versioned in GitHub with pod disruption budgets, rolling updates, and health-checked automated rollbacks when ingestion lag or worker queue saturation breached predefined SLI/SLO thresholds. Instrumented Prometheus, Grafana, and OpenSearch telemetry around cluster queues, memory pressure, and index write latency with automated runbook routing to resolve pipeline stalls before log loss occurred.",
-            "Maintained the Wazuh public integrations repository as core maintainer, authoring and shipping detection rules, decoders, IOC lookups, alert enrichment, threat intelligence feeds, active-response scripts, SCA policies, and custom integrations for AWS (SQS, CloudTrail, VPC Flow Logs), Azure (Microsoft Graph), Microsoft 365, Okta, Entra ID, Active Directory, Google Workspace, LDAP, FortiGate, Sophos, and Cisco.",
+            "Maintained the Wazuh public integrations repository as core maintainer, publishing detection rules, decoders, enrichment scripts, and connectors for AWS, Azure, Microsoft 365, Okta, Entra ID, Active Directory, Google Workspace, LDAP, FortiGate, Sophos, and Cisco. Built integrations for Cortex XDR, Splunk SOAR, AlienVault OTX, MISP, VirusTotal, AbuseIPDB, Bitdefender GravityZone, Trend Micro DDI, Nessus, UniFi, QNAP, and Synology, alongside GitHub enterprise audit collection.",
             "Built Wazuh response playbooks where correlation rules identify temporal patterns across shared attributes, IOC and enrichment scripts append threat context, and active-response commands execute against targeted endpoints with strict execution timeouts and circuit-breaker rate limits to prevent alert storms. Channeled alerts and automated ticketing through enterprise integrations while reserving host isolation and credential actions for analyst review, maintaining high detection fidelity through frequency thresholds, exception grouping, and benign-case baseline validation.",
             "Developed SCA baselines mapped to PCI-DSS, CJIS, ISO 27001, HIPAA, GDPR, and NIST, assigned by agent group, and ingested device telemetry with rsyslog over TLS into internal Network Load Balancers inside air-gapped VPCs with egress strictly restricted to proxy allowlists for OS updates and vulnerability feeds. Enforced least-privilege separation across Wazuh APIs and OpenSearch index patterns using role-based access controls and identity provider synchronization, deploying detection content only after staging validation, backup verification, and approved change windows."
           ]
@@ -236,14 +321,6 @@
         "image": "/images/nextcloud_login.png"
       },
       {
-        "name": "Classifying Mushrooms",
-        "url": "https://github.com/leonfullxr/Classifying-Mushrooms",
-        "period": "2024",
-        "description": "Supervised models that classify mushroom edibility from the UCI Secondary Mushroom dataset. Course project at the University of Granada.",
-        "tags": ["AI", "Machine Learning"],
-        "image": "/images/mushroom_classification.png"
-      },
-      {
         "name": "AI for Ludo Game",
         "url": "https://github.com/leonfullxr/AI-for-Ludo-game",
         "period": "2023",
@@ -341,9 +418,9 @@
       },
       {
         "k": "platforms",
-        "num": "10",
-        "label": "platforms integrated",
-        "summary": "Rules, decoders and connectors shipped in the public Wazuh integrations repository."
+        "num": "150+",
+        "label": "integration and ruleset entries",
+        "summary": "Across Wazuh repositories, with selected platforms highlighted below."
       },
       {
         "k": "frameworks",
@@ -413,7 +490,7 @@
         "k": "integ",
         "icon": "plug",
         "title": "Integrations",
-        "line": "Core maintainer of the public integrations repo: rules, decoders and connectors for 10 platforms.",
+        "line": "Rules, decoders, enrichment and connectors across cloud, identity, endpoint and network platforms.",
         "full": 5,
         "logos": "platforms"
       },
@@ -433,5 +510,177 @@
         "logos": "frameworks"
       }
     ]
+  },
+  "aboutPage": {
+    "meta": {
+      "title": "About - Leon Elliott Fuller",
+      "description": "Who Leon Elliott Fuller is, what he does as a security engineer at Wazuh, how he works and what he is looking for next."
+    },
+    "title": "Hi there! I’m Leon.",
+    "globeLabel": "Globe showing Granada and Kraków",
+    "pins": ["Granada", "Kraków"],
+    "story": {
+      "label": "Proudest work",
+      "title": "When my results disagreed with the textbooks",
+      "text": "For my thesis I spent over a year implementing elliptic-curve cryptography from scratch in C++. The speedups the literature predicted didn’t show up in my measurements, because of years of hardware and assembly-level optimisation. So I stopped assuming the theory was right and dug through every layer (algorithm, implementation, compiler, hardware) until I could explain the gap. It earned Honors.",
+      "badge": "Matrícula de Honor",
+      "cta": "Explore the thesis in 3D"
+    },
+    "looking": {
+      "title": "What I’m looking for",
+      "lead": "Where I’d do my best work next.",
+      "cta": "Let’s talk",
+      "items": [
+        {
+          "title": "A competitive, ambitious team",
+          "text": "People who raise the bar and expect me to raise mine."
+        },
+        {
+          "title": "Infrastructure at scale",
+          "text": "Production systems where stability, scale and efficiency really matter."
+        },
+        {
+          "title": "Ownership and autonomy",
+          "text": "Where technical judgment and owning production systems end to end are valued."
+        },
+        {
+          "title": "Room to grow",
+          "text": "Hard problems, people to learn from, and a clear path to senior and beyond."
+        }
+      ]
+    },
+    "back": "Back to home",
+    "fun": {
+      "ultra": {
+        "title": "I run ultramarathons",
+        "text": "An ultra is any race longer than a marathon. I run them for fun, not podiums, and often with friends. Drag the runner.",
+        "marathon": "Marathon",
+        "ultra": "Ultra territory",
+        "road": "Still on the road",
+        "km": "km",
+        "mi": "mi",
+        "label": "Distance"
+      },
+      "jam": {
+        "title": "I make games in 48 hours",
+        "text": "Game jams: a theme, a weekend and a team. At the Pichola jam our team of five won Best Art.",
+        "start": "Start the jam",
+        "again": "Again",
+        "done": "Time’s up! Results:",
+        "awards": ["1st · Best Art", "3rd · Best Commercial Potential", "3rd · Most Popular"],
+        "link": "Pichola on GitHub",
+        "url": "https://github.com/leonfullxr/Pichola",
+        "idle": "48 hours on the clock. Ready?"
+      },
+      "cp": {
+        "title": "I compete in programming contests",
+        "text": "Tight time limits, hidden test cases, and a judge that only ever says Accepted or Wrong Answer.",
+        "submit": "Submit solution",
+        "again": "Submit again",
+        "running": "Running on test {n}…",
+        "accepted": "Accepted",
+        "meta": "All tests passed"
+      },
+      "aoc": {
+        "title": "Every December I do Advent of Code",
+        "text": "25 days of puzzles, two parts a day and a gold star for each one.",
+        "link": "My solutions on GitHub",
+        "url": "https://github.com/leonfullxr/Advent-of-Code",
+        "site": "adventofcode.com"
+      },
+      "race": {
+        "title": "I’ve won several mountain races",
+        "text": "My personal bests so far:",
+        "dist": "Distance",
+        "time": "Time",
+        "pace": "Pace",
+        "rows": [
+          {
+            "dist": "21 km",
+            "time": "1h 28min",
+            "secs": 5280,
+            "km": 21
+          },
+          {
+            "dist": "Marathon",
+            "time": "3h 20min",
+            "secs": 12000,
+            "km": 42.195
+          },
+          {
+            "dist": "100 km",
+            "time": "15h 00min",
+            "secs": 54000,
+            "km": 100
+          }
+        ],
+        "unit": "/km",
+        "note": "h min",
+        "pb": "My best: {t}"
+      }
+    },
+    "intro": [
+      "I’m a security engineer at Wazuh, based in Granada, Spain.",
+      "I design, run and fix security platforms that have to keep working at enormous scale, and I’m at my best when the problem is hard.",
+      "Outside work I run ultramarathons, hike in the mountains and always have music on."
+    ],
+    "place": {
+      "same": "I live in Granada, Spain, where it’s {g}, same as for you.",
+      "diff": "I live in Granada, Spain, where it’s {g}. For you it’s {l}.",
+      "note": "I spent a year in Kraków, and these days I work remotely. Drag the globe to spin it."
+    },
+    "langs": {
+      "words": ["Hello!", "¡Hola!"],
+      "text": "English and Spanish are both my native languages."
+    },
+    "edu": {
+      "text": "I studied computer engineering at the University of Granada, with an Erasmus+ year at AGH in Kraków."
+    }
+  },
+  "legal": {
+    "meta": {
+      "title": "Privacy & legal notice - Leon Elliott Fuller",
+      "description": "Privacy policy and legal notice for resume.leonfuller.com."
+    },
+    "title": "Privacy & legal notice",
+    "updated": "Last updated: 26 October 2026",
+    "link": "Privacy & legal",
+    "summary": "No cookies, no analytics, no tracking and no forms. I don’t collect personal data on this site myself.",
+    "sections": [
+      {
+        "title": "Who runs this site",
+        "body": [
+          "This is the personal, non-commercial website of Leon Elliott Fuller, based in Granada, Spain. You can reach me at <a href=\"mailto:l.elliottfuller@gmail.com\">l.elliottfuller@gmail.com</a>."
+        ]
+      },
+      {
+        "title": "What happens when you visit",
+        "body": [
+          "<b>Hosting.</b> The site is served by GitHub Pages. Like any web server, GitHub processes your IP address and request details to deliver the pages and keep them secure. See <a href=\"https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub’s privacy statement</a>.",
+          "<b>Fonts.</b> Lato and JetBrains Mono load from Google Fonts, so your browser sends your IP address to Google. See <a href=\"https://policies.google.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">Google’s privacy policy</a>.",
+          "<b>Maths rendering.</b> KaTeX loads from the jsDelivr CDN, which also receives your IP address. See <a href=\"https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net\" target=\"_blank\" rel=\"noopener noreferrer\">jsDelivr’s privacy policy</a>.",
+          "<b>Your preferences.</b> Your theme (light or dark) and sound setting are saved in your browser’s local storage. They never leave your device, and you can clear them at any time."
+        ]
+      },
+      {
+        "title": "If you email me",
+        "body": [
+          "I use your email address and message only to reply to you, keep the conversation only as long as it’s useful, and never share it with anyone."
+        ]
+      },
+      {
+        "title": "Your rights",
+        "body": [
+          "Under the GDPR you can ask to access, correct or delete any personal data I hold about you, or object to its use, by writing to the address above. You can also complain to the Spanish Data Protection Agency (<a href=\"https://www.aepd.es\" target=\"_blank\" rel=\"noopener noreferrer\">AEPD</a>)."
+        ]
+      },
+      {
+        "title": "Content and code",
+        "body": [
+          "Texts, photos and illustrations on this site are © Leon Elliott Fuller unless stated otherwise. The site’s source code is <a href=\"https://github.com/leonfullxr/MyWebsite\" target=\"_blank\" rel=\"noopener noreferrer\">MIT-licensed on GitHub</a>. Links to other sites are there for convenience, and I’m not responsible for their content."
+        ]
+      }
+    ],
+    "back": "Back to home"
   }
 }
