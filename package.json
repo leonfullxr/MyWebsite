@@ -32,13 +32,13 @@
     "world-atlas": "^2.0.2"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.9",
-    "@types/d3-geo": "^3.1.0",
-    "@types/node": "^25.9.1",
+    "@astrojs/check": "^0.9.12",
+    "@types/d3-geo": "^3.1.1",
+    "@types/node": "^26.6.5",
     "@types/topojson-client": "^3.1.5",
-    "prettier": "^3.8.3",
-    "prettier-plugin-astro": "^0.14.1",
-    "typescript": "^6.0.3"
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.2",
+    "typescript": "^7.0.2"
   },
   "allowScripts": {
     "esbuild@0.28.1": true,
