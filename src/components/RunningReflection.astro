@@ -1,108 +1,179 @@
 ---
 import reflection from '../data/running-reflection.json';
-
 interface Props {
   lang: string;
 }
-
 const { lang } = Astro.props;
 const content = reflection[lang === 'es' ? 'es' : 'en'];
 ---
 
-<section class="running-reflection" id="why-i-run" aria-labelledby="running-reflection-title">
+<section
+  class="running-reflection trail-reflection"
+  id="why-i-run"
+  aria-labelledby="running-reflection-title"
+>
   <div class="reflection-inner">
-    <header class="reflection-header">
-      <p class="reflection-label">{content.label}</p>
-      <h2 id="running-reflection-title">{content.title}</h2>
+    <header class="trail-header">
+      <img src="/images/mascot/running.webp" alt="" width="96" height="96" /><h2
+        id="running-reflection-title"
+      >
+        {content.title}
+      </h2>
     </header>
-    <div class="reflection-content">
-      <p class="reflection-lead">{content.lead}</p>
-      {content.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-      <p class="reflection-sources">
-        {content.sourceLabel}{' '}
+    <div class="trail-essay">
+      <svg class="trail-path" viewBox="0 0 80 1000" preserveAspectRatio="none" aria-hidden="true"
+        ><path
+          d="M40 0 C80 80 0 160 40 240 S80 380 40 480 S0 640 40 740 S80 900 40 1000"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-dasharray="5 7"
+          vector-effect="non-scaling-stroke"></path></svg
+      >
+      <div class="trail-copy">
         {
-          content.sources.map((source, index) => (
-            <>
-              {index > 0 && (lang === 'es' ? ' y ' : ' and ')}
-              <a href={source.url} target="_blank" rel="noopener noreferrer">
-                {source.title}
-              </a>
-            </>
+          content.sections.map((section, index) => (
+            <section class="trail-stage" aria-labelledby={`running-stage-${index}`}>
+              <h3 class="trail-stop" id={`running-stage-${index}`}>
+                {section.title}
+              </h3>
+              {index === 0 && <p class="trail-lead">{content.lead}</p>}
+              {section.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </section>
           ))
-        }.
-      </p>
+        }
+        <p class="trail-sources">
+          {content.sourceLabel}{' '}{
+            content.sources.map((source, index) => (
+              <>
+                {index > 0 && (lang === 'es' ? ' y ' : ' and ')}
+                <a href={source.url} target="_blank" rel="noopener noreferrer">
+                  {source.title}
+                </a>
+              </>
+            ))
+          }.
+        </p>
+      </div>
     </div>
   </div>
 </section>
-
 <style>
-  .running-reflection {
+  .trail-reflection {
     margin-top: 5rem;
-    padding: 3rem 1.25rem 0;
+    padding-top: 3rem;
     border-top: 1px solid color-mix(in srgb, var(--muted) 28%, transparent);
     color: var(--soft-text);
   }
-
   .reflection-inner {
-    width: min(100%, 56rem);
-    margin-inline: auto;
-    font-size: 1.05rem;
-  }
-
-  .reflection-header,
-  .reflection-content {
-    width: min(100%, 65ch);
+    max-width: 56rem;
+    padding-inline: 1.25rem;
     margin-inline: auto;
   }
-
-  .reflection-label {
-    margin: 0 0 0.6rem;
-    color: var(--accent);
-    font-size: 0.875rem;
-    font-weight: 900;
+  .trail-header {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr);
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
   }
-
+  .trail-header img {
+    width: 5rem;
+    height: 5rem;
+    object-fit: contain;
+  }
   h2 {
-    margin: 0;
-    color: var(--soft-text);
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 900;
+    letter-spacing: -0.03em;
     line-height: 1.12;
     text-wrap: balance;
   }
-
-  .reflection-content {
-    margin-top: 1.75rem;
+  .trail-essay {
+    position: relative;
+    padding-left: 6.5rem;
+  }
+  .trail-path {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 5rem;
+    color: var(--accent);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .trail-copy {
+    max-width: 65ch;
+    font-size: 1.05rem;
     line-height: 1.75;
     overflow-wrap: anywhere;
   }
-
-  .reflection-content p {
-    margin: 0 0 1.2em;
+  p {
+    margin-bottom: 1.25rem;
   }
-
-  .reflection-content .reflection-lead {
-    color: var(--soft-text);
+  .trail-lead {
     font-size: 1.15rem;
-    line-height: 1.7;
   }
-
-  .reflection-content .reflection-sources {
+  .trail-stop {
+    position: relative;
+    margin: 2.5rem 0 1rem;
+    font-weight: 900;
+    font-size: 1rem;
+    color: var(--accent);
+  }
+  .trail-stage:first-child .trail-stop {
+    margin-top: 0;
+  }
+  .trail-stop::before {
+    content: '';
+    position: absolute;
+    width: 0.7rem;
+    height: 0.7rem;
+    border: 3px solid var(--accent);
+    border-radius: 50%;
+    left: -4.35rem;
+    top: 0.55rem;
+    background: var(--color-sand-50);
+  }
+  :global(.dark) .trail-stop::before {
+    background: var(--color-ink-950);
+  }
+  .trail-sources {
     margin-top: 2rem;
-    color: var(--muted);
     font-size: 0.9rem;
+    color: var(--muted);
   }
-
-  .reflection-sources a {
+  a {
     color: var(--accent);
     text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.18em;
+    text-underline-offset: 0.2em;
   }
-
-  .reflection-sources a:focus-visible {
-    border-radius: 2px;
+  a:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
+  }
+  @media (max-width: 550px) {
+    .trail-header {
+      grid-template-columns: 2rem minmax(0, 1fr);
+      gap: 0;
+    }
+    .trail-header img {
+      width: 2rem;
+      height: 2rem;
+    }
+    .trail-essay {
+      padding-left: 2rem;
+    }
+    .trail-path {
+      width: 1rem;
+    }
+    .trail-stop::before {
+      left: -1.85rem;
+      width: 0.6rem;
+      height: 0.6rem;
+    }
   }
 </style>

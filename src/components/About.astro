@@ -5,6 +5,7 @@ import Nav from './Nav.astro';
 import Footer from './Footer.astro';
 import SiteFlag from './SiteFlag.astro';
 import RunningReflection from './RunningReflection.astro';
+import RunningJournal from './RunningJournal.astro';
 import '../styles/about.css';
 import type { Data } from '../data/home';
 
@@ -95,7 +96,7 @@ const check =
       <p class="t-text">{a.edu.text}</p>
     </article>
 
-    <article class="tile t-ultra" data-ultra data-reveal>
+    <article class="tile t-ultra" id="running-start" data-ultra data-reveal>
       <div class="t-head">
         <h3>{f.ultra.title}</h3>
         <div class="ab-units" role="group" aria-label={f.ultra.label}>
@@ -170,6 +171,8 @@ const check =
         </tbody>
       </table>
     </article>
+
+    <RunningJournal lang={lang} />
 
     <article class="tile t-jam" data-jam data-reveal>
       <img class="t-peek t-peek-jam" src="/images/mascot/jumping.webp" alt="" />

@@ -1,23 +1,7 @@
 {
   "en": {
-    "label": "A personal reflection",
     "title": "Why I keep running",
     "lead": "I've been running for two years. In that time, I've completed a 101 km race in 15 hours, reached 17 laps in a solo backyard ultra attempt, and taken part in multiple mountain and road races. I'm proud of those efforts, and I'm still finding out what draws me back to long distances.",
-    "paragraphs": [
-      "Listening to Mark Dowdle talk about ultrarunning helped me put some of that into words. His experiences are on a scale I haven't reached, but his thoughts about doubt, commitment, and personal responsibility gave me something to reflect on in my own running.",
-      "A 101 km race gives you a known distance to work towards. A backyard ultra asks you to complete a 6.706 km loop every hour, then decide whether to start again. During my solo attempt, I reached 17 laps. With no other runner determining how long it would last, continuing was a decision I had to make for myself.",
-      "That's part of what interests me about the format. You don't have to know how you'll manage every hour ahead before you start the next loop. You need to judge whether you're able and willing to do another one.",
-      "I find that useful outside running too. I can spend a lot of time thinking about how difficult something might become. Breaking it into something I can do now gives me a way to begin without needing certainty about the whole thing.",
-      "One idea from Mark that stayed with me is the difference between feeling incapable and knowing you've reached your limit. When you're tired, your judgement about yourself can become harsh. A difficult stretch can start to feel like a verdict on your ability.",
-      "I want to get better at recognising that. Being uncomfortable doesn't automatically mean I have nothing left. Sometimes I need to slow down, reassess, and give myself time before deciding. Injury or a genuine health risk calls for a different response. Learning to tell the difference matters more to me than being able to say I never quit.",
-      "I also appreciate Mark's openness about needing other people. It's easy to admire endurance athletes for their independence and overlook the support behind their efforts. His willingness to talk about struggling makes his perspective easier to relate to. I want to be able to admit when something is difficult and ask for help without feeling that it diminishes the effort.",
-      "The part of his philosophy I keep returning to, though, concerns what happens after the race.",
-      "Finishing 101 km in 15 hours is something I'm proud of. But that result doesn't tell anyone whether I keep my promises or whether they can rely on me. Those things depend on how I behave every day.",
-      "If I value discipline in running, I want that value to carry into the less exciting parts of my life. Following through on a commitment deserves attention even when nobody is recording the time. Running gives me a place to practise persistence, but I still have to choose to apply it elsewhere.",
-      "There's also a question of how much of my identity I attach to results. I'd like to improve and find out what else I'm capable of. I also want to enjoy running without needing every race to prove something about me. A slower finish or a decision to stop shouldn't erase the work that came before it.",
-      "After two years, I have plenty left to learn. Mountain races, road races, and long hours repeating a loop give me different reasons to keep exploring the sport. The distances matter to me, but so does understanding why I'm choosing them.",
-      "What I take from Mark's approach is a reason to examine my own decisions more honestly. I want to give difficult things a fair attempt, understand when to change direction, and follow through on the commitments I make. Running is one way I'm learning to do that."
-    ],
     "sourceLabel": "Inspired by Mark Dowdle's conversations on",
     "sources": [
       {
@@ -28,27 +12,47 @@
         "title": "This Past Weekend with Theo Von",
         "url": "https://podcasts.happyscribe.com/this-past-weekend-w-theo-von/680-ultramarathoner-mark-dowdle"
       }
-    ]
+    ],
+    "sections": [
+      {
+        "title": "Two years running",
+        "paragraphs": [
+          "Listening to Mark Dowdle talk about ultrarunning helped me put some of that into words. His experiences are on a scale I haven't reached, but his thoughts about doubt, commitment, and personal responsibility gave me something to reflect on in my own running."
+        ]
+      },
+      {
+        "title": "17 solo laps",
+        "paragraphs": [
+          "A 101 km race gives you a known distance to work towards. A backyard ultra asks you to complete a 6.706 km loop every hour, then decide whether to start again. During my solo attempt, I reached 17 laps. With no other runner determining how long it would last, continuing was a decision I had to make for myself.",
+          "That's part of what interests me about the format. You don't have to know how you'll manage every hour ahead before you start the next loop. You need to judge whether you're able and willing to do another one.",
+          "I find that useful outside running too. I can spend a lot of time thinking about how difficult something might become. Breaking it into something I can do now gives me a way to begin without needing certainty about the whole thing.",
+          "One idea from Mark that stayed with me is the difference between feeling incapable and knowing you've reached your limit. When you're tired, your judgement about yourself can become harsh. A difficult stretch can start to feel like a verdict on your ability.",
+          "I want to get better at recognising that. Being uncomfortable doesn't automatically mean I have nothing left. Sometimes I need to slow down, reassess, and give myself time before deciding. Injury or a genuine health risk calls for a different response. Learning to tell the difference matters more to me than being able to say I never quit.",
+          "I also appreciate Mark's openness about needing other people. It's easy to admire endurance athletes for their independence and overlook the support behind their efforts. His willingness to talk about struggling makes his perspective easier to relate to. I want to be able to admit when something is difficult and ask for help without feeling that it diminishes the effort.",
+          "The part of his philosophy I keep returning to, though, concerns what happens after the race."
+        ]
+      },
+      {
+        "title": "101 km in 15 hours",
+        "paragraphs": [
+          "Finishing 101 km in 15 hours is something I'm proud of. But that result doesn't tell anyone whether I keep my promises or whether they can rely on me. Those things depend on how I behave every day.",
+          "If I value discipline in running, I want that value to carry into the less exciting parts of my life. Following through on a commitment deserves attention even when nobody is recording the time. Running gives me a place to practise persistence, but I still have to choose to apply it elsewhere.",
+          "There's also a question of how much of my identity I attach to results. I'd like to improve and find out what else I'm capable of. I also want to enjoy running without needing every race to prove something about me. A slower finish or a decision to stop shouldn't erase the work that came before it.",
+          "After two years, I have plenty left to learn. Mountain races, road races, and long hours repeating a loop give me different reasons to keep exploring the sport. The distances matter to me, but so does understanding why I'm choosing them."
+        ]
+      },
+      {
+        "title": "Beyond the race",
+        "paragraphs": [
+          "What I take from Mark's approach is a reason to examine my own decisions more honestly. I want to give difficult things a fair attempt, understand when to change direction, and follow through on the commitments I make. Running is one way I'm learning to do that."
+        ]
+      }
+    ],
+    "journalLink": "Read the full reflection"
   },
   "es": {
-    "label": "Una reflexión personal",
     "title": "Por qué sigo corriendo",
     "lead": "Llevo dos años corriendo. En ese tiempo he completado una carrera de 101 km en 15 horas, he llegado a 17 vueltas en un intento de backyard ultra en solitario y he participado en varias carreras de montaña y de asfalto. Estoy orgulloso de esos esfuerzos y sigo descubriendo qué me hace volver a las distancias largas.",
-    "paragraphs": [
-      "Escuchar a Mark Dowdle hablar sobre ultrafondo me ayudó a poner parte de eso en palabras. Sus experiencias están a una escala que yo no he alcanzado, pero sus ideas sobre la duda, el compromiso y la responsabilidad personal me dieron motivos para reflexionar sobre mi propia forma de correr.",
-      "En una carrera de 101 km tienes una distancia conocida hacia la que avanzar. En una backyard ultra completas un circuito de 6,706 km cada hora y después decides si vuelves a salir. En mi intento en solitario llegué a las 17 vueltas. Sin otro corredor que determinase cuánto iba a durar, continuar era una decisión que tenía que tomar por mí mismo.",
-      "Eso es parte de lo que me interesa de este formato. No necesitas saber cómo vas a afrontar todas las horas que quedan antes de empezar la siguiente vuelta. Necesitas valorar si puedes y quieres dar una más.",
-      "También me resulta útil fuera del deporte. Puedo pasar mucho tiempo pensando en lo difícil que podría llegar a ser algo. Dividirlo en algo que puedo hacer ahora me permite empezar sin necesitar certezas sobre todo lo que vendrá después.",
-      "Una idea de Mark que se me ha quedado es la diferencia entre sentirte incapaz y saber que has llegado a tu límite. Cuando estás cansado, puedes juzgarte con mucha dureza. Un tramo difícil puede empezar a parecer una sentencia sobre tu capacidad.",
-      "Quiero aprender a reconocer mejor esa diferencia. Estar incómodo no significa automáticamente que no me quede nada. A veces necesito bajar el ritmo, valorar cómo estoy y darme tiempo antes de decidir. Una lesión o un riesgo real para la salud requieren otra respuesta. Aprender a distinguirlo me importa más que poder decir que nunca abandono.",
-      "También valoro la franqueza con la que Mark habla de necesitar a otras personas. Es fácil admirar la independencia de los deportistas de resistencia y pasar por alto el apoyo que reciben. Su disposición a hablar de sus dificultades hace que me resulte más cercano. Quiero poder reconocer que algo me cuesta y pedir ayuda sin sentir que eso le resta valor al esfuerzo.",
-      "Sin embargo, la parte de su filosofía a la que más vuelvo tiene que ver con lo que ocurre después de la carrera.",
-      "Estoy orgulloso de haber completado 101 km en 15 horas. Pero ese resultado no le dice a nadie si cumplo mis promesas o si puede contar conmigo. Eso depende de cómo me comporte cada día.",
-      "Si valoro la disciplina al correr, quiero que también esté presente en las partes menos emocionantes de mi vida. Cumplir un compromiso merece atención aunque nadie esté cronometrando. Correr me permite practicar la constancia, pero llevarla a otros ámbitos sigue siendo una decisión que tengo que tomar.",
-      "También me planteo cuánto de mi identidad vinculo a los resultados. Me gustaría mejorar y descubrir de qué más soy capaz. A la vez, quiero disfrutar de correr sin necesitar que cada carrera demuestre algo sobre mí. Llegar más despacio o decidir parar no debería borrar el trabajo previo.",
-      "Después de dos años me queda mucho por aprender. Las carreras de montaña, las de asfalto y las horas repitiendo un circuito me dan distintos motivos para seguir explorando este deporte. Las distancias me importan, y también entender por qué las elijo.",
-      "La forma de entender el deporte de Mark me anima a examinar mis decisiones con más honestidad. Quiero intentar las cosas difíciles, entender cuándo cambiar de rumbo y cumplir los compromisos que asumo. Correr es una de las formas en las que estoy aprendiendo a hacerlo."
-    ],
     "sourceLabel": "Inspirado en las conversaciones de Mark Dowdle en",
     "sources": [
       {
@@ -59,6 +63,42 @@
         "title": "This Past Weekend con Theo Von",
         "url": "https://podcasts.happyscribe.com/this-past-weekend-w-theo-von/680-ultramarathoner-mark-dowdle"
       }
-    ]
+    ],
+    "sections": [
+      {
+        "title": "Dos años corriendo",
+        "paragraphs": [
+          "Escuchar a Mark Dowdle hablar sobre ultrafondo me ayudó a poner parte de eso en palabras. Sus experiencias están a una escala que yo no he alcanzado, pero sus ideas sobre la duda, el compromiso y la responsabilidad personal me dieron motivos para reflexionar sobre mi propia forma de correr."
+        ]
+      },
+      {
+        "title": "17 vueltas en solitario",
+        "paragraphs": [
+          "En una carrera de 101 km tienes una distancia conocida hacia la que avanzar. En una backyard ultra completas un circuito de 6,706 km cada hora y después decides si vuelves a salir. En mi intento en solitario llegué a las 17 vueltas. Sin otro corredor que determinase cuánto iba a durar, continuar era una decisión que tenía que tomar por mí mismo.",
+          "Eso es parte de lo que me interesa de este formato. No necesitas saber cómo vas a afrontar todas las horas que quedan antes de empezar la siguiente vuelta. Necesitas valorar si puedes y quieres dar una más.",
+          "También me resulta útil fuera del deporte. Puedo pasar mucho tiempo pensando en lo difícil que podría llegar a ser algo. Dividirlo en algo que puedo hacer ahora me permite empezar sin necesitar certezas sobre todo lo que vendrá después.",
+          "Una idea de Mark que se me ha quedado es la diferencia entre sentirte incapaz y saber que has llegado a tu límite. Cuando estás cansado, puedes juzgarte con mucha dureza. Un tramo difícil puede empezar a parecer una sentencia sobre tu capacidad.",
+          "Quiero aprender a reconocer mejor esa diferencia. Estar incómodo no significa automáticamente que no me quede nada. A veces necesito bajar el ritmo, valorar cómo estoy y darme tiempo antes de decidir. Una lesión o un riesgo real para la salud requieren otra respuesta. Aprender a distinguirlo me importa más que poder decir que nunca abandono.",
+          "También valoro la franqueza con la que Mark habla de necesitar a otras personas. Es fácil admirar la independencia de los deportistas de resistencia y pasar por alto el apoyo que reciben. Su disposición a hablar de sus dificultades hace que me resulte más cercano. Quiero poder reconocer que algo me cuesta y pedir ayuda sin sentir que eso le resta valor al esfuerzo.",
+          "Sin embargo, la parte de su filosofía a la que más vuelvo tiene que ver con lo que ocurre después de la carrera."
+        ]
+      },
+      {
+        "title": "101 km en 15 horas",
+        "paragraphs": [
+          "Estoy orgulloso de haber completado 101 km en 15 horas. Pero ese resultado no le dice a nadie si cumplo mis promesas o si puede contar conmigo. Eso depende de cómo me comporte cada día.",
+          "Si valoro la disciplina al correr, quiero que también esté presente en las partes menos emocionantes de mi vida. Cumplir un compromiso merece atención aunque nadie esté cronometrando. Correr me permite practicar la constancia, pero llevarla a otros ámbitos sigue siendo una decisión que tengo que tomar.",
+          "También me planteo cuánto de mi identidad vinculo a los resultados. Me gustaría mejorar y descubrir de qué más soy capaz. A la vez, quiero disfrutar de correr sin necesitar que cada carrera demuestre algo sobre mí. Llegar más despacio o decidir parar no debería borrar el trabajo previo.",
+          "Después de dos años me queda mucho por aprender. Las carreras de montaña, las de asfalto y las horas repitiendo un circuito me dan distintos motivos para seguir explorando este deporte. Las distancias me importan, y también entender por qué las elijo."
+        ]
+      },
+      {
+        "title": "Después de la carrera",
+        "paragraphs": [
+          "La forma de entender el deporte de Mark me anima a examinar mis decisiones con más honestidad. Quiero intentar las cosas difíciles, entender cuándo cambiar de rumbo y cumplir los compromisos que asumo. Correr es una de las formas en las que estoy aprendiendo a hacerlo."
+        ]
+      }
+    ],
+    "journalLink": "Leer la reflexión completa"
   }
 }
