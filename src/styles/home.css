@@ -59,9 +59,6 @@
 .home-hero-title .home-line-a {
   animation: home-rise 0.9s var(--soft) 0.25s both;
 }
-.home-hero-title .home-line-b {
-  animation: home-rise 0.9s var(--soft) 0.4s both;
-}
 .home-hero-title {
   animation: none !important;
 }

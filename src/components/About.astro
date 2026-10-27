@@ -4,6 +4,7 @@
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
 import SiteFlag from './SiteFlag.astro';
+import RunningReflection from './RunningReflection.astro';
 import '../styles/about.css';
 import type { Data } from '../data/home';
 
@@ -267,6 +268,8 @@ const check =
       </ul>
     </article>
   </section>
+
+  <RunningReflection lang={lang} />
 </main>
 <Footer footer={data.footer} contact={data.contact} nav={data.nav} lang={lang} />
 

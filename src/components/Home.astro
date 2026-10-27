@@ -115,11 +115,6 @@ const skillCells = skillGroups.flatMap((g) =>
     return place ? [{ ...ic, ...place, group: g.id }] : [];
   })
 );
-const hobbyIcons: string[] = [
-  'M3 12h4l3-8 4 16 3-8h4',
-  'M2 20 9 8l4 6 3-4 6 10z',
-  'M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z',
-];
 ---
 
 <div data-home class="home-root relative text-ink-900 dark:text-sand-50">
@@ -150,20 +145,19 @@ const hobbyIcons: string[] = [
     <div class="home-hero-shade absolute inset-0 pointer-events-none" aria-hidden="true"></div>
     <div class="home-hero-copy relative z-[2] px-5 pt-[12vh] md:pt-[13vh]">
       <p class="mt-3 text-lg md:text-xl font-bold text-white/90">
-        <span class="text-white">{data.hero.name}</span>
+        <span class="text-white">{data.hero.greeting}</span>
       </p>
       <h1
         class="home-hero-title mt-3 font-black text-[clamp(2.6rem,7.4vw,5.6rem)] leading-[0.98] tracking-[-0.025em]"
       >
         <span class="home-line-a block">{data.hero.line1}</span>
-        <span class="home-line-b block text-lava-200">{data.hero.line2}</span>
       </h1>
     </div>
     <div class="home-runner" data-home-runner aria-hidden="true">
       <img src="/images/mascot/running.webp" alt="" width="640" height="640" />
     </div>
     <a
-      href="#about"
+      href="#intro"
       class="home-cue absolute bottom-6 left-1/2 z-[2] -translate-x-1/2 flex flex-col items-center gap-1 text-white text-sm font-bold"
       data-ui-sound
     >
@@ -175,7 +169,8 @@ const hobbyIcons: string[] = [
   </section>
 
   <!-- About stage -->
-  <section id="about" data-scroll="pin" data-settle="0.88" class="home-pin relative md:h-[220vh]">
+  <section id="intro" data-scroll="pin" data-settle="0.88" class="home-pin relative md:h-[220vh]">
+    <div id="about" class="absolute top-0 pointer-events-none" aria-hidden="true"></div>
     <div class="md:sticky md:top-0 md:h-screen flex items-center px-4 pt-20 pb-6">
       <div
         class="relative w-full max-w-6xl mx-auto p-6 md:p-12 grid md:grid-cols-[45fr_55fr] items-center gap-8 md:gap-14"
@@ -836,44 +831,6 @@ const hobbyIcons: string[] = [
           </div>
         )
       }
-    </div>
-  </section>
-
-  <!-- Hobbies -->
-  <section id="beyond" class="relative px-4 py-8" aria-labelledby="beyond-title">
-    <div class={`${panel} max-w-6xl mx-auto p-6 md:p-10`}>
-      <h2 id="beyond-title" class="text-3xl md:text-4xl font-black">{data.hobbies.title}</h2>
-      <div class="mt-6 grid md:grid-cols-3 gap-5">
-        {
-          data.hobbies.items.map((h, i) => (
-            <div
-              data-reveal
-              style={`--d:${i * 110}ms`}
-              class="flex gap-4 rounded-2xl bg-white/80 dark:bg-ink-900/80 ring-1 ring-black/5 dark:ring-white/10 p-5"
-            >
-              <span class="shrink-0 w-12 h-12 rounded-xl bg-sand-200 dark:bg-ink-800 text-lava-800 dark:text-sand-200 grid place-items-center">
-                <svg
-                  viewBox="0 0 24 24"
-                  class="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linejoin="round"
-                  stroke-linecap="round"
-                >
-                  <path d={hobbyIcons[i % hobbyIcons.length]} />
-                </svg>
-              </span>
-              <div>
-                <h3 class="font-black">{h.title}</h3>
-                <p class="mt-1 text-sm text-ink-600 dark:text-ink-300 leading-relaxed">
-                  {h.description}
-                </p>
-              </div>
-            </div>
-          ))
-        }
-      </div>
     </div>
   </section>
 

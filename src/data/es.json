@@ -4,6 +4,7 @@
     "description": "Portfolio personal de Leon Elliott Fuller. Estudiante de Ingeniería Informática apasionado por Deep Learning, Ciberseguridad y Desarrollo Web."
   },
   "nav": {
+    "intro": "Intro",
     "about": "Sobre mí",
     "cv": "Experiencia",
     "skills": "Habilidades",
@@ -18,8 +19,7 @@
     "tagline": "Ingeniería Informática · Ingeniero de Seguridad · Ciberseguridad · Ingeniero Software",
     "description": "Ingeniero de seguridad en Wazuh. Me gradué en Ingeniería Informática en la Universidad de Granada y cursé un año Erasmus+ en AGH Cracovia. Construyo sistemas, aprendo herramientas nuevas y asumo retos difíciles.",
     "cta": "Conóceme",
-    "line1": "Ingeniero de seguridad.",
-    "line2": "Corredor de ultras.",
+    "line1": "Leon Elliott Fuller",
     "lead": "Ingeniería de detección en Wazuh entre semana; kilómetros de montaña por Granada el fin de semana.",
     "chip": "Corro ultras por diversión"
   },
@@ -253,7 +253,10 @@
         },
         {
           "name": "Idiomas",
-          "items": ["Inglés (Nativo)", "Español (Nativo)"]
+          "items": [
+            "Inglés (Nativo)",
+            "Español (Nativo)"
+          ]
         }
       ]
     },
@@ -293,7 +296,11 @@
         "url": "https://potocolom.leonfuller.com/",
         "period": "2026",
         "description": "Plataforma open source de generación de imágenes en tiempo real. Dibujas en un lienzo y un modelo de difusión pinta sobre los trazos en vivo; un clic pasa el resultado a un modelo más pesado para el render final. Generar, mejorar y hacer upscale van incluidos. Un único código AGPL corre autoalojado en tu GPU o como nube de suscripción. SvelteKit, FastAPI, PostgreSQL, Redis, WebSockets y CUDA/ROCm.",
-        "tags": ["IA", "Open Source", "Docker"],
+        "tags": [
+          "IA",
+          "Open Source",
+          "Docker"
+        ],
         "image": "/images/potocolom.png"
       },
       {
@@ -301,7 +308,11 @@
         "url": "https://github.com/leonfullxr/ECC-Thesis",
         "period": "2025",
         "description": "Visualización interactiva de curvas elípticas (y² = x³ + ax + b) con parámetros ajustables y zoom. Parte de mi trabajo de fin de grado sobre criptografía de curvas elípticas. Hecho en C++ y ejecutado en Docker.",
-        "tags": ["Ciberseguridad", "C++", "Docker"],
+        "tags": [
+          "Ciberseguridad",
+          "C++",
+          "Docker"
+        ],
         "image": "/images/hopf_torus.png"
       },
       {
@@ -309,7 +320,11 @@
         "url": "https://github.com/leonfullxr/Cypher",
         "period": "2024",
         "description": "Aplicación de chat encriptada con cifrado de extremo a extremo, mensajería en tiempo real, sin almacenamiento de metadatos y protocolos avanzados como TLS y Signal. Usa cifrado AES y garantiza anonimato completo.",
-        "tags": ["Ciberseguridad", "Web App", "JavaScript"],
+        "tags": [
+          "Ciberseguridad",
+          "Web App",
+          "JavaScript"
+        ],
         "image": "/images/cypher_logo.png"
       },
       {
@@ -317,23 +332,23 @@
         "url": "https://nextcloud.leonfuller.com/",
         "period": "2024",
         "description": "Alternativa privada y autoalojada a Google Drive usando Docker y Traefik. Parte de un homelab más amplio centrado en privacidad de datos y control total sobre archivos personales.",
-        "tags": ["DevOps", "Docker", "Web App"],
+        "tags": [
+          "DevOps",
+          "Docker",
+          "Web App"
+        ],
         "image": "/images/nextcloud_login.png"
-      },
-      {
-        "name": "Clasificación de Hongos",
-        "url": "https://github.com/leonfullxr/Classifying-Mushrooms",
-        "period": "2024",
-        "description": "Clasificación de comestibilidad de hongos usando modelos de ML supervisado. Análisis del dataset UCI Secondary Mushroom como parte del curso de ML en la UGR.",
-        "tags": ["IA", "Machine Learning"],
-        "image": "/images/mushroom_classification.png"
       },
       {
         "name": "IA para Juego de Parchís",
         "url": "https://github.com/leonfullxr/AI-for-Ludo-game",
         "period": "2023",
         "description": "Parchís reinventado con un giro estratégico, con un agente de IA deliberativo usando MINIMAX y poda ALFA-BETA para juego inteligente contra humanos.",
-        "tags": ["IA", "Videojuegos", "C++"],
+        "tags": [
+          "IA",
+          "Videojuegos",
+          "C++"
+        ],
         "image": "/images/ludo_game.png"
       },
       {
@@ -341,7 +356,11 @@
         "url": "https://github.com/leonfullxr/Visual-Path-Finding",
         "period": "2023",
         "description": "Herramienta interactiva de visualización de algoritmos de búsqueda de caminos como A*, Dijkstra y más. Recurso educativo para entender la mecánica algorítmica.",
-        "tags": ["IA", "Diseño", "C++"],
+        "tags": [
+          "IA",
+          "Diseño",
+          "C++"
+        ],
         "image": "/images/visual_pathfinding.png"
       },
       {
@@ -349,7 +368,10 @@
         "url": "https://github.com/leonfullxr/Pichola",
         "period": "Ene 2022",
         "description": "Juego premiado creado en una Game Jam de 48 horas con Godot Engine. Tema: 'Empezar de cero'. Los jugadores comienzan como un huevo, recolectando otros para desbloquear habilidades. Ganó 'Mejor Arte'.",
-        "tags": ["Videojuegos", "Godot"],
+        "tags": [
+          "Videojuegos",
+          "Godot"
+        ],
         "image": "/images/pichola.png"
       }
     ]
@@ -445,17 +467,44 @@
       "Índice de OpenSearch"
     ],
     "levers": [
-      ["Right-sizing", "de instancias a la carga real"],
-      ["ARM → AMD", "para los pods de indexación"],
-      ["Políticas ISM", "que mueven índices antiguos a S3 warm y cold"]
+      [
+        "Right-sizing",
+        "de instancias a la carga real"
+      ],
+      [
+        "ARM → AMD",
+        "para los pods de indexación"
+      ],
+      [
+        "Políticas ISM",
+        "que mueven índices antiguos a S3 warm y cold"
+      ]
     ],
     "frameworks": [
-      ["PCI-DSS", "Estándar de seguridad de datos de tarjetas de pago"],
-      ["CJIS", "Servicios de Información de Justicia Criminal (EE. UU.)"],
-      ["ISO 27001", "Gestión de la seguridad de la información"],
-      ["HIPAA", "Privacidad y seguridad de datos de salud (EE. UU.)"],
-      ["GDPR", "Reglamento General de Protección de Datos (UE)"],
-      ["NIST", "Marco de Ciberseguridad del NIST"]
+      [
+        "PCI-DSS",
+        "Estándar de seguridad de datos de tarjetas de pago"
+      ],
+      [
+        "CJIS",
+        "Servicios de Información de Justicia Criminal (EE. UU.)"
+      ],
+      [
+        "ISO 27001",
+        "Gestión de la seguridad de la información"
+      ],
+      [
+        "HIPAA",
+        "Privacidad y seguridad de datos de salud (EE. UU.)"
+      ],
+      [
+        "GDPR",
+        "Reglamento General de Protección de Datos (UE)"
+      ],
+      [
+        "NIST",
+        "Marco de Ciberseguridad del NIST"
+      ]
     ],
     "themes": [
       {
@@ -526,7 +575,10 @@
     },
     "title": "¡Hola! Soy Leon.",
     "globeLabel": "Globo con Granada y Cracovia",
-    "pins": ["Granada", "Cracovia"],
+    "pins": [
+      "Granada",
+      "Cracovia"
+    ],
     "story": {
       "label": "De lo que más orgulloso estoy",
       "title": "Cuando mis resultados no coincidían con los libros",
@@ -575,7 +627,11 @@
         "start": "Empezar la jam",
         "again": "Otra vez",
         "done": "¡Tiempo! Resultados:",
-        "awards": ["1.º · Mejor Arte", "3.º · Mayor Potencial Comercial", "3.º · Más Popular"],
+        "awards": [
+          "1.º · Mejor Arte",
+          "3.º · Mayor Potencial Comercial",
+          "3.º · Más Popular"
+        ],
         "link": "Pichola en GitHub",
         "url": "https://github.com/leonfullxr/Pichola",
         "idle": "48 horas en el reloj. ¿Listo?"
@@ -593,7 +649,7 @@
         "title": "Cada diciembre hago el Advent of Code",
         "text": "25 días de retos, dos partes al día y una estrella dorada por cada una.",
         "link": "Mis soluciones en GitHub",
-        "url": "https://github.com/leonfullxr?tab=repositories&q=advent",
+        "url": "https://github.com/leonfullxr/Advent-of-Code",
         "site": "adventofcode.com"
       },
       "race": {
@@ -605,25 +661,25 @@
         "rows": [
           {
             "dist": "21 km",
-            "time": "1:22",
-            "secs": 4920,
+            "time": "1h 28min",
+            "secs": 5280,
             "km": 21
           },
           {
             "dist": "Maratón",
-            "time": "3:20",
+            "time": "3h 20min",
             "secs": 12000,
             "km": 42.195
           },
           {
             "dist": "100 km",
-            "time": "15:00",
+            "time": "15h 00min",
             "secs": 54000,
             "km": 100
           }
         ],
         "unit": "/km",
-        "note": "h:mm",
+        "note": "h min",
         "pb": "Mi mejor marca: {t}"
       }
     },
@@ -638,7 +694,10 @@
       "note": "Pasé un año en Cracovia y ahora trabajo en remoto. Arrastra el globo para girarlo."
     },
     "langs": {
-      "words": ["¡Hola!", "Hello!"],
+      "words": [
+        "¡Hola!",
+        "Hello!"
+      ],
       "text": "El inglés y el español son mis dos lenguas nativas."
     },
     "edu": {
