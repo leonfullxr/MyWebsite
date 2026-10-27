@@ -38,54 +38,80 @@
     "plain": [
       [
         {
-          "text": "I look after "
+          "text": "I build and run the "
         },
         {
-          "text": "the alarm system",
-          "tip": "SIEM / XDR: collects logs from every machine and raises alerts on attacks"
+          "text": "security systems",
+          "tip": "SIEM / XDR platforms on Wazuh and OpenSearch, on-prem and in the cloud"
         },
         {
-          "text": " that big companies use to spot hackers. It reads "
+          "text": " big companies rely on to spot attacks. They can’t ever switch off, so I design them to "
+        },
+        {
+          "text": "survive failures",
+          "tip": "High availability: multi-node clusters across availability zones with automatic failover"
+        },
+        {
+          "text": ": if one machine goes down, another takes over before anyone notices."
+        }
+      ],
+      [
+        {
+          "text": "They also deal with a lot: "
         },
         {
           "text": "billions of messages",
           "tip": "250B+ events through high-throughput ingestion pipelines"
         },
         {
-          "text": " from their computers, and I make sure "
+          "text": " from computers all over the world. I make sure "
         },
         {
           "text": "none get lost",
-          "tip": "Kernel and manager buffer tuning to prevent ingestion bottlenecks"
+          "tip": "Queue and buffer tuning to absorb burst traffic without dropping events"
         },
         {
-          "text": ", while "
+          "text": " when traffic spikes, "
         },
         {
-          "text": "cutting the cloud bill",
+          "text": "grow the system",
+          "tip": "Horizontal scaling on Kubernetes (AWS EKS, Azure AKS), Google Cloud and Proxmox"
+        },
+        {
+          "text": " as companies grow, and "
+        },
+        {
+          "text": "cut the cloud bill",
           "tip": "Compute and storage right-sizing on AWS EKS: up to −20%"
         },
         {
-          "text": "."
+          "text": " along the way."
         }
       ],
       [
         {
-          "text": "I also write the "
+          "text": "When something breaks in production, I’m the one who "
+        },
+        {
+          "text": "finds out why",
+          "tip": "Root-cause analysis and incident recovery: ingestion bottlenecks, disk pressure, split-brain clusters"
+        },
+        {
+          "text": " and gets it running again. I also write the "
         },
         {
           "text": "“what counts as suspicious” rules",
           "tip": "Detection rules and decoders for AWS, Azure, identity providers and network gear"
         },
         {
-          "text": " that anyone can download for free, and the "
+          "text": " and "
         },
         {
           "text": "automatic responses",
           "tip": "Active-response playbooks"
         },
         {
-          "text": " that kick in when something looks wrong."
+          "text": " that anyone can download for free."
         }
       ]
     ]

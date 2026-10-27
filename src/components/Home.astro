@@ -1353,12 +1353,40 @@ const hobbyIcons: string[] = [
     const plain = box.querySelector('[data-view="plain"]');
     const tech = box.querySelector('[data-view="tech"]');
     const hint = box.querySelector('[data-decoder-hint]');
+    const views = box.querySelector('.decoder-views');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let busy = false;
+    // Old text fades out, the box eases to the new height, the new paragraphs rise in.
     sw?.addEventListener('click', () => {
+      if (busy) return;
       const on = sw.getAttribute('aria-checked') !== 'true';
       sw.setAttribute('aria-checked', String(on));
-      plain.hidden = on;
-      tech.hidden = !on;
       if (hint) hint.hidden = on;
+      const from = on ? plain : tech;
+      const to = on ? tech : plain;
+      const swap = () => {
+        const start = views.offsetHeight;
+        from.hidden = true;
+        from.classList.remove('is-leaving');
+        to.hidden = false;
+        if (reduce) return;
+        const end = views.offsetHeight;
+        views.style.height = start + 'px';
+        void views.offsetHeight;
+        views.classList.add('is-resizing');
+        views.style.height = end + 'px';
+        const done = () => {
+          views.classList.remove('is-resizing');
+          views.style.height = '';
+          busy = false;
+        };
+        views.addEventListener('transitionend', done, { once: true });
+        window.setTimeout(done, 700);
+      };
+      if (reduce) return swap();
+      busy = true;
+      from.classList.add('is-leaving');
+      window.setTimeout(swap, 200);
     });
     const terms = Array.from(box.querySelectorAll('.decoder-term'));
     const closeAll = (except) =>

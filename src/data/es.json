@@ -38,54 +38,80 @@
     "plain": [
       [
         {
-          "text": "Me encargo del "
+          "text": "Construyo y opero los "
         },
         {
-          "text": "sistema de alarma",
-          "tip": "SIEM / XDR: recoge los registros de cada máquina y lanza alertas ante ataques"
+          "text": "sistemas de seguridad",
+          "tip": "Plataformas SIEM / XDR con Wazuh y OpenSearch, on-prem y en la nube"
         },
         {
-          "text": " que usan las grandes empresas para detectar a los hackers. Lee "
+          "text": " en los que confían las grandes empresas para detectar ataques. No pueden apagarse nunca, así que los diseño para "
+        },
+        {
+          "text": "sobrevivir a los fallos",
+          "tip": "Alta disponibilidad: clústeres multinodo en varias zonas de disponibilidad con failover automático"
+        },
+        {
+          "text": ": si una máquina cae, otra toma el relevo antes de que nadie lo note."
+        }
+      ],
+      [
+        {
+          "text": "Además mueven muchísimo: "
         },
         {
           "text": "miles de millones de mensajes",
           "tip": "Más de 250 mil millones de eventos en pipelines de alta ingesta"
         },
         {
-          "text": " de sus ordenadores, y me aseguro de que "
+          "text": " de ordenadores de todo el mundo. Me aseguro de que "
         },
         {
           "text": "no se pierda ninguno",
-          "tip": "Ajuste de buffers del kernel y del gestor para evitar cuellos de botella"
+          "tip": "Ajuste de colas y buffers para absorber picos de tráfico sin perder eventos"
         },
         {
-          "text": ", mientras "
+          "text": " cuando hay picos de tráfico, "
+        },
+        {
+          "text": "hago crecer el sistema",
+          "tip": "Escalado horizontal en Kubernetes (AWS EKS, Azure AKS), Google Cloud y Proxmox"
+        },
+        {
+          "text": " a la vez que crecen las empresas y "
         },
         {
           "text": "reduzco la factura de la nube",
           "tip": "Right-sizing de cómputo y almacenamiento en AWS EKS: hasta un −20%"
         },
         {
-          "text": "."
+          "text": " por el camino."
         }
       ],
       [
         {
-          "text": "También escribo las "
+          "text": "Cuando algo se rompe en producción, soy quien "
+        },
+        {
+          "text": "averigua por qué",
+          "tip": "Análisis de causa raíz y recuperación de incidentes: cuellos de botella de ingesta, presión de disco, clústeres en split-brain"
+        },
+        {
+          "text": " y lo vuelve a poner en marcha. También escribo las "
         },
         {
           "text": "reglas de «qué es sospechoso»",
           "tip": "Reglas de detección y decoders para AWS, Azure, proveedores de identidad y equipos de red"
         },
         {
-          "text": " que cualquiera puede descargar gratis, y las "
+          "text": " y las "
         },
         {
           "text": "respuestas automáticas",
           "tip": "Playbooks de active response"
         },
         {
-          "text": " que se activan cuando algo no va bien."
+          "text": " que cualquiera puede descargar gratis."
         }
       ]
     ]
