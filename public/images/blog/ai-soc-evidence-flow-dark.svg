@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 620" role="img" aria-labelledby="soc-flow-title soc-flow-desc" id="ai-soc-evidence-flow-dark-root">
+<title id="soc-flow-title">AI SOC investigation</title>
+<desc id="soc-flow-desc">An analyst asks a question. The assistant collects evidence under the analyst's permissions, builds a topic-bound evidence pack, checks model findings, and returns the answer to the analyst.</desc>
+<defs>
+      <style>#ai-soc-evidence-flow-dark-root { font-family: Arial, sans-serif; }
+      #ai-soc-evidence-flow-dark-root .box { fill: #f4f3f0; stroke: #d2d1cc; }
+      #ai-soc-evidence-flow-dark-root .title { fill: #242424; font: 23px Arial, sans-serif; }
+      #ai-soc-evidence-flow-dark-root .detail { fill: #656565; font: 19px Arial, sans-serif; }
+      #ai-soc-evidence-flow-dark-root .line { fill: none; stroke: #767676; stroke-width: 2; }
+      #ai-soc-evidence-flow-dark-root .accent { fill: #ae4b1f; font: 19px Arial, sans-serif; }
+      #ai-soc-evidence-flow-dark-root .box { fill: #171713; stroke: #383832; }
+      #ai-soc-evidence-flow-dark-root .title { fill: #f2f2f2; }
+      #ai-soc-evidence-flow-dark-root .detail { fill: #b0b0b0; }
+      #ai-soc-evidence-flow-dark-root .line { stroke: #a7a7a7; }
+      #ai-soc-evidence-flow-dark-root .accent { fill: #fa8a53; }</style><marker id="ai-soc-evidence-flow-dark-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10" fill="none" stroke="context-stroke" stroke-width="1.5"/></marker></defs>
+<g class="line" marker-end="url(#ai-soc-evidence-flow-dark-arrow)"><path d="M284 98 H436"/><path d="M568 146 V442"/><path d="M436 490 H284"/><path d="M152 442 V340 H260"/></g>
+<rect class="box" x="20" y="50" width="264" height="96" rx="5"/><text class="title" x="152" y="89" text-anchor="middle">Analyst's question</text><text class="detail" x="152" y="120" text-anchor="middle">Topic and time window</text>
+<rect class="box" x="436" y="50" width="264" height="96" rx="5"/><text class="title" x="568" y="89" text-anchor="middle">Plan and collect</text><text class="detail" x="568" y="120" text-anchor="middle">Analyst's permissions</text>
+<rect class="box" x="436" y="442" width="264" height="96" rx="5"/><text class="title" x="568" y="481" text-anchor="middle">Evidence pack</text><text class="detail" x="568" y="512" text-anchor="middle">Records and checks</text>
+<rect class="box" x="20" y="442" width="264" height="96" rx="5"/><text class="title" x="152" y="481" text-anchor="middle">Model and validation</text><text class="detail" x="152" y="512" text-anchor="middle">Check proposed findings</text>
+<text class="accent" x="360" y="295" text-anchor="middle">Analyst reviews</text><text class="detail" x="360" y="326" text-anchor="middle">answer and gaps</text>
+</svg>
