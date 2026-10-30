@@ -171,7 +171,7 @@ const skillCells = skillGroups.flatMap((g) =>
   <!-- About stage -->
   <section id="intro" data-scroll="pin" data-settle="0.88" class="home-pin relative md:h-[220vh]">
     <div id="about" class="absolute top-0 pointer-events-none" aria-hidden="true"></div>
-    <div class="md:sticky md:top-0 md:h-screen flex items-center px-4 pt-20 pb-6">
+    <div class="home-pin-stage md:sticky md:top-0 md:h-screen flex items-center px-4 pt-20 pb-6">
       <div
         class="relative w-full max-w-6xl mx-auto p-6 md:p-12 grid md:grid-cols-[45fr_55fr] items-center gap-8 md:gap-14"
       >
@@ -476,7 +476,7 @@ const skillCells = skillGroups.flatMap((g) =>
     data-settle="0.65"
     class="home-pin relative md:h-[220vh]"
   >
-    <div class="md:sticky md:top-0 md:h-screen flex items-center px-4 pt-20 pb-6">
+    <div class="home-pin-stage md:sticky md:top-0 md:h-screen flex items-center px-4 pt-20 pb-6">
       <div class={`${panel} w-full max-w-6xl mx-auto p-6 md:p-10`}>
         <h2 class="text-4xl md:text-5xl font-black">{t.stackTitle}</h2>
         <div class="mt-8 max-md:overflow-x-auto max-md:overscroll-x-contain">
@@ -888,6 +888,14 @@ const skillCells = skillGroups.flatMap((g) =>
     opacity: var(--c);
     transform: translateY(calc((1 - var(--c)) * 16px));
   }
+  .home-pin.is-flow {
+    height: auto;
+    --p: 1 !important;
+  }
+  .home-pin.is-flow .home-pin-stage {
+    position: static;
+    height: auto;
+  }
 
   /* Skills: logos sit in periodic-table cells and gather into place on scroll */
   .home-icon {
@@ -1038,8 +1046,9 @@ const skillCells = skillGroups.flatMap((g) =>
         // data-lead starts a pinned stage before it sticks, so skills begin
         // gathering while experience is still on screen.
         const lead = Number(el.dataset.lead || 0) * ih;
-        const p =
-          el.dataset.scroll === 'view' || el.classList.contains('is-flow') || mobile
+        const p = el.classList.contains('is-flow')
+          ? 1
+          : el.dataset.scroll === 'view' || mobile
             ? clamp((ih - r.top) / (ih / 2 + r.height / 2))
             : clamp((lead - r.top) / (r.height - ih + lead));
         el.style.setProperty('--p', p.toFixed(4));
@@ -1048,6 +1057,30 @@ const skillCells = skillGroups.flatMap((g) =>
     }
 
     const revealEls = Array.from(root.querySelectorAll('[data-reveal]'));
+
+    const pinStages = Array.from(root.querySelectorAll('.home-pin-stage'));
+    const canObservePins = 'ResizeObserver' in window;
+    function syncPinnedSections() {
+      pinStages.forEach((stage) => {
+        const content = stage.firstElementChild;
+        const style = getComputedStyle(stage);
+        const height =
+          content.offsetHeight + parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+        stage.parentElement.classList.toggle(
+          'is-flow',
+          window.innerWidth >= 768 && (!canObservePins || height > window.innerHeight)
+        );
+      });
+    }
+    if (canObservePins) {
+      const pinObserver = new ResizeObserver(() => {
+        syncPinnedSections();
+        if (!reduce) refresh();
+      });
+      pinStages.forEach((stage) => pinObserver.observe(stage.firstElementChild));
+    }
+    window.addEventListener('resize', syncPinnedSections, { passive: true });
+    syncPinnedSections();
 
     if (reduce) {
       root.style.setProperty('--page', '0');
