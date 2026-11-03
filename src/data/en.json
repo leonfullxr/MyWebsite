@@ -49,15 +49,15 @@
         },
         {
           "text": "survive failures",
-          "tip": "High availability: multi-node clusters across availability zones with automatic failover"
+          "tip": "High availability with multi-node clusters across availability zones and automatic failover"
         },
         {
-          "text": ": if one machine goes down, another takes over before anyone notices."
+          "text": ". If one machine goes down, another takes over before anyone notices."
         }
       ],
       [
         {
-          "text": "They also deal with a lot: "
+          "text": "They also deal with "
         },
         {
           "text": "billions of messages",
@@ -82,7 +82,7 @@
         },
         {
           "text": "cut the cloud bill",
-          "tip": "Compute and storage right-sizing on AWS EKS: up to −20%"
+          "tip": "Compute and storage right-sizing on AWS EKS, reducing costs by up to 20%"
         },
         {
           "text": " along the way."
@@ -94,7 +94,7 @@
         },
         {
           "text": "finds out why",
-          "tip": "Root-cause analysis and incident recovery: ingestion bottlenecks, disk pressure, split-brain clusters"
+          "tip": "Root-cause analysis and recovery from ingestion bottlenecks, disk pressure and split-brain clusters"
         },
         {
           "text": " and gets it running again. I also write the "
