@@ -169,11 +169,11 @@ const skillCells = skillGroups.flatMap((g) =>
   </section>
 
   <!-- About stage -->
-  <section id="intro" data-scroll="pin" data-settle="0.88" class="home-pin relative md:h-[220vh]">
+  <section id="intro" class="relative">
     <div id="about" class="absolute top-0 pointer-events-none" aria-hidden="true"></div>
-    <div class="home-pin-stage md:sticky md:top-0 md:h-screen flex items-center px-4 pt-20 pb-6">
+    <div class="flex items-center px-4 pt-20 pb-6">
       <div
-        class="relative w-full max-w-6xl mx-auto p-6 md:p-12 grid md:grid-cols-[45fr_55fr] items-center gap-8 md:gap-14"
+        class="relative w-full max-w-6xl mx-auto p-6 md:p-12 grid lg:grid-cols-[45fr_55fr] items-center gap-8 lg:gap-14"
       >
         <div class={`home-about-bg absolute inset-0 ${panel}`} aria-hidden="true"></div>
         <img
@@ -870,24 +870,6 @@ const skillCells = skillGroups.flatMap((g) =>
     box-shadow: 0 1px 0 rgb(255 255 255 / 0.06);
   }
 
-  /* About */
-  .home-about-bg {
-    opacity: clamp(0, var(--p, 0) * 3, 1);
-  }
-  .home-photo {
-    --a: min(var(--p, 0) * 2, 1);
-    transform: translateY(calc((1 - var(--a)) * 40vh)) scale(calc(0.85 + var(--a) * 0.15));
-  }
-  .home-about-text {
-    --t: clamp(0, (var(--p, 0) - 0.3) * 2.5, 1);
-    opacity: var(--t);
-    transform: translateX(calc((1 - var(--t)) * 160px));
-  }
-  .home-contact {
-    --c: clamp(0, (var(--p, 0) - 0.7) * 8, 1);
-    opacity: var(--c);
-    transform: translateY(calc((1 - var(--c)) * 16px));
-  }
   .home-pin.is-flow {
     height: auto;
     --p: 1 !important;

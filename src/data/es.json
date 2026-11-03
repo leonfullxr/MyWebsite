@@ -49,15 +49,15 @@
         },
         {
           "text": "sobrevivir a los fallos",
-          "tip": "Alta disponibilidad: clústeres multinodo en varias zonas de disponibilidad con failover automático"
+          "tip": "Alta disponibilidad con clústeres multinodo en varias zonas de disponibilidad y failover automático"
         },
         {
-          "text": ": si una máquina cae, otra toma el relevo antes de que nadie lo note."
+          "text": ". Si una máquina cae, otra toma el relevo antes de que nadie lo note."
         }
       ],
       [
         {
-          "text": "Además mueven muchísimo: "
+          "text": "Además procesan "
         },
         {
           "text": "miles de millones de mensajes",
@@ -82,7 +82,7 @@
         },
         {
           "text": "reduzco la factura de la nube",
-          "tip": "Right-sizing de cómputo y almacenamiento en AWS EKS: hasta un −20%"
+          "tip": "Right-sizing de cómputo y almacenamiento en AWS EKS, con una reducción de costes de hasta un 20%"
         },
         {
           "text": " por el camino."
@@ -94,7 +94,7 @@
         },
         {
           "text": "averigua por qué",
-          "tip": "Análisis de causa raíz y recuperación de incidentes: cuellos de botella de ingesta, presión de disco, clústeres en split-brain"
+          "tip": "Análisis de causa raíz y recuperación de cuellos de botella de ingesta, presión de disco y clústeres en split-brain"
         },
         {
           "text": " y lo vuelve a poner en marcha. También escribo las "
