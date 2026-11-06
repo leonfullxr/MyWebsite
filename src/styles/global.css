@@ -449,6 +449,28 @@
     @apply bg-white/95 border-ink-700;
   }
 
+  .prose-blog img.ir-diagram,
+  .dark .prose-blog img.ir-diagram {
+    @apply w-full min-w-[640px] max-w-none mx-auto mt-8 mb-2 p-0 border-0 bg-transparent rounded-none;
+  }
+
+  .prose-blog .ir-diagram-figure {
+    @apply overflow-x-auto;
+  }
+
+  .prose-blog img.ir-diagram-dark,
+  .dark .prose-blog img.ir-diagram-light {
+    display: none;
+  }
+
+  .dark .prose-blog img.ir-diagram-dark {
+    display: block;
+  }
+
+  .prose-blog .ir-diagram-caption {
+    @apply mb-8 text-sm text-ink-500 dark:text-ink-400;
+  }
+
   /* Nav blur */
   .nav-blur {
     @apply backdrop-blur-lg bg-sand-50/80 border-b border-sand-200/50;

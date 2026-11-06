@@ -11,7 +11,7 @@ translation: "nextcloud-raspberry-pi-docker-setup"
 
 > **Actualización (julio 2026):** dos años después este stack es bastante distinto. El borde con Traefik y puertos redirigidos que se describe aquí acabó sustituido por un túnel de Cloudflare con cero puertos abiertos. Este post se queda como registro de la construcción original. La continuación es [De abrir puertos a túneles de Cloudflare](/es/blog/de-puertos-abiertos-a-tuneles-cloudflare/).
 
-Tras escribir sobre [por qué montar un servidor doméstico](/es/blog/creando-servidor-domestico/), aquí va la primera pieza concreta de mi montaje: **Nextcloud en una Raspberry Pi, todo en contenedores**, con base de datos en serio, caché, TLS que se renueva solo y algo que casi nadie documenta bien en Docker: notificaciones push que de verdad funcionan en los clientes.
+Esta fue la primera pieza concreta de mi servidor doméstico: **Nextcloud en una Raspberry Pi, todo en contenedores**, con base de datos en serio, caché, TLS que se renueva solo y algo que casi nadie documenta bien en Docker: notificaciones push que de verdad funcionan en los clientes.
 
 Dos guías de la comunidad marcaron el camino: [esta del foro de Nextcloud para Raspberry Pi](https://help.nextcloud.com/t/guide-setting-up-nextcloud-on-raspberry-pi-ssl-advanced-app-support-high-performance-postgresql-and-cloudflare-zero-trust-integration/185757) y el muy útil [docker compose con notify_push](https://help.nextcloud.com/t/how-to-docker-compose-with-notify-push-2024/186721) de wwe. Lo de abajo es mi adaptación para Pi ARM64, más los detalles que me costaron varias tardes descubrir.
 

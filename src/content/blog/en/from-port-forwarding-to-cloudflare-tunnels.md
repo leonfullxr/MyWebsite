@@ -9,7 +9,7 @@ translation: "de-puertos-abiertos-a-tuneles-cloudflare"
 
 # From Port Forwarding to Cloudflare Tunnels: Evolving My Home Server
 
-Back in 2024 I wrote about [why you might want a home server](/en/blog/creating-homeserver/). This is the follow-up, two years and many lessons later. I tell it as **two architectures**. The first is the classic setup everybody builds: open ports, a reverse proxy, and a script fighting my ISP's dynamic IP. The second replaced it: a Cloudflare Tunnel with **zero open ports**.
+I started building my home server in 2024. Two years and many lessons later, its story comes down to **two architectures**. The first is the classic setup everybody builds: open ports, a reverse proxy, and a script fighting my ISP's dynamic IP. The second replaced it: a Cloudflare Tunnel with **zero open ports**.
 
 Everything runs on a Raspberry Pi 5 in my house. By the end of this post you will see how requests travel from a phone on the other side of the world to a container on that Pi. No port is forwarded on my router. My home IP does not appear in any DNS record.
 
