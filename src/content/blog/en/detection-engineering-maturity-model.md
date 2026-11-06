@@ -9,7 +9,11 @@ translation: "modelo-madurez-ingenieria-deteccion"
 
 How do you show that a detection program is improving? Counting rules alone says little about whether they work or whether analysts can respond to their alerts. [Rcegan's article on Detect FYI](https://detect.fyi/from-zero-to-expert-level-detection-engineering-with-elastics-maturity-model-bc230107741e), published on October 5, 2024, introduces Elastic's Detection Engineering Behavior Maturity Model (DEBMM) as a way to have that conversation.
 
-The [model from Elastic](https://www.elastic.co/security-labs/threat-command/elastic-releases-debmm) describes five tiers, from foundational work on individual rules to an expert program that incorporates threat hunting and automation. Between those points are practices such as version control, tuning false positives, documenting coverage gaps, and testing for missed threats. Each tier has criteria for assessing both the state of a ruleset and the work needed to maintain it.
+Elastic's original article, [Elastic releases the Detection Engineering Behavior Maturity Model](https://www.elastic.co/security-labs/threat-command/elastic-releases-debmm), by Mika Ayenson, Terrance DeJesus, and Samir Bousseaden, describes five tiers, from foundational work on individual rules to an expert program that incorporates threat hunting and automation. Between those points are practices such as version control, tuning false positives, documenting coverage gaps, and testing for missed threats. Each tier has criteria for assessing both the state of a ruleset and the work needed to maintain it.
+
+![Elastic's maturity model shown as a cycle: tier 0 foundation, tier 1 basic, tier 2 intermediate, tier 3 advanced, tier 4 expert, followed by refine, repeat, and mature.](https://images.contentstack.io/v3/assets/bltefdd0b53724fa2ce/blt181534fe2ef46811/6a7c80d18fc2d05fa33e889c/image5.png)
+
+*Image: Elastic, from its [DEBMM article](https://www.elastic.co/security-labs/threat-command/elastic-releases-debmm).*
 
 ## Put the model to work
 
