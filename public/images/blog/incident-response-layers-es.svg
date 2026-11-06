@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 586" role="img" aria-labelledby="layers-es-title layers-es-desc">
+<title id="layers-es-title">Cuatro capas conectadas de respuesta</title>
+<desc id="layers-es-desc">Política. Responsables y acciones que requieren autorización; Procedimiento. Escalado y autoridad para cada tipo de incidente; Guía de detección. Qué significa la alerta de Wazuh y qué investigar; Runbook técnico. Cómo ejecutar y comprobar una acción aprobada</desc>
+<rect width="960" height="586" rx="24" fill="#faf8f3"/>
+<g font-family="Arial, sans-serif">
+<text x="48" y="64" font-size="26" font-weight="700" fill="#202c34">Cuatro capas conectadas de respuesta</text>
+<rect x="48" y="92" width="864" height="74" rx="12" fill="#fff" stroke="#e0d6c8"/>
+<circle cx="82" cy="129" r="19" fill="#e65b38"/>
+<text x="82" y="135" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">01</text>
+<text x="120" y="122" font-size="20" font-weight="700" fill="#202c34">Política</text>
+<text x="120" y="147" font-size="17" fill="#58626a">Responsables y acciones que requieren autorización</text>
+<path d="M 82 164 V 182" stroke="#c7b8a8" stroke-width="3"/>
+<rect x="48" y="184" width="864" height="74" rx="12" fill="#fff" stroke="#e0d6c8"/>
+<circle cx="82" cy="221" r="19" fill="#e65b38"/>
+<text x="82" y="227" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">02</text>
+<text x="120" y="214" font-size="20" font-weight="700" fill="#202c34">Procedimiento</text>
+<text x="120" y="239" font-size="17" fill="#58626a">Escalado y autoridad para cada tipo de incidente</text>
+<path d="M 82 256 V 274" stroke="#c7b8a8" stroke-width="3"/>
+<rect x="48" y="276" width="864" height="74" rx="12" fill="#fff" stroke="#e0d6c8"/>
+<circle cx="82" cy="313" r="19" fill="#e65b38"/>
+<text x="82" y="319" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">03</text>
+<text x="120" y="306" font-size="20" font-weight="700" fill="#202c34">Guía de detección</text>
+<text x="120" y="331" font-size="17" fill="#58626a">Qué significa la alerta de Wazuh y qué investigar</text>
+<path d="M 82 348 V 366" stroke="#c7b8a8" stroke-width="3"/>
+<rect x="48" y="368" width="864" height="74" rx="12" fill="#fff" stroke="#e0d6c8"/>
+<circle cx="82" cy="405" r="19" fill="#e65b38"/>
+<text x="82" y="411" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">04</text>
+<text x="120" y="398" font-size="20" font-weight="700" fill="#202c34">Runbook técnico</text>
+<text x="120" y="423" font-size="17" fill="#58626a">Cómo ejecutar y comprobar una acción aprobada</text>
+<text x="48" y="556" font-size="15" fill="#667077">Flujo ilustrativo. Las autorizaciones y herramientas pueden variar.</text></g></svg>
