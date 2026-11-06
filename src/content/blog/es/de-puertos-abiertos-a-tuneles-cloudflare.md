@@ -9,7 +9,7 @@ translation: "from-port-forwarding-to-cloudflare-tunnels"
 
 # De abrir puertos a túneles de Cloudflare: la evolución de mi servidor doméstico
 
-En 2024 escribí sobre [por qué montar un servidor doméstico](/es/blog/creando-servidor-domestico/). Este post es la continuación, dos años y bastantes lecciones después: en qué se convirtió aquella idea, contado como **dos arquitecturas**. La clásica que casi todo el mundo monta primero (puertos abiertos, proxy inverso y un script peleándose con la IP dinámica de la operadora), y la que la sustituyó (un túnel de Cloudflare con **cero puertos abiertos**).
+Empecé a montar mi servidor doméstico en 2024. Dos años y bastantes lecciones después, su historia se resume en **dos arquitecturas**. La clásica que casi todo el mundo monta primero (puertos abiertos, proxy inverso y un script peleándose con la IP dinámica de la operadora), y la que la sustituyó (un túnel de Cloudflare con **cero puertos abiertos**).
 
 Todo corre en una Raspberry Pi 5 en casa. Al final verás cómo una petición viaja desde un móvil en la otra punta del mundo hasta un contenedor en esa Pi, sin redirigir un solo puerto en el router y sin que mi IP doméstica aparezca en ningún registro DNS.
 
