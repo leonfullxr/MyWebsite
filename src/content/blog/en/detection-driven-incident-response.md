@@ -21,7 +21,11 @@ A scenario procedure handles a narrower problem, such as a compromised server or
 
 The detection guidance sits closer to the alert. It describes what a particular rule is looking for, what evidence to check, and what might make the match benign. A technical runbook then explains how to perform an approved action on a specific platform and how to check or reverse it. Keeping these pieces separate lets a team change a firewall command without rewriting its incident policy.
 
-![Four connected layers of response, from policy and scenario procedures to detection guidance and technical runbooks.](/images/blog/incident-response-layers-en.svg)
+<figure class="ir-diagram-figure">
+  <img class="ir-diagram ir-diagram-light" src="/images/blog/incident-response-layers-en.svg" width="1002" height="370" alt="Policy guides incident procedures, which inform detection guidance linked to a technical runbook.">
+  <img class="ir-diagram ir-diagram-dark" src="/images/blog/incident-response-layers-en-dark.svg" width="1002" height="370" alt="Policy guides incident procedures, which inform detection guidance linked to a technical runbook.">
+  <figcaption class="ir-diagram-caption">A proposed way to connect response documents, from authority to the steps an analyst can use.</figcaption>
+</figure>
 
 The links between those pieces matter. A rule owner can maintain one investigation guide for a detection, while each customer or environment has its own contacts and runbooks. Wazuh does not create those documents or enforce that link for you. The team can keep them in an accessible wiki or case system and include a stable reference wherever analysts work with alerts.
 
@@ -35,7 +39,11 @@ Next, widen the time window and look for related authentication events on the af
 
 A source address alone rarely settles the case. A shared VPN or NAT address can represent many users, and an expected scanner can produce a noisy alert. Record what supports the assessment and what you could not check. Missing logs, an offline agent, or a search outside the right time window should remain visible in the handoff.
 
-![Illustrative response flow showing a Wazuh SSH alert followed by analyst triage, a decision, an approved response, and review.](/images/blog/incident-response-flow-en.svg)
+<figure class="ir-diagram-figure">
+  <img class="ir-diagram ir-diagram-light" src="/images/blog/incident-response-flow-en.svg" width="1003" height="455" alt="A Wazuh SSH alert goes to analyst triage, a response decision, and an approved runbook. Separately configured Active Response can trigger an endpoint action automatically.">
+  <img class="ir-diagram ir-diagram-dark" src="/images/blog/incident-response-flow-en-dark.svg" width="1003" height="455" alt="A Wazuh SSH alert goes to analyst triage, a response decision, and an approved runbook. Separately configured Active Response can trigger an endpoint action automatically.">
+  <figcaption class="ir-diagram-caption">An illustrative investigation. Active Response runs automatically when configured; it does not wait for the analyst's approval.</figcaption>
+</figure>
 
 ## Write the response plan alongside the rule
 
