@@ -7,22 +7,22 @@ lang: "en"
 translation: "respuesta-incidentes-desde-deteccion"
 ---
 
-An alert tells an analyst that a detection matched. It does not necessarily say what evidence to collect next, who can approve containment, or how to act in the affected environment. Those answers often live in separate documents, if they are written down at all.
+An alert lands in the queue. The rule matched something suspicious, but now what? The analyst still needs to work out what happened, where to look next, and who can approve a response. Those answers might be scattered across a wiki, a customer agreement, and a runbook that nobody has opened in months.
 
-In [Re-Writing the Playbook: A detection-driven approach to Incident Response](https://detect.fyi/re-writing-the-playbook-a-detection-driven-approach-to-incident-response-5269e2eb33ca), published on Detect FYI on October 15, 2025, Rcegan proposes connecting detection-specific response plans to broader incident procedures and detailed runbooks. The distinction gives each document a job: one helps an analyst interpret an alert, another establishes the response process, and another explains how to carry out a particular action.
+In an [article for Detect FYI](https://detect.fyi/re-writing-the-playbook-a-detection-driven-approach-to-incident-response-5269e2eb33ca), Rcegan suggests connecting the guidance for each detection to the wider incident response process. The detection plan helps an analyst investigate. The procedure sets out who makes decisions and who needs to know. The runbook covers the steps for a particular system or customer.
 
 ## Follow one alert through the response
 
-Consider a hypothetical alert for a suspicious sign-in. A useful detection response plan starts with the context needed to investigate: the affected account, sign-in time, source address, and the reason the activity matched. It can point the analyst to recent account activity and identity-provider records, while noting that an unusual location alone does not prove compromise.
+Imagine an alert for a suspicious sign-in. The analyst needs the account, the time, the source address, and an explanation of why the rule fired. From there, the detection plan can point to recent account activity and identity-provider logs. A sign-in from an unusual location deserves a look, but it does not prove that someone stole the account.
 
-If the evidence supports escalation, the plan can link to the account-compromise procedure. That procedure identifies who to notify and how containment decisions are authorized. A separate, environment-specific runbook can explain how an approved responder revokes sessions or disables an account, including how to confirm the change and record the outcome. If the required records are unavailable, the analyst should record that gap rather than infer that the account is safe.
+If the evidence warrants escalation, the analyst can follow the account-compromise procedure to find out who to notify and who can authorize containment. An environment-specific runbook then explains how an approved responder can revoke sessions or disable the account, check that the action worked, and record what happened. If the logs are missing, that gap belongs in the investigation too. An empty search is not proof that the account is safe.
 
-The exact evidence, approval path, and containment steps depend on the organization. For a managed SOC, they may also differ between customers. A shared detection plan can point to each customer's approved contacts and runbooks without assuming that the same action is authorized everywhere.
+This gets more complicated in a managed SOC. Two customers might use the same identity platform but have different contacts and rules for disabling accounts. A shared detection plan can link to each customer's details, so the analyst doesn't have to guess what they are allowed to do.
 
 ## Keep the links useful
 
-A response plan is most useful when analysts can reach it from the alert and improve it after an investigation. Before deploying a detection, have an analyst check whether the described fields and queries are available. After a relevant incident or exercise, review the guidance against what actually happened, including missing telemetry and confusing handoffs.
+The plan needs to be easy to find when an alert fires. Link it from the detection, and ask an analyst to try the queries before the rule goes live. After an incident or exercise, revisit the parts that slowed the team down. Maybe a field was missing, a link was broken, or nobody knew who was on call for the customer.
 
-Track an owner and review date for the plan, and test links to procedures and runbooks. Automate repetitive collection where it helps, but keep authorization and human review appropriate to the action. A response step that changes access needs a clear decision point, whether a person or a tool executes it.
+Give someone responsibility for keeping the plan current and set a date to review it. Automating repetitive evidence collection can save time, but actions that change access still need the right authorization, whether a person or a tool carries them out.
 
-This is also a practical way to apply the [detection engineering maturity model](/en/blog/detection-engineering-maturity-model/): improve the evidence and response around one detection, test the result, and use what the team learns to choose the next improvement.
+The [detection engineering maturity model](/en/blog/detection-engineering-maturity-model/) offers a way to build on this work. Start with one detection, test the guidance with the people who use it, and carry those lessons into the next review.

@@ -7,22 +7,22 @@ lang: "es"
 translation: "detection-driven-incident-response"
 ---
 
-Una alerta indica al analista que una detección ha encontrado una coincidencia. No siempre dice qué pruebas debe recopilar a continuación, quién puede autorizar la contención o cómo actuar en el entorno afectado. Esas respuestas suelen estar repartidas entre varios documentos, si es que están documentadas.
+Llega una alerta a la cola. La regla ha encontrado algo sospechoso, pero ¿y ahora qué? El analista todavía tiene que averiguar qué ha pasado, dónde buscar y quién puede autorizar una respuesta. Puede que esas respuestas estén repartidas entre una wiki, un acuerdo con el cliente y un runbook que nadie abre desde hace meses.
 
-En [Re-Writing the Playbook: A detection-driven approach to Incident Response](https://detect.fyi/re-writing-the-playbook-a-detection-driven-approach-to-incident-response-5269e2eb33ca), publicado en Detect FYI el 15 de octubre de 2025, Rcegan propone conectar los planes de respuesta de cada detección con procedimientos generales de incidentes y runbooks detallados. Cada documento tiene una función: ayudar al analista a interpretar una alerta, establecer el proceso de respuesta o explicar cómo ejecutar una acción concreta.
+En un [artículo publicado en Detect FYI](https://detect.fyi/re-writing-the-playbook-a-detection-driven-approach-to-incident-response-5269e2eb33ca), Rcegan propone conectar la guía de cada detección con el proceso general de respuesta a incidentes. El plan de detección ayuda al analista a investigar. El procedimiento establece quién toma las decisiones y a quién hay que avisar. El runbook explica los pasos para un sistema o cliente concreto.
 
 ## Seguir una alerta durante la respuesta
 
-Imagina una alerta por un inicio de sesión sospechoso. Un plan de respuesta útil empieza por el contexto necesario para investigarla: la cuenta afectada, la hora, la dirección de origen y el motivo de la coincidencia. Puede dirigir al analista a la actividad reciente de la cuenta y a los registros del proveedor de identidad, dejando claro que una ubicación inusual no demuestra por sí sola que la cuenta esté comprometida.
+Imagina una alerta por un inicio de sesión sospechoso. El analista necesita saber qué cuenta está afectada, cuándo ocurrió, desde qué dirección y por qué saltó la regla. A partir de ahí, el plan puede dirigirle a la actividad reciente de la cuenta y a los registros del proveedor de identidad. Una ubicación inusual merece una revisión, pero no demuestra que hayan robado la cuenta.
 
-Si las pruebas justifican una escalada, el plan puede enlazar con el procedimiento de compromiso de cuentas. Ese procedimiento identifica a quién avisar y cómo se autorizan las decisiones de contención. Un runbook específico del entorno puede explicar cómo revocar sesiones o desactivar una cuenta una vez aprobada la acción, cómo confirmar el cambio y cómo registrar el resultado. Si faltan los registros necesarios, el analista debe anotar esa limitación en lugar de concluir que la cuenta está a salvo.
+Si las pruebas justifican una escalada, el analista puede consultar el procedimiento de compromiso de cuentas para saber a quién avisar y quién autoriza la contención. Después, un runbook del entorno explica cómo revocar sesiones o desactivar la cuenta una vez aprobada la acción, comprobar que ha funcionado y registrar lo ocurrido. Si faltan registros, también hay que dejar constancia de ello. Una búsqueda vacía no demuestra que la cuenta esté a salvo.
 
-Las pruebas, las autorizaciones y los pasos de contención dependen de cada organización. En un SOC gestionado también pueden variar entre clientes. Un plan de detección compartido puede enlazar con los contactos y runbooks aprobados de cada cliente, sin asumir que la misma acción está autorizada para todos.
+En un SOC gestionado esto se complica. Dos clientes pueden usar la misma plataforma de identidad y tener contactos distintos o reglas diferentes para desactivar cuentas. Un plan de detección compartido puede enlazar con los datos de cada cliente para que el analista no tenga que adivinar qué puede hacer.
 
 ## Mantener útiles los enlaces
 
-Un plan de respuesta resulta más útil cuando el analista puede abrirlo desde la alerta y mejorarlo después de una investigación. Antes de desplegar una detección, un analista puede comprobar que los campos y las consultas descritos están disponibles. Después de un incidente o ejercicio relevante, conviene revisar la guía a la luz de lo ocurrido, incluida la telemetría que faltó y los traspasos que generaron dudas.
+El plan tiene que ser fácil de encontrar cuando salta una alerta. Enlázalo desde la detección y pide a un analista que pruebe las consultas antes de poner la regla en producción. Después de un incidente o un ejercicio, revisa qué frenó al equipo. Quizá faltaba un campo, un enlace estaba roto o nadie sabía quién estaba de guardia por parte del cliente.
 
-Asigna una persona responsable y una fecha de revisión al plan, y comprueba los enlaces a los procedimientos y runbooks. Automatiza la recopilación repetitiva cuando aporte valor, pero mantén las autorizaciones y la revisión humana que correspondan a cada acción. Un paso que modifica accesos necesita un punto de decisión claro, tanto si lo ejecuta una persona como una herramienta.
+Asigna a alguien la responsabilidad de mantener el plan al día y fija una fecha para revisarlo. Automatizar la recopilación repetitiva de pruebas puede ahorrar tiempo, pero las acciones que cambian accesos siguen necesitando la autorización adecuada, tanto si las ejecuta una persona como una herramienta.
 
-También es una forma práctica de aplicar el [modelo de madurez de ingeniería de detección](/es/blog/modelo-madurez-ingenieria-deteccion/): mejora las pruebas y la respuesta asociadas a una detección, comprueba el resultado y utiliza lo aprendido para elegir la siguiente mejora.
+El [modelo de madurez de ingeniería de detección](/es/blog/modelo-madurez-ingenieria-deteccion/) ofrece una forma de continuar este trabajo. Empieza con una detección, prueba la guía con quienes la usan y aplica lo aprendido en la siguiente revisión.
