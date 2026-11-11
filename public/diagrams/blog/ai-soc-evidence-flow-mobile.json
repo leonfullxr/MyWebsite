@@ -1,0 +1,258 @@
+{
+  "type": "flow",
+  "theme": "product",
+  "accent": [
+    "#b94b2b",
+    "#ffab83"
+  ],
+  "title": "AI SOC: evidence path",
+  "canvas": [
+    620,
+    950
+  ],
+  "grid": [
+    1,
+    1
+  ],
+  "theme_overrides": {
+    "fonts": {
+      "title": [
+        "Inter",
+        600,
+        17,
+        0.04,
+        "upper"
+      ],
+      "subtitle": [
+        "Inter",
+        400,
+        15,
+        0,
+        null
+      ],
+      "label": [
+        "Inter",
+        600,
+        18,
+        0,
+        null
+      ],
+      "sub": [
+        "Inter",
+        400,
+        16,
+        0,
+        null
+      ],
+      "edge": [
+        "Inter",
+        500,
+        16,
+        0,
+        null
+      ],
+      "edge_sub": [
+        "Inter",
+        400,
+        16,
+        0,
+        null
+      ],
+      "group": [
+        "Inter",
+        600,
+        16,
+        0,
+        null
+      ],
+      "text": [
+        "Inter",
+        400,
+        16,
+        0,
+        null
+      ],
+      "text_b": [
+        "Inter",
+        600,
+        16,
+        0,
+        null
+      ],
+      "legend": [
+        "Inter",
+        500,
+        16,
+        0,
+        null
+      ],
+      "msg": [
+        "Inter",
+        500,
+        16,
+        0,
+        null
+      ],
+      "gap": [
+        "Inter",
+        400,
+        8,
+        0,
+        null
+      ],
+      "label_keep": [
+        "Inter",
+        600,
+        18,
+        0,
+        null
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "analyst",
+      "label": "Analyst",
+      "sub": "question",
+      "at": [
+        0,
+        0
+      ],
+      "icon": "user",
+      "tone": "soft",
+      "w": 155,
+      "h": 110
+    },
+    {
+      "id": "plan",
+      "label": "Planner",
+      "sub": "topic + window",
+      "at": [
+        290,
+        0
+      ],
+      "icon": "code",
+      "tone": "focus",
+      "w": 155,
+      "h": 110
+    },
+    {
+      "id": "reads",
+      "label": "Wazuh reads",
+      "sub": "analyst scope",
+      "at": [
+        290,
+        195
+      ],
+      "icon": "server",
+      "tone": "default",
+      "w": 155,
+      "h": 110
+    },
+    {
+      "id": "pack",
+      "label": "Evidence pack",
+      "sub": "results + gaps",
+      "at": [
+        0,
+        195
+      ],
+      "icon": "file",
+      "tone": "focus",
+      "w": 155,
+      "h": 110
+    },
+    {
+      "id": "model",
+      "label": "Model",
+      "sub": "no tools",
+      "at": [
+        0,
+        390
+      ],
+      "icon": "brain",
+      "tone": "default",
+      "w": 155,
+      "h": 110
+    },
+    {
+      "id": "validate",
+      "label": "Validation",
+      "sub": "facts + citations",
+      "at": [
+        290,
+        390
+      ],
+      "icon": "check",
+      "tone": "focus",
+      "w": 155,
+      "h": 110
+    },
+    {
+      "id": "audit",
+      "label": "Audit",
+      "sub": "durable record",
+      "at": [
+        290,
+        585
+      ],
+      "icon": "file",
+      "tone": "default",
+      "w": 155,
+      "h": 110
+    },
+    {
+      "id": "answer",
+      "label": "Answer",
+      "sub": "analyst reviews",
+      "at": [
+        0,
+        585
+      ],
+      "icon": "user",
+      "tone": "soft",
+      "w": 155,
+      "h": 110
+    }
+  ],
+  "edges": [
+    {
+      "from": "analyst",
+      "to": "plan",
+      "label": "Ask"
+    },
+    {
+      "from": "plan",
+      "to": "reads",
+      "label": "Plan",
+      "sides": "bt"
+    },
+    {
+      "from": "reads",
+      "to": "pack",
+      "label": "Collect"
+    },
+    {
+      "from": "pack",
+      "to": "model",
+      "label": "Facts",
+      "sides": "bt"
+    },
+    {
+      "from": "model",
+      "to": "validate",
+      "label": "Propose"
+    },
+    {
+      "from": "validate",
+      "to": "audit",
+      "label": "Record",
+      "sides": "bt"
+    },
+    {
+      "from": "audit",
+      "to": "answer",
+      "label": "Publish"
+    }
+  ]
+}

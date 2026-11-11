@@ -1,0 +1,184 @@
+{
+  "type": "flow",
+  "theme": "product",
+  "accent": [
+    "#b94b2b",
+    "#ffab83"
+  ],
+  "title": "Propuesta: conectar detección y respuesta",
+  "canvas": [
+    710,
+    580
+  ],
+  "grid": [
+    1,
+    1
+  ],
+  "theme_overrides": {
+    "fonts": {
+      "title": [
+        "Inter",
+        600,
+        17,
+        0.04,
+        "upper"
+      ],
+      "subtitle": [
+        "Inter",
+        400,
+        15,
+        0,
+        null
+      ],
+      "label": [
+        "Inter",
+        600,
+        18,
+        0,
+        null
+      ],
+      "sub": [
+        "Inter",
+        400,
+        16,
+        0,
+        null
+      ],
+      "edge": [
+        "Inter",
+        500,
+        16,
+        0,
+        null
+      ],
+      "edge_sub": [
+        "Inter",
+        400,
+        16,
+        0,
+        null
+      ],
+      "group": [
+        "Inter",
+        600,
+        16,
+        0,
+        null
+      ],
+      "text": [
+        "Inter",
+        400,
+        16,
+        0,
+        null
+      ],
+      "text_b": [
+        "Inter",
+        600,
+        16,
+        0,
+        null
+      ],
+      "legend": [
+        "Inter",
+        500,
+        16,
+        0,
+        null
+      ],
+      "msg": [
+        "Inter",
+        500,
+        16,
+        0,
+        null
+      ],
+      "gap": [
+        "Inter",
+        400,
+        8,
+        0,
+        null
+      ],
+      "label_keep": [
+        "Inter",
+        600,
+        18,
+        0,
+        null
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "policy",
+      "label": "Política",
+      "sub": "autoridad + roles",
+      "at": [
+        0,
+        0
+      ],
+      "icon": "file",
+      "tone": "default",
+      "w": 195,
+      "h": 115
+    },
+    {
+      "id": "procedure",
+      "label": "Procedimiento",
+      "sub": "contactos + escalado",
+      "at": [
+        325,
+        0
+      ],
+      "icon": "file",
+      "tone": "default",
+      "w": 195,
+      "h": 115
+    },
+    {
+      "id": "guide",
+      "label": "Guía de detección",
+      "sub": "evidencias + contexto",
+      "at": [
+        325,
+        195
+      ],
+      "icon": "file",
+      "tone": "focus",
+      "w": 195,
+      "h": 115
+    },
+    {
+      "id": "runbook",
+      "label": "Runbook",
+      "sub": "acción + reversión",
+      "at": [
+        0,
+        195
+      ],
+      "icon": "file",
+      "tone": "default",
+      "w": 195,
+      "h": 115
+    }
+  ],
+  "edges": [
+    {
+      "from": "policy",
+      "to": "procedure",
+      "label": "Orienta"
+    },
+    {
+      "from": "procedure",
+      "to": "guide",
+      "label": "Informa",
+      "sides": "bt"
+    },
+    {
+      "from": "guide",
+      "to": "runbook",
+      "label": "Enlaza"
+    }
+  ]
+}

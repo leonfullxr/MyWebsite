@@ -771,6 +771,8 @@ const skillCells = skillGroups.flatMap((g) =>
         ) : (
           <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {posts.map((post, i) => {
+              const legacyPost =
+                post.date < '2026-10-01' && !post.image?.startsWith('/images/blog/covers/');
               const logos = post.tags
                 .filter((t) => tagIcons[t])
                 .map((t) => ({ t, src: tagIcons[t] }));
@@ -786,7 +788,11 @@ const skillCells = skillGroups.flatMap((g) =>
                       <img
                         src={post.image}
                         alt=""
-                        class="w-full h-full object-contain bg-white p-3"
+                        class={
+                          legacyPost
+                            ? 'w-full h-full object-contain bg-white p-3'
+                            : 'w-full h-full object-cover'
+                        }
                         loading="lazy"
                       />
                     ) : (
@@ -817,6 +823,13 @@ const skillCells = skillGroups.flatMap((g) =>
                   <div class="p-5 flex-1 flex flex-col">
                     <p class="text-sm font-bold text-lava-600 dark:text-lava-400">
                       {fmtDate(post.date)}
+                      {!legacyPost && (
+                        <>
+                          {' '}
+                          <span aria-hidden="true">·</span> {post.minutes}{' '}
+                          {lang === 'es' ? 'min de lectura' : 'min read'}
+                        </>
+                      )}
                     </p>
                     <h3 class="mt-1 text-lg font-black leading-snug line-clamp-2 group-hover:text-lava-700 dark:group-hover:text-lava-300">
                       {post.title}

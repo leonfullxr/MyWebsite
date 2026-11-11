@@ -1,0 +1,256 @@
+{
+  "type": "flow",
+  "theme": "product",
+  "accent": [
+    "#b94b2b",
+    "#ffab83"
+  ],
+  "title": "AI SOC: evidence before judgment",
+  "canvas": [
+    1330,
+    590
+  ],
+  "grid": [
+    1,
+    1
+  ],
+  "theme_overrides": {
+    "fonts": {
+      "title": [
+        "Inter",
+        600,
+        17,
+        0.04,
+        "upper"
+      ],
+      "subtitle": [
+        "Inter",
+        400,
+        15,
+        0,
+        null
+      ],
+      "label": [
+        "Inter",
+        600,
+        21,
+        0,
+        null
+      ],
+      "sub": [
+        "Inter",
+        400,
+        18,
+        0,
+        null
+      ],
+      "edge": [
+        "Inter",
+        500,
+        14,
+        0,
+        null
+      ],
+      "edge_sub": [
+        "Inter",
+        400,
+        16,
+        0,
+        null
+      ],
+      "group": [
+        "Inter",
+        600,
+        16,
+        0,
+        null
+      ],
+      "text": [
+        "Inter",
+        400,
+        16,
+        0,
+        null
+      ],
+      "text_b": [
+        "Inter",
+        600,
+        16,
+        0,
+        null
+      ],
+      "legend": [
+        "Inter",
+        500,
+        16,
+        0,
+        null
+      ],
+      "msg": [
+        "Inter",
+        500,
+        16,
+        0,
+        null
+      ],
+      "gap": [
+        "Inter",
+        400,
+        8,
+        0,
+        null
+      ],
+      "label_keep": [
+        "Inter",
+        600,
+        21,
+        0,
+        null
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "analyst",
+      "label": "Analyst",
+      "sub": "question",
+      "at": [
+        0,
+        50
+      ],
+      "icon": "user",
+      "tone": "soft",
+      "w": 175,
+      "h": 120
+    },
+    {
+      "id": "plan",
+      "label": "Planner",
+      "sub": "topic + window",
+      "at": [
+        310,
+        50
+      ],
+      "icon": "code",
+      "tone": "focus",
+      "w": 175,
+      "h": 120
+    },
+    {
+      "id": "reads",
+      "label": "Wazuh reads",
+      "sub": "analyst scope",
+      "at": [
+        620,
+        50
+      ],
+      "icon": "server",
+      "tone": "default",
+      "w": 175,
+      "h": 120
+    },
+    {
+      "id": "pack",
+      "label": "Evidence pack",
+      "sub": "results + gaps",
+      "at": [
+        930,
+        50
+      ],
+      "icon": "file",
+      "tone": "focus",
+      "w": 175,
+      "h": 120
+    },
+    {
+      "id": "model",
+      "label": "Model",
+      "sub": "no tools",
+      "at": [
+        930,
+        300
+      ],
+      "icon": "brain",
+      "tone": "default",
+      "w": 175,
+      "h": 120
+    },
+    {
+      "id": "validate",
+      "label": "Validation",
+      "sub": "facts + citations",
+      "at": [
+        620,
+        300
+      ],
+      "icon": "check",
+      "tone": "focus",
+      "w": 175,
+      "h": 120
+    },
+    {
+      "id": "audit",
+      "label": "Audit",
+      "sub": "durable record",
+      "at": [
+        310,
+        300
+      ],
+      "icon": "file",
+      "tone": "default",
+      "w": 175,
+      "h": 120
+    },
+    {
+      "id": "answer",
+      "label": "Answer",
+      "sub": "analyst reviews",
+      "at": [
+        0,
+        300
+      ],
+      "icon": "user",
+      "tone": "soft",
+      "w": 175,
+      "h": 120
+    }
+  ],
+  "edges": [
+    {
+      "from": "analyst",
+      "to": "plan",
+      "label": "Ask"
+    },
+    {
+      "from": "plan",
+      "to": "reads",
+      "label": "Plan"
+    },
+    {
+      "from": "reads",
+      "to": "pack",
+      "label": "Collect"
+    },
+    {
+      "from": "pack",
+      "to": "model",
+      "label": "Bounded facts",
+      "sides": "bt"
+    },
+    {
+      "from": "model",
+      "to": "validate",
+      "label": "Propose"
+    },
+    {
+      "from": "validate",
+      "to": "audit",
+      "label": "Record"
+    },
+    {
+      "from": "audit",
+      "to": "answer",
+      "label": "Publish"
+    }
+  ]
+}

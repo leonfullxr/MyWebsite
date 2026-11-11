@@ -3,6 +3,7 @@ title: "A practical way to assess detection engineering maturity"
 date: "2026-11-06"
 description: "A reading note on Elastic's detection engineering maturity model and how to turn an assessment into a useful improvement plan."
 tags: ["Security", "Detection Engineering", "Elastic"]
+image: "/images/blog/covers/maturity.png"
 lang: "en"
 translation: "modelo-madurez-ingenieria-deteccion"
 ---
@@ -11,9 +12,17 @@ How do you show that a detection program is improving? Counting rules alone says
 
 Elastic's original article, [Elastic releases the Detection Engineering Behavior Maturity Model](https://www.elastic.co/security-labs/threat-command/elastic-releases-debmm), by Mika Ayenson, Terrance DeJesus, and Samir Bousseaden, describes five tiers, from foundational work on individual rules to an expert program that incorporates threat hunting and automation. Between those points are practices such as version control, tuning false positives, documenting coverage gaps, and testing for missed threats. Each tier has criteria for assessing both the state of a ruleset and the work needed to maintain it.
 
-![Elastic's maturity model shown as a cycle: tier 0 foundation, tier 1 basic, tier 2 intermediate, tier 3 advanced, tier 4 expert, followed by refine, repeat, and mature.](https://images.contentstack.io/v3/assets/bltefdd0b53724fa2ce/blt181534fe2ef46811/6a7c80d18fc2d05fa33e889c/image5.png)
-
-*Image: Elastic, from its [DEBMM article](https://www.elastic.co/security-labs/threat-command/elastic-releases-debmm).*
+<figure class="architecture-figure">
+<picture class="diagram-light">
+  <source media="(max-width: 600px)" srcset="/images/blog/maturity-en-mobile.svg">
+  <img src="/images/blog/maturity-en.svg" alt="Elastic’s five maturity tiers and an illustrative assessment cycle: choose scope, record evidence, improve, and reassess.">
+</picture>
+<picture class="diagram-dark">
+  <source media="(max-width: 600px)" srcset="/images/blog/maturity-en-dark-mobile.svg">
+  <img src="/images/blog/maturity-en-dark.svg" alt="Elastic’s five maturity tiers and an illustrative assessment cycle: choose scope, record evidence, improve, and reassess.">
+</picture>
+<figcaption>Adapted tier overview based on Elastic’s [DEBMM article](https://www.elastic.co/security-labs/threat-command/elastic-releases-debmm); the assessment workflow is an illustrative application.</figcaption>
+</figure>
 
 ## Put the model to work
 

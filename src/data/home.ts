@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import en from './en.json';
+import { readingMinutes } from './blog';
 
 export type Post = {
   title: string;
@@ -10,6 +11,7 @@ export type Post = {
   tags: string[];
   slug: string;
   image: string | null;
+  minutes: number;
 };
 
 export function getPosts(lang: string): Post[] {
@@ -31,11 +33,33 @@ export function getPosts(lang: string): Post[] {
         description: fm.match(/description:\s*"(.+)"/)?.[1] ?? '',
         tags,
         slug: file.replace('.md', ''),
+        minutes: readingMinutes(content),
         image:
           fm.match(/image:\s*"(.+)"/)?.[1] ?? content.match(/!\[[^\]]*\]\(([^)\s]+)/)?.[1] ?? null,
       };
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
+
+export function getRelatedPosts(lang: string, slug: string): Post[] {
+  const posts = getPosts(lang);
+  const current = posts.find((post) => post.slug === slug);
+  if (!current) return [];
+  const tags = new Set(current.tags.map((tag) => tag.toLocaleLowerCase()));
+  return posts
+    .filter((post) => post.slug !== slug)
+    .map((post) => ({
+      post,
+      score: post.tags.filter((tag) => tags.has(tag.toLocaleLowerCase())).length,
+    }))
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        b.post.date.localeCompare(a.post.date) ||
+        a.post.slug.localeCompare(b.post.slug)
+    )
+    .slice(0, 3)
+    .map(({ post }) => post);
 }
 
 export type Data = typeof en;

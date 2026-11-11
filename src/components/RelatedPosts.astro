@@ -1,0 +1,71 @@
+---
+import type { Post } from '../data/home';
+
+interface Props {
+  posts: Post[];
+  lang: 'en' | 'es';
+}
+
+const { posts, lang } = Astro.props;
+const labels =
+  lang === 'es'
+    ? {
+        title: 'La siguiente lectura',
+        intro: 'Más ideas y proyectos del blog.',
+        all: 'Ver todas las entradas',
+        minutes: 'min de lectura',
+        topic: 'Blog',
+      }
+    : {
+        title: 'Read on',
+        intro: 'More ideas and projects from the blog.',
+        all: 'View all posts',
+        minutes: 'min read',
+        topic: 'Blog',
+      };
+---
+
+{
+  posts.length > 0 && (
+    <section class="related-reading" aria-labelledby="related-reading-title">
+      <div class="related-reading-intro">
+        <h2 id="related-reading-title">{labels.title}</h2>
+        <p>{labels.intro}</p>
+        <a href={`/${lang}/#blog`}>
+          {labels.all} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <ol class="related-reading-list">
+        {posts.map((post, index) => (
+          <li>
+            <a class="related-reading-link" href={`/${lang}/blog/${post.slug}/`}>
+              <span class="related-reading-number" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span class="related-reading-copy">
+                <span class="related-reading-meta">
+                  {post.tags[0] || labels.topic} <span aria-hidden="true">·</span> {post.minutes}{' '}
+                  {labels.minutes}
+                </span>
+                <span class="related-reading-title">{post.title}</span>
+                <span class="related-reading-description">{post.description}</span>
+              </span>
+              {post.image && (
+                <img
+                  class="related-reading-image"
+                  src={post.image}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+              <span class="related-reading-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )
+}

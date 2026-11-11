@@ -9,9 +9,18 @@ interface Props {
   image?: string;
   alternate?: string;
   noindex?: boolean;
+  type?: 'website' | 'article';
 }
 
-const { title, description, lang, image, alternate, noindex = false } = Astro.props;
+const {
+  title,
+  description,
+  lang,
+  image,
+  alternate,
+  noindex = false,
+  type = 'website',
+} = Astro.props;
 const ogImage = image ? new URL(image, Astro.site).href : undefined;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const alternateUrl = alternate ? new URL(alternate, Astro.site).href : undefined;
@@ -27,7 +36,7 @@ const alternateLang = lang === 'en' ? 'es' : 'en';
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
     {ogImage && <meta property="og:image" content={ogImage} />}
     {ogImage && <meta name="twitter:card" content="summary_large_image" />}
     {ogImage && <meta name="twitter:image" content={ogImage} />}

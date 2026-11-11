@@ -3,6 +3,7 @@ title: "Building an evidence-first AI SOC assistant"
 date: "2026-10-28"
 description: "How a read-only Wazuh assistant can help analysts investigate alerts while keeping evidence, access, and uncertainty visible."
 tags: ["Security", "Wazuh", "Artificial Intelligence"]
+image: "/images/blog/covers/soc.png"
 lang: "en"
 ---
 
@@ -20,14 +21,16 @@ An assistant can make the same mistake in two directions. It can treat a detecti
 
 The design therefore separates the work of collecting records from the work of interpreting them. It also records what the assistant could not check. The difference is operational: an analyst can decide whether to widen the investigation instead of relying on an unsupported all-clear.
 
-<style>
-.soc-diagram-light, .soc-diagram-dark { width: 75%; max-width: 480px; margin: 2rem auto; }
-.soc-diagram-dark { display: none; }
-.dark .soc-diagram-light { display: none; }
-.dark .soc-diagram-dark { display: block; }
-</style>
-<img class="soc-diagram-light" src="/images/blog/ai-soc-evidence-flow.svg" alt="An analyst asks a question, the assistant gathers evidence under their permissions, checks model findings, and returns an answer for review.">
-<img class="soc-diagram-dark" src="/images/blog/ai-soc-evidence-flow-dark.svg" alt="An analyst asks a question, the assistant gathers evidence under their permissions, checks model findings, and returns an answer for review.">
+<figure class="architecture-figure">
+<picture class="diagram-light">
+  <source media="(max-width: 600px)" srcset="/images/blog/ai-soc-evidence-flow-mobile.svg">
+  <img src="/images/blog/ai-soc-evidence-flow.svg" alt="An analyst asks a question. A planner and permission-scoped Wazuh reads build an evidence pack; a model without tools proposes findings, which are validated and audited before the answer is published.">
+</picture>
+<picture class="diagram-dark">
+  <source media="(max-width: 600px)" srcset="/images/blog/ai-soc-evidence-flow-dark-mobile.svg">
+  <img src="/images/blog/ai-soc-evidence-flow-dark.svg" alt="An analyst asks a question. A planner and permission-scoped Wazuh reads build an evidence pack; a model without tools proposes findings, which are validated and audited before the answer is published.">
+</picture>
+</figure>
 
 The diagram follows one topic through the service. A question can produce more than one topic plan, with a separate evidence pack and judgment for each.
 

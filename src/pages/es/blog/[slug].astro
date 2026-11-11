@@ -7,6 +7,9 @@ import path from 'node:path';
 import { Marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js';
+import { readingMinutes } from '../../../data/blog';
+import { getRelatedPosts } from '../../../data/home';
+import RelatedPosts from '../../../components/RelatedPosts.astro';
 
 import data from '../../../data/es.json';
 
@@ -53,18 +56,27 @@ const slugify = (s: string) =>
     .trim()
     .replace(/\s+/g, '-');
 
-const headings = [...markdownBody.matchAll(/^## (.+)$/gm)].map((m) => m[1]);
+const headingIds = new Map<string, number>();
+const headings: { id: string; text: string; depth: number }[] = [];
 let htmlContent = await marked.parse(markdownBody);
 htmlContent = htmlContent.replace(/<img /g, '<img loading="lazy" decoding="async" ');
-for (const h of headings) {
-  const rendered = marked.parseInline(h);
-  htmlContent = htmlContent.replace(
-    `<h2>${rendered}</h2>`,
-    `<h2 id="${slugify(h)}">${rendered}</h2>`
-  );
-}
+htmlContent = htmlContent.replace(/<h([23])>([\s\S]*?)<\/h\1>/g, (_, level, inner) => {
+  const text = inner
+    .replace(/<[^>]*>/g, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+  const base = slugify(text) || 'section';
+  const count = headingIds.get(base) ?? 0;
+  headingIds.set(base, count + 1);
+  const id = count ? `${base}-${count + 1}` : base;
+  headings.push({ id, text, depth: Number(level) });
+  return `<h${level} id="${id}">${inner}</h${level}>`;
+});
+const minutes = readingMinutes(markdownBody);
 
 const lang = 'es';
+const relatedPosts = getRelatedPosts(lang, slug ?? '');
 ---
 
 <Layout
@@ -72,42 +84,124 @@ const lang = 'es';
   description={description}
   lang={lang}
   image={image}
+  type="article"
   alternate={alternate}
 >
   <Nav nav={data.nav} lang={lang} />
-  <main class="pt-28 pb-20">
-    <article class="max-w-3xl mx-auto px-6">
-      <a href={`/${lang}/#blog`} class="link inline-flex items-center text-sm font-mono mb-8">
-        Volver
-      </a>
-      <header class="mb-10">
-        <p class="font-mono text-sm text-lava-500 mb-3">{date}</p>
-        <h1 class="font-display text-4xl md:text-5xl italic tracking-tight">{title}</h1>
+  <main class="blog-article-shell">
+    <article class="blog-article">
+      <a href={`/${lang}/#blog`} class="blog-back">← Volver al blog</a>
+      <header class:list={['blog-article-header', image && 'blog-article-header-with-cover']}>
+        <div class="blog-header-copy">
+          <h1>{title}</h1>
+          <p class="blog-deck">{description}</p>
+          <div class="blog-article-meta">
+            <time datetime={date}
+              >{
+                new Intl.DateTimeFormat('es-ES', {
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric',
+                  timeZone: 'UTC',
+                }).format(new Date(`${date}T00:00:00Z`))
+              }</time
+            >
+            <span aria-hidden="true">·</span><span>{minutes} min de lectura</span>
+            <button
+              type="button"
+              class="blog-copy-link"
+              data-copy-link
+              data-copy-label="Copiar enlace"
+              data-copied-label="Enlace copiado"
+              data-failed-label="No se pudo copiar; selecciona la dirección en el navegador"
+              >Copiar enlace</button
+            >
+            <span class="blog-copy-status" role="status" aria-live="polite"></span>
+          </div>
+        </div>
+        {
+          image && (
+            <img
+              class="blog-hero-image"
+              src={image}
+              alt=""
+              width="1200"
+              height="630"
+              fetchpriority="high"
+            />
+          )
+        }
       </header>
-      {
-        headings.length >= 3 && (
-          <nav class="mb-10 rounded-xl border border-sand-200 dark:border-ink-700 bg-sand-100/50 dark:bg-ink-900/30 px-6 py-5">
-            <p class="card-subsection-heading">Contenido</p>
-            <ol class="space-y-1.5 text-sm list-none">
-              {headings.map((h) => (
-                <li>
-                  <a
-                    class="text-ink-500 dark:text-lava-400 hover:text-ink-800 dark:hover:text-sand-200 transition-colors"
-                    href={`#${slugify(h)}`}
-                  >
-                    {h}
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </nav>
-        )
-      }
-      <div class="prose-blog">
-        <Fragment set:html={htmlContent} />
+      <div class="blog-reading-layout">
+        <div class="prose-blog"><Fragment set:html={htmlContent} /></div>
+        {
+          headings.length > 0 && (
+            <aside class="blog-toc" aria-label="En esta página">
+              <details open class="blog-toc-details">
+                <summary>En esta página</summary>
+                <nav aria-label="En esta página">
+                  <ol>
+                    {headings.map((heading) => (
+                      <li class:list={[heading.depth === 3 && 'blog-toc-sub']}>
+                        <a href={`#${heading.id}`}>{heading.text}</a>
+                      </li>
+                    ))}
+                  </ol>
+                </nav>
+              </details>
+            </aside>
+          )
+        }
       </div>
+      <RelatedPosts posts={relatedPosts} lang={lang} />
     </article>
   </main>
+  <script is:inline>
+    const mobileContents = document.querySelector('.blog-toc-details');
+    if (mobileContents) {
+      const smallScreen = window.matchMedia('(max-width: 900px)');
+      mobileContents.open = !smallScreen.matches;
+      smallScreen.addEventListener('change', (event) => {
+        mobileContents.open = !event.matches;
+      });
+    }
+    const share = document.querySelector('[data-copy-link]');
+    share?.addEventListener('click', async () => {
+      const status = document.querySelector('.blog-copy-status');
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        share.textContent = share.dataset.copiedLabel;
+        status.textContent = share.dataset.copiedLabel;
+        setTimeout(() => {
+          share.textContent = share.dataset.copyLabel;
+          status.textContent = '';
+        }, 2200);
+      } catch {
+        status.textContent = share.dataset.failedLabel;
+      }
+    });
+    const sectionLinks = [...document.querySelectorAll('.blog-toc a')];
+    if ('IntersectionObserver' in window && sectionLinks.length) {
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          const current = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+          if (!current) return;
+          sectionLinks.forEach((link) => {
+            if (link.getAttribute('href') === `#${current.target.id}`)
+              link.setAttribute('aria-current', 'location');
+            else link.removeAttribute('aria-current');
+          });
+        },
+        { rootMargin: '-100px 0px -65% 0px', threshold: 0 }
+      );
+      sectionLinks.forEach((link) => {
+        const section = document.getElementById(link.getAttribute('href').slice(1));
+        if (section) sectionObserver.observe(section);
+      });
+    }
+  </script>
   <Footer footer={data.footer} contact={data.contact} nav={data.nav} lang={lang} />
   <button id="back-to-top" class="back-to-top" aria-label="Volver arriba">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"

@@ -3,6 +3,7 @@ title: "Organizar la respuesta a incidentes alrededor de las detecciones de Wazu
 date: "2026-11-06"
 description: "Una forma práctica de conectar las alertas de Wazuh con guías de investigación, procedimientos de incidentes y runbooks de respuesta."
 tags: ["Seguridad", "Wazuh", "Ingeniería de detección", "Respuesta a incidentes"]
+image: "/images/blog/covers/incident.png"
 lang: "es"
 translation: "detection-driven-incident-response"
 ---
@@ -21,9 +22,15 @@ Un procedimiento por escenario aborda un problema más concreto, como un servido
 
 La guía de detección está más cerca de la alerta. Describe qué busca una regla, qué pruebas conviene revisar y qué podría explicar una coincidencia legítima. Un runbook técnico explica cómo ejecutar una acción autorizada en una plataforma concreta y cómo comprobarla o revertirla. Separar estas piezas permite cambiar un comando de firewall sin reescribir la política de incidentes.
 
-<figure class="ir-diagram-figure">
-  <img class="ir-diagram ir-diagram-light" src="/images/blog/incident-response-layers-es.svg" width="1002" height="370" alt="La política guía los procedimientos de incidentes, que orientan la guía de detección enlazada con un runbook técnico.">
-  <img class="ir-diagram ir-diagram-dark" src="/images/blog/incident-response-layers-es-dark.svg" width="1002" height="370" alt="La política guía los procedimientos de incidentes, que orientan la guía de detección enlazada con un runbook técnico.">
+<figure class="ir-diagram-figure architecture-figure">
+  <picture class="diagram-light">
+  <source media="(max-width: 600px)" srcset="/images/blog/incident-response-layers-es-mobile.svg">
+  <img src="/images/blog/incident-response-layers-es.svg" alt="La política guía los procedimientos de incidentes, que orientan la guía de detección enlazada con un runbook técnico.">
+</picture>
+  <picture class="diagram-dark">
+  <source media="(max-width: 600px)" srcset="/images/blog/incident-response-layers-es-dark-mobile.svg">
+  <img src="/images/blog/incident-response-layers-es-dark.svg" alt="La política guía los procedimientos de incidentes, que orientan la guía de detección enlazada con un runbook técnico.">
+</picture>
   <figcaption class="ir-diagram-caption">Una propuesta para conectar los documentos de respuesta, desde la autoridad hasta los pasos que puede seguir el analista.</figcaption>
 </figure>
 
@@ -39,9 +46,15 @@ Después, amplía la ventana temporal y busca eventos de autenticación relacion
 
 Una dirección de origen rara vez resuelve el caso por sí sola. Una VPN compartida o una dirección NAT puede representar a muchas personas, y un escáner autorizado puede generar una alerta ruidosa. Registra tanto las pruebas que apoyan la valoración como lo que no pudiste comprobar. Los registros ausentes, un agente desconectado o una búsqueda fuera del intervalo adecuado deben quedar reflejados al escalar el caso.
 
-<figure class="ir-diagram-figure">
-  <img class="ir-diagram ir-diagram-light" src="/images/blog/incident-response-flow-es.svg" width="1003" height="455" alt="Una alerta SSH de Wazuh pasa al análisis, la decisión y un runbook autorizado. Active Response, configurado por separado, puede ejecutar una acción automática en el equipo.">
-  <img class="ir-diagram ir-diagram-dark" src="/images/blog/incident-response-flow-es-dark.svg" width="1003" height="455" alt="Una alerta SSH de Wazuh pasa al análisis, la decisión y un runbook autorizado. Active Response, configurado por separado, puede ejecutar una acción automática en el equipo.">
+<figure class="ir-diagram-figure architecture-figure">
+  <picture class="diagram-light">
+  <source media="(max-width: 600px)" srcset="/images/blog/incident-response-flow-es-mobile.svg">
+  <img src="/images/blog/incident-response-flow-es.svg" alt="Una alerta SSH de Wazuh pasa al análisis, la decisión y un runbook autorizado. Active Response, configurado por separado, puede ejecutar una acción automática en el equipo.">
+</picture>
+  <picture class="diagram-dark">
+  <source media="(max-width: 600px)" srcset="/images/blog/incident-response-flow-es-dark-mobile.svg">
+  <img src="/images/blog/incident-response-flow-es-dark.svg" alt="Una alerta SSH de Wazuh pasa al análisis, la decisión y un runbook autorizado. Active Response, configurado por separado, puede ejecutar una acción automática en el equipo.">
+</picture>
   <figcaption class="ir-diagram-caption">Una investigación ilustrativa. Una vez configurado, Active Response actúa automáticamente y no espera la aprobación del analista.</figcaption>
 </figure>
 
