@@ -39,7 +39,8 @@ Todo contenedor que deba ser accesible se une a una red externa compartida de Do
 
 La primera versión seguía el patrón de cualquier tutorial de self-hosting: redirigir 80/443 en el router, un proxy inverso que termina TLS con certificados Let's Encrypt, y un registro `A` apuntando a tu IP pública. Documenté aquella construcción en detalle, incluyendo el stack Compose completo y Traefik, en [Montando Nextcloud en una Raspberry Pi](/es/blog/montando-nextcloud-en-raspberry-pi-docker/).
 
-[![Arquitectura v1 - Traefik + Let's Encrypt + port forwarding](/images/blog/v1-architecture.svg)](/images/blog/v1-architecture.svg)
+<a class="legacy-light" href="/images/blog/v1-architecture.svg"><img src="/images/blog/v1-architecture.svg" alt="Arquitectura v1 - Traefik + Let's Encrypt + port forwarding"></a>
+<a class="legacy-dark" href="/images/blog/v1-architecture-dark.svg"><img src="/images/blog/v1-architecture-dark.svg" alt="Arquitectura v1 - Traefik + Let's Encrypt + port forwarding" loading="lazy"></a>
 
 Funcionaba. Pero cada pieza cobraba un impuesto.
 
@@ -85,7 +86,8 @@ Ninguno de estos problemas es exótico. Son la experiencia *por defecto* del sel
 
 Un túnel de Cloudflare invierte el modelo. En lugar de que internet se conecte *hacia dentro* de mi casa, un contenedor ligero (`cloudflared`) marca *hacia fuera*, al edge de Cloudflare, y mantiene vivas varias conexiones QUIC redundantes. El tráfico entrante vuelve por esas conexiones ya establecidas. Nada escucha en la WAN. El router no redirige nada. Mi IP doméstica no aparece en ningún registro DNS. Los hostnames públicos resuelven a la red anycast de Cloudflare.
 
-[![Arquitectura v2 - Cloudflare Tunnel + Zero Trust](/images/blog/v2-architecture.svg)](/images/blog/v2-architecture.svg)
+<a class="legacy-light" href="/images/blog/v2-architecture.svg"><img src="/images/blog/v2-architecture.svg" alt="Arquitectura v2 - Cloudflare Tunnel + Zero Trust"></a>
+<a class="legacy-dark" href="/images/blog/v2-architecture-dark.svg"><img src="/images/blog/v2-architecture-dark.svg" alt="Arquitectura v2 - Cloudflare Tunnel + Zero Trust" loading="lazy"></a>
 
 Todo el borde de la infraestructura es ahora este fichero Compose:
 

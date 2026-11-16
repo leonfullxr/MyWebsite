@@ -19,16 +19,7 @@ Lo compara con un proveedor de hosting que te diera servidores más lentos cada 
 El obstáculo es la calidad. En un vídeo anterior dejó que Qwen 3.8 editara un vídeo completo, y terminó el trabajo, pero tomó decisiones extrañas y su harness tuvo que esforzarse para mantenerlo encauzado. Un modelo pequeño no va a igualar a un modelo frontera en general. Su plan solo necesita que lo iguale en una tarea concreta.
 
 
-<figure class="architecture-figure">
-<picture class="diagram-light">
-  <source media="(max-width: 600px)" srcset="/images/blog/local-model-loop-es-mobile.svg">
-  <img src="/images/blog/local-model-loop-es.svg" alt="Datos de entrenamiento, ajuste fino, benchmark y evaluación forman un ciclo para sustituir un modelo frontera en una tarea.">
-</picture>
-<picture class="diagram-dark">
-  <source media="(max-width: 600px)" srcset="/images/blog/local-model-loop-es-dark-mobile.svg">
-  <img src="/images/blog/local-model-loop-es-dark.svg" alt="Datos de entrenamiento, ajuste fino, benchmark y evaluación forman un ciclo para sustituir un modelo frontera en una tarea.">
-</picture>
-</figure>
+<figure data-diagram="local-model-loop" data-alt="Datos de entrenamiento, ajuste fino, benchmark y evaluación forman un ciclo para sustituir un modelo frontera en una tarea."></figure>
 
 ## Datos de entrenamiento generados por el modelo frontera
 
@@ -48,16 +39,7 @@ El eval lee la sesión registrada y nunca toca la cuenta real de Stripe. Comprue
 
 El equipo prueba el eval antes de fiarse de él. Un modelo frontera toma sesiones correctas y las rompe a propósito, por ejemplo quitando el reintento o haciendo que Stripe rechace la tarjeta mientras la respuesta sigue diciendo "todo listo". También genera casos que parecen incorrectos pero no lo son, como un pago que sigue en proceso. El eval se ejecuta contra cientos de estas sesiones etiquetadas, y el equipo ajusta las reglas hasta que detecta las rotas y deja pasar las buenas. Los errores nuevos con clientes reales se añaden al conjunto de pruebas. Como el estándar vive en un eval probado, sustituir GPT-6 por el modelo ajustado mantiene las mismas reglas.
 
-<figure class="architecture-figure">
-<picture class="diagram-light">
-  <source media="(max-width: 600px)" srcset="/images/blog/reply-eval-es-mobile.svg">
-  <img src="/images/blog/reply-eval-es.svg" alt="El evaluador compara las afirmaciones de una respuesta de soporte con los resultados registrados antes de aprobarla.">
-</picture>
-<picture class="diagram-dark">
-  <source media="(max-width: 600px)" srcset="/images/blog/reply-eval-es-dark-mobile.svg">
-  <img src="/images/blog/reply-eval-es-dark.svg" alt="El evaluador compara las afirmaciones de una respuesta de soporte con los resultados registrados antes de aprobarla.">
-</picture>
-</figure>
+<figure data-diagram="reply-eval" data-alt="El evaluador compara las afirmaciones de una respuesta de soporte con los resultados registrados antes de aprobarla."></figure>
 
 ## Un benchmark privado
 

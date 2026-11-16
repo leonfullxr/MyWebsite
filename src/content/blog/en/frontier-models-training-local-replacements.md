@@ -19,16 +19,7 @@ He compares it to a hosting provider that gave you slower servers every time it 
 Quality is the obstacle. In an earlier video he let Qwen 3.8 edit a full video, and it finished the job, but it made odd decisions and his harness had to work hard to keep it on track. A small model will not match a frontier model in general. His plan only needs it to match one on a specific job.
 
 
-<figure class="architecture-figure">
-<picture class="diagram-light">
-  <source media="(max-width: 600px)" srcset="/images/blog/local-model-loop-en-mobile.svg">
-  <img src="/images/blog/local-model-loop-en.svg" alt="Training data, fine-tuning, benchmarking, and evaluation form a loop for replacing a frontier model on one task.">
-</picture>
-<picture class="diagram-dark">
-  <source media="(max-width: 600px)" srcset="/images/blog/local-model-loop-en-dark-mobile.svg">
-  <img src="/images/blog/local-model-loop-en-dark.svg" alt="Training data, fine-tuning, benchmarking, and evaluation form a loop for replacing a frontier model on one task.">
-</picture>
-</figure>
+<figure data-diagram="local-model-loop" data-alt="Training data, fine-tuning, benchmarking, and evaluation form a loop for replacing a frontier model on one task."></figure>
 
 ## Training data from the frontier model
 
@@ -48,16 +39,7 @@ The eval reads the logged session and never touches the live Stripe account. It 
 
 The team tests the eval before trusting it. A frontier model takes good sessions and breaks them on purpose, for instance by removing the retry or by making Stripe decline the card while the reply still says "you're all set". It also produces cases that look wrong but are fine, such as a payment that is still processing. The eval runs against hundreds of these labelled sessions, and the team tightens the rules until it catches the broken ones and passes the good ones. New mistakes from real customers go into the test set. Because the standard lives in a tested eval, swapping GPT-6 for the fine-tuned model keeps the same rules.
 
-<figure class="architecture-figure">
-<picture class="diagram-light">
-  <source media="(max-width: 600px)" srcset="/images/blog/reply-eval-en-mobile.svg">
-  <img src="/images/blog/reply-eval-en.svg" alt="The evaluator compares claims in a support reply against recorded tool results before the reply is approved.">
-</picture>
-<picture class="diagram-dark">
-  <source media="(max-width: 600px)" srcset="/images/blog/reply-eval-en-dark-mobile.svg">
-  <img src="/images/blog/reply-eval-en-dark.svg" alt="The evaluator compares claims in a support reply against recorded tool results before the reply is approved.">
-</picture>
-</figure>
+<figure data-diagram="reply-eval" data-alt="The evaluator compares claims in a support reply against recorded tool results before the reply is approved."></figure>
 
 ## A private benchmark
 

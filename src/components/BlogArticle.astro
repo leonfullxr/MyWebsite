@@ -1,0 +1,365 @@
+---
+// One article template for both languages. The pages under src/pages/{en,es}/blog only pick the slug.
+import Layout from '../layouts/Layout.astro';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+import RelatedPosts from './RelatedPosts.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+import { Marked } from 'marked';
+import { markedHighlight } from 'marked-highlight';
+import hljs from 'highlight.js';
+import { readingMinutes } from '../data/blog';
+import { getRelatedPosts } from '../data/home';
+import { diagrams } from '../data/diagrams';
+import { renderDiagram } from '../lib/diagram';
+import en from '../data/en.json';
+import es from '../data/es.json';
+import '../styles/article.css';
+import '../styles/diagram.css';
+
+interface Props {
+  lang: 'en' | 'es';
+  slug: string;
+}
+const { lang, slug } = Astro.props;
+const data = lang === 'es' ? es : en;
+const t =
+  lang === 'es'
+    ? {
+        back: 'Blog',
+        read: 'min de lectura',
+        copy: 'Copiar enlace',
+        copied: 'Enlace copiado',
+        failed: 'No se pudo copiar; selecciona la dirección en el navegador',
+        toc: 'En esta página',
+        top: 'Volver arriba',
+        copyCode: 'Copiar código',
+        copyShort: 'Copiar',
+        copiedShort: 'Copiado',
+        locale: 'es-ES',
+      }
+    : {
+        back: 'Blog',
+        read: 'min read',
+        copy: 'Copy link',
+        copied: 'Link copied',
+        failed: 'Could not copy; select the URL in your address bar',
+        toc: 'On this page',
+        top: 'Back to top',
+        copyCode: 'Copy code',
+        copyShort: 'Copy',
+        copiedShort: 'Copied',
+        locale: 'en-GB',
+      };
+
+const marked = new Marked(
+  markedHighlight({
+    langPrefix: 'hljs language-',
+    highlight(code, language) {
+      return hljs.highlight(code, { language: hljs.getLanguage(language) ? language : 'plaintext' })
+        .value;
+    },
+  })
+);
+
+const content = fs.readFileSync(
+  path.join(process.cwd(), 'src', 'content', 'blog', lang, `${slug}.md`),
+  'utf-8'
+);
+const frontmatter = content.match(/^---\n([\s\S]*?)\n---/)?.[1] || '';
+const field = (name: string) => frontmatter.match(new RegExp(`${name}:\\s*"(.+)"`))?.[1];
+const title = field('title') || '';
+const date = field('date') || '';
+const description = field('description') || title;
+const image = field('image');
+const translation = field('translation');
+const alternate = translation ? `/${lang === 'es' ? 'en' : 'es'}/blog/${translation}/` : undefined;
+
+const markdownBody = content.replace(/^---\n[\s\S]*?\n---\n/, '');
+const slugify = (s: string) =>
+  s
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-');
+
+const headingIds = new Map<string, number>();
+const headings: { id: string; text: string; depth: number }[] = [];
+let htmlContent = await marked.parse(markdownBody);
+htmlContent = htmlContent.replace(/<img /g, '<img loading="lazy" decoding="async" ');
+htmlContent = htmlContent.replace(/<h([23])>([\s\S]*?)<\/h\1>/g, (_, level, inner) => {
+  const text = inner
+    .replace(/<[^>]*>/g, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+  const base = slugify(text) || 'section';
+  const count = headingIds.get(base) ?? 0;
+  headingIds.set(base, count + 1);
+  const id = count ? `${base}-${count + 1}` : base;
+  headings.push({ id, text, depth: Number(level) });
+  return `<h${level} id="${id}">${inner}</h${level}>`;
+});
+// <figure data-diagram="id" data-alt="..."> becomes an inline, themed SVG. Unknown ids fail the build.
+htmlContent = htmlContent.replace(
+  /<figure data-diagram="([\w-]+)" data-alt="([^"]*)">/g,
+  (_, id, alt) => {
+    if (!diagrams[id]) throw new Error(`${slug}.md: unknown diagram "${id}"`);
+    return `<figure class="dg-figure">${renderDiagram(diagrams[id], lang, alt)}`;
+  }
+);
+const minutes = readingMinutes(markdownBody);
+const relatedPosts = getRelatedPosts(lang, slug);
+const prettyDate = new Intl.DateTimeFormat(t.locale, {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+}).format(new Date(`${date}T00:00:00Z`));
+---
+
+<Layout
+  title={`${title} - Leon Elliott Fuller`}
+  description={description}
+  lang={lang}
+  image={image}
+  type="article"
+  alternate={alternate}
+>
+  <Nav nav={data.nav} lang={lang} />
+  <div class="post-progress" aria-hidden="true"></div>
+  <main class="post">
+    <article>
+      <header class="post-header">
+        <a href={`/${lang}/#blog`} class="post-back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            ><path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 12H5m6-6-6 6 6 6"></path></svg
+          >
+          {t.back}
+        </a>
+        <h1>{title}</h1>
+        <p class="post-deck">{description}</p>
+        <div class="post-meta">
+          <time datetime={date}>{prettyDate}</time>
+          <span>{minutes} {t.read}</span>
+          <button
+            type="button"
+            class="post-copy"
+            data-copy-link
+            aria-label={t.copy}
+            title={t.copy}
+            data-copied-label={t.copied}
+            data-failed-label={t.failed}
+          >
+            <svg class="post-copy-link" viewBox="0 0 24 24" aria-hidden="true"
+              ><path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.5 1.5"></path><path
+                d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.5-1.5"></path></svg
+            >
+            <svg class="post-copy-done" viewBox="0 0 24 24" aria-hidden="true"
+              ><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg
+            >
+          </button>
+          <span class="post-copy-status" role="status" aria-live="polite"></span>
+        </div>
+      </header>
+      <div class="post-body">
+        {
+          headings.length > 0 && (
+            <aside class="post-toc">
+              <details open>
+                <summary>{t.toc}</summary>
+                <nav aria-label={t.toc}>
+                  <ol>
+                    {headings.map((heading) => (
+                      <li class:list={[heading.depth === 3 && 'post-toc-sub']}>
+                        <a href={`#${heading.id}`}>{heading.text}</a>
+                      </li>
+                    ))}
+                  </ol>
+                </nav>
+              </details>
+            </aside>
+          )
+        }
+        <div class="prose-blog"><Fragment set:html={htmlContent} /></div>
+      </div>
+      <RelatedPosts posts={relatedPosts} lang={lang} />
+    </article>
+  </main>
+  <Footer footer={data.footer} contact={data.contact} nav={data.nav} lang={lang} />
+  <button id="back-to-top" class="back-to-top" aria-label={t.top}>
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+      ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 15l7-7 7 7"
+      ></path></svg
+    >
+  </button>
+  <script
+    is:inline
+    define:vars={{ copyCode: t.copyCode, copyShort: t.copyShort, copiedShort: t.copiedShort }}
+  >
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // The contents list sits in the margin on wide screens and collapses above the text otherwise.
+    const contents = document.querySelector('.post-toc details');
+    if (contents) {
+      const narrow = window.matchMedia('(max-width: 1379px)');
+      contents.open = !narrow.matches;
+      narrow.addEventListener('change', (event) => {
+        contents.open = !event.matches;
+      });
+    }
+
+    const share = document.querySelector('[data-copy-link]');
+    share?.addEventListener('click', async () => {
+      const status = document.querySelector('.post-copy-status');
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        share.dataset.copied = '';
+        status.textContent = share.dataset.copiedLabel;
+        setTimeout(() => {
+          delete share.dataset.copied;
+          status.textContent = '';
+        }, 2200);
+      } catch {
+        status.textContent = share.dataset.failedLabel;
+        share.title = share.dataset.failedLabel;
+      }
+    });
+
+    // Highlight the section being read.
+    const sectionLinks = [...document.querySelectorAll('.post-toc a')];
+    if ('IntersectionObserver' in window && sectionLinks.length) {
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          const current = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+          if (!current) return;
+          sectionLinks.forEach((link) => {
+            if (link.getAttribute('href') === `#${current.target.id}`)
+              link.setAttribute('aria-current', 'location');
+            else link.removeAttribute('aria-current');
+          });
+        },
+        { rootMargin: '-100px 0px -65% 0px', threshold: 0 }
+      );
+      sectionLinks.forEach((link) => {
+        const section = document.getElementById(link.getAttribute('href').slice(1));
+        if (section) sectionObserver.observe(section);
+      });
+    }
+
+    // Diagrams draw themselves the first time they scroll into view.
+    const figures = document.querySelectorAll('.dg');
+    if ('IntersectionObserver' in window && figures.length && !reduced) {
+      const figureObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.remove('dg-pending');
+            figureObserver.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.3 }
+      );
+      figures.forEach((figure) => {
+        figure.classList.add('dg-pending');
+        figureObserver.observe(figure);
+      });
+    }
+
+    // Lightbox for linked images inside the post body
+    document.querySelectorAll('.prose-blog a').forEach((a) => {
+      const img = a.querySelector('img');
+      if (!img) return;
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const overlay = document.createElement('div');
+        overlay.style.cssText =
+          'position:fixed;inset:0;z-index:100;background:rgba(10,12,16,.88);display:flex;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out;';
+        const big = document.createElement('img');
+        big.src = a.href;
+        big.alt = img.alt || '';
+        big.style.cssText =
+          'max-width:100%;max-height:100%;border-radius:12px;background:#fff;padding:12px;object-fit:contain;';
+        overlay.appendChild(big);
+        const close = () => {
+          overlay.remove();
+          document.removeEventListener('keydown', onKey);
+        };
+        const onKey = (ev) => {
+          if (ev.key === 'Escape') close();
+        };
+        overlay.addEventListener('click', close);
+        document.addEventListener('keydown', onKey);
+        document.body.appendChild(overlay);
+      });
+    });
+
+    // Code blocks: language label + copy
+    const copyIcon =
+      '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3"/></svg>';
+    const checkIcon =
+      '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>';
+    document.querySelectorAll('.prose-blog pre').forEach((pre) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'code-block';
+      pre.parentNode.insertBefore(wrap, pre);
+
+      const header = document.createElement('div');
+      header.className = 'code-block-header';
+
+      const codeEl = pre.querySelector('code');
+      const langLabel = document.createElement('span');
+      langLabel.className = 'code-block-lang';
+      langLabel.textContent = codeEl?.className.match(/language-([\w-]+)/)?.[1] ?? 'text';
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'code-copy';
+      btn.setAttribute('aria-label', copyCode);
+      btn.innerHTML = `${copyIcon}<span>${copyShort}</span>`;
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText((codeEl || pre).textContent.replace(/\n$/, ''));
+        } catch {
+          const range = document.createRange();
+          range.selectNodeContents(codeEl || pre);
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          return;
+        }
+        btn.classList.add('copied');
+        btn.innerHTML = `${checkIcon}<span>${copiedShort}</span>`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `${copyIcon}<span>${copyShort}</span>`;
+        }, 1500);
+      });
+
+      header.appendChild(langLabel);
+      header.appendChild(btn);
+      wrap.appendChild(header);
+      wrap.appendChild(pre);
+    });
+
+    // Back to top
+    const toTop = document.getElementById('back-to-top');
+    window.addEventListener(
+      'scroll',
+      () => toTop.classList.toggle('visible', window.scrollY > 600),
+      { passive: true }
+    );
+    toTop.addEventListener('click', () =>
+      window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' })
+    );
+  </script>
+</Layout>

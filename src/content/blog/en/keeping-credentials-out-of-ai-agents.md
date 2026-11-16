@@ -18,16 +18,7 @@ A bearer token grants access to whoever presents it. Short expiration and narrow
 
 A proxy gateway takes a different route. The agent authenticates to the gateway with its own identity or delegated context. The gateway checks the requested destination and action against policy. If the request is allowed, a separate credential service supplies the upstream credential and the gateway adds it to the outgoing request. The response returns to the agent without exposing that credential.
 
-<figure class="architecture-figure">
-<picture class="diagram-light">
-  <source media="(max-width: 600px)" srcset="/images/blog/credential-flow-en-mobile.svg">
-  <img src="/images/blog/credential-flow-en.svg" alt="An agent sends an authenticated request to a gateway. Policy authorizes the request, the credential store supplies a token, and the gateway injects it before calling the API.">
-</picture>
-<picture class="diagram-dark">
-  <source media="(max-width: 600px)" srcset="/images/blog/credential-flow-en-dark-mobile.svg">
-  <img src="/images/blog/credential-flow-en-dark.svg" alt="An agent sends an authenticated request to a gateway. Policy authorizes the request, the credential store supplies a token, and the gateway injects it before calling the API.">
-</picture>
-</figure>
+<figure data-diagram="credential-flow" data-alt="An agent sends an authenticated request to a gateway. Policy authorizes the request, the credential store supplies a token, and the gateway injects it before calling the API."></figure>
 
 The agent still needs a way to authenticate to the gateway. That identity is sensitive too, and its permissions should be limited to the agent and task. The distinction is that the agent does not receive the reusable credential for the destination service.
 
@@ -63,16 +54,7 @@ There are limits to the proxy. If an agent can bypass it and reach an upstream A
 
 A stolen gateway identity can still be used to make requests within its allowed scope. A prompt-injected agent can also ask the gateway to perform an action it is permitted to perform. Credential isolation is therefore not a substitute for least privilege, operation-level authorization, approval for consequential actions, and audit records that link a request to its user and workload.
 
-<figure class="architecture-figure">
-<picture class="diagram-light">
-  <source media="(max-width: 600px)" srcset="/images/blog/credential-risk-en-mobile.svg">
-  <img src="/images/blog/credential-risk-en.svg" alt="Two residual risks: a manipulated agent can misuse permitted actions, while a broker compromise may expose credentials and upstream accounts.">
-</picture>
-<picture class="diagram-dark">
-  <source media="(max-width: 600px)" srcset="/images/blog/credential-risk-en-dark-mobile.svg">
-  <img src="/images/blog/credential-risk-en-dark.svg" alt="Two residual risks: a manipulated agent can misuse permitted actions, while a broker compromise may expose credentials and upstream accounts.">
-</picture>
-</figure>
+<figure data-diagram="credential-risk" data-alt="Two residual risks: a manipulated agent can misuse permitted actions, while a broker compromise may expose credentials and upstream accounts."></figure>
 
 ### What to test before trusting the boundary
 
