@@ -21,16 +21,7 @@ An assistant can make the same mistake in two directions. It can treat a detecti
 
 The design therefore separates the work of collecting records from the work of interpreting them. It also records what the assistant could not check. The difference is operational: an analyst can decide whether to widen the investigation instead of relying on an unsupported all-clear.
 
-<figure class="architecture-figure">
-<picture class="diagram-light">
-  <source media="(max-width: 600px)" srcset="/images/blog/ai-soc-evidence-flow-mobile.svg">
-  <img src="/images/blog/ai-soc-evidence-flow.svg" alt="An analyst asks a question. A planner and permission-scoped Wazuh reads build an evidence pack; a model without tools proposes findings, which are validated and audited before the answer is published.">
-</picture>
-<picture class="diagram-dark">
-  <source media="(max-width: 600px)" srcset="/images/blog/ai-soc-evidence-flow-dark-mobile.svg">
-  <img src="/images/blog/ai-soc-evidence-flow-dark.svg" alt="An analyst asks a question. A planner and permission-scoped Wazuh reads build an evidence pack; a model without tools proposes findings, which are validated and audited before the answer is published.">
-</picture>
-</figure>
+<figure data-diagram="soc" data-alt="An analyst asks a question. A planner and permission-scoped Wazuh reads build an evidence pack; a model without tools proposes findings, which are validated and audited before the answer is published."></figure>
 
 The diagram follows one topic through the service. A question can produce more than one topic plan, with a separate evidence pack and judgment for each.
 

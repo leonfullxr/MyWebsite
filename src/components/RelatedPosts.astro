@@ -36,12 +36,9 @@ const labels =
         </a>
       </div>
       <ol class="related-reading-list">
-        {posts.map((post, index) => (
+        {posts.map((post) => (
           <li>
             <a class="related-reading-link" href={`/${lang}/blog/${post.slug}/`}>
-              <span class="related-reading-number" aria-hidden="true">
-                {String(index + 1).padStart(2, '0')}
-              </span>
               <span class="related-reading-copy">
                 <span class="related-reading-meta">
                   {post.tags[0] || labels.topic} <span aria-hidden="true">·</span> {post.minutes}{' '}

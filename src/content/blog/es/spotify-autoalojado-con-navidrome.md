@@ -11,7 +11,8 @@ translation: "self-hosted-spotify-with-navidrome"
 
 Parte de mi [serie sobre el servidor doméstico](/es/blog/de-puertos-abiertos-a-tuneles-cloudflare/). La meta era clara y la ejecución, menos: **tener toda mi biblioteca de Spotify, favoritos y playlists incluidas, como ficheros de audio normales en la Raspberry Pi**, servidos por [Navidrome](https://www.navidrome.org/) para que cualquier cliente Subsonic pueda hacer streaming desde donde sea.
 
-[![El pipeline de música - un Spotify autoalojado](/images/blog/music-pipeline.svg)](/images/blog/music-pipeline.svg)
+<a class="legacy-light" href="/images/blog/music-pipeline.svg"><img src="/images/blog/music-pipeline.svg" alt="El pipeline de música - un Spotify autoalojado"></a>
+<a class="legacy-dark" href="/images/blog/music-pipeline-dark.svg"><img src="/images/blog/music-pipeline-dark.svg" alt="El pipeline de música - un Spotify autoalojado" loading="lazy"></a>
 
 ## La idea clave: Spotify es un oráculo de metadatos, no una fuente de audio
 

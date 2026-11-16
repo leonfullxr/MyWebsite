@@ -19,7 +19,8 @@ Dos guías de la comunidad marcaron el camino: [esta del foro de Nextcloud para 
 
 Un proyecto Compose, seis contenedores, cada uno con una función clara:
 
-[![El stack de Nextcloud (2024)](/images/blog/nextcloud-2024-stack.svg)](/images/blog/nextcloud-2024-stack.svg)
+<a class="legacy-light" href="/images/blog/nextcloud-2024-stack.svg"><img src="/images/blog/nextcloud-2024-stack.svg" alt="El stack de Nextcloud (2024)"></a>
+<a class="legacy-dark" href="/images/blog/nextcloud-2024-stack-dark.svg"><img src="/images/blog/nextcloud-2024-stack-dark.svg" alt="El stack de Nextcloud (2024)" loading="lazy"></a>
 
 | Contenedor | Función |
 |---|---|

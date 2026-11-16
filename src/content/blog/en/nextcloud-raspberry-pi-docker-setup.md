@@ -19,7 +19,8 @@ Credit where it is due: two community guides shaped this setup. One is [this Ras
 
 One Compose project, six containers, one job each:
 
-[![The Nextcloud stack (2024)](/images/blog/nextcloud-2024-stack.svg)](/images/blog/nextcloud-2024-stack.svg)
+<a class="legacy-light" href="/images/blog/nextcloud-2024-stack.svg"><img src="/images/blog/nextcloud-2024-stack.svg" alt="The Nextcloud stack (2024)"></a>
+<a class="legacy-dark" href="/images/blog/nextcloud-2024-stack-dark.svg"><img src="/images/blog/nextcloud-2024-stack-dark.svg" alt="The Nextcloud stack (2024)" loading="lazy"></a>
 
 | Container | Role |
 |---|---|

@@ -18,16 +18,7 @@ Un token de portador da acceso a quien lo presenta. Una duración corta y permis
 
 Una pasarela proxy toma otro camino. El agente se autentica ante la pasarela con su propia identidad o contexto delegado. La pasarela comprueba el destino y la acción frente a una política. Si la petición está permitida, un servicio separado facilita la credencial y la pasarela la añade a la petición saliente. La respuesta vuelve al agente sin mostrarle esa credencial.
 
-<figure class="architecture-figure">
-<picture class="diagram-light">
-  <source media="(max-width: 600px)" srcset="/images/blog/credential-flow-es-mobile.svg">
-  <img src="/images/blog/credential-flow-es.svg" alt="Un agente envía una petición autenticada a una pasarela. La política autoriza la petición, el almacén facilita un token y la pasarela lo añade antes de llamar a la API.">
-</picture>
-<picture class="diagram-dark">
-  <source media="(max-width: 600px)" srcset="/images/blog/credential-flow-es-dark-mobile.svg">
-  <img src="/images/blog/credential-flow-es-dark.svg" alt="Un agente envía una petición autenticada a una pasarela. La política autoriza la petición, el almacén facilita un token y la pasarela lo añade antes de llamar a la API.">
-</picture>
-</figure>
+<figure data-diagram="credential-flow" data-alt="Un agente envía una petición autenticada a una pasarela. La política autoriza la petición, el almacén facilita un token y la pasarela lo añade antes de llamar a la API."></figure>
 
 El agente sigue necesitando una forma de autenticarse ante la pasarela. Esa identidad también es sensible y sus permisos deben limitarse al agente y a la tarea. La diferencia es que el agente no recibe la credencial reutilizable del servicio de destino.
 
@@ -63,16 +54,7 @@ El proxy tiene límites. Si un agente puede evitarlo y llegar directamente a una
 
 Una identidad de pasarela robada todavía puede utilizarse para hacer peticiones dentro de su alcance. Un agente afectado por una inyección también puede pedir a la pasarela una acción que tiene permitida. El aislamiento de credenciales no sustituye al mínimo privilegio, la autorización por operación, la aprobación de acciones sensibles ni los registros que vinculan una petición con su usuario y su agente.
 
-<figure class="architecture-figure">
-<picture class="diagram-light">
-  <source media="(max-width: 600px)" srcset="/images/blog/credential-risk-es-mobile.svg">
-  <img src="/images/blog/credential-risk-es.svg" alt="Dos riesgos residuales: un agente manipulado puede abusar de acciones permitidas y un intermediario comprometido puede exponer credenciales y cuentas.">
-</picture>
-<picture class="diagram-dark">
-  <source media="(max-width: 600px)" srcset="/images/blog/credential-risk-es-dark-mobile.svg">
-  <img src="/images/blog/credential-risk-es-dark.svg" alt="Dos riesgos residuales: un agente manipulado puede abusar de acciones permitidas y un intermediario comprometido puede exponer credenciales y cuentas.">
-</picture>
-</figure>
+<figure data-diagram="credential-risk" data-alt="Dos riesgos residuales: un agente manipulado puede abusar de acciones permitidas y un intermediario comprometido puede exponer credenciales y cuentas."></figure>
 
 ### Qué probar antes de confiar en el límite
 
