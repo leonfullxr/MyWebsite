@@ -69,3 +69,5 @@ En el registro de auditoría guardaría usuario y agente, destino, operación, d
 Para un asistente de seguridad, empezaría con una integración de solo lectura y registraría las llamadas que necesita. Identificaría al usuario y al agente, limitaría los destinos y las operaciones, y probaría tanto una petición denegada como una permitida. Después comprobaría que los registros expliquen quién pidió acceso, qué decidió la política y qué servicio recibió la petición, sin guardar el token.
 
 Solo entonces añadiría más integraciones o permisos de escritura. El objetivo es un límite que se pueda probar y auditar, no solo un proxy más en la arquitectura.
+
+Un [segundo artículo de esta serie](/es/blog/proteger-el-almacen-de-tokens/) examina ese último punto con más detalle: cómo se cifra el almacén de tokens, quién puede abrir una fila y cuánto de ese almacén puede leer un controlador comprometido.

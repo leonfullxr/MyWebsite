@@ -1,0 +1,56 @@
+---
+title: The gateway logs in as the user
+---
+flowchart TB
+
+  subgraph AG[Agent]
+    direction TB
+    user["User<br>subject token"]
+    agentN["Agent<br>no upstream token"]
+    user --> agentN
+  end
+
+  subgraph EG[Egress]
+    gw["Gateway<br>only it may log in"]
+  end
+
+  subgraph KC[Key custodian]
+    bao["OpenBao<br>JWT login · Transit"]
+  end
+
+  subgraph CP[Control plane]
+    direction TB
+    ctrl["Controller<br>picks the row"]
+    store["Token store<br>Alice · GitHub"]
+    other["Alice · Slack"]
+    residual["other rows stay in reach"]
+    ctrl -->|"4. unwrap"| store
+    store --- other
+    other --- residual
+  end
+
+  subgraph UP[Upstream]
+    up["Upstream API<br>receives the token"]
+  end
+
+  subgraph ID[Identity]
+    idp["Identity provider<br>verifies the user"]
+  end
+
+  agentN -->|"1. request"| gw
+  gw -->|"2. login"| bao
+  bao -->|"3. user token"| ctrl
+  ctrl -->|"5. access token"| gw
+  gw -->|"6. access token"| up
+  idp -.->|"JWKS"| bao
+  ctrl -.->|"unwrap"| bao
+
+  class ctrl,up,other plaintext
+  class store cipher
+  class residual risk
+
+  classDef plaintext fill:#fff1f3,stroke:#ff8fa3,color:#121a24
+  classDef cipher fill:#f0f4f8,stroke:#9fb0be,color:#121a24
+  classDef note fill:#eceff2,stroke:#c5d0d8,color:#5b6878
+  classDef risk fill:#fff1f3,stroke:#ff8fa3,color:#c92a4f
+

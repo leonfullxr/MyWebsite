@@ -1,0 +1,50 @@
+---
+title: Refresh tokens leave the hot path
+---
+flowchart TB
+
+  subgraph CP[Control plane]
+    direction TB
+    ctrl["Controller<br>access tokens"]
+    store["Token store<br>access-token rows"]
+    ctrl --- store
+  end
+
+  subgraph RD[Refresher domain]
+    direction TB
+    ref["Refresher<br>no dataplane ingress"]
+    rstore["Refresh store<br>refresh token"]
+    cue["never on the hot path"]
+    ref -->|"read secret"| rstore
+    rstore --- cue
+  end
+
+  subgraph AU[Authorizer]
+    brk["Broker<br>unwraps the key"]
+  end
+
+  subgraph KM[Key management]
+    kms["AWS KMS<br>wrapping key"]
+  end
+
+  subgraph EX[External]
+    endpoint["Token endpoint<br>the provider"]
+  end
+
+  ctrl -->|"1. expired token"| ref
+  ref -->|"6. new row"| ctrl
+  ref -->|"2. wrapped key"| brk
+  brk -->|"3. decrypt"| kms
+  kms -.->|"data key"| brk
+  brk -.->|"data key"| ref
+  ref -->|"4. refresh"| endpoint
+  endpoint -->|"5. new access token"| ref
+
+  class store,rstore cipher
+  class cue note
+
+  classDef plaintext fill:#fff1f3,stroke:#ff8fa3,color:#121a24
+  classDef cipher fill:#f0f4f8,stroke:#9fb0be,color:#121a24
+  classDef note fill:#eceff2,stroke:#c5d0d8,color:#5b6878
+  classDef risk fill:#fff1f3,stroke:#ff8fa3,color:#c92a4f
+

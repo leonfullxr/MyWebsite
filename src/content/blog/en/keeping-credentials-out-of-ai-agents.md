@@ -69,3 +69,5 @@ For the audit trail, I would record the requesting user and workload, destinatio
 For a security assistant, I would start with one read-only integration and map its actual calls. Identify the user and workload, restrict the destinations and operations, and test a denied request as well as an allowed one. Then check whether the logs explain who requested access, what policy decided, and which service received the request, without recording the token.
 
 Only after that would I add more integrations or write access. The useful outcome is a boundary that can be tested and audited, not just an extra proxy in the architecture.
+
+A [second post in this series](/en/blog/protecting-the-token-vault/) looks at that last point in more detail: how the token vault is encrypted, who is allowed to unwrap a row, and how much of the store a compromised controller can read.

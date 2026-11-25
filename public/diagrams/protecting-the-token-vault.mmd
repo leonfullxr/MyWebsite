@@ -1,0 +1,60 @@
+---
+title: Broker-gated unwrap
+---
+flowchart TB
+
+  subgraph AG[Agent]
+    direction TB
+    user["User<br>subject token"]
+    agentN["Agent<br>no upstream token"]
+    user --> agentN
+  end
+
+  subgraph EG[Egress]
+    gw["Gateway<br>injects the token"]
+  end
+
+  subgraph CP[Control plane]
+    direction TB
+    ctrl["Controller<br>live token"]
+    store["Token store<br>Alice · GitHub"]
+    residual["controller residual"]
+    ctrl -->|"read row"| store
+    store --- residual
+  end
+
+  subgraph AU[Authorizer]
+    brk["Broker<br>approves unwrap"]
+  end
+
+  subgraph KM[Key management]
+    kms["AWS KMS<br>wrapping key"]
+  end
+
+  subgraph UP[Upstream]
+    up["Upstream API<br>receives the token"]
+  end
+
+  subgraph ID[Identity]
+    idp["Identity provider<br>verifies the user"]
+  end
+
+  agentN -->|"1. request"| gw
+  gw -->|"2. exchange"| ctrl
+  ctrl -->|"3. wrapped key"| brk
+  brk -->|"4. decrypt"| kms
+  kms -.->|"data key"| brk
+  brk -.->|"data key"| ctrl
+  ctrl -->|"5. access token"| gw
+  gw -->|"6. access token"| up
+  idp -.->|"JWKS"| brk
+
+  class gw,ctrl,up plaintext
+  class store cipher
+  class residual risk
+
+  classDef plaintext fill:#fff1f3,stroke:#ff8fa3,color:#121a24
+  classDef cipher fill:#f0f4f8,stroke:#9fb0be,color:#121a24
+  classDef note fill:#eceff2,stroke:#c5d0d8,color:#5b6878
+  classDef risk fill:#fff1f3,stroke:#ff8fa3,color:#c92a4f
+
